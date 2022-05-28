@@ -28,6 +28,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             Account? account = new Account(_user.PrivateKey, Chain.Kovan);
             Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
+            HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
+
 
 
         }
