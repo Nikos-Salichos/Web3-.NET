@@ -1,4 +1,4 @@
-﻿namespace Lottery
+﻿namespace CSharpInWeb3SmartContracts
 {
     public class User
     {

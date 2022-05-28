@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Lottery.Controllers
+namespace CSharpInWeb3SmartContracts.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,7 +18,7 @@ namespace Lottery.Controllers
             _user.PrivateKey = _configuration["PrivateKey"];
         }
 
-        [HttpGet("AllHeroes")]
+        [HttpGet("GetLottery")]
         public async Task<ActionResult> EnterLottery()
         {
             return NotFound();
