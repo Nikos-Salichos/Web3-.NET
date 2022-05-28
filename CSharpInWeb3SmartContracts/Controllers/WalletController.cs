@@ -26,6 +26,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public async Task<ActionResult> GetBalance()
         {
             Account? account = new Account(_user.PrivateKey, Chain.Kovan);
+            Web3? web3 = new Web3(account, _user.BlockchainProvider);
+
+
 
         }
 
