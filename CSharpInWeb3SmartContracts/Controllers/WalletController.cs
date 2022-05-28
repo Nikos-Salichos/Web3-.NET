@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSharpInWeb3SmartContracts.Models;
+using Microsoft.AspNetCore.Mvc;
+using Nethereum.Hex.HexTypes;
 using Nethereum.Signer;
+using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 namespace CSharpInWeb3SmartContracts.Controllers
@@ -23,14 +26,16 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("GetBalance")]
-        public async Task<ActionResult> GetBalance()
+        public async Task<ActionResult> GetBalance(Chain chain)
         {
-            Account? account = new Account(_user.PrivateKey, Chain.Kovan);
+            Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
             HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
 
+            decimal etherAmount = Web3.Convert.FromWei(balance.Value);
 
+            return Ok("Ethereum balance" + etherAmount);
 
         }
 

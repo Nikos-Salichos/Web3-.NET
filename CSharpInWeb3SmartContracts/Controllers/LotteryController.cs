@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSharpInWeb3SmartContracts.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {

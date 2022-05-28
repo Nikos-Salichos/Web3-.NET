@@ -1,4 +1,4 @@
-﻿namespace CSharpInWeb3SmartContracts
+﻿namespace CSharpInWeb3SmartContracts.Models
 {
     public class User
     {
