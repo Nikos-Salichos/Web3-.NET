@@ -1,6 +1,7 @@
 ﻿using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace CSharpInWeb3SmartContracts
@@ -14,7 +15,7 @@ namespace CSharpInWeb3SmartContracts
                 model.Enum.Clear();
                 foreach (string enumName in Enum.GetNames(context.Type))
                 {
-                    System.Reflection.MemberInfo memberInfo = context.Type.GetMember(enumName).FirstOrDefault(m => m.DeclaringType == context.Type);
+                    MemberInfo memberInfo = context.Type.GetMember(enumName).FirstOrDefault(m => m.DeclaringType == context.Type);
                     EnumMemberAttribute enumMemberAttribute = memberInfo == null
                      ? null
                      : memberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false).OfType<EnumMemberAttribute>().FirstOrDefault();

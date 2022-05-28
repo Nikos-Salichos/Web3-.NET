@@ -35,7 +35,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
             decimal etherAmount = Web3.Convert.FromWei(balance.Value);
 
-            return Ok("Ethereum balance" + etherAmount);
+            return Ok($"Ethereum balance {etherAmount}");
 
         }
 
