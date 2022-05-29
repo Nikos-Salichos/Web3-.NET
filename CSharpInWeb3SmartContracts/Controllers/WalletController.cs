@@ -11,17 +11,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class WalletController : ControllerBase
     {
-
-        private readonly IConfiguration _configuration;
-
         private readonly User _user = new User();
 
         public WalletController(IConfiguration configuration)
         {
-            _configuration = configuration;
-            _user.BlockchainProvider = _configuration["BlockchainProvider"];
-            _user.MetamaskAddress = _configuration["MetamaskAddress"];
-            _user.PrivateKey = _configuration["PrivateKey"];
+            _user.BlockchainProvider = configuration["BlockchainProvider"];
+            _user.MetamaskAddress = configuration["MetamaskAddress"];
+            _user.PrivateKey = configuration["PrivateKey"];
         }
 
 
@@ -32,12 +28,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
             Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
             HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
-
             decimal etherAmount = Web3.Convert.FromWei(balance.Value);
 
             return Ok($"Ethereum balance {etherAmount}");
-
         }
+
 
     }
 }
