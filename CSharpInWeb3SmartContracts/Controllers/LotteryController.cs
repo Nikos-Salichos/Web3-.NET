@@ -1,5 +1,6 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Signer;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -19,10 +20,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
             _user.PrivateKey = _configuration["PrivateKey"];
         }
 
-        [HttpGet("GetLottery")]
-        public async Task<ActionResult> EnterLottery()
+        [HttpGet("Deploy")]
+        public async Task<ActionResult> DeployContract(Chain chain)
         {
-            return NotFound();
+
         }
     }
 }
