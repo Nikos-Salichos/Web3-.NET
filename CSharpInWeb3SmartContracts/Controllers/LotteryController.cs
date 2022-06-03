@@ -72,6 +72,53 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("GetPlayers")]
+        public async Task<ActionResult> GetPlayers(Chain chain)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+
+                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? getPlayers = smartContract.GetFunction("getPlayers");
+                List<string> getPlayersResult = await getPlayers.CallAsync<List<string>>();
+
+                return Ok(string.Join(",", getPlayersResult));
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+
+        [HttpGet("GetBalance")]
+        public async Task<ActionResult> GetBalance(Chain chain)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+
+                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? getBalance = smartContract.GetFunction("getBalance");
+                long getBalanceResult = await getBalance.CallAsync<long>();
+
+                decimal balanceInEth = Web3.Convert.FromWei(getBalanceResult);
+
+                return Ok($"Smart contract balance {balanceInEth}");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+
+
+
+
 
     }
 }
