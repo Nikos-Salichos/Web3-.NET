@@ -116,6 +116,41 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
+        [HttpGet("EnterLottery")]
+        public async Task<ActionResult> EnterLottery(Chain chain)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+
+                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+
+                var transactionInput = new TransactionInput();
+                transactionInput.From = account.Address;
+                transactionInput.GasPrice = new HexBigInteger(new BigInteger(2));
+                transactionInput.To = _smartContractAddress;
+                transactionInput.Value = new HexBigInteger(new BigInteger(2));
+
+                // var transactionHash = await web3.Eth.TransactionManager.SendTransactionAsync(transactionInput);
+
+                BigInteger wei = Web3.Convert.ToWei(0.02);
+                HexBigInteger value = new HexBigInteger(wei);
+                HexBigInteger gas = new HexBigInteger(wei);
+
+                object[] parameters = new object[1] { value };
+                Function? enterLottery = smartContract.GetFunction("enter");
+                HexBigInteger? estimatedGas = await enterLottery.EstimateGasAsync(account.Address, gas, value, null);
+                TransactionReceipt? enterLotteryResult = await enterLottery.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null);
+
+                return Ok($"Transaction Hash {enterLotteryResult.TransactionHash}");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
 
 
 
