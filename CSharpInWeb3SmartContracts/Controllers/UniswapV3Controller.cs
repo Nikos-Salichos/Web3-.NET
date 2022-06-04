@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpInWeb3SmartContracts.Controllers
@@ -7,5 +7,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class UniswapV3Controller : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        private readonly User _user = new User();
+
+
+
     }
 }

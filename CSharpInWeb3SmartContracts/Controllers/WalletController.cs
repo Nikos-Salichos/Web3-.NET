@@ -1,6 +1,7 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -31,6 +32,25 @@ namespace CSharpInWeb3SmartContracts.Controllers
             decimal etherAmount = Web3.Convert.FromWei(balance.Value);
 
             return Ok($"Ethereum balance {etherAmount}");
+        }
+
+        [HttpGet("SendEthereum")]
+        public async Task<ActionResult> GetBalance(Chain chain, string toAddress, decimal etherAmount)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+
+                TransactionReceipt? transaction = await web3.Eth.GetEtherTransferService().TransferEtherAndWaitForReceiptAsync(toAddress, etherAmount);
+
+                return Ok($"Transaction hash {transaction.TransactionHash}");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+
+            }
         }
 
 
