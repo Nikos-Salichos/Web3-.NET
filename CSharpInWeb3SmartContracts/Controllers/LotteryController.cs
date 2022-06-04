@@ -152,7 +152,27 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
+        [HttpGet("PickWinner")]
+        public async Task<ActionResult> PickWinner(Chain chain)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
+                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+
+                Function? pickWinner = smartContract.GetFunction("pickWinner");
+                HexBigInteger? estimatedGas = await pickWinner.EstimateGasAsync(account.Address, null, null, null);
+                TransactionReceipt? enterLotteryResult = await pickWinner.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null);
+
+                return Ok($"Transaction Hash {enterLotteryResult.TransactionHash}");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
 
     }
