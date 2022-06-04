@@ -12,6 +12,15 @@ namespace CSharpInWeb3SmartContracts.Controllers
         private readonly User _user = new User();
 
 
+        public UniswapV3Controller(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _user.BlockchainProvider = _configuration["BlockchainProvider"];
+            _user.MetamaskAddress = _configuration["MetamaskAddress"];
+            _user.PrivateKey = _configuration["PrivateKey"];
+        }
+
+
 
     }
 }
