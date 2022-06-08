@@ -13,4 +13,4 @@ https://tools.techcybo.com/multiline-to-single-line
 
 I will create different controllers for different cases:
 - Network (current block, current block difficulty etc)
-- Wallet
+- Wallet (check balance, send ether/token to another wallet)
