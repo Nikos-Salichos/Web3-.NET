@@ -27,7 +27,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public LotteryController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _user.BlockchainProvider = _configuration["BlockchainProvider"];
+            _user.BlockchainProvider = _configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = _configuration["MetamaskAddress"];
             _user.PrivateKey = _configuration["PrivateKey"];
         }

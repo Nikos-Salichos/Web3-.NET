@@ -16,11 +16,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public WalletController(IConfiguration configuration)
         {
-            _user.BlockchainProvider = configuration["BlockchainProvider"];
+            _user.BlockchainProvider = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
-
 
         [HttpGet("GetBalance")]
         public async Task<ActionResult> GetBalance(Chain chain)

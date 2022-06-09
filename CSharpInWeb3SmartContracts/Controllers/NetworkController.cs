@@ -17,7 +17,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public NetworkController(IConfiguration configuration)
         {
-            _user.BlockchainProvider = configuration["BlockchainProvider"];
+            _user.BlockchainProvider = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
