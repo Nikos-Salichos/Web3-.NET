@@ -39,11 +39,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("GetPrices")]
-        public async Task<ActionResult> GetPoolAndBalances(Chain chain, string addressToken0, string addressToken1, long fee)
+        public async Task<ActionResult> GetPoolAndBalances(string addressToken0, string addressToken1, long fee)
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
+                Account? account = new Account(_user.PrivateKey, Chain.MainNet);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3factoryAbi, _uniswapV3factoryAddress);

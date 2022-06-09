@@ -101,7 +101,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
-                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? getBalance = smartContract.GetFunction("getBalance");
                 long getBalanceResult = await getBalance.CallAsync<long>();
 
@@ -124,9 +124,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
-                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
 
-                var transactionInput = new TransactionInput();
+                TransactionInput? transactionInput = new TransactionInput();
                 transactionInput.From = account.Address;
                 transactionInput.GasPrice = new HexBigInteger(new BigInteger(2));
                 transactionInput.To = _smartContractAddress;
@@ -160,7 +160,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
-                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
 
                 Function? pickWinner = smartContract.GetFunction("pickWinner");
                 HexBigInteger? estimatedGas = await pickWinner.EstimateGasAsync(account.Address, null, null, null);
