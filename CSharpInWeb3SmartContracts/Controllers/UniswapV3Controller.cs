@@ -82,7 +82,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 decimal price = balanceInEthToken0 / inverted_price;
 
-                return Ok($"Token 1 balance {balanceInEthToken0} and balance of token 2 {inverted_price} , total price {price}");
+                return Ok($"Token 1 balance {balanceInEthToken0} and balance of token 2 {inverted_price}");
             }
             catch (Exception exception)
             {
