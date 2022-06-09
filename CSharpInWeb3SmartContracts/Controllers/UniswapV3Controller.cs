@@ -77,10 +77,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 decimal balanceInEthToken1 = Web3.Convert.FromWei(balanceOfToken1Result);
 
                 //balanceInEthToken1 has 6 decimals and not 18
-                var adjusted_price = balanceInEthToken1 / (10 ^ (18 - 6));
-                var inverted_price = 1 / adjusted_price;
+                decimal adjusted_price = balanceInEthToken1 / (10 ^ (18 - 6));
+                decimal inverted_price = 1 / adjusted_price;
 
-                var price = balanceInEthToken0 / inverted_price;
+                decimal price = balanceInEthToken0 / inverted_price;
 
                 return Ok($"Token 1 balance {balanceInEthToken0} and balance of token 2 {inverted_price} , total price {price}");
             }
