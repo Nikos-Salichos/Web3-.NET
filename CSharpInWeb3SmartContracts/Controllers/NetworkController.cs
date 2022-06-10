@@ -34,5 +34,22 @@ namespace CSharpInWeb3SmartContracts.Controllers
             return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
         }
 
+
+        [HttpGet("GetAllTransactionOfABlock")]
+        public async Task<ActionResult> GetBalance(Chain chain)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+
+            }
+        }
+
     }
 }
