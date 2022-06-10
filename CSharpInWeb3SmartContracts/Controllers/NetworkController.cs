@@ -45,6 +45,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 
+                BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber)));
+
             }
             catch (Exception exception)
             {
