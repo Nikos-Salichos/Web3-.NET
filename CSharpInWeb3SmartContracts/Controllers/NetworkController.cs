@@ -47,6 +47,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber)));
 
+                List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
+
             }
             catch (Exception exception)
             {
