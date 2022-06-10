@@ -43,7 +43,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
-
+                HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 
             }
             catch (Exception exception)
