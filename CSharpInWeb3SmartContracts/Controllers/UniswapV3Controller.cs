@@ -38,7 +38,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             _user.PrivateKey = _configuration["PrivateKey"];
         }
 
-        [HttpGet("GetPrices")]
+        [HttpGet("GetReserves")]
         public async Task<ActionResult> GetPoolAndBalances(string addressToken0, string addressToken1, long fee)
         {
             try
