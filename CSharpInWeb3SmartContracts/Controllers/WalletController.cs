@@ -34,7 +34,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("SendEthereum")]
-        public async Task<ActionResult> GetBalance(Chain chain, string toAddress, decimal etherAmount)
+        public async Task<ActionResult> SendEthereum(Chain chain, string toAddress, decimal etherAmount)
         {
             try
             {
@@ -51,6 +51,23 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
             }
         }
+
+
+        [HttpGet("TransferTokens")]
+        public async Task<ActionResult> SendERC20Token() //Chain chain,string toAddress, string contractAddress, 
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, Chain.Kovan);
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+
+            }
+        }
+
 
 
     }

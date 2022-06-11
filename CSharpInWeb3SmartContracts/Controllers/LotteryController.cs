@@ -126,14 +126,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
 
-                TransactionInput? transactionInput = new TransactionInput();
-                transactionInput.From = account.Address;
-                transactionInput.GasPrice = new HexBigInteger(new BigInteger(2));
-                transactionInput.To = _smartContractAddress;
-                transactionInput.Value = new HexBigInteger(new BigInteger(2));
-
-                // var transactionHash = await web3.Eth.TransactionManager.SendTransactionAsync(transactionInput);
-
                 BigInteger wei = Web3.Convert.ToWei(0.02);
                 HexBigInteger value = new HexBigInteger(wei);
                 HexBigInteger gas = new HexBigInteger(wei);
