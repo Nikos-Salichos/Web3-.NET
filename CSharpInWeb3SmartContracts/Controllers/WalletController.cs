@@ -1,5 +1,6 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
@@ -72,6 +73,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     // MaxFeePerGas = 21000,
                     Value = 10000000000000000, //send amount of ERC20 tokens and NOT value in transaction
                 };
+
+                IContractTransactionHandler<TransferFunction> transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
             }
             catch (Exception exception)
             {
