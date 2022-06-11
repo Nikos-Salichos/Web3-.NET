@@ -1,5 +1,6 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
@@ -60,6 +61,17 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(_user.PrivateKey, Chain.Kovan);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
+
+                TransferFunction? transferFunction = new TransferFunction()
+                {
+                    FromAddress = account.Address,
+                    To = "0x67ed7a6183199Fc01a3F2Eb7bb0dF20F76016F12",
+                    // AmountToSend = 10000000000000000,
+                    Gas = 50000,
+                    // GasPrice = 25000,
+                    // MaxFeePerGas = 21000,
+                    Value = 10000000000000000, //send amount of ERC20 tokens and NOT value in transaction
+                };
             }
             catch (Exception exception)
             {
