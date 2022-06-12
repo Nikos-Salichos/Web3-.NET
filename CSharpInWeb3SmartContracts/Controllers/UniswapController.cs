@@ -111,6 +111,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? getPair = smartContract.GetFunction("getPair");
 
                 object[] parameters = new object[2] { addressToken0, addressToken1 };
+                string pairAddress = await getPair.CallAsync<string>(parameters);
             }
             catch (Exception exception)
             {
