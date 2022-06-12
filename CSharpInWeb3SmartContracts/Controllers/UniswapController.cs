@@ -113,6 +113,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[] parameters = new object[2] { addressToken0, addressToken1 };
                 string pairAddress = await getPair.CallAsync<string>(parameters);
 
+                if (pairAddress == "0x0000000000000000000000000000000000000000")
+                {
+                    return NotFound();
+                }
 
             }
             catch (Exception exception)
