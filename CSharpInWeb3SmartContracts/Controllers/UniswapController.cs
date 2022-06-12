@@ -123,7 +123,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 GetReservesDTO? reserves = await getReserves.CallDeserializingToObjectAsync<GetReservesDTO>();
 
                 Function? getToken0 = smartContractPair.GetFunction("token0");
-
+                string token0 = await getToken0.CallAsync<string>();
             }
             catch (Exception exception)
             {
