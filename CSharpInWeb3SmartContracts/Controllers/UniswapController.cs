@@ -119,6 +119,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 }
 
                 Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pairAddress);
+                Function? getReserves = smartContractPair.GetFunction("getReserves");
+
 
             }
             catch (Exception exception)
