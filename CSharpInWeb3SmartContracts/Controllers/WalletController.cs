@@ -56,22 +56,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("TransferTokens")]
-        public async Task<ActionResult> SendERC20Token() //Chain chain,string toAddress, string contractAddress, 
+        public async Task<ActionResult> SendERC20Token(Chain chain, string toAddress, long bigInteger) //Chain chain,string toAddress, string contractAddress, 
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, Chain.Kovan);
+                Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
                 TransferFunction? transferFunction = new TransferFunction()
                 {
                     FromAddress = account.Address,
-                    To = "0x67ed7a6183199Fc01a3F2Eb7bb0dF20F76016F12",
-                    // AmountToSend = 10000000000000000,
+                    To = toAddress,
                     Gas = 50000,
-                    // GasPrice = 25000,
-                    // MaxFeePerGas = 21000,
-                    Value = 10000000000000000, //send amount of ERC20 tokens and NOT value in transaction
+                    Value = bigInteger, //value of transfer tokens
                 };
 
                 IContractTransactionHandler<TransferFunction> transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
@@ -85,7 +82,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        /*                TransactionInput? transactionInput = new TransactionInput();
+                           transactionInput.From = account.Address;
+                           transactionInput.GasPrice = new HexBigInteger(new BigInteger(2));
+                           transactionInput.To = _smartContractAddress;
+                           transactionInput.Value = new HexBigInteger(new BigInteger(2));
 
+                            var transactionHash = await web3.Eth.TransactionManager.SendTransactionAsync(transactionInput);*/
 
     }
 }
