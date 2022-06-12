@@ -122,6 +122,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? getReserves = smartContractPair.GetFunction("getReserves");
                 GetReservesDTO? reserves = await getReserves.CallDeserializingToObjectAsync<GetReservesDTO>();
 
+                Function? getToken0 = smartContractPair.GetFunction("token0");
 
             }
             catch (Exception exception)
