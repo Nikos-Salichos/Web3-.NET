@@ -118,6 +118,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     return NotFound();
                 }
 
+                Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pairAddress);
+
             }
             catch (Exception exception)
             {
