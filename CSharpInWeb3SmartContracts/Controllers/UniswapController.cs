@@ -126,6 +126,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 string token0 = await getToken0.CallAsync<string>();
 
                 Function? getToken1 = smartContractPair.GetFunction("token1");
+                string token1 = await getToken1.CallAsync<string>();
+
+
             }
             catch (Exception exception)
             {
