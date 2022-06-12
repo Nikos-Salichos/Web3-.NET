@@ -109,6 +109,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
+
+                object[] parameters = new object[2] { addressToken0, addressToken1 };
             }
             catch (Exception exception)
             {
