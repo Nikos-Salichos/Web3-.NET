@@ -104,7 +104,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-
+                Account? account = new Account(_user.PrivateKey, Chain.MainNet);
             }
             catch (Exception exception)
             {
