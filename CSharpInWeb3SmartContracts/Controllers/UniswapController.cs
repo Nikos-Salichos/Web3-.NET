@@ -108,6 +108,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
+                Function? getPair = smartContract.GetFunction("getPair");
             }
             catch (Exception exception)
             {
