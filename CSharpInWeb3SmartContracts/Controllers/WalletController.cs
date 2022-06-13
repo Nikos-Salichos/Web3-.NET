@@ -93,6 +93,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger? pendingFilter = await web3.Eth.Filters.NewPendingTransactionFilter.SendRequestAsync();
                 string[]? filterChanges = await web3.Eth.Filters.GetFilterChangesForBlockOrTransaction.SendRequestAsync(pendingFilter);
 
+                return Ok(filterChanges);
             }
             catch (Exception exception)
             {
