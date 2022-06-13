@@ -56,7 +56,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("TransferTokens")]
-        public async Task<ActionResult> SendERC20Token(Chain chain, string toAddress, long bigInteger) //Chain chain,string toAddress, string contractAddress, 
+        public async Task<ActionResult> SendERC20Token(Chain chain, string toAddress, long bigInteger)
         {
             try
             {
@@ -74,6 +74,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 IContractTransactionHandler<TransferFunction> transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
                 TransactionReceipt? transactionReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync("0xd0a1e359811322d97991e03f863a0c30c2cf029c", transferFunction);
                 return Ok(transactionReceipt.TransactionHash);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+
+            }
+        }
+
+        [HttpGet("PendingTransactions")]
+        public async Task<ActionResult> GetPendingTransactions(Chain chain)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
             }
             catch (Exception exception)
             {
