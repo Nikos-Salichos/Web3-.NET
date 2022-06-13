@@ -91,6 +91,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, _user.BlockchainProvider);
 
                 HexBigInteger? pendingFilter = await web3.Eth.Filters.NewPendingTransactionFilter.SendRequestAsync();
+                string[]? filterChanges = await web3.Eth.Filters.GetFilterChangesForBlockOrTransaction.SendRequestAsync(pendingFilter);
+
             }
             catch (Exception exception)
             {
