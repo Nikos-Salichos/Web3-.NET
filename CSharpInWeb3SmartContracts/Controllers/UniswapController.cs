@@ -43,7 +43,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public UniswapController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _user.BlockchainProvider = _configuration["BlockchainProviderMainnet"];
+            _user.BlockchainProviderMainnet = _configuration["BlockchainProviderMainnet"];
+            _user.BlockchainProviderKovan = _configuration["BlockchainProviderKovan"];
+            _user.BlockchainProviderRopsten = _configuration["BlockchainProviderRopsten"];
             _user.MetamaskAddress = _configuration["MetamaskAddress"];
             _user.PrivateKey = _configuration["PrivateKey"];
         }
@@ -54,7 +56,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, Chain.MainNet);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
                 Function? getPool = smartContract.GetFunction("getPool");
@@ -105,7 +107,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, Chain.MainNet);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
@@ -139,6 +141,42 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
+        [HttpGet("UniswapV2PairApprove")]
+        public async Task<ActionResult> GetUniswapV2PairApprove(string addressToken0, string addressToken1, string spenderAddress, long value)
+        {
+            try
+            {
+                addressToken0 = USDT_V2;
+                addressToken1 = DAI_V2;
+                spenderAddress = "0x67ed7a6183199Fc01a3F2Eb7bb0dF20F76016F12"; //SpenderAddress
+
+
+                Account? account = new Account(_user.PrivateKey, Chain.MainNet);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
+
+                Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
+                Function? getPair = smartContract.GetFunction("getPair");
+
+                object[] parameters = new object[2] { addressToken0, addressToken1 };
+                string pairAddress = await getPair.CallAsync<string>(parameters);
+
+                if (pairAddress == "0x0000000000000000000000000000000000000000")
+                {
+                    return NotFound();
+                }
+
+                Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pairAddress);
+                Function? approve = smartContractPair.GetFunction("approve");
+
+                var result = await approve.CallAsync<string>();
+
+                return Ok("");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
     }
 }

@@ -18,7 +18,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public WalletController(IConfiguration configuration)
         {
-            _user.BlockchainProvider = configuration["BlockchainProviderKovan"];
+            _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
@@ -27,7 +27,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public async Task<ActionResult> GetBalance(Chain chain)
         {
             Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, _user.BlockchainProvider);
+            Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
             HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
             decimal etherAmount = Web3.Convert.FromWei(balance.Value);
@@ -41,7 +41,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 TransactionReceipt? transaction = await web3.Eth.GetEtherTransferService().TransferEtherAndWaitForReceiptAsync(toAddress, etherAmount);
 
@@ -61,7 +61,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 TransferFunction? transferFunction = new TransferFunction()
                 {
@@ -88,7 +88,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 HexBigInteger? pendingFilter = await web3.Eth.Filters.NewPendingTransactionFilter.SendRequestAsync();
                 string[]? filterChanges = await web3.Eth.Filters.GetFilterChangesForBlockOrTransaction.SendRequestAsync(pendingFilter);

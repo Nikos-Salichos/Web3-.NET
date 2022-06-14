@@ -27,7 +27,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public LotteryController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _user.BlockchainProvider = _configuration["BlockchainProviderKovan"];
+            _user.BlockchainProviderKovan = _configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = _configuration["MetamaskAddress"];
             _user.PrivateKey = _configuration["PrivateKey"];
         }
@@ -38,7 +38,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi, _byteCode, _user.MetamaskAddress, _user.MetamaskAddress);
 
@@ -58,7 +58,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? getRandomNumber = smartContract.GetFunction("getRandomNumber");
@@ -78,7 +78,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? getPlayers = smartContract.GetFunction("getPlayers");
@@ -99,7 +99,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? getBalance = smartContract.GetFunction("getBalance");
@@ -122,7 +122,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
 
@@ -150,7 +150,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
 

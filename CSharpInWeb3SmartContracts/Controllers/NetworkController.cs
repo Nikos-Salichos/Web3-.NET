@@ -17,7 +17,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public NetworkController(IConfiguration configuration)
         {
-            _user.BlockchainProvider = configuration["BlockchainProviderKovan"];
+            _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
@@ -26,7 +26,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public async Task<ActionResult> GetLatestBlock(Chain chain)
         {
             Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, _user.BlockchainProvider);
+            Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
             HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
             BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
@@ -41,7 +41,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProvider);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 
