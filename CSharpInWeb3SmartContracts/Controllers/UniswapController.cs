@@ -1,6 +1,8 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
+using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -130,8 +132,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? getToken1 = smartContractPair.GetFunction("token1");
                 string token1 = await getToken1.CallAsync<string>();
 
-                return Ok($"BlockTimestamp {reserves.BlockTimeStampLast}\n\r " +
-                       $"token0 {token0} and reserve0 {reserves.Reserve0}\n\r " +
+                return Ok($"Pair address {pairAddress} \n\r" +
+                        $"BlockTimestamp {reserves.BlockTimeStampLast}\n\r" +
+                       $"token0 {token0} and reserve0 {reserves.Reserve0}\n\r" +
                        $"token1 {token1} and reserve1 {reserves.Reserve1}");
             }
             catch (Exception exception)
@@ -150,25 +153,28 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 addressToken1 = DAI_V2;
                 spenderAddress = "0x67ed7a6183199Fc01a3F2Eb7bb0dF20F76016F12"; //SpenderAddress
 
-
                 Account? account = new Account(_user.PrivateKey, Chain.MainNet);
                 Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
 
-                object[] parameters = new object[2] { addressToken0, addressToken1 };
-                string pairAddress = await getPair.CallAsync<string>(parameters);
+                object[] parametersForPair = new object[2] { addressToken0, addressToken1 };
+                string pairAddress = await getPair.CallAsync<string>(parametersForPair);
 
                 if (pairAddress == "0x0000000000000000000000000000000000000000")
                 {
                     return NotFound();
                 }
 
+                var valueToApprove = Web3.Convert.ToWei(1);
+
                 Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pairAddress);
                 Function? approve = smartContractPair.GetFunction("approve");
 
-                var result = await approve.CallAsync<string>();
+                object[] parametersForApprove = new object[2] { spenderAddress, valueToApprove };
+                HexBigInteger? estimatedGas = await approve.EstimateGasAsync(account.Address, null, null, parametersForApprove);
+                TransactionReceipt? approveTransactionResult = await approve.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parametersForApprove);
 
                 return Ok("");
             }
