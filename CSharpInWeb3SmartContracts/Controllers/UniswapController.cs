@@ -150,10 +150,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                addressToken0 = WETH_KOVAN_V2;
-                addressToken1 = DAI_KOVAN_V2;
-                spenderAddress = "0x67ed7a6183199Fc01a3F2Eb7bb0dF20F76016F12"; //SpenderAddress
-
                 Account? account = new Account(_user.PrivateKey, Chain.Kovan);
                 Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
@@ -168,7 +164,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     return NotFound();
                 }
 
-                BigInteger valueToApprove = Web3.Convert.ToWei(1);
+                BigInteger valueToApprove = Web3.Convert.ToWei(value);
 
                 Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pairAddress);
                 Function? approve = smartContractPair.GetFunction("approve");
@@ -218,7 +214,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[] parametersForSwap = new object[4] { amount0Out, amount1Out, _user.MetamaskAddress, data };
                 HexBigInteger? estimatedGas = await swap.EstimateGasAsync(account.Address, null, null, parametersForSwap);
-                // HexBigInteger? estimatedGas = new HexBigInteger(30000);
                 TransactionReceipt? transactionReceiptForSwap = await swap.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parametersForSwap);
 
                 return Ok($"Transaction Hash for swap {transactionReceiptForSwap.TransactionHash}");
