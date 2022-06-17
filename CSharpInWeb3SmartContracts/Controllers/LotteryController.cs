@@ -130,7 +130,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger value = new HexBigInteger(wei);
                 HexBigInteger gas = new HexBigInteger(wei);
 
-                object[] parameters = new object[1] { value };
                 Function? enterLottery = smartContract.GetFunction("enter");
                 HexBigInteger? estimatedGas = await enterLottery.EstimateGasAsync(account.Address, gas, value, null);
                 TransactionReceipt? enterLotteryResult = await enterLottery.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null);

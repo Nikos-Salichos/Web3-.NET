@@ -1,6 +1,7 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
@@ -211,9 +212,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? swap = smartContractPair.GetFunction("swap");
                 BigInteger amount0Out = Web3.Convert.ToWei(0.1);
                 BigInteger amount1Out = Web3.Convert.ToWei(0);
-                byte[] data = Array.Empty<byte>();
+                byte[]? data = "0000000000000000000000000000000000000000000000000000000000000000".HexToByteArray();
+
+                // byte[]? data = Array.Empty<byte>();
+
                 object[] parametersForSwap = new object[4] { amount0Out, amount1Out, _user.MetamaskAddress, data };
                 HexBigInteger? estimatedGas = await swap.EstimateGasAsync(account.Address, null, null, parametersForSwap);
+                // HexBigInteger? estimatedGas = new HexBigInteger(30000);
                 TransactionReceipt? transactionReceiptForSwap = await swap.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parametersForSwap);
 
                 return Ok($"Transaction Hash for swap {transactionReceiptForSwap.TransactionHash}");
