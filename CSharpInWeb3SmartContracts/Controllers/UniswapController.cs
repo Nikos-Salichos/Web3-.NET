@@ -199,6 +199,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[] parametersForPair = new object[2] { amountIn, path };
                 List<long> amount = await getAmountsOut.CallAsync<List<long>>(parametersForPair);
+
+                return Ok($"For {amount[0]} of token {path.FirstOrDefault()} you receive {amount[1]} of {path.LastOrDefault()}");
             }
             catch (Exception exception)
             {
