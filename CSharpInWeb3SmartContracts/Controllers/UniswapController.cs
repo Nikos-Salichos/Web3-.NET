@@ -193,6 +193,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 */
                 Account? account = new Account(_user.PrivateKey, Chain.Kovan);
                 Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+
+                Contract? smartContract = web3.Eth.GetContract(_uniswapV2RouterAbi, _uniswapV2RouterAddress);
             }
             catch (Exception exception)
             {
