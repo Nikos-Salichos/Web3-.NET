@@ -196,6 +196,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV2RouterAbi, _uniswapV2RouterAddress);
                 Function? getAmountsOut = smartContract.GetFunction("getAmountsOut");
+
+                object[] parametersForPair = new object[2] { amountIn, path };
             }
             catch (Exception exception)
             {
