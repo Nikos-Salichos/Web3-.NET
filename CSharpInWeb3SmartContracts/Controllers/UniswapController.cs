@@ -198,6 +198,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? getAmountsOut = smartContract.GetFunction("getAmountsOut");
 
                 object[] parametersForPair = new object[2] { amountIn, path };
+                List<long> amount = await getAmountsOut.CallAsync<List<long>>(parametersForPair);
             }
             catch (Exception exception)
             {
