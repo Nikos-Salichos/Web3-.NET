@@ -191,16 +191,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                   "0xd0A1E359811322d97991E03f863a0C30C2cF029C","0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
                 ]
                 */
-                Account? account = new Account(_user.PrivateKey, Chain.Kovan);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
-                Contract? smartContract = web3.Eth.GetContract(_uniswapV2RouterAbi, _uniswapV2RouterAddress);
-                Function? getAmountsOut = smartContract.GetFunction("getAmountsOut");
-
-                object[] parametersForPair = new object[2] { amountIn, path };
-                List<long> amount = await getAmountsOut.CallAsync<List<long>>(parametersForPair);
-
-                return Ok($"For {amount[0]} of token {path.FirstOrDefault()} you receive {amount[1]} of {path.LastOrDefault()}");
             }
             catch (Exception exception)
             {
