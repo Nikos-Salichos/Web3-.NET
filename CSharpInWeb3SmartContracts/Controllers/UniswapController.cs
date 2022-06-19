@@ -117,12 +117,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? allPairsLength = smartContract.GetFunction("allPairsLength");
 
                 long pairsCount = await allPairsLength.CallAsync<long>();
-                List<string> pairsAddresses = new List<string>();
+                List<Pair> pairsAddresses = new List<Pair>();
 
                 for (int i = 0; i < Convert.ToDouble(pairsCount); i++)
                 {
                     object[] parameters = new object[1] { i };
                     Function? allPairs = smartContract.GetFunction("allPairs");
+                    string pairAddress = await allPairs.CallAsync<string>(parameters);
                 }
 
             }
