@@ -106,7 +106,17 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV2FactoryAllPairs")]
+        public async Task<ActionResult> GetUniswapV2GetReserves()
+        {
+            try
+            {
 
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
         [HttpGet("UniswapV2GetReserves")]
         public async Task<ActionResult> GetUniswapV2GetReserves(string addressToken0, string addressToken1)
