@@ -118,6 +118,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 long pairsCount = await allPairsLength.CallAsync<long>();
                 List<string> pairsAddresses = new List<string>();
+
+                for (int i = 0; i < Convert.ToDouble(pairsCount); i++)
+                { }
+
             }
             catch (Exception exception)
             {
