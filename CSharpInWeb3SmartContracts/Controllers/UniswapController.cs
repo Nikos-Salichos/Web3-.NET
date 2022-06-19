@@ -105,6 +105,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("UniswapV2FactoryAllPairs")]
+
+
         [HttpGet("UniswapV2GetReserves")]
         public async Task<ActionResult> GetUniswapV2GetReserves(string addressToken0, string addressToken1)
         {
