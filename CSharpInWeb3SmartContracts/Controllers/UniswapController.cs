@@ -120,7 +120,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 List<string> pairsAddresses = new List<string>();
 
                 for (int i = 0; i < Convert.ToDouble(pairsCount); i++)
-                { }
+                {
+                    object[] parameters = new object[1] { i };
+                }
 
             }
             catch (Exception exception)
