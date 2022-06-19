@@ -117,6 +117,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? allPairsLength = smartContract.GetFunction("allPairsLength");
 
                 long pairsCount = await allPairsLength.CallAsync<long>();
+                List<string> pairsAddresses = new List<string>();
             }
             catch (Exception exception)
             {
