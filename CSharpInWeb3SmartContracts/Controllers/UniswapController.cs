@@ -106,7 +106,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV2FactoryAllPairs")]
-        public async Task<ActionResult> GetUniswapV2GetReserves()
+        public async Task<ActionResult> GetUniswapV2GetReserve()
         {
             try
             {
@@ -124,6 +124,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     object[] parameters = new object[1] { i };
                     Function? allPairs = smartContract.GetFunction("allPairs");
                     string pairAddress = await allPairs.CallAsync<string>(parameters);
+                    Pair pair = new Pair();
+                    pair.Id = pairAddress;
                 }
 
             }
