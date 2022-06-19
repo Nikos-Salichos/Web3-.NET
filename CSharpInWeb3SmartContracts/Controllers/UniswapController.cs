@@ -115,6 +115,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? allPairsLength = smartContract.GetFunction("allPairsLength");
+
+                long pairsCount = await allPairsLength.CallAsync<long>();
             }
             catch (Exception exception)
             {
