@@ -111,7 +111,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, Chain.MainNet);
-
+                Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
             }
             catch (Exception exception)
             {
