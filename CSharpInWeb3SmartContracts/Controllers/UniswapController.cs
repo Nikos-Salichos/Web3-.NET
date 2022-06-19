@@ -122,6 +122,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 for (int i = 0; i < Convert.ToDouble(pairsCount); i++)
                 {
                     object[] parameters = new object[1] { i };
+                    Function? allPairs = smartContract.GetFunction("allPairs");
                 }
 
             }
