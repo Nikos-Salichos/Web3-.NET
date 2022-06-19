@@ -112,6 +112,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(_user.PrivateKey, Chain.MainNet);
                 Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
+
+                Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
+
             }
             catch (Exception exception)
             {
