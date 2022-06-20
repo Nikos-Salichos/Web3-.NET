@@ -17,7 +17,9 @@ I will create different controllers for different cases:
 - UniswapV2
   - getReserves
   - getPair
-  - approve
+  - approve  
+  - SwapExactETHForTokens
+
 
 
 
