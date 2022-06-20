@@ -16,6 +16,7 @@ I will create different controllers for different cases:
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
   - getReserves
+  - getPair
 
 
 
