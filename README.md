@@ -15,10 +15,11 @@ I will create different controllers for different cases:
 - Network (current block, current block difficulty etc)
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
+  - allPairs
   - getReserves
-  - getPair
-  - approve  
-  - SwapExactETHForTokens
+  - getAmountsOut
+  - approve
+  - swapExactETHForTokens
 - UniswapV3
   - getReserves
 
