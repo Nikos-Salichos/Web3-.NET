@@ -15,7 +15,8 @@ I will create different controllers for different cases:
 - Network (current block, current block difficulty etc)
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
-- UniswapV3
+  - getReserves
+
 
 
 In order to test UniswapV3 get prices you can use the following addresses:
