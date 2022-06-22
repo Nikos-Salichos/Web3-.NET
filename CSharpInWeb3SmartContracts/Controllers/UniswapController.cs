@@ -14,12 +14,16 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class UniswapController : ControllerBase
     {
+        //Uniswap v3 https://kovan.etherscan.io/address/0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45#writeContract exactInputSingle
+        //  {"tokenIn": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",     "tokenOut": "0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735",     "fee": 100,     "recipient": "0x56814Ca0854e878C2FD9FfA0899c12f4c4e35346",     "dealline": 1633596832,     "amountIn": 1,     "amountOutMinimum": 0,     "sqrtPriceLimitX96": 0 }
         private readonly IConfiguration _configuration;
 
         private readonly User _user = new User();
 
         private readonly string _uniswapV3FactoryAddress = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
         private readonly string _uniswapV3FactoryAbi = @" [{""inputs"":[],""stateMutability"":""nonpayable"",""type"":""constructor""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""indexed"":true,""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""}],""name"":""FeeAmountEnabled"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""oldOwner"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""newOwner"",""type"":""address""}],""name"":""OwnerChanged"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""token0"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""token1"",""type"":""address""},{""indexed"":true,""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""indexed"":false,""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""},{""indexed"":false,""internalType"":""address"",""name"":""pool"",""type"":""address""}],""name"":""PoolCreated"",""type"":""event""},{""inputs"":[{""internalType"":""address"",""name"":""tokenA"",""type"":""address""},{""internalType"":""address"",""name"":""tokenB"",""type"":""address""},{""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""}],""name"":""createPool"",""outputs"":[{""internalType"":""address"",""name"":""pool"",""type"":""address""}],""stateMutability"":""nonpayable"",""type"":""function""},{""inputs"":[{""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""}],""name"":""enableFeeAmount"",""outputs"":[],""stateMutability"":""nonpayable"",""type"":""function""},{""inputs"":[{""internalType"":""uint24"",""name"":"""",""type"":""uint24""}],""name"":""feeAmountTickSpacing"",""outputs"":[{""internalType"":""int24"",""name"":"""",""type"":""int24""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""},{""internalType"":""address"",""name"":"""",""type"":""address""},{""internalType"":""uint24"",""name"":"""",""type"":""uint24""}],""name"":""getPool"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""owner"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""parameters"",""outputs"":[{""internalType"":""address"",""name"":""factory"",""type"":""address""},{""internalType"":""address"",""name"":""token0"",""type"":""address""},{""internalType"":""address"",""name"":""token1"",""type"":""address""},{""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[{""internalType"":""address"",""name"":""_owner"",""type"":""address""}],""name"":""setOwner"",""outputs"":[],""stateMutability"":""nonpayable"",""type"":""function""}] ";
+
+        private readonly string _uniswapV3SwapRouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
 
 
         private readonly string USDT_V3 = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
@@ -105,8 +109,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("UniswapV3")]
+
+        [Produces("application/json")]
         [HttpGet("UniswapV2FactoryAllPairs")]
-        public async Task<ActionResult> GetUniswapV2GetReserve()
+        public async Task<ActionResult<List<Pair>>> GetUniswapV2GetReserve()
         {
             try
             {
@@ -126,8 +133,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     string pairAddress = await allPairs.CallAsync<string>(parameters);
                     Pair pair = new Pair();
                     pair.Id = pairAddress;
+
+                    Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pair.Id);
+
+                    Function? getToken0 = smartContractPair.GetFunction("token0");
+                    pair.Token0.Address = await getToken0.CallAsync<string>();
+
+                    Function? getToken1 = smartContractPair.GetFunction("token1");
+                    pair.Token1.Address = await getToken1.CallAsync<string>();
+
+                    pairsAddresses.Add(pair);
                 }
 
+                return Ok(pairsAddresses);
             }
             catch (Exception exception)
             {
@@ -135,8 +153,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-        [HttpGet("UniswapV2GetReserves")]
-        public async Task<ActionResult> GetUniswapV2GetReserves(string addressToken0, string addressToken1)
+        [HttpGet("UniswapV2FactoryGetReserves")]
+        public async Task<ActionResult> GetUniswapV2FactoryGetReserves(string addressToken0, string addressToken1)
         {
             try
             {

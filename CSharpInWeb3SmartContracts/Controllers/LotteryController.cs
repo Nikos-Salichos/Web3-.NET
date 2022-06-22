@@ -60,7 +60,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
-                var smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? getRandomNumber = smartContract.GetFunction("getRandomNumber");
                 BigInteger getRandomNumberResult = await getRandomNumber.CallAsync<BigInteger>();
 
