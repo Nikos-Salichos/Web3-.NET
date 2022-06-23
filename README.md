@@ -14,7 +14,7 @@ I have create different controllers for different cases:
   - approve
   - swapExactETHForTokens
 - UniswapV3
-  - getReserves
+  - getReserves (getPool, tokens and balanceOf)
 
 In addition i use the following tools to convert ABI to string:
 
