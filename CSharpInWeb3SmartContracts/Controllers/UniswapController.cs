@@ -15,7 +15,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
     public class UniswapController : ControllerBase
     {
         //Uniswap v3 https://kovan.etherscan.io/address/0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45#writeContract exactInputSingle
-        //  {"tokenIn": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",     "tokenOut": "0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735",     "fee": 100,     "recipient": "0x56814Ca0854e878C2FD9FfA0899c12f4c4e35346",     "dealline": 1633596832,     "amountIn": 1,     "amountOutMinimum": 0,     "sqrtPriceLimitX96": 0 }
+        //  {"tokenIn": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",     "tokenOut": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",     "fee": 100,     "recipient": "0x56814Ca0854e878C2FD9FfA0899c12f4c4e35346",     "dealline": 1633596832,     "amountIn": 1,     "amountOutMinimum": 0,     "sqrtPriceLimitX96": 0 }
         private readonly IConfiguration _configuration;
 
         private readonly User _user = new User();
@@ -32,7 +32,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
         private readonly string USDT_V3 = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
 
         private readonly string DAI_V3 = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
-
 
         private readonly string _tokenERC20Abi = @" [{""inputs"":[{""internalType"":""uint256"",""name"":""chainId_"",""type"":""uint256""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""constructor""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""src"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""guy"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""Approval"",""type"":""event""},{""anonymous"":true,""inputs"":[{""indexed"":true,""internalType"":""bytes4"",""name"":""sig"",""type"":""bytes4""},{""indexed"":true,""internalType"":""address"",""name"":""usr"",""type"":""address""},{""indexed"":true,""internalType"":""bytes32"",""name"":""arg1"",""type"":""bytes32""},{""indexed"":true,""internalType"":""bytes32"",""name"":""arg2"",""type"":""bytes32""},{""indexed"":false,""internalType"":""bytes"",""name"":""data"",""type"":""bytes""}],""name"":""LogNote"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""src"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""dst"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""Transfer"",""type"":""event""},{""constant"":true,""inputs"":[],""name"":""DOMAIN_SEPARATOR"",""outputs"":[{""internalType"":""bytes32"",""name"":"""",""type"":""bytes32""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""PERMIT_TYPEHASH"",""outputs"":[{""internalType"":""bytes32"",""name"":"""",""type"":""bytes32""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""},{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""allowance"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""usr"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""approve"",""outputs"":[{""internalType"":""bool"",""name"":"""",""type"":""bool""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""balanceOf"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""usr"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""burn"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""decimals"",""outputs"":[{""internalType"":""uint8"",""name"":"""",""type"":""uint8""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""guy"",""type"":""address""}],""name"":""deny"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""usr"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""mint"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""src"",""type"":""address""},{""internalType"":""address"",""name"":""dst"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""move"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""name"",""outputs"":[{""internalType"":""string"",""name"":"""",""type"":""string""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""nonces"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""holder"",""type"":""address""},{""internalType"":""address"",""name"":""spender"",""type"":""address""},{""internalType"":""uint256"",""name"":""nonce"",""type"":""uint256""},{""internalType"":""uint256"",""name"":""expiry"",""type"":""uint256""},{""internalType"":""bool"",""name"":""allowed"",""type"":""bool""},{""internalType"":""uint8"",""name"":""v"",""type"":""uint8""},{""internalType"":""bytes32"",""name"":""r"",""type"":""bytes32""},{""internalType"":""bytes32"",""name"":""s"",""type"":""bytes32""}],""name"":""permit"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""usr"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""pull"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""usr"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""push"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""guy"",""type"":""address""}],""name"":""rely"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""symbol"",""outputs"":[{""internalType"":""string"",""name"":"""",""type"":""string""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""totalSupply"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""dst"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""transfer"",""outputs"":[{""internalType"":""bool"",""name"":"""",""type"":""bool""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""src"",""type"":""address""},{""internalType"":""address"",""name"":""dst"",""type"":""address""},{""internalType"":""uint256"",""name"":""wad"",""type"":""uint256""}],""name"":""transferFrom"",""outputs"":[{""internalType"":""bool"",""name"":"""",""type"":""bool""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""version"",""outputs"":[{""internalType"":""string"",""name"":"""",""type"":""string""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""wards"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""}] ";
 
@@ -111,24 +110,41 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV3SwapRouter02/ExactInputSingle")]
-        public async Task<ActionResult> UniswapV3SwapRouter02ExactInputSingle(string addressToken0, string addressToken1, long fee)
+        public async Task<ActionResult> UniswapV3SwapRouter02ExactInputSingle()
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, Chain.MainNet);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
+                Account? account = new Account(_user.PrivateKey, Chain.Kovan);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
-                Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
-                Function? getPool = smartContract.GetFunction("getPool");
+                // pair https://kovan.etherscan.io/address/0x89007E48d47484245805679Ab37114DB117AfAB2#readContract
 
-                object[] parameters = new object[3] { addressToken0, addressToken1, fee };
-                string poolAddress = await getPool.CallAsync<string>(parameters);
+                string tokenIn = WETH_KOVAN_V2;
+                string tokenOut = DAI_KOVAN_V2;
+                int fee = 500;
+                string recipient = account.Address;
+                BigInteger deadline = DateTimeOffset.Now.AddSeconds(1000).ToUnixTimeSeconds();
+                BigInteger amountIn = 1;
+                BigInteger amountOutMinimum = 0;
+                long sqrtPriceLimitX96 = 0;
 
-                if (poolAddress == "0x0000000000000000000000000000000000000000")
-                {
-                    return NotFound();
-                }
+                Tuple<string, string, int, string, BigInteger, BigInteger, BigInteger, Tuple<long>> tuple =
+            new Tuple<string, string, int, string, BigInteger, BigInteger, BigInteger, Tuple<long>>
+                    (
+                    tokenIn, tokenOut, fee, recipient, deadline, amountIn, amountOutMinimum, new Tuple<long>(sqrtPriceLimitX96)
+                    );
 
+
+                Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
+                Function? exactInputSingle = smartContract.GetFunction("exactInputSingle");
+
+                object[] parametersForSwap = new object[1] { tuple };
+
+                BigInteger wei = Web3.Convert.ToWei(1);
+                HexBigInteger value = new HexBigInteger(wei);
+
+                HexBigInteger? estimatedGas = await exactInputSingle.EstimateGasAsync(account.Address, null, value, parametersForSwap);
+                TransactionReceipt? transactionReceiptForSwap = await exactInputSingle.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);
 
                 return Ok();
             }
@@ -285,8 +301,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(_user.PrivateKey, Chain.Kovan);
                 Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
-
-                // List<string>? path = new List<string> { WETH_KOVAN_V2, DAI_KOVAN_V2 };
 
                 string to = account.Address;
                 BigInteger deadline = DateTimeOffset.Now.AddSeconds(seconds).ToUnixTimeSeconds();

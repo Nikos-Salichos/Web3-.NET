@@ -107,8 +107,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                            transactionInput.GasPrice = new HexBigInteger(new BigInteger(2));
                            transactionInput.To = _smartContractAddress;
                            transactionInput.Value = new HexBigInteger(new BigInteger(2));
-
-                            var transactionHash = await web3.Eth.TransactionManager.SendTransactionAsync(transactionInput);*/
+                           var transactionHash = await web3.Eth.TransactionManager.SendTransactionAsync(transactionInput);*/
 
     }
 }
