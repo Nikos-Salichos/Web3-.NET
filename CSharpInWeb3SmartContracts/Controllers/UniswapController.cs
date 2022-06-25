@@ -1,4 +1,5 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.DTOs;
+using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -123,17 +124,15 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 string tokenOut = DAI_KOVAN_V2;
                 int fee = 500;
                 string recipient = account.Address;
-                BigInteger deadline = DateTimeOffset.Now.AddSeconds(1000).ToUnixTimeSeconds();
+                BigInteger deadline = DateTimeOffset.Now.AddSeconds(9999).ToUnixTimeSeconds();
                 BigInteger amountIn = 1;
                 BigInteger amountOutMinimum = 0;
                 long sqrtPriceLimitX96 = 0;
 
-                Tuple<string, string, int, string, BigInteger, BigInteger, BigInteger, Tuple<long>> tuple =
-            new Tuple<string, string, int, string, BigInteger, BigInteger, BigInteger, Tuple<long>>
+                Tuple<string, string, int, string, BigInteger, BigInteger, BigInteger, Tuple<long>> tuple = new
                     (
                     tokenIn, tokenOut, fee, recipient, deadline, amountIn, amountOutMinimum, new Tuple<long>(sqrtPriceLimitX96)
                     );
-
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
                 Function? exactInputSingle = smartContract.GetFunction("exactInputSingle");

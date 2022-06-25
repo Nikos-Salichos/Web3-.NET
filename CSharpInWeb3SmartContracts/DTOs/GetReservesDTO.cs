@@ -1,7 +1,7 @@
 ﻿using Nethereum.ABI.FunctionEncoding.Attributes;
 using System.Numerics;
 
-namespace CSharpInWeb3SmartContracts.Models
+namespace CSharpInWeb3SmartContracts.DTOs
 {
     [FunctionOutput]
     public class GetReservesDTO : IFunctionOutputDTO
