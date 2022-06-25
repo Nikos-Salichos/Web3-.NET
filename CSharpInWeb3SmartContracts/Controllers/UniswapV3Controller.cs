@@ -100,6 +100,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, Chain.Kovan);
+                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+
             }
             catch (Exception exception)
             {
