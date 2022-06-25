@@ -115,6 +115,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger? estimatedGas = await swapExactTokensForTokensFunction.EstimateGasAsync(account.Address, null, value, parametersForSwap);
                 TransactionReceipt? transactionReceiptForSwap = await swapExactTokensForTokensFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);
 
+                return Ok($"Transaction Hash for swap {transactionReceiptForSwap.TransactionHash}");
             }
             catch (Exception exception)
             {
