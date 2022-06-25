@@ -1,8 +1,6 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
-using Nethereum.Hex.HexTypes;
-using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -15,8 +13,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class UniswapV3Controller : ControllerBase
     {
-        //Uniswap v3 https://kovan.etherscan.io/address/0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45#writeContract exactInputSingle
-        //  {"tokenIn": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",     "tokenOut": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",     "fee": 100,     "recipient": "0x56814Ca0854e878C2FD9FfA0899c12f4c4e35346",     "dealline": 1633596832,     "amountIn": 1,     "amountOutMinimum": 0,     "sqrtPriceLimitX96": 0 }
         private readonly IConfiguration _configuration;
 
         private readonly User _user = new User();
@@ -98,42 +94,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-        [HttpGet("UniswapV3SwapRouter02/ExactInputSingle")]
-        public async Task<ActionResult> UniswapV3SwapRouter02ExactInputSingle()
+        [HttpPost("UniswapV3SwapRouter02/SwapExactTokensForTokens")]
+        public async Task<ActionResult> UniswapV3SwapRouter02SwapExactTokensForTokens(double amountToSwap, long amountIn, long amountOutMin, [FromBody] List<string> path, string recipientAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, Chain.Kovan);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
-
-                // pair https://kovan.etherscan.io/address/0x89007E48d47484245805679Ab37114DB117AfAB2#readContract
-
-                string tokenIn = WETH_KOVAN_V2;
-                string tokenOut = DAI_KOVAN_V2;
-                int fee = 500;
-                string recipient = account.Address;
-                BigInteger deadline = DateTimeOffset.Now.AddSeconds(9999).ToUnixTimeSeconds();
-                BigInteger amountIn = 1;
-                BigInteger amountOutMinimum = 0;
-                long sqrtPriceLimitX96 = 0;
-
-                Tuple<string, string, int, string, BigInteger, BigInteger, BigInteger, Tuple<long>> tuple = new
-                    (
-                    tokenIn, tokenOut, fee, recipient, deadline, amountIn, amountOutMinimum, new Tuple<long>(sqrtPriceLimitX96)
-                    );
-
-                Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
-                Function? exactInputSingle = smartContract.GetFunction("exactInputSingle");
-
-                object[] parametersForSwap = new object[1] { tuple };
-
-                BigInteger wei = Web3.Convert.ToWei(1);
-                HexBigInteger value = new HexBigInteger(wei);
-
-                HexBigInteger? estimatedGas = await exactInputSingle.EstimateGasAsync(account.Address, null, value, parametersForSwap);
-                TransactionReceipt? transactionReceiptForSwap = await exactInputSingle.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);
-
-                return Ok();
             }
             catch (Exception exception)
             {
