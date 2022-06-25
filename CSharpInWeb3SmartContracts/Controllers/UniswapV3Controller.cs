@@ -106,6 +106,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");
 
                 object[] parametersForSwap = new object[4] { amountIn, amountOutMin, path, recipientAddress };
+
+                BigInteger wei = Web3.Convert.ToWei(amountToSwap);
             }
             catch (Exception exception)
             {
