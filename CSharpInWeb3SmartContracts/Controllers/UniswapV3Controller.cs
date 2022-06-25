@@ -108,6 +108,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[] parametersForSwap = new object[4] { amountIn, amountOutMin, path, recipientAddress };
 
                 BigInteger wei = Web3.Convert.ToWei(amountToSwap);
+                HexBigInteger value = new HexBigInteger(wei);
+
+
             }
             catch (Exception exception)
             {
