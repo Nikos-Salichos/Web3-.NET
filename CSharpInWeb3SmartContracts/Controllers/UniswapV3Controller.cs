@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -112,6 +113,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger value = new HexBigInteger(wei);
 
                 HexBigInteger? estimatedGas = await swapExactTokensForTokensFunction.EstimateGasAsync(account.Address, null, value, parametersForSwap);
+                TransactionReceipt? transactionReceiptForSwap = await swapExactTokensForTokensFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);
+
             }
             catch (Exception exception)
             {
