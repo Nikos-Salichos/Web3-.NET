@@ -104,6 +104,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
                 Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");
+
+                object[] parametersForSwap = new object[4] { amountIn, amountOutMin, path, recipientAddress };
             }
             catch (Exception exception)
             {
