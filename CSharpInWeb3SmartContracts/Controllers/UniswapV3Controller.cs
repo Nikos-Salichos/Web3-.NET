@@ -103,6 +103,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
+                Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");
             }
             catch (Exception exception)
             {
