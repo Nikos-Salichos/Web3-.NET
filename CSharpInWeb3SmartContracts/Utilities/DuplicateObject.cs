@@ -21,7 +21,7 @@
                     return originalObject.ToString();
                 }
 
-                if (originalObject.GetType() == typeof(Int32))
+                if (originalObject.GetType() == typeof(int))
                 {
                     return Convert.ToInt32(originalObject);
                 }
