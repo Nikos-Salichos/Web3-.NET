@@ -8,13 +8,14 @@ I have create different controllers for different cases:
 - Network (current block, current block difficulty etc)
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
-  - allPairs
-  - getReserves
-  - getAmountsOut
-  - approve
-  - swapExactETHForTokens
+  - AllPairs
+  - GetReserves
+  - GetAmountsOut
+  - Approve
+  - SwapExactETHForTokens
 - UniswapV3
-  - getReserves (getPool, tokens and balanceOf)
+  - GetReserves (getPool, tokens and balanceOf)
+  - SwapExactTokensForTokens in Router02
 
 In addition i use the following tools to convert ABI to string:
 
