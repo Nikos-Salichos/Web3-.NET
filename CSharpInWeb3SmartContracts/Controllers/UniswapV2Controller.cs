@@ -42,7 +42,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Produces("application/json")]
         [HttpGet("UniswapV2FactoryAllPairs")]
-        public async Task<ActionResult<List<Pair>>> GetUniswapV2GetReserves()
+        public async Task<ActionResult<List<Pair>>> GetUniswapV2allPairsLength()
         {
             try
             {
