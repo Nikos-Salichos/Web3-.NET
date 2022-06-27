@@ -1,8 +1,8 @@
 # C# - Solidity
 Connect smart contracts with .NET
 
-In order to compile a smart contract i am using visual studio code with solidity extension. 
-When compilation finish i use ABI and bin (bytecode) in C#. 
+In order to compile a smart contract I am using visual studio code with solidity extension. 
+When compilation finish I use ABI and bin (bytecode) in C#. 
 
 I have create different controllers for different cases:
 - Network (current block, current block difficulty etc)
