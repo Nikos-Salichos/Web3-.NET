@@ -26,6 +26,11 @@
                     return Convert.ToInt32(originalObject);
                 }
 
+                if (originalObject.GetType() == typeof(bool))
+                {
+                    return Convert.ToBoolean(originalObject);
+                }
+
                 //create new instance of the object
                 object newObject = Activator.CreateInstance(originalObject.GetType());
 
