@@ -33,17 +33,28 @@ namespace CSharpInWeb3SmartContracts.Controllers
             _user.PrivateKey = configuration["PrivateKey"];
         }
 
-        [HttpGet("Deploy")]
+        [HttpPost("Deploy")]
         public async Task<ActionResult> DeployContract(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
+
+                object[]? parametersForPair = new object[1] { _user.MetamaskAddress };
+
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi, _byteCode, _user.MetamaskAddress, _user.MetamaskAddress);
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
+                                                                                            _byteCode,
+                                                                                            _user.MetamaskAddress,
+                                                                                            parametersForPair);
 
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi, _byteCode, _user.MetamaskAddress, estimatedGas, null, _user.MetamaskAddress);
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
+                                                                                                                     _byteCode,
+                                                                                                                     _user.MetamaskAddress,
+                                                                                                                     estimatedGas,
+                                                                                                                     null,
+                                                                                                                     parametersForPair);
 
                 return Ok($"Deploy Contract Transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
             }
