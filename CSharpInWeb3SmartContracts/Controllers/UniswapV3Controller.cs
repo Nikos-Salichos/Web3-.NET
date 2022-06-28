@@ -1,4 +1,6 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.Enumerations;
+using CSharpInWeb3SmartContracts.Models;
+using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -35,7 +37,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public UniswapV3Controller(IConfiguration configuration)
         {
             _configuration = configuration;
-            _user.BlockchainProviderMainnet = _configuration["BlockchainProviderMainnet"];
             _user.BlockchainProviderKovan = _configuration["BlockchainProviderKovan"];
             _user.BlockchainProviderRopsten = _configuration["BlockchainProviderRopsten"];
             _user.MetamaskAddress = _configuration["MetamaskAddress"];
@@ -43,12 +44,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV3GetReserves")]
-        public async Task<ActionResult> GetUniswapV3GetReserves(string addressToken0, string addressToken1, long fee)
+        public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, BlockchainNetworks blockchainNetwork, string addressToken0, string addressToken1, long fee)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, Chain.MainNet);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderMainnet);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
                 Function? getPool = smartContract.GetFunction("getPool");
