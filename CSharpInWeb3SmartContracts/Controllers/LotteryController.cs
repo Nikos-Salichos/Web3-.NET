@@ -29,13 +29,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public LotteryController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [HttpGet("Deploy")]
-        public async Task<ActionResult> DeployContract(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> DeployContract(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -55,7 +54,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("GetRandomNumber")]
-        public async Task<ActionResult> GetRandomNumber(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> GetRandomNumber(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -75,7 +74,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("GetPlayers")]
-        public async Task<ActionResult> GetPlayers(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> GetPlayers(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -96,7 +95,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("GetBalance")]
-        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -119,7 +118,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("EnterLottery")]
-        public async Task<ActionResult> EnterLottery(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> EnterLottery(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -146,7 +145,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("PickWinner")]
-        public async Task<ActionResult> PickWinner(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> PickWinner(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {

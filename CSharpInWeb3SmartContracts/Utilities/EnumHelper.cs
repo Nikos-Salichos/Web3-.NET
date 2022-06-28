@@ -11,15 +11,15 @@ namespace CSharpInWeb3SmartContracts.Utilities
             _configuration = configuration;
         }
 
-        public string GetStringBasedOnEnum(BlockchainNetworks blockchainNetworks)
+        public string GetStringBasedOnEnum(BlockchainNetwork blockchainNetworks)
         {
             switch (blockchainNetworks)
             {
-                case BlockchainNetworks.BlockchainNetworkMainnet:
+                case BlockchainNetwork.BlockchainNetworkMainnet:
                     return _configuration["BlockchainProviderMainnet"];
-                case BlockchainNetworks.BlockchainNetworkKovan:
+                case BlockchainNetwork.BlockchainNetworkKovan:
                     return _configuration["BlockchainProviderKovan"];
-                case BlockchainNetworks.BlockchainNetworkRopsten:
+                case BlockchainNetwork.BlockchainNetworkRopsten:
                     return _configuration["BlockchainProviderRopsten"];
                 default:
                     return "NO NETWORK GIVEN";

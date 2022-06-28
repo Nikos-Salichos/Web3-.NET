@@ -1,4 +1,6 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.Enumerations;
+using CSharpInWeb3SmartContracts.Models;
+using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
@@ -15,19 +17,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
     public class WalletController : ControllerBase
     {
         private readonly User _user = new User();
+        public EnumHelper EnumHelper { get; set; }
 
         public WalletController(IConfiguration configuration)
         {
-            _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
+            EnumHelper = new EnumHelper(configuration);
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [HttpGet("GetBalance")]
-        public async Task<ActionResult> GetBalance(Chain chain)
+        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
             HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
             decimal etherAmount = Web3.Convert.FromWei(balance.Value);
@@ -36,12 +39,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("SendEthereum")]
-        public async Task<ActionResult> SendEthereum(Chain chain, string toAddress, decimal etherAmount)
+        public async Task<ActionResult> SendEthereum(Chain chain, BlockchainNetwork blockchainNetwork, string toAddress, decimal etherAmount)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 TransactionReceipt? transaction = await web3.Eth.GetEtherTransferService().TransferEtherAndWaitForReceiptAsync(toAddress, etherAmount);
 
@@ -56,12 +59,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("TransferTokens")]
-        public async Task<ActionResult> SendERC20Token(Chain chain, string toAddress, long bigInteger)
+        public async Task<ActionResult> SendERC20Token(Chain chain, BlockchainNetwork blockchainNetwork, string toAddress, long bigInteger)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 TransferFunction? transferFunction = new TransferFunction()
                 {
@@ -83,12 +86,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("PendingTransactions")]
-        public async Task<ActionResult> GetPendingTransactions(Chain chain)
+        public async Task<ActionResult> GetPendingTransactions(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 HexBigInteger? pendingFilter = await web3.Eth.Filters.NewPendingTransactionFilter.SendRequestAsync();
                 string[]? filterChanges = await web3.Eth.Filters.GetFilterChangesForBlockOrTransaction.SendRequestAsync(pendingFilter);

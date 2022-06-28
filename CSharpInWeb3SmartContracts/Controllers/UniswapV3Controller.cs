@@ -17,7 +17,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class UniswapV3Controller : ControllerBase
     {
-        private readonly IConfiguration _configuration;
 
         private readonly User _user = new User();
 
@@ -38,16 +37,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public UniswapV3Controller(IConfiguration configuration)
         {
-            _configuration = configuration;
             EnumHelper = new EnumHelper(configuration);
-            _user.BlockchainProviderKovan = _configuration["BlockchainProviderKovan"];
-            _user.BlockchainProviderRopsten = _configuration["BlockchainProviderRopsten"];
-            _user.MetamaskAddress = _configuration["MetamaskAddress"];
-            _user.PrivateKey = _configuration["PrivateKey"];
+            _user.MetamaskAddress = configuration["MetamaskAddress"];
+            _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [HttpGet("UniswapV3GetReserves")]
-        public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, BlockchainNetworks blockchainNetwork, string addressToken0, string addressToken1, long fee)
+        public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, BlockchainNetwork blockchainNetwork, string addressToken0, string addressToken1, long fee)
         {
             try
             {
@@ -98,7 +94,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("UniswapV3SwapRouter02/SwapExactTokensForTokens")]
-        public async Task<ActionResult> UniswapV3SwapRouter02SwapExactTokensForTokens(Chain chain, BlockchainNetworks blockchainNetwork, double amountToSwap, long amountIn, long amountOutMin, [FromBody] List<string> path, string recipientAddress)
+        public async Task<ActionResult> UniswapV3SwapRouter02SwapExactTokensForTokens(Chain chain, BlockchainNetwork blockchainNetwork, double amountToSwap, long amountIn, long amountOutMin, [FromBody] List<string> path, string recipientAddress)
         {
             try
             {

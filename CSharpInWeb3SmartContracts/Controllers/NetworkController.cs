@@ -22,13 +22,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public NetworkController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [HttpGet("GetLatestBlock")]
-        public async Task<ActionResult> GetLatestBlock(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> GetLatestBlock(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
@@ -41,7 +40,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("GetAllTransactionOfABlock")]
-        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {

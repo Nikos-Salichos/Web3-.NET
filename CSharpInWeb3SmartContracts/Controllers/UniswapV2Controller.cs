@@ -17,8 +17,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class UniswapV2Controller : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-
         private readonly User _user = new User();
 
         private readonly string WETH_KOVAN_V2 = "0xd0A1E359811322d97991E03f863a0C30C2cF029C";
@@ -36,15 +34,14 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public UniswapV2Controller(IConfiguration configuration)
         {
-            _configuration = configuration;
             EnumHelper = new EnumHelper(configuration);
-            _user.MetamaskAddress = _configuration["MetamaskAddress"];
-            _user.PrivateKey = _configuration["PrivateKey"];
+            _user.MetamaskAddress = configuration["MetamaskAddress"];
+            _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [Produces("application/json")]
         [HttpGet("UniswapV2FactoryAllPairs")]
-        public async Task<ActionResult<List<Pair>>> GetUniswapV2allPairsLength(Chain chain, BlockchainNetworks blockchainNetwork)
+        public async Task<ActionResult<List<Pair>>> GetUniswapV2allPairsLength(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -85,7 +82,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV2FactoryGetReserves")]
-        public async Task<ActionResult> GetUniswapV2FactoryGetReserves(Chain chain, BlockchainNetworks blockchainNetwork, string addressToken0, string addressToken1)
+        public async Task<ActionResult> GetUniswapV2FactoryGetReserves(Chain chain, BlockchainNetwork blockchainNetwork, string addressToken0, string addressToken1)
         {
             try
             {
@@ -125,7 +122,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV2PairApprove")]
-        public async Task<ActionResult> GetUniswapV2PairApprove(Chain chain, BlockchainNetworks blockchainNetwork, string addressToken0, string addressToken1, string spenderAddress, long value)
+        public async Task<ActionResult> GetUniswapV2PairApprove(Chain chain, BlockchainNetwork blockchainNetwork, string addressToken0, string addressToken1, string spenderAddress, long value)
         {
             try
             {
@@ -161,7 +158,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("UniswapV2RouterGetAmountsOut")]
-        public async Task<ActionResult> UniswapV2RouterGetAmountsOut(Chain chain, BlockchainNetworks blockchainNetwork, long amountIn, List<string> path)
+        public async Task<ActionResult> UniswapV2RouterGetAmountsOut(Chain chain, BlockchainNetwork blockchainNetwork, long amountIn, List<string> path)
         {
             try
             {
@@ -183,7 +180,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("UniswapV2RouterSwapExactETHForTokens")]
-        public async Task<ActionResult> SwapExactETHForTokens(Chain chain, BlockchainNetworks blockchainNetwork, double amountToSwap, long amountOutMin, [FromBody] List<string> path, double seconds)
+        public async Task<ActionResult> SwapExactETHForTokens(Chain chain, BlockchainNetwork blockchainNetwork, double amountToSwap, long amountOutMin, [FromBody] List<string> path, double seconds)
         {
             try
             {

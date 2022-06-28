@@ -1,6 +1,6 @@
 ﻿namespace CSharpInWeb3SmartContracts.Enumerations
 {
-    public enum BlockchainNetworks
+    public enum BlockchainNetwork
     {
         BlockchainNetworkMainnet = 1,
         BlockchainNetworkKovan = 2,
