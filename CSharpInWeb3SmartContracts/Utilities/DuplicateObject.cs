@@ -1,8 +1,8 @@
 ﻿namespace CSharpInWeb3SmartContracts.Utilities
 {
-    public static class DuplicateObject
+    public class DuplicateObject
     {
-        public static object? CreateDuplicateObject(object originalObject)
+        public object? CreateDuplicateObject(object originalObject)
         {
             try
             {

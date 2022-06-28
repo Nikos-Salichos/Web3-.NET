@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace CSharpInWeb3SmartContracts
+namespace CSharpInWeb3SmartContracts.Utilities
 {
     public class EnumSchemaFilter : ISchemaFilter
     {
