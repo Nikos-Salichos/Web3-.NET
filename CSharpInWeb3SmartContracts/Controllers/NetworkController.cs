@@ -1,4 +1,6 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.Enumerations;
+using CSharpInWeb3SmartContracts.Models;
+using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
@@ -15,18 +17,21 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         private readonly User _user = new User();
 
+        public EnumHelper EnumHelper { get; set; }
+
         public NetworkController(IConfiguration configuration)
         {
+            EnumHelper = new EnumHelper(configuration);
             _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [HttpGet("GetLatestBlock")]
-        public async Task<ActionResult> GetLatestBlock(Chain chain)
+        public async Task<ActionResult> GetLatestBlock(Chain chain, BlockchainNetworks blockchainNetwork)
         {
             Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, _user.BlockchainProviderKovan.ToString());
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
             HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
             BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
@@ -36,12 +41,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("GetAllTransactionOfABlock")]
-        public async Task<ActionResult> GetBalance(Chain chain)
+        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetworks blockchainNetwork)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, _user.BlockchainProviderKovan);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 

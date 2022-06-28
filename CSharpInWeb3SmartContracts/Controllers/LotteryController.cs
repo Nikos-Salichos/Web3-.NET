@@ -16,8 +16,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class LotteryController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-
         private readonly User _user = new User();
 
         private readonly string _abi = @" [{""inputs"":[{""internalType"":""address"",""name"":""oracleAddress"",""type"":""address""}],""stateMutability"":""nonpayable"",""type"":""constructor""},{""inputs"":[],""name"":""enter"",""outputs"":[],""stateMutability"":""payable"",""type"":""function""},{""inputs"":[],""name"":""getBalance"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""getPlayers"",""outputs"":[{""internalType"":""address payable[]"",""name"":"""",""type"":""address[]""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""getRandomNumber"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[{""internalType"":""uint256"",""name"":""historyLotteryId"",""type"":""uint256""}],""name"":""getWinnerByLottery"",""outputs"":[{""internalType"":""address payable"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""name"":""lotteryHistory"",""outputs"":[{""internalType"":""address payable"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""lotteryId"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""owner"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""pickWinner"",""outputs"":[],""stateMutability"":""nonpayable"",""type"":""function""},{""inputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""name"":""players"",""outputs"":[{""internalType"":""address payable"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""}] ";
@@ -30,11 +28,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public LotteryController(IConfiguration configuration)
         {
-            _configuration = configuration;
             EnumHelper = new EnumHelper(configuration);
-            _user.BlockchainProviderKovan = _configuration["BlockchainProviderKovan"];
-            _user.MetamaskAddress = _configuration["MetamaskAddress"];
-            _user.PrivateKey = _configuration["PrivateKey"];
+            _user.BlockchainProviderKovan = configuration["BlockchainProviderKovan"];
+            _user.MetamaskAddress = configuration["MetamaskAddress"];
+            _user.PrivateKey = configuration["PrivateKey"];
         }
 
         [HttpGet("Deploy")]
