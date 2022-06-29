@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SmartContracts\MyCryptoCoin\**" />
+    <Content Remove="SmartContracts\MyCryptoCoin\**" />
+    <EmbeddedResource Remove="SmartContracts\MyCryptoCoin\**" />
+    <None Remove="SmartContracts\MyCryptoCoin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Nethereum.ABI" Version="4.5.0" />
     <PackageReference Include="Nethereum.Accounts" Version="4.5.0" />
     <PackageReference Include="Nethereum.BlockchainProcessing" Version="4.5.0" />

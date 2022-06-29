@@ -111,7 +111,7 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
- contract CryptoCoin is IERC20,Pausable{
+ contract CryptoToken is IERC20,Pausable{
 
     uint256 public immutable cap;
     string public name;
