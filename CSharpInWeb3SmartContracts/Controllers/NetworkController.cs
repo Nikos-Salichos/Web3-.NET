@@ -39,8 +39,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
-        [HttpGet("GetAllTransactionOfABlock")]
-        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork)
+        [HttpGet("GetAllTransactionsOfCurrentBlock")]
+        public async Task<ActionResult> GetTransactionsOfABlock(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             try
             {
@@ -52,6 +52,31 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber)));
 
                 List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
+                return Ok(allTransactions);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+
+            }
+        }
+
+
+        [HttpGet("GetAllTransactionsOfABlock")]
+        public async Task<ActionResult> GetBlockTransactions(Chain chain, BlockchainNetwork blockchainNetwork, long blockNumber)
+        {
+            try
+            {
+                //test block 32456104 in Kovan
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+
+                BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber)));
+
+                List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
+
+                //  List<string>? transactionsForContracts = allTransactions.Where(t => t.To == null).ToList().ConvertAll(transaction => transaction.TransactionHash);
+
                 return Ok(allTransactions);
             }
             catch (Exception exception)

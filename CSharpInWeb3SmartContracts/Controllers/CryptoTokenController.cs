@@ -1,6 +1,12 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.Enumerations;
+using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
+using Nethereum.Web3;
+using Nethereum.Web3.Accounts;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -24,7 +30,36 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
+        [HttpGet("Deploy")]
+        public async Task<ActionResult> DeployContract(Chain chain, BlockchainNetwork blockchainNetwork)
+        {
+            try
+            {
 
+                object[]? parametersForPair = new object[1] { _user.MetamaskAddress };
+
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
+                                                                                            _byteCode,
+                                                                                            _user.MetamaskAddress,
+                                                                                            parametersForPair);
+
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
+                                                                                                                     _byteCode,
+                                                                                                                     _user.MetamaskAddress,
+                                                                                                                     estimatedGas,
+                                                                                                                     null,
+                                                                                                                     parametersForPair);
+
+                return Ok($"Deploy Contract Transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
     }
 }
