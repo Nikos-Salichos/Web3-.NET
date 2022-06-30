@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 //Extension method for configuring CORS
-var lala = builder.Services.ConfigureCORS();
+IServiceCollection configureCors = builder.Services.ConfigureCors();
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -32,8 +32,6 @@ builder.Services.AddSwaggerGen(options =>
     options.UseInlineDefinitionsForEnums();
     options.SchemaFilter<EnumSchemaFilter>();
 });
-
-
 
 
 var app = builder.Build();
