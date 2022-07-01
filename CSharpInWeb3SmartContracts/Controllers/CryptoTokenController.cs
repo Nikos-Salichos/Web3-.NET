@@ -86,29 +86,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-        [HttpGet("Mint")]
-        public async Task<ActionResult> Mint(Chain chain, BlockchainNetwork blockchainNetwork, string receiverAddress, long amount)
-        {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
-                object[]? parameters = new object[2] { receiverAddress, amount };
-
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? mint = smartContract.GetFunction("mint");
-
-                HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
-
-                TransactionReceipt? enterLotteryResult = await mint.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
-
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
-        }
     }
 }
