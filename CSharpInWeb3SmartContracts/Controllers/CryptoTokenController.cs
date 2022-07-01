@@ -2,6 +2,7 @@
 using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
@@ -30,7 +31,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
         }
-
 
         [HttpGet("Deploy")]
         public async Task<ActionResult> DeployContract(Chain chain, BlockchainNetwork blockchainNetwork, long initialSupply, string tokenName, string tokenSymbol, long tokenCap)
@@ -62,5 +62,42 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("GetBalance")]
+        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork, string address)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpGet("Mint")]
+        public async Task<ActionResult> Mint(Chain chain, BlockchainNetwork blockchainNetwork, string receiverAddress, long amount)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+
+                object[]? parameters = new object[2] { receiverAddress, amount };
+
+                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? mint = smartContract.GetFunction("mint");
+
+                HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
+
+                TransactionReceipt? enterLotteryResult = await mint.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
