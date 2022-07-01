@@ -75,6 +75,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? getBalance = smartContract.GetFunction("getBalance");
 
                 long getBalanceResult = await getBalance.CallAsync<long>(parameters);
+
+                decimal balanceInEth = Web3.Convert.FromWei(getBalanceResult);
             }
             catch (Exception exception)
             {
