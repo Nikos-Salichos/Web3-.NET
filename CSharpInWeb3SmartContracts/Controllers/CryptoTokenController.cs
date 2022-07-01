@@ -72,6 +72,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[]? parameters = new object[1] { address };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? getBalance = smartContract.GetFunction("getBalance");
             }
             catch (Exception exception)
             {
