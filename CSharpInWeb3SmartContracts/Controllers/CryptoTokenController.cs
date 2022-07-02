@@ -93,6 +93,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+
+                object[]? parameters = new object[2] { receiverAddress, amount };
+
             }
             catch (Exception exception)
             {
