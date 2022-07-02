@@ -101,6 +101,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
 
                 TransactionReceipt? enterLotteryResult = await mint.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+
+                return Ok();
             }
             catch (Exception exception)
             {
