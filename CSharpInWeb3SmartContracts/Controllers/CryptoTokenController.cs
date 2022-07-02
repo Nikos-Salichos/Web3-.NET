@@ -99,6 +99,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? mint = smartContract.GetFunction("mint");
 
                 HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
+
+                TransactionReceipt? enterLotteryResult = await mint.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
             }
             catch (Exception exception)
             {
