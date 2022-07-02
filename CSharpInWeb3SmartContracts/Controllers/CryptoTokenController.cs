@@ -98,7 +98,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? mint = smartContract.GetFunction("mint");
 
-
+                HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
             }
             catch (Exception exception)
             {
