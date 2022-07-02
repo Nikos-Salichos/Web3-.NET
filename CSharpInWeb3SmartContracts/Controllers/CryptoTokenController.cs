@@ -86,6 +86,18 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("Mint")]
+        public async Task<ActionResult> Mint(Chain chain, BlockchainNetwork blockchainNetwork, string receiverAddress, long amount)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
 
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
