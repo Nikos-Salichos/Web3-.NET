@@ -4,7 +4,8 @@ Connect smart contracts with .NET
 In order to compile a smart contract I am using visual studio code with solidity extension. 
 When compilation finish I use ABI and bin (bytecode) in C#. 
 
-I have create different controllers for different cases:
+I have create different controllers for different smart contracts:
+
 - Network (current block, current block difficulty etc)
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
