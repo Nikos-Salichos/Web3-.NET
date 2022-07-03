@@ -137,7 +137,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("Allowance")]
+        public async Task<ActionResult> Allowance(Chain chain, BlockchainNetwork blockchainNetwork, string ownerAddress, string spenderAddress)
+        {
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
 
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
 
     }
