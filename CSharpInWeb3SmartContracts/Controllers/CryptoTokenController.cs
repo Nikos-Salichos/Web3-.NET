@@ -150,6 +150,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? allowance = smartContract.GetFunction("allowance");
 
                 BigInteger allowanceAmount = await allowance.CallAsync<BigInteger>(parameters);
+                BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(allowanceAmount);
             }
             catch (Exception exception)
             {
