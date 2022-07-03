@@ -151,6 +151,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 BigInteger allowanceAmount = await allowance.CallAsync<BigInteger>(parameters);
                 BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(allowanceAmount);
+
+                return Ok($"{spenderAddress} allow to spend {balanceInEth} ETH of {ownerAddress}");
             }
             catch (Exception exception)
             {
