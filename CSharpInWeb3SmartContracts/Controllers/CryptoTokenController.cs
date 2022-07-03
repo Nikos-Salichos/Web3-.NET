@@ -148,6 +148,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[]? parameters = new object[2] { ownerAddress, spenderAddress };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? allowance = smartContract.GetFunction("allowance");
+
+                BigInteger allowanceAmount = await allowance.CallAsync<BigInteger>(parameters);
             }
             catch (Exception exception)
             {
