@@ -6,6 +6,7 @@ using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
+using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using System.Numerics;
@@ -117,7 +118,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? getBalance = smartContract.GetFunction("getBalance");
                 long getBalanceResult = await getBalance.CallAsync<long>();
 
-                decimal balanceInEth = Web3.Convert.FromWei(getBalanceResult);
+                BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(getBalanceResult);
 
                 return Ok($"Smart contract balance {balanceInEth}");
             }

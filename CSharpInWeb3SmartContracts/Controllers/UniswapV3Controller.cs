@@ -6,6 +6,7 @@ using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
+using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using System.Numerics;
@@ -76,14 +77,14 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? balanceOfToken1 = smartContractToken1.GetFunction("balanceOf");
                 BigInteger balanceOfToken1Result = await balanceOfToken1.CallAsync<BigInteger>(poolAddress);
 
-                decimal balanceInEthToken0 = Web3.Convert.FromWei(balanceOfToken0Result);
-                decimal balanceInEthToken1 = Web3.Convert.FromWei(balanceOfToken1Result);
+                BigDecimal balanceInEthToken0 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken0Result);
+                BigDecimal balanceInEthToken1 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken1Result);
 
                 //balanceInEthToken1 has 6 decimals and not 18
-                decimal adjusted_price = balanceInEthToken1 / (10 ^ (18 - 6));
-                decimal inverted_price = 1 / adjusted_price;
+                BigDecimal adjusted_price = balanceInEthToken1 / (10 ^ (18 - 6));
+                BigDecimal inverted_price = 1 / adjusted_price;
 
-                decimal price = balanceInEthToken0 / inverted_price;
+                BigDecimal price = balanceInEthToken0 / inverted_price;
 
                 return Ok($"Token 1 balance {balanceInEthToken0} and balance of token 2 {inverted_price}");
             }

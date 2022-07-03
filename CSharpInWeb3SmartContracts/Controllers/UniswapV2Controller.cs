@@ -150,6 +150,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 TransactionReceipt? transactionReceiptForApprove = await approve.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parametersForApprove);
 
                 return Ok($"Transaction Hash for approve {transactionReceiptForApprove?.TransactionHash}");
+
             }
             catch (Exception exception)
             {

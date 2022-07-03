@@ -7,6 +7,7 @@ using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
+using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
@@ -33,7 +34,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
             HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
-            decimal etherAmount = Web3.Convert.FromWei(balance.Value);
+
+            BigDecimal etherAmount = Web3.Convert.FromWeiToBigDecimal(balance.Value);
 
             return Ok($"Ethereum balance {etherAmount}");
         }
@@ -59,7 +61,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("TransferTokens")]
-        public async Task<ActionResult> SendERC20Token(Chain chain, BlockchainNetwork blockchainNetwork, string toAddress, long bigInteger)
+        public async Task<ActionResult> SendERC20Token(Chain chain, BlockchainNetwork blockchainNetwork, string toAddress, long amountOfTokens)
         {
             try
             {
@@ -71,7 +73,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     FromAddress = account.Address,
                     To = toAddress,
                     Gas = 50000,
-                    Value = bigInteger, //value of transfer tokens
+                    Value = amountOfTokens, //value of transfer tokens
                 };
 
                 IContractTransactionHandler<TransferFunction> transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
