@@ -17,7 +17,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class WalletController : ControllerBase
     {
-
+        private readonly ILogger<WalletController> _logger;
 
         private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
