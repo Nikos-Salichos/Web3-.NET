@@ -33,16 +33,22 @@ namespace CSharpInWeb3SmartContracts.Controllers
         [HttpPost("GetBalance")]
         public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+            try
+            {
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
-            HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
+                HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
 
-            BigDecimal etherAmount = Web3.Convert.FromWeiToBigDecimal(balance.Value);
+                BigDecimal etherAmount = Web3.Convert.FromWeiToBigDecimal(balance.Value);
 
-
-
-            return Ok($"Ethereum balance {etherAmount}");
+                return Ok($"Ethereum balance {etherAmount}");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpGet("SendEthereum")]
