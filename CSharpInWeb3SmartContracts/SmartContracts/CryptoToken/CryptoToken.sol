@@ -201,6 +201,7 @@ interface IERC20 {
         balanceOf[from] -=value;
         balanceOf[to] +=value;
         allowed[from][msg.sender] -= value;
+        emit Transfer(from, to, value);
         return true;
     }
 

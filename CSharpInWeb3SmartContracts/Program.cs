@@ -1,8 +1,9 @@
 using CSharpInWeb3SmartContracts;
 using CSharpInWeb3SmartContracts.Utilities;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 using System.Text.Json.Serialization;
-
-
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,23 @@ IServiceCollection configureCors = builder.Services.ConfigureCors();
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options =>
-            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())).AddNewtonsoftJson();
 
+
+#region Serilog Logging
+string fullPath = Environment.CurrentDirectory + @"\logs.txt";
+LoggingLevelSwitch? levelSwitch = new LoggingLevelSwitch();
+levelSwitch.MinimumLevel = LogEventLevel.Error;
+builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
+                                       .WriteTo.File(fullPath, rollingInterval: RollingInterval.Day));
+/*.WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("MsSqlConnection"),
+ new MSSqlServerSinkOptions
+ {
+     TableName = "Logs",
+     SchemaName = "dbo",
+     AutoCreateSqlTable = true
+ }));*/
+#endregion Serilog Logging
 
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");

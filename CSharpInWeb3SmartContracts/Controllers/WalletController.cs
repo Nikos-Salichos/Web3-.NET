@@ -17,17 +17,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class WalletController : ControllerBase
     {
+
+
         private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
 
-        public WalletController(IConfiguration configuration)
+        public WalletController(IConfiguration configuration, ILogger<WalletController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
+
         }
 
-        [HttpGet("GetBalance")]
+        [HttpPost("GetBalance")]
         public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork)
         {
             Account? account = new Account(_user.PrivateKey, chain);
@@ -36,6 +39,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
 
             BigDecimal etherAmount = Web3.Convert.FromWeiToBigDecimal(balance.Value);
+
+
 
             return Ok($"Ethereum balance {etherAmount}");
         }
