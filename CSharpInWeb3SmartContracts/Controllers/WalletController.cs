@@ -27,7 +27,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             EnumHelper = new EnumHelper(configuration);
             _user.MetamaskAddress = configuration["MetamaskAddress"];
             _user.PrivateKey = configuration["PrivateKey"];
-
+            _logger = logger;
         }
 
         [HttpPost("GetBalance")]
