@@ -2,7 +2,7 @@
 Connect smart contracts with .NET
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
-When compilation finish I use ABI and bin (bytecode) in C#. 
+When compilation finish I use ABI and bytecode from .json file. 
 
 I have create different controllers for different smart contracts:
 
