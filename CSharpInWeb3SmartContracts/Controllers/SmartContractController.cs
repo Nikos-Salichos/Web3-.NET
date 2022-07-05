@@ -2,8 +2,10 @@
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
+using Nethereum.Web3.Accounts;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -29,6 +31,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                             byteCode,
                                                                                             metamaskAddress,
                                                                                             null);
+
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(abi.ToString(),
+                                                                                                                    byteCode,
+                                                                                                                    metamaskAddress,
+                                                                                                                    estimatedGas,
+                                                                                                                    null, null, null, null);
 
                 return Ok(deployContract);
             }
