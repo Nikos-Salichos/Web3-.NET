@@ -20,6 +20,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
+                Account? account = new Account(privateKey, chain);
+
 
                 return Ok(deployContract);
             }
