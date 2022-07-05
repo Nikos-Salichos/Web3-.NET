@@ -1,7 +1,9 @@
 ﻿using CSharpInWeb3SmartContracts.Enumerations;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Hex.HexTypes;
 using Nethereum.Signer;
+using Nethereum.Web3;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -22,6 +24,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(privateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(abi.ToString(),
+                                                                                            byteCode,
+                                                                                            metamaskAddress,
+                                                                                            null);
 
                 return Ok(deployContract);
             }
