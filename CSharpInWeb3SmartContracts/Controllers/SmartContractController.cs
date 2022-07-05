@@ -21,7 +21,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(privateKey, chain);
-
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 return Ok(deployContract);
             }
