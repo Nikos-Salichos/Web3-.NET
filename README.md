@@ -1,4 +1,4 @@
-# C# - Solidity
+# Smart Contracts in Solidity - C#
 Connect smart contracts with .NET
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
