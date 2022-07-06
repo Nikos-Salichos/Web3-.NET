@@ -160,5 +160,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("DestroySmartContract")]
+        public async Task<ActionResult> DestroySmartContract(Chain chain, BlockchainNetwork blockchainNetwork, string withdrawalAddress)
+        {
+        }
+
     }
 }
