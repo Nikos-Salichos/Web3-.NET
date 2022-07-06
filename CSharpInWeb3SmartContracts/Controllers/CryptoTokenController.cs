@@ -173,6 +173,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? destroySmartContract = smartContract.GetFunction("destroySmartContract");
 
                 HexBigInteger? estimatedGas = await destroySmartContract.EstimateGasAsync(account.Address, null, null, parameters);
+
+                TransactionReceipt? destroySmartContractResult = await destroySmartContract.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+
             }
             catch (Exception exception)
             {
