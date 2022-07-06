@@ -165,9 +165,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-
+                Account? account = new Account(_user.PrivateKey, chain);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
