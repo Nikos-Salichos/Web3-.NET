@@ -176,6 +176,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 TransactionReceipt? destroySmartContractResult = await destroySmartContract.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
+                return Ok($"Smart contract destroyed {destroySmartContractResult.TransactionHash}");
             }
             catch (Exception exception)
             {
