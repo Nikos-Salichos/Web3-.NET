@@ -170,6 +170,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[]? parameters = new object[1] { withdrawalAddress };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? destroySmartContract = smartContract.GetFunction("destroySmartContract");
             }
             catch (Exception exception)
             {
