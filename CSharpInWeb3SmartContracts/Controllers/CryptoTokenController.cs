@@ -194,6 +194,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[]? parameters = new object[2] { receiver, amountOfTokens };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? transfer = smartContract.GetFunction("transfer");
+
             }
             catch (Exception exception)
             {
