@@ -3,6 +3,7 @@ using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
+using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
@@ -195,6 +196,14 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[]? parameters = new object[2] { receiver, amountOfTokens };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? transfer = smartContract.GetFunction("transfer");
+
+                TransferFunction? transferFunction = new TransferFunction()
+                {
+                    FromAddress = account.Address,
+                    To = receiver,
+                    Gas = 50000,
+                    Value = amountOfTokens,
+                };
 
             }
             catch (Exception exception)
