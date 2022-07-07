@@ -184,5 +184,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("TransferTokens")]
+        public async Task<ActionResult> TransferTokens(Chain chain, BlockchainNetwork blockchainNetwork, string receiver, long amountOfTokens)
+        {
+            try
+            {
+
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
     }
 }
