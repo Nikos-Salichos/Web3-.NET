@@ -208,6 +208,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
 
                 TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+
+                return Ok($"Tokens transfer was successful {transferResult.TransactionHash}");
             }
             catch (Exception exception)
             {
