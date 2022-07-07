@@ -205,6 +205,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     Value = amountOfTokens,
                 };
 
+                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+
             }
             catch (Exception exception)
             {
