@@ -230,6 +230,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? transfer = smartContract.GetFunction("increaseApproval");
 
                 HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+
+                TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+
             }
             catch (Exception exception)
             {
