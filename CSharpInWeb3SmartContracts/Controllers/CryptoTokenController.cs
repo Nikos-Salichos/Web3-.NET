@@ -226,6 +226,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
 
                 object[]? parameters = new object[2] { spender, addedAmount };
+                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
             }
             catch (Exception exception)
             {
