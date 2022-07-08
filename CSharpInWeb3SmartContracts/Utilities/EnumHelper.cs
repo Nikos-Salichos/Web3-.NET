@@ -1,4 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Enumerations;
+﻿using Nethereum.Signer;
 
 namespace CSharpInWeb3SmartContracts.Utilities
 {
@@ -11,15 +11,15 @@ namespace CSharpInWeb3SmartContracts.Utilities
             _configuration = configuration;
         }
 
-        public string GetStringBasedOnEnum(BlockchainNetwork blockchainNetworks)
+        public string GetStringBasedOnEnum(Chain chain)
         {
-            switch (blockchainNetworks)
+            switch (chain)
             {
-                case BlockchainNetwork.BlockchainNetworkMainnet:
+                case Chain.MainNet:
                     return _configuration["BlockchainProviderMainnet"];
-                case BlockchainNetwork.BlockchainNetworkKovan:
+                case Chain.Kovan:
                     return _configuration["BlockchainProviderKovan"];
-                case BlockchainNetwork.BlockchainNetworkRopsten:
+                case Chain.Ropsten:
                     return _configuration["BlockchainProviderRopsten"];
                 default:
                     return "NO NETWORK GIVEN";

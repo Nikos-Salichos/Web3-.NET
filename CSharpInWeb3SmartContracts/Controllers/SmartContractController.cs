@@ -1,5 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Enumerations;
-using CSharpInWeb3SmartContracts.Utilities;
+﻿using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
@@ -20,12 +19,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployWithoutParameters")]
-        public async Task<ActionResult> DeployWithoutParameters(Chain chain, BlockchainNetwork blockchainNetwork, string privateKey, string metamaskAddress, string byteCode, [FromBody] object abi)
+        public async Task<ActionResult> DeployWithoutParameters(Chain chain, string privateKey, string metamaskAddress, string byteCode, [FromBody] object abi)
         {
             try
             {
                 Account? account = new Account(privateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(abi.ToString(),
                                                                                             byteCode,

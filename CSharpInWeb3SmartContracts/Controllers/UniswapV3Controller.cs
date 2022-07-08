@@ -1,5 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Enumerations;
-using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -44,12 +43,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV3GetReserves")]
-        public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, BlockchainNetwork blockchainNetwork, string addressToken0, string addressToken1, long fee)
+        public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, string addressToken0, string addressToken1, long fee)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
                 Function? getPool = smartContract.GetFunction("getPool");
@@ -95,12 +94,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("UniswapV3SwapRouter02/SwapExactTokensForTokens")]
-        public async Task<ActionResult> UniswapV3SwapRouter02SwapExactTokensForTokens(Chain chain, BlockchainNetwork blockchainNetwork, double amountToSwap, long amountIn, long amountOutMin, [FromBody] List<string> path, string recipientAddress)
+        public async Task<ActionResult> UniswapV3SwapRouter02SwapExactTokensForTokens(Chain chain, double amountToSwap, long amountIn, long amountOutMin, [FromBody] List<string> path, string recipientAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
                 Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");

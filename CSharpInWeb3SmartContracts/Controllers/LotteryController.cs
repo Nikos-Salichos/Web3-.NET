@@ -1,5 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Enumerations;
-using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -35,7 +34,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("Deploy")]
-        public async Task<ActionResult> DeployContract(Chain chain, BlockchainNetwork blockchainNetwork)
+        public async Task<ActionResult> DeployContract(Chain chain)
         {
             try
             {
@@ -43,7 +42,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[]? parametersForPair = new object[1] { _user.MetamaskAddress };
 
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
                                                                                             _byteCode,
@@ -66,12 +65,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("GetRandomNumber")]
-        public async Task<ActionResult> GetRandomNumber(Chain chain, BlockchainNetwork blockchainNetwork, string smartContractAddress)
+        public async Task<ActionResult> GetRandomNumber(Chain chain, string smartContractAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
                 Function? getRandomNumber = smartContract.GetFunction("getRandomNumber");
@@ -86,12 +85,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("GetPlayers")]
-        public async Task<ActionResult> GetPlayers(Chain chain, BlockchainNetwork blockchainNetwork, string smartContractAddress)
+        public async Task<ActionResult> GetPlayers(Chain chain, string smartContractAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 var smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
                 Function? getPlayers = smartContract.GetFunction("getPlayers");
@@ -107,12 +106,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("GetBalance")]
-        public async Task<ActionResult> GetBalance(Chain chain, BlockchainNetwork blockchainNetwork, string smartContractAddress)
+        public async Task<ActionResult> GetBalance(Chain chain, string smartContractAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
                 Function? getBalance = smartContract.GetFunction("getBalance");
@@ -130,12 +129,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("EnterLottery")]
-        public async Task<ActionResult> EnterLottery(Chain chain, BlockchainNetwork blockchainNetwork, string smartContractAddress)
+        public async Task<ActionResult> EnterLottery(Chain chain, string smartContractAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
 
@@ -157,12 +156,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
         [HttpGet("PickWinner")]
-        public async Task<ActionResult> PickWinner(Chain chain, BlockchainNetwork blockchainNetwork, string smartContractAddress)
+        public async Task<ActionResult> PickWinner(Chain chain, string smartContractAddress)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
 

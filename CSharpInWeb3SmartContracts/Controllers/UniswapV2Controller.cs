@@ -1,5 +1,4 @@
 ﻿using CSharpInWeb3SmartContracts.DTOs;
-using CSharpInWeb3SmartContracts.Enumerations;
 using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -41,12 +40,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Produces("application/json")]
         [HttpGet("UniswapV2FactoryAllPairs")]
-        public async Task<ActionResult<List<Pair>>> GetUniswapV2allPairsLength(Chain chain, BlockchainNetwork blockchainNetwork)
+        public async Task<ActionResult<List<Pair>>> GetUniswapV2allPairsLength(Chain chain)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? allPairsLength = smartContract.GetFunction("allPairsLength");
@@ -82,12 +81,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV2FactoryGetReserves")]
-        public async Task<ActionResult> GetUniswapV2FactoryGetReserves(Chain chain, BlockchainNetwork blockchainNetwork, string addressToken0, string addressToken1)
+        public async Task<ActionResult> GetUniswapV2FactoryGetReserves(Chain chain, string addressToken0, string addressToken1)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
@@ -122,12 +121,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpGet("UniswapV2PairApprove")]
-        public async Task<ActionResult> GetUniswapV2PairApprove(Chain chain, BlockchainNetwork blockchainNetwork, string addressToken0, string addressToken1, string spenderAddress, long value)
+        public async Task<ActionResult> GetUniswapV2PairApprove(Chain chain, string addressToken0, string addressToken1, string spenderAddress, long value)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
@@ -159,12 +158,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("UniswapV2RouterGetAmountsOut")]
-        public async Task<ActionResult> UniswapV2RouterGetAmountsOut(Chain chain, BlockchainNetwork blockchainNetwork, long amountIn, List<string> path)
+        public async Task<ActionResult> UniswapV2RouterGetAmountsOut(Chain chain, long amountIn, List<string> path)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV2RouterAbi, _uniswapV2RouterAddress);
                 Function? getAmountsOut = smartContract.GetFunction("getAmountsOut");
@@ -181,12 +180,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("UniswapV2RouterSwapExactETHForTokens")]
-        public async Task<ActionResult> SwapExactETHForTokens(Chain chain, BlockchainNetwork blockchainNetwork, double amountToSwap, long amountOutMin, [FromBody] List<string> path, double seconds)
+        public async Task<ActionResult> SwapExactETHForTokens(Chain chain, double amountToSwap, long amountOutMin, [FromBody] List<string> path, double seconds)
         {
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(blockchainNetwork));
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 string to = account.Address;
                 BigInteger deadline = DateTimeOffset.Now.AddSeconds(seconds).ToUnixTimeSeconds();
