@@ -228,6 +228,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[]? parameters = new object[2] { spender, addedAmount };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
                 Function? transfer = smartContract.GetFunction("increaseApproval");
+
+                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
             }
             catch (Exception exception)
             {
