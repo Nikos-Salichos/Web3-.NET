@@ -55,18 +55,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(privateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? dataSource = smartContractModel.Parameters?.ToArray();
+                object[]? parameters = smartContractModel.Parameters?.ToArray();
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel.Abi.ToString(),
                                                                                           smartContractModel.Bytecode,
                                                                                           metamaskAddress,
-                                                                                          dataSource);
+                                                                                          parameters);
 
                 TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel.Abi.ToString(),
                                                                                                                     smartContractModel.Bytecode,
                                                                                                                     metamaskAddress,
                                                                                                                     estimatedGas,
-                                                                                                                    null, null, null, dataSource);
+                                                                                                                    null, null, null, parameters);
+
+                return Ok(deployContract);
             }
             catch (Exception exception)
             {
