@@ -9,6 +9,8 @@ I have create different controllers for different smart contracts:
 - SmartContractController
 - Network
   - GetLatestBlock
+  - GetAllTransactionsOfCurrentBlock
+
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
   - AllPairs
