@@ -6,7 +6,9 @@ When compilation finish I use ABI and bytecode from .json file.
 
 I have create different controllers for different smart contracts:
 
-- Network (current block, current block difficulty etc)
+- SmartContractController
+- Network
+  - GetLatestBlock
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
   - AllPairs
