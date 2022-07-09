@@ -10,7 +10,7 @@ I have create different controllers for different smart contracts:
 - Network
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
-
+  - GetAllTransactionOfABlock
 - Wallet (check balance, send ether/token to another wallet)
 - UniswapV2
   - AllPairs
