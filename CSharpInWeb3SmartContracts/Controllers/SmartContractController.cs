@@ -45,5 +45,18 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [Consumes("application/json")]
+        [HttpPost("DeployWithParameters")]
+        public async Task<ActionResult> DeployWithParameters(Chain chain, string privateKey, string metamaskAddress, [FromBody] SmartContractDeploy smartContractModel)
+        {
+            try
+            {
+                Account? account = new Account(privateKey, chain);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
