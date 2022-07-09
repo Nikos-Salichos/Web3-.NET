@@ -1,4 +1,5 @@
-﻿using CSharpInWeb3SmartContracts.Utilities;
+﻿using CSharpInWeb3SmartContracts.Models;
+using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
@@ -60,6 +61,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                           smartContractModel.Bytecode,
                                                                                           metamaskAddress,
                                                                                           dataSource);
+
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel.Abi.ToString(),
+                                                                                                                    smartContractModel.Bytecode,
+                                                                                                                    metamaskAddress,
+                                                                                                                    estimatedGas,
+                                                                                                                    null, null, null, dataSource);
             }
             catch (Exception exception)
             {
