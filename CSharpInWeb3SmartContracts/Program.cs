@@ -12,8 +12,7 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 IServiceCollection configureCors = builder.Services.ConfigureCors();
 
 // Add services to the container.
-builder.Services.AddControllers().AddJsonOptions(options =>
-            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())).AddNewtonsoftJson();
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())).AddNewtonsoftJson();
 
 var section = builder.Configuration["PrivateKey"];
 var myConfigObject = builder.Configuration.Get<User>();

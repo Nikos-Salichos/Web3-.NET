@@ -76,5 +76,21 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [Consumes("application/json")]
+        [HttpPost("CallContractVariable")]
+        public async Task<ActionResult> CallContractVariable(Chain chain, string privateKey, string variableName, [FromBody] SmartContractDeploy smartContractModel)
+        {
+            try
+            {
+                Account? account = new Account(privateKey, chain);
+
+
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
