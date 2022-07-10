@@ -96,6 +96,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     return Ok(variableName + "is null");
                 }
 
+                return Ok(variableName + ": " + variableValue.ToString());
             }
             catch (Exception exception)
             {
