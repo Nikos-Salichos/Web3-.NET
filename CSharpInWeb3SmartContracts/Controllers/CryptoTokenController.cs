@@ -30,8 +30,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public CryptoTokenController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user.MetamaskAddress = configuration["MetamaskAddress"];
-            _user.PrivateKey = configuration["PrivateKey"];
+            _user = configuration.Get<User>();
         }
 
         [HttpGet("Deploy")]

@@ -24,8 +24,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public WalletController(IConfiguration configuration, ILogger<WalletController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user.MetamaskAddress = configuration["MetamaskAddress"];
-            _user.PrivateKey = configuration["PrivateKey"];
+            _user = configuration.Get<User>();
             _logger = logger;
         }
 
