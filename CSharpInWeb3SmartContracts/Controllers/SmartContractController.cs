@@ -88,6 +88,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
                 Function? variable = smartContract.GetFunction(variableName);
+
+                dynamic variableValue = await variable.CallAsync<dynamic>();
             }
             catch (Exception exception)
             {
