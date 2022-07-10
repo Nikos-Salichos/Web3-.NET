@@ -90,6 +90,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? variable = smartContract.GetFunction(variableName);
 
                 dynamic variableValue = await variable.CallAsync<dynamic>();
+
+                if (variableValue is null)
+                {
+                    return Ok(variableName + "is null");
+                }
+
             }
             catch (Exception exception)
             {
