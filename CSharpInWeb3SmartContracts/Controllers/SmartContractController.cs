@@ -58,15 +58,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[]? parameters = smartContractModel.Parameters?.ToArray();
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel.Abi.ToString(),
-                                                                                          smartContractModel.Bytecode,
-                                                                                          metamaskAddress,
-                                                                                          parameters);
+                                                                                 parameters);
 
                 TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel.Abi.ToString(),
-                                                                                                                    smartContractModel.Bytecode,
-                                                                                                                    metamaskAddress,
-                                                                                                                    estimatedGas,
-                                                                                                                    null, null, null, parameters);
+                                                                                              null, null, null, parameters);
 
                 return Ok(deployContract);
             }
@@ -75,5 +70,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
+
+
     }
 }

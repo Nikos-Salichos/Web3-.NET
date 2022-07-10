@@ -37,7 +37,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
         }
 
-
         [HttpGet("GetAllTransactionsOfCurrentBlock")]
         public async Task<ActionResult> GetTransactionsOfABlock(Chain chain)
         {
@@ -59,7 +58,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
             }
         }
-
 
         [HttpGet("GetAllTransactionsOfABlock")]
         public async Task<ActionResult> GetBlockTransactions(Chain chain, long blockNumber)
