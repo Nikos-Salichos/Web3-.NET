@@ -109,7 +109,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
         [HttpPost("CallReadFunction")]
         public async Task<ActionResult> CallReadFunction(Chain chain, string privateKey, string variableName, [FromBody] SmartContractDeploy smartContractModel)
         {
-
+            try
+            {
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
 
