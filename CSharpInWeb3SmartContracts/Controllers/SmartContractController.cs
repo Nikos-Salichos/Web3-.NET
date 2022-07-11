@@ -123,6 +123,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 {
                     parameters = smartContractModel.Parameters.ToArray();
                 }
+
+                dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
             }
             catch (Exception exception)
             {
