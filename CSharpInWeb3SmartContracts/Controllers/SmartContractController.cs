@@ -118,6 +118,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Function? readFunction = smartContract.GetFunction(variableName);
                 object[]? parameters = null;
+
+                if (smartContractModel?.Parameters?.Count > 0)
+                {
+                    parameters = smartContractModel.Parameters.ToArray();
+                }
             }
             catch (Exception exception)
             {
