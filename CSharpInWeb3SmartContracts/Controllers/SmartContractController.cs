@@ -125,6 +125,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 }
 
                 dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
+
+                return Ok(variableName + ": " + variableValue.ToString());
             }
             catch (Exception exception)
             {
