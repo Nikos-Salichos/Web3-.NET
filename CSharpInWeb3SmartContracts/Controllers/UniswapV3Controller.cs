@@ -38,7 +38,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public UniswapV3Controller(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.Get<User>();
+            _user = configuration.GetSection("User").Get<User>();
         }
 
         [HttpGet("UniswapV3GetReserves")]

@@ -34,7 +34,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public UniswapV2Controller(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.Get<User>();
+            _user = configuration.GetSection("User").Get<User>();
         }
 
         [Produces("application/json")]

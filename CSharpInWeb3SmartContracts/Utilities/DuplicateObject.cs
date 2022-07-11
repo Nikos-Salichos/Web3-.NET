@@ -11,24 +11,9 @@
                     return null;
                 }
 
-                if (originalObject.GetType() is null)
+                if (originalObject.GetType() != typeof(object))
                 {
                     return null;
-                }
-
-                if (originalObject.GetType() == typeof(string))
-                {
-                    return originalObject.ToString();
-                }
-
-                if (originalObject.GetType() == typeof(int))
-                {
-                    return Convert.ToInt32(originalObject);
-                }
-
-                if (originalObject.GetType() == typeof(bool))
-                {
-                    return Convert.ToBoolean(originalObject);
                 }
 
                 //create new instance of the object

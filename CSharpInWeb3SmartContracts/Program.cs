@@ -1,5 +1,4 @@
 using CSharpInWeb3SmartContracts;
-using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Serilog;
 using Serilog.Core;
@@ -14,8 +13,8 @@ IServiceCollection configureCors = builder.Services.ConfigureCors();
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())).AddNewtonsoftJson();
 
-var section = builder.Configuration["PrivateKey"];
-var myConfigObject = builder.Configuration.Get<User>();
+// Read appsettings.json file
+IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
 
 #region Serilog Logging
 string fullPath = Environment.CurrentDirectory + @"\logs.txt";

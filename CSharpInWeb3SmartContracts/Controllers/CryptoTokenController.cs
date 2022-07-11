@@ -30,7 +30,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public CryptoTokenController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.Get<User>();
+            _user = configuration.GetSection("User").Get<User>();
         }
 
         [HttpGet("Deploy")]
@@ -278,12 +278,14 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok($"Tokens transfer was successful {transferResult.TransactionHash}");
+                return Ok($"{amount} tokens was burned {transferResult.TransactionHash}");
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
         }
+
+
     }
 }

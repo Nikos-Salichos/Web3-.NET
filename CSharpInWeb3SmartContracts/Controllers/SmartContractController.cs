@@ -21,20 +21,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployWithoutParameters")]
-        public async Task<ActionResult> DeployWithoutParameters(Chain chain, string privateKey, string metamaskAddress, string byteCode, [FromBody] object abi)
+        public async Task<ActionResult> DeployWithoutParameters(Chain chain, string privateKey, string metamaskAddress, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
                 Account? account = new Account(privateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(abi.ToString(),
-                                                                                            byteCode,
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel.Abi.ToString(),
+                                                                                            smartContractModel.Bytecode,
                                                                                             metamaskAddress,
                                                                                             null);
 
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(abi.ToString(),
-                                                                                                                    byteCode,
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel.Abi.ToString(),
+                                                                                                                     smartContractModel.Bytecode,
                                                                                                                     metamaskAddress,
                                                                                                                     estimatedGas,
                                                                                                                     null, null, null, null);
@@ -103,5 +103,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
+
+
+
+
+
     }
 }

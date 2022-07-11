@@ -21,7 +21,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public NetworkController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.Get<User>();
+            _user = configuration.GetSection("User").Get<User>();
         }
 
         [HttpGet("GetLatestBlock")]
