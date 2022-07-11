@@ -105,7 +105,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
+        [Consumes("application/json")]
+        [HttpPost("CallReadFunction")]
+        public async Task<ActionResult> CallReadFunction(Chain chain, string privateKey, string variableName, [FromBody] SmartContractDeploy smartContractModel)
+        {
 
+        }
 
 
     }
