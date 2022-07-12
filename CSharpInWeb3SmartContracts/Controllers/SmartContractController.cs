@@ -144,6 +144,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+                Function? writeFunction = smartContract.GetFunction(functionName);
             }
             catch (Exception exception)
             {
