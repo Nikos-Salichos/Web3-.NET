@@ -134,6 +134,21 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [Consumes("application/json")]
+        [HttpPost("CallWriteFunction")]
+        public async Task<ActionResult> CallWriteFunction(Chain chain, string privateKey, string functionName, long sendAsEth, [FromBody] SmartContractDeploy smartContractModel)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+
 
     }
 }

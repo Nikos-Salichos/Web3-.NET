@@ -4,7 +4,7 @@ namespace CSharpInWeb3SmartContracts.Utilities
 {
     public class EnumHelper
     {
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public EnumHelper(IConfiguration configuration)
         {
