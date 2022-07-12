@@ -145,6 +145,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
                 Function? writeFunction = smartContract.GetFunction(functionName);
+                object[]? parameters = null;
             }
             catch (Exception exception)
             {
