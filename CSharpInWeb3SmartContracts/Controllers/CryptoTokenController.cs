@@ -286,8 +286,17 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("TransferFrom")]
+        public async Task<ActionResult> TransferFrom(Chain chain, string from, string to, long amount)
+        {
+            try
+            {
 
-
-
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
