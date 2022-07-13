@@ -296,6 +296,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[]? parameters = new object[3] { from, to, amount };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+                Function? transfer = smartContract.GetFunction("transferFrom");
             }
             catch (Exception exception)
             {
