@@ -323,6 +323,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Function? transfer = smartContract.GetFunction("burnFrom");
 
                 HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+
+                return Ok($"Tokens burned from {from} successfully {transferResult.TransactionHash}");
             }
             catch (Exception exception)
             {
