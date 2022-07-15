@@ -7,7 +7,8 @@ When compilation finish I use ABI and bytecode from .json file.
 I have create different controllers for different smart contracts:
 
 - SmartContractController
-  - DeployAnyContract (with or without parameters)
+  - DeployAnyContract (deploy contract with or without parameters)
+  - CallContractVariable (call any variable in contract)
 - Network
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
