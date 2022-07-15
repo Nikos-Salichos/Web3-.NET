@@ -9,6 +9,7 @@ I have create different controllers for different smart contracts:
 - SmartContractController
   - DeployAnyContract (deploy contract with or without parameters)
   - CallContractVariable (call any variable in contract)
+  - CallReadFunction (call read functions in contract)
 - Network
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
