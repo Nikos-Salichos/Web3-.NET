@@ -15,7 +15,9 @@ I have create different controllers for different smart contracts:
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
   - GetAllTransactionOfABlock
-- Wallet (check balance, send ether/token to another wallet)
+- Wallet 
+ - Check balance
+ - Send ether/token to another wallet
 - UniswapV2
   - AllPairs
   - GetReserves
