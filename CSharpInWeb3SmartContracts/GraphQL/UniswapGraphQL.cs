@@ -27,6 +27,8 @@ namespace CSharpInWeb3SmartContracts.GraphQL
                             poolCount
                             }
                         }";
+            query.Variables = new { tokenId = tokenId };
+
         }
 
     }
