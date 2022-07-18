@@ -16,21 +16,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         public async Task<Token> GetTokenData(string tokenId)
         {
             GraphQLRequest? query = new GraphQLRequest();
-            query.Query = @"
-                        query tokenQuery($tokenId: ID!) {
-                          token(id:$tokenId) 
-                            {
-                            symbol
-                            name
-                            decimals
-                            volumeUSD
-                            poolCount
-                            }
-                        }";
-            query.Variables = new { tokenId = tokenId };
 
-            GraphQLResponse<TokenResponse>? response = await _client.SendQueryAsync<TokenResponse>(query);
-            return response.Data.Token;
         }
 
     }
