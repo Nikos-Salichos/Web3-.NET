@@ -129,6 +129,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Token? token = await _uniswapGraphQL.GetTokenData(tokenId);
+                return Ok(token);
             }
             catch (Exception exception)
             {
