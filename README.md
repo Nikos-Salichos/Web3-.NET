@@ -7,11 +7,17 @@ When compilation finish I use ABI and bytecode from .json file.
 I have create different controllers for different smart contracts:
 
 - SmartContractController
+  - DeployAnyContract (deploy contract with or without parameters)
+  - CallContractVariable (call any variable in contract)
+  - CallReadFunction (call read functions in contract)
+  - CallWriteFunction (call write functions in contract)
 - Network
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
   - GetAllTransactionOfABlock
-- Wallet (check balance, send ether/token to another wallet)
+- Wallet 
+  - Check balance
+  - Send ether/token to another wallet
 - UniswapV2
   - AllPairs
   - GetReserves
