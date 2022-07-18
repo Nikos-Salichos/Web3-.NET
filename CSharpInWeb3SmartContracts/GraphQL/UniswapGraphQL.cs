@@ -29,6 +29,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
                         }";
             query.Variables = new { tokenId = tokenId };
 
+            GraphQLResponse<TokenResponse>? response = await _client.SendQueryAsync<TokenResponse>(query);
         }
 
     }
