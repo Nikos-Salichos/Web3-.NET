@@ -45,12 +45,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
                                                                                             _byteCode,
-                                                                                            _user.MetamaskAddress,
+                                                                                            _user.WalletAddress,
                                                                                             parameters);
 
                 TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
                                                                                                                      _byteCode,
-                                                                                                                     _user.MetamaskAddress,
+                                                                                                                     _user.WalletAddress,
                                                                                                                      estimatedGas,
                                                                                                                      null,
                                                                                                                      parameters);

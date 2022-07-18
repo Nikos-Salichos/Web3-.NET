@@ -38,19 +38,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
 
-                object[]? parametersForPair = new object[1] { _user.MetamaskAddress };
+                object[]? parametersForPair = new object[1] { _user.WalletAddress };
 
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
                                                                                             _byteCode,
-                                                                                            _user.MetamaskAddress,
+                                                                                            _user.WalletAddress,
                                                                                             parametersForPair);
 
                 TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
                                                                                                                      _byteCode,
-                                                                                                                     _user.MetamaskAddress,
+                                                                                                                     _user.WalletAddress,
                                                                                                                      estimatedGas,
                                                                                                                      null,
                                                                                                                      parametersForPair);

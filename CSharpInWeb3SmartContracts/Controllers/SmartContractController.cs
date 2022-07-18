@@ -21,52 +21,32 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [Consumes("application/json")]
-        [HttpPost("DeployWithoutParameters")]
-        public async Task<ActionResult> DeployWithoutParameters(Chain chain, string privateKey, string metamaskAddress, [FromBody] SmartContractDeploy smartContractModel)
+        [HttpPost("DeployAnyContract")]
+        public async Task<ActionResult> DeployContract(Chain chain, User user, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
-                Account? account = new Account(privateKey, chain);
+                Account? account = new Account(user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel.Abi.ToString(),
-                                                                                            smartContractModel.Bytecode,
-                                                                                            metamaskAddress,
-                                                                                            null);
+                object[]? parameters = null;
+                if (smartContractModel?.Parameters?.Count > 0)
+                {
+                    parameters = smartContractModel.Parameters.ToArray();
+                    if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
+                    {
+                        parameters = null;
+                    }
+                }
 
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel.Abi.ToString(),
-                                                                                                                     smartContractModel.Bytecode,
-                                                                                                                    metamaskAddress,
-                                                                                                                    estimatedGas,
-                                                                                                                    null, null, null, null);
-
-                return Ok(deployContract);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
-        }
-
-        [Consumes("application/json")]
-        [HttpPost("DeployWithParameters")]
-        public async Task<ActionResult> DeployWithParameters(Chain chain, string privateKey, string metamaskAddress, [FromBody] SmartContractDeploy smartContractModel)
-        {
-            try
-            {
-                Account? account = new Account(privateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                object[]? parameters = smartContractModel.Parameters?.ToArray();
-
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel.Abi.ToString(),
-                                                                                          smartContractModel.Bytecode,
-                                                                                          metamaskAddress,
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
+                                                                                          smartContractModel?.Bytecode,
+                                                                                          user.WalletAddress,
                                                                                           parameters);
 
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel.Abi.ToString(),
-                                                                                                                    smartContractModel.Bytecode,
-                                                                                                                    metamaskAddress,
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
+                                                                                                                    smartContractModel?.Bytecode,
+                                                                                                                    user.WalletAddress,
                                                                                                                     estimatedGas,
                                                                                                                     null, null, null, parameters);
 
@@ -104,7 +84,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
-
 
         [Consumes("application/json")]
         [HttpPost("CallReadFunction")]
@@ -146,8 +125,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
                 Function? writeFunction = smartContract.GetFunction(functionName);
-                object[]? parameters = null;
 
+                object[]? parameters = null;
                 if (smartContractModel?.Parameters?.Count > 0)
                 {
                     parameters = smartContractModel.Parameters.ToArray();

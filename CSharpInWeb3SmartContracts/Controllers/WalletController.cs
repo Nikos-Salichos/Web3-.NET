@@ -36,7 +36,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.MetamaskAddress);
+                HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.WalletAddress);
 
                 BigDecimal etherAmount = Web3.Convert.FromWeiToBigDecimal(balance.Value);
 

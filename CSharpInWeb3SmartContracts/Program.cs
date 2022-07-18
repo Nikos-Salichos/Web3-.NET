@@ -1,5 +1,9 @@
 using CSharpInWeb3SmartContracts;
+using CSharpInWeb3SmartContracts.GraphQL;
 using CSharpInWeb3SmartContracts.Utilities;
+using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.Newtonsoft;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -12,6 +16,9 @@ IServiceCollection configureCors = builder.Services.ConfigureCors();
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())).AddNewtonsoftJson();
+
+builder.Services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient("https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3", new NewtonsoftJsonSerializer()));
+builder.Services.AddScoped<UniswapV3GraphQL>();
 
 // Read appsettings.json file
 IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();

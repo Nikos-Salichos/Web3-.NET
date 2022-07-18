@@ -1,4 +1,5 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.GraphQL;
+using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -35,10 +36,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public EnumHelper EnumHelper { get; set; }
 
-        public UniswapV3Controller(IConfiguration configuration)
+        private readonly UniswapV3GraphQL _uniswapGraphQL;
+
+        public UniswapV3Controller(IConfiguration configuration, UniswapV3GraphQL uniswapGraphQL)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>();
+            _uniswapGraphQL = uniswapGraphQL;
         }
 
         [HttpGet("UniswapV3GetReserves")]
@@ -119,5 +123,18 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpPost("GetTokenData")]
+        public async Task<IActionResult> GetTokenData(string tokenId)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+
+        }
     }
 }

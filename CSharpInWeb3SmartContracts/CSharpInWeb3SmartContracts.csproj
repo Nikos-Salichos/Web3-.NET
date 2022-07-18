@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>4977538a-c8eb-4be2-95f6-40941f382354</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,11 +17,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="GraphQL" Version="5.3.2" />
 		<PackageReference Include="GraphQL.Client" Version="4.0.2" />
 		<PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="4.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.1" />
 		<PackageReference Include="Nethereum.ABI" Version="4.6.1" />
 		<PackageReference Include="Nethereum.Accounts" Version="4.6.1" />
 		<PackageReference Include="Nethereum.BlockchainProcessing" Version="4.6.1" />
@@ -40,7 +42,7 @@
 		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.1" />
 		<PackageReference Include="Solidity.Roslyn" Version="0.1.25" />
 		<PackageReference Include="Solidity.Roslyn.Core" Version="0.1.25" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.2" />
 	</ItemGroup>
 
 	<ItemGroup>
