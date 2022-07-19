@@ -7,17 +7,18 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
-using System.Numerics;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
     public class SmartContractController : ControllerBase
     {
+        private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
 
         public SmartContractController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
+            _user = configuration.GetSection("User").Get<User>();
         }
 
         [Consumes("application/json")]
@@ -115,45 +116,26 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [Consumes("application/json")]
-        [HttpPost("CallWriteFunction")]
-        public async Task<ActionResult> CallWriteFunction(Chain chain, string privateKey, string functionName, long sendAsEth, [FromBody] SmartContractDeploy smartContractModel)
+        [HttpPost("TrackCryptoWhalesForAnyToken")]
+        public async Task<ActionResult> TrackCryptoWhalesForAnyToken(Chain chain, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
-                Account? account = new Account(privateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
-                Function? writeFunction = smartContract.GetFunction(functionName);
-
-                object[]? parameters = null;
-                if (smartContractModel?.Parameters?.Count > 0)
-                {
-                    parameters = smartContractModel.Parameters.ToArray();
-                    if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                    {
-                        parameters = null;
-                    }
-                }
-
-                HexBigInteger? value = null;
-                BigInteger wei = Web3.Convert.ToWei(sendAsEth);
-                if (wei != 0)
-                {
-                    value = new HexBigInteger(wei);
-                }
-
-                HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
-                TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
-                return Ok(functionResult);
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
+
         }
 
 
 
+
     }
+
+
+
+
 }
