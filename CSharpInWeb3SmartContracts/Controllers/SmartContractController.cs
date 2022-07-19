@@ -1,4 +1,5 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using CSharpInWeb3SmartContracts.DTOs;
+using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -129,6 +130,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 BlockParameter? _lastBlock = BlockParameter.CreateLatest();
                 NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
                 List<EventLog<TransferEventDTO>>? transfers = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
+
+                return Ok(transfers);
             }
             catch (Exception exception)
             {
