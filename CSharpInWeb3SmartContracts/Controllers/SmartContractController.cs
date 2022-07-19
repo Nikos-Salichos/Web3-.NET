@@ -128,6 +128,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Event transferEvent = smartContract.GetEvent("Transfer");
                 BlockParameter? _lastBlock = BlockParameter.CreateLatest();
                 NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
+                List<EventLog<TransferEventDTO>>? transfers = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
             }
             catch (Exception exception)
             {
