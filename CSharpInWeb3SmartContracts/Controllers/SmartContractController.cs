@@ -126,6 +126,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
 
                 Event transferEvent = smartContract.GetEvent("Transfer");
+                BlockParameter? _lastBlock = BlockParameter.CreateLatest();
             }
             catch (Exception exception)
             {
