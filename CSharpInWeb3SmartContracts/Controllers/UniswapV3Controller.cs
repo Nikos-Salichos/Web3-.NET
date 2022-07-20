@@ -135,7 +135,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 return BadRequest(exception.Message);
             }
+        }
 
+        [HttpPost("GetMostLiquidPools")]
+        public async Task<IActionResult> GetMostLiquidPools(int numberOfPools)
+        {
+            try
+            {
+                dynamic? data = await _uniswapGraphQL.GetMostLiquidPools(numberOfPools);
+                return Ok(data);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
     }
 }

@@ -33,5 +33,10 @@ namespace CSharpInWeb3SmartContracts.GraphQL
             return response.Data.Token;
         }
 
+        public async Task<dynamic> GetMostLiquidPools(int numberOfPools)
+        {
+
+        }
+
     }
 }
