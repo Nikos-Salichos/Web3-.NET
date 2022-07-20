@@ -36,6 +36,16 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         public async Task<dynamic> GetMostLiquidPools(int numberOfPools)
         {
             GraphQLRequest? query = new GraphQLRequest();
+            query.Query = "{                                                              " +
+             $"    pools(first:{numberOfPools}, orderBy: liquidity, orderDirection: desc)" +
+             "     {                                                                     " +
+             "      id                                                                   " +
+             "      token0 {id name}                                                     " +
+             "      token1 {id name}                                                     " +
+             "      liquidity                                                            " +
+             "    }                                                                      " +
+             "  }                                                                        ";
+
         }
 
     }
