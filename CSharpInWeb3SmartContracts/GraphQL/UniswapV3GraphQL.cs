@@ -35,7 +35,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
 
         public async Task<dynamic> GetMostLiquidPools(int numberOfPools)
         {
-
+            GraphQLRequest? query = new GraphQLRequest();
         }
 
     }
