@@ -11,7 +11,7 @@ I have create different controllers for different smart contracts:
   - CallContractVariable (call any variable in contract)
   - CallReadFunction (call read functions in contract)
   - CallWriteFunction (call write functions in contract)
-- Network
+- NetworkController
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
   - GetAllTransactionOfABlock
@@ -26,7 +26,9 @@ I have create different controllers for different smart contracts:
   - SwapExactETHForTokens
 - UniswapV3
   - GetReserves (getPool, tokens and balanceOf)
-  - SwapExactTokensForTokens in Router02
+  - SwapExactTokensForTokens using Router02
+  - GetTokenData (using GraphQL)
+
 - Lottery smart contract
   - Deploy
   - GetRandomNumber
