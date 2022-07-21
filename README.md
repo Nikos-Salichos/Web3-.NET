@@ -28,7 +28,7 @@ I have create different controllers for different smart contracts:
   - GetReserves (getPool, tokens and balanceOf)
   - SwapExactTokensForTokens using Router02
   - GetTokenData (using GraphQL)
-
+  - GetMostLiquidPools (using GraphQL)
 - Lottery smart contract
   - Deploy
   - GetRandomNumber
