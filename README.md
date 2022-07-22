@@ -1,5 +1,8 @@
 # Smart Contracts in Solidity - C#
-Connect smart contracts with .NET
+Connect smart contracts with .NET through web APIs.
+
+Alt-Installation
+
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
 After compilation I use ABI and bytecode from .json file. 
