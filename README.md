@@ -11,6 +11,7 @@ I have create different controllers for different smart contracts:
   - CallContractVariable (call any variable in contract)
   - CallReadFunction (call read functions in contract)
   - CallWriteFunction (call write functions in contract)
+  - TrackCryptoWhalesForAnyToken (track "Transfer" event in any token of your choice)
 - NetworkController
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
@@ -36,6 +37,8 @@ I have create different controllers for different smart contracts:
   - GetBalance
   - EnterLottery
   - PickWinner
+- CryptoToken
+
 
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
