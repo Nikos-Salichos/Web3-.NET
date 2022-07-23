@@ -138,6 +138,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     }
                 }
 
+                HexBigInteger? value = null;
+                BigInteger wei = Web3.Convert.ToWei(sendAsEth);
+                if (wei != 0)
+                {
+                    value = new HexBigInteger(wei);
+                }
+
             }
             catch (Exception exception)
             {
