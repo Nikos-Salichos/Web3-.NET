@@ -124,6 +124,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(privateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+                Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+                Function? writeFunction = smartContract.GetFunction(functionName);
+                object[]? parameters = null;
             }
             catch (Exception exception)
             {
