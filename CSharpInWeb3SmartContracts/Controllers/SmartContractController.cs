@@ -8,6 +8,7 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using System.Numerics;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -144,6 +145,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 {
                     value = new HexBigInteger(wei);
                 }
+
+                HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
+                TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
+                return Ok(functionResult);
 
             }
             catch (Exception exception)
