@@ -117,6 +117,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [Consumes("application/json")]
+        [HttpPost("CallWriteFunction")]
+        public async Task<ActionResult> CallWriteFunction(Chain chain, string privateKey, string functionName, long sendAsEth, [FromBody] SmartContractDeploy smartContractModel)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [Consumes("application/json")]
         [HttpPost("TrackCryptoWhalesForAnyToken")]
         public async Task<ActionResult> TrackCryptoWhalesForAnyToken(Chain chain, [FromBody] SmartContractDeploy smartContractModel)
         {
@@ -140,12 +154,5 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         }
 
-
-
-
     }
-
-
-
-
 }
