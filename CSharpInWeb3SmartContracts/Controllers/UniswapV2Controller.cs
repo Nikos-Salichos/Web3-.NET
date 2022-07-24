@@ -1,5 +1,4 @@
 ﻿using CSharpInWeb3SmartContracts.DTOs;
-using CSharpInWeb3SmartContracts.GraphQL;
 using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +16,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class UniswapV2Controller : ControllerBase
     {
-        private readonly User _user = new User();
+        private readonly User _user = new();
 
         private readonly string WETH_KOVAN_V2 = "0xd0A1E359811322d97991E03f863a0C30C2cF029C";
         private readonly string DAI_KOVAN_V2 = "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa";
@@ -31,8 +30,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
         private readonly string _pairERC20Abi = @" [{""inputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""constructor""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""owner"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""spender"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""value"",""type"":""uint256""}],""name"":""Approval"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""sender"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount0"",""type"":""uint256""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount1"",""type"":""uint256""},{""indexed"":true,""internalType"":""address"",""name"":""to"",""type"":""address""}],""name"":""Burn"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""sender"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount0"",""type"":""uint256""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount1"",""type"":""uint256""}],""name"":""Mint"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""sender"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount0In"",""type"":""uint256""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount1In"",""type"":""uint256""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount0Out"",""type"":""uint256""},{""indexed"":false,""internalType"":""uint256"",""name"":""amount1Out"",""type"":""uint256""},{""indexed"":true,""internalType"":""address"",""name"":""to"",""type"":""address""}],""name"":""Swap"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":false,""internalType"":""uint112"",""name"":""reserve0"",""type"":""uint112""},{""indexed"":false,""internalType"":""uint112"",""name"":""reserve1"",""type"":""uint112""}],""name"":""Sync"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""from"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""to"",""type"":""address""},{""indexed"":false,""internalType"":""uint256"",""name"":""value"",""type"":""uint256""}],""name"":""Transfer"",""type"":""event""},{""constant"":true,""inputs"":[],""name"":""DOMAIN_SEPARATOR"",""outputs"":[{""internalType"":""bytes32"",""name"":"""",""type"":""bytes32""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""MINIMUM_LIQUIDITY"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""PERMIT_TYPEHASH"",""outputs"":[{""internalType"":""bytes32"",""name"":"""",""type"":""bytes32""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""},{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""allowance"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""spender"",""type"":""address""},{""internalType"":""uint256"",""name"":""value"",""type"":""uint256""}],""name"":""approve"",""outputs"":[{""internalType"":""bool"",""name"":"""",""type"":""bool""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""balanceOf"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""to"",""type"":""address""}],""name"":""burn"",""outputs"":[{""internalType"":""uint256"",""name"":""amount0"",""type"":""uint256""},{""internalType"":""uint256"",""name"":""amount1"",""type"":""uint256""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""decimals"",""outputs"":[{""internalType"":""uint8"",""name"":"""",""type"":""uint8""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""factory"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""getReserves"",""outputs"":[{""internalType"":""uint112"",""name"":""_reserve0"",""type"":""uint112""},{""internalType"":""uint112"",""name"":""_reserve1"",""type"":""uint112""},{""internalType"":""uint32"",""name"":""_blockTimestampLast"",""type"":""uint32""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""_token0"",""type"":""address""},{""internalType"":""address"",""name"":""_token1"",""type"":""address""}],""name"":""initialize"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""kLast"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""to"",""type"":""address""}],""name"":""mint"",""outputs"":[{""internalType"":""uint256"",""name"":""liquidity"",""type"":""uint256""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""name"",""outputs"":[{""internalType"":""string"",""name"":"""",""type"":""string""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""name"":""nonces"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""owner"",""type"":""address""},{""internalType"":""address"",""name"":""spender"",""type"":""address""},{""internalType"":""uint256"",""name"":""value"",""type"":""uint256""},{""internalType"":""uint256"",""name"":""deadline"",""type"":""uint256""},{""internalType"":""uint8"",""name"":""v"",""type"":""uint8""},{""internalType"":""bytes32"",""name"":""r"",""type"":""bytes32""},{""internalType"":""bytes32"",""name"":""s"",""type"":""bytes32""}],""name"":""permit"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""price0CumulativeLast"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""price1CumulativeLast"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""to"",""type"":""address""}],""name"":""skim"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""uint256"",""name"":""amount0Out"",""type"":""uint256""},{""internalType"":""uint256"",""name"":""amount1Out"",""type"":""uint256""},{""internalType"":""address"",""name"":""to"",""type"":""address""},{""internalType"":""bytes"",""name"":""data"",""type"":""bytes""}],""name"":""swap"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""symbol"",""outputs"":[{""internalType"":""string"",""name"":"""",""type"":""string""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[],""name"":""sync"",""outputs"":[],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""token0"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""token1"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":true,""inputs"":[],""name"":""totalSupply"",""outputs"":[{""internalType"":""uint256"",""name"":"""",""type"":""uint256""}],""payable"":false,""stateMutability"":""view"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""to"",""type"":""address""},{""internalType"":""uint256"",""name"":""value"",""type"":""uint256""}],""name"":""transfer"",""outputs"":[{""internalType"":""bool"",""name"":"""",""type"":""bool""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""},{""constant"":false,""inputs"":[{""internalType"":""address"",""name"":""from"",""type"":""address""},{""internalType"":""address"",""name"":""to"",""type"":""address""},{""internalType"":""uint256"",""name"":""value"",""type"":""uint256""}],""name"":""transferFrom"",""outputs"":[{""internalType"":""bool"",""name"":"""",""type"":""bool""}],""payable"":false,""stateMutability"":""nonpayable"",""type"":""function""}] ";
         public EnumHelper EnumHelper { get; set; }
 
-        private readonly UniswapV3GraphQL _uniswapGraphQL;
-
         public UniswapV2Controller(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
@@ -45,21 +42,21 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? allPairsLength = smartContract.GetFunction("allPairsLength");
 
                 long pairsCount = await allPairsLength.CallAsync<long>();
-                List<Pair> pairsAddresses = new List<Pair>();
+                List<Pair> pairsAddresses = new();
 
                 for (int i = 0; i < Convert.ToDouble(pairsCount); i++)
                 {
                     object[] parameters = new object[1] { i };
                     Function? allPairs = smartContract.GetFunction("allPairs");
                     string pairAddress = await allPairs.CallAsync<string>(parameters);
-                    Pair pair = new Pair();
+                    Pair pair = new();
                     pair.Id = pairAddress;
 
                     Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pair.Id);
@@ -86,8 +83,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
@@ -126,8 +123,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapv2FactoryAbi, _uniswapV2FactoryAddress);
                 Function? getPair = smartContract.GetFunction("getPair");
@@ -163,8 +160,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV2RouterAbi, _uniswapV2RouterAddress);
                 Function? getAmountsOut = smartContract.GetFunction("getAmountsOut");
@@ -185,8 +182,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 string to = account.Address;
                 BigInteger deadline = DateTimeOffset.Now.AddSeconds(seconds).ToUnixTimeSeconds();
@@ -197,7 +194,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[] parametersForSwap = new object[4] { amountOutMin, path, to, deadline };
 
                 BigInteger wei = Web3.Convert.ToWei(amountToSwap);
-                HexBigInteger value = new HexBigInteger(wei);
+                HexBigInteger value = new(wei);
 
                 HexBigInteger? estimatedGas = await swapExactETHForTokens.EstimateGasAsync(account.Address, null, value, parametersForSwap);
 
