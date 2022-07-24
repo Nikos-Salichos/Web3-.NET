@@ -56,8 +56,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     object[] parameters = new object[1] { i };
                     Function? allPairs = smartContract.GetFunction("allPairs");
                     string pairAddress = await allPairs.CallAsync<string>(parameters);
-                    Pair pair = new();
-                    pair.Id = pairAddress;
+                    Pair pair = new()
+                    {
+                        Id = pairAddress
+                    };
 
                     Contract? smartContractPair = web3.Eth.GetContract(_pairERC20Abi, pair.Id);
 
@@ -147,7 +149,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 TransactionReceipt? transactionReceiptForApprove = await approve.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parametersForApprove);
 
                 return Ok($"Transaction Hash for approve {transactionReceiptForApprove?.TransactionHash}");
-
             }
             catch (Exception exception)
             {
@@ -207,6 +208,5 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
-
     }
 }
