@@ -18,7 +18,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
     {
         private readonly ILogger<WalletController> _logger;
 
-        private readonly User _user = new User();
+        private readonly User _user = new();
         public EnumHelper EnumHelper { get; set; }
 
         public WalletController(IConfiguration configuration, ILogger<WalletController> logger)
@@ -33,8 +33,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.WalletAddress);
 
@@ -54,8 +54,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 TransactionReceipt? transaction = await web3.Eth.GetEtherTransferService().TransferEtherAndWaitForReceiptAsync(toAddress, etherAmount);
 
@@ -73,10 +73,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                TransferFunction? transferFunction = new TransferFunction()
+                TransferFunction? transferFunction = new()
                 {
                     FromAddress = account.Address,
                     To = toAddress,
@@ -100,8 +100,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger? pendingFilter = await web3.Eth.Filters.NewPendingTransactionFilter.SendRequestAsync();
                 string[]? filterChanges = await web3.Eth.Filters.GetFilterChangesForBlockOrTransaction.SendRequestAsync(pendingFilter);

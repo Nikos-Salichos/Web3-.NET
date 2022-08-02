@@ -63,11 +63,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallContractVariable")]
-        public async Task<ActionResult> CallContractVariable(Chain chain, string privateKey, string variableName, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> CallContractVariable(Chain chain, string variableName, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
-                Account? account = new Account(privateKey, chain);
+                Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
@@ -90,11 +90,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallReadFunction")]
-        public async Task<ActionResult> CallReadFunction(Chain chain, string privateKey, string variableName, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> CallReadFunction(Chain chain, string variableName, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
-                Account? account = new Account(privateKey, chain);
+                Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
@@ -119,11 +119,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallWriteFunction")]
-        public async Task<ActionResult> CallWriteFunction(Chain chain, string privateKey, string functionName, long sendAsEth, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> CallWriteFunction(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
-                Account? account = new Account(privateKey, chain);
+                Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
