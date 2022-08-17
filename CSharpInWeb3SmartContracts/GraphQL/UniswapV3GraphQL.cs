@@ -53,6 +53,8 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         public async Task<dynamic> GetPoolData(int poolId)
         {
             GraphQLRequest? query = new GraphQLRequest();
+            query.Query = "{\r\n  pool(id: \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\") {\r\n    tick\r\n    token0 {\r\n      symbol\r\n      id\r\n      decimals\r\n    }\r\n    token1 {\r\n      symbol\r\n      id\r\n      decimals\r\n    }\r\n    feeTier\r\n    sqrtPrice\r\n    liquidity\r\n  }\r\n}";
+
 
 
         }
