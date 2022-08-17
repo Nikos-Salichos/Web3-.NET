@@ -52,6 +52,8 @@ namespace CSharpInWeb3SmartContracts.GraphQL
 
         public async Task<dynamic> GetPoolData(int poolId)
         {
+            GraphQLRequest? query = new GraphQLRequest();
+
 
         }
 
