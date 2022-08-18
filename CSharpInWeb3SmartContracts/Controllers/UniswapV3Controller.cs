@@ -149,6 +149,20 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpPost("GetPoolData")]
+        public async Task<IActionResult> GetPoolData(string poolId)
+        {
+            try
+            {
+                dynamic? data = await _uniswapGraphQL.GetPoolData(poolId);
+                return Ok(data);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
 
     }
 }

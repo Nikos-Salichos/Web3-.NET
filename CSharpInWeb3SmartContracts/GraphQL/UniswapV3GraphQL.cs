@@ -50,10 +50,29 @@ namespace CSharpInWeb3SmartContracts.GraphQL
             return response.Data;
         }
 
-        public async Task<dynamic> GetPoolData(int poolId)
+        // 0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8
+        public async Task<dynamic> GetPoolData(string poolId)
         {
             GraphQLRequest? query = new GraphQLRequest();
-            query.Query = "{\r\n  pool(id: \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\") {\r\n    tick\r\n    token0 {\r\n      symbol\r\n      id\r\n      decimals\r\n    }\r\n    token1 {\r\n      symbol\r\n      id\r\n      decimals\r\n    }\r\n    feeTier\r\n    sqrtPrice\r\n    liquidity\r\n  }\r\n}";
+            query.Query = "  {                                " +
+                                $"    pool(id: \"{poolId}\")  " +
+                                "  {    					  " +
+                                "      tick                   " +
+                                "      token0 {               " +
+                                "        symbol               " +
+                                "        id                   " +
+                                "        decimals             " +
+                                "      }                      " +
+                                "      token1 {               " +
+                                "        symbol               " +
+                                "        id                   " +
+                                "        decimals             " +
+                                "      }                      " +
+                                "      feeTier                " +
+                                "      sqrtPrice              " +
+                                "      liquidity              " +
+                                "    }                        " +
+                                "  }                          ";
 
             GraphQLResponse<dynamic>? response = await _client.SendQueryAsync<dynamic>(query);
             return response.Data;
