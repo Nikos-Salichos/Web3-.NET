@@ -81,6 +81,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         // 0x7858e59e0c01ea06df3af3d20ac7b0003275d4bf
         public async Task<dynamic> GetRecentSwapsWithinAPool(string poolId)
         {
+            GraphQLRequest? query = new GraphQLRequest();
 
         }
 
