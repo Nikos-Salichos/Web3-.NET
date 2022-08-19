@@ -82,6 +82,29 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         public async Task<dynamic> GetRecentSwapsWithinAPool(string poolId)
         {
             GraphQLRequest? query = new GraphQLRequest();
+            query.Query = "	{														   " +
+                            "	swaps(orderBy: timestamp, orderDirection: desc, where:     " +
+                            "	 { " +
+                            $"   pool: \"{poolId}\"    " +
+                            "   }  " +
+                            "	) {                                                        " +
+                            "	  pool {                                                   " +
+                            "	    token0 {                                               " +
+                            "	      id                                                   " +
+                            "	      symbol                                               " +
+                            "	    }                                                      " +
+                            "	    token1 {                                               " +
+                            "	      id                                                   " +
+                            "	      symbol                                               " +
+                            "	    }                                                      " +
+                            "	  }                                                        " +
+                            "	  sender                                                   " +
+                            "	  recipient                                                " +
+                            "	  amount0                                                  " +
+                            "	  amount1                                                  " +
+                            "	 }                                                         " +
+                            "	}                                                          ";
+
 
         }
 
