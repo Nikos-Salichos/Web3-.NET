@@ -163,6 +163,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpPost("GetRecentSwapsWithinAPool")]
+        public async Task<IActionResult> GetRecentSwapsWithinAPool(string poolId)
+        {
+
+        }
 
     }
 }
