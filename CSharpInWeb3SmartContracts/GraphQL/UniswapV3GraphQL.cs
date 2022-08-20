@@ -106,6 +106,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
                             "	}                                                          ";
 
             GraphQLResponse<dynamic>? response = await _client.SendQueryAsync<dynamic>(query);
+            return response.Data;
         }
 
     }
