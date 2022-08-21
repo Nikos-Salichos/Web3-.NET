@@ -169,6 +169,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 dynamic? data = await _uniswapGraphQL.GetRecentSwapsWithinAPool(poolId);
+                return Ok(data);
             }
             catch (Exception exception)
             {
