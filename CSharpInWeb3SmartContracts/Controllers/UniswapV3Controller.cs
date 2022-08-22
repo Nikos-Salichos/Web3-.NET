@@ -150,11 +150,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("GetPoolData")]
-        public async Task<IActionResult> GetPoolData(string poolId)
+        public async Task<IActionResult> GetPoolData(string poolAddress)
         {
             try
             {
-                dynamic? data = await _uniswapGraphQL.GetPoolData(poolId);
+                dynamic? data = await _uniswapGraphQL.GetPoolData(poolAddress);
                 return Ok(data);
             }
             catch (Exception exception)
@@ -164,11 +164,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [HttpPost("GetRecentSwapsWithinAPool")]
-        public async Task<IActionResult> GetRecentSwapsWithinAPool(string poolId)
+        public async Task<IActionResult> GetRecentSwapsWithinAPool(string poolAddress)
         {
             try
             {
-                dynamic? data = await _uniswapGraphQL.GetRecentSwapsWithinAPool(poolId);
+                dynamic? data = await _uniswapGraphQL.GetRecentSwapsWithinAPool(poolAddress);
                 return Ok(data);
             }
             catch (Exception exception)

@@ -51,11 +51,11 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         }
 
         // 0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8
-        public async Task<dynamic> GetPoolData(string poolId)
+        public async Task<dynamic> GetPoolData(string poolAddress)
         {
             GraphQLRequest? query = new GraphQLRequest();
             query.Query = "  {                                " +
-                                $"    pool(id: \"{poolId}\")  " +
+                                $"    pool(id: \"{poolAddress}\")  " +
                                 "  {    					  " +
                                 "      tick                   " +
                                 "      token0 {               " +
@@ -79,13 +79,13 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         }
 
         // 0x7858e59e0c01ea06df3af3d20ac7b0003275d4bf
-        public async Task<dynamic> GetRecentSwapsWithinAPool(string poolId)
+        public async Task<dynamic> GetRecentSwapsWithinAPool(string poolAddress)
         {
             GraphQLRequest? query = new GraphQLRequest();
             query.Query = "	{														   " +
                             "	swaps(orderBy: timestamp, orderDirection: desc, where:     " +
                             "	 { " +
-                            $"   pool: \"{poolId}\"    " +
+                            $"   pool: \"{poolAddress}\"    " +
                             "   }  " +
                             "	) {                                                        " +
                             "	  pool {                                                   " +
