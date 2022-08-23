@@ -52,6 +52,7 @@ I have create different controllers for different smart contracts:
   - PickWinner
 
 - CryptoToken
+  - Deploy ERC20 Token 
 
 
 In addition i use the following tools to convert ABI to string:
