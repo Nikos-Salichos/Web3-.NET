@@ -40,7 +40,8 @@ I have create different controllers for different smart contracts:
   - SwapExactTokensForTokens using Router02
   - GetTokenData (using GraphQL)
   - GetMostLiquidPools (using GraphQL)
-  -
+  - GetPoolData (using GraphQL)
+  
 - Lottery smart contract
   - Deploy
   - GetRandomNumber
