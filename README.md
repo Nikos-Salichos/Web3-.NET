@@ -41,7 +41,8 @@ I have create different controllers for different smart contracts:
   - GetTokenData (using GraphQL)
   - GetMostLiquidPools (using GraphQL)
   - GetPoolData (using GraphQL)
-  
+  GetRecentSwapsWithinAPool using GraphQL)  
+
 - Lottery smart contract
   - Deploy
   - GetRandomNumber
@@ -49,6 +50,7 @@ I have create different controllers for different smart contracts:
   - GetBalance
   - EnterLottery
   - PickWinner
+
 - CryptoToken
 
 
