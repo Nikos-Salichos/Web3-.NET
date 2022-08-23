@@ -54,6 +54,7 @@ I have create different controllers for different smart contracts:
 - CryptoToken
   - Deploy ERC20 Token 
   - GetBalance
+  - Mint
 
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
