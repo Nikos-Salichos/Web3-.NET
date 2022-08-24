@@ -59,6 +59,7 @@ I have create different controllers for different smart contracts:
   - Allowance
   - DestroySmartContract
   - Transfer
+  - IncreaseApproval
 
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
