@@ -61,6 +61,7 @@ I have create different controllers for different smart contracts:
   - Transfer
   - IncreaseApproval
   - DecreaseApproval
+  - Burn
 
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
