@@ -109,7 +109,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
             return response.Data;
         }
 
-        public async Task<dynamic> GetPositionData(string poolAddress)
+        public async Task<dynamic> GetPositionData(int positionId)
         {
 
         }
