@@ -113,6 +113,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
         {
             GraphQLRequest? query = new GraphQLRequest();
             query.Query = "{\r\n  position(id:3) {\r\n    id\r\n    collectedFeesToken0\r\n    collectedFeesToken1\r\n    liquidity\r\n    token0 {\r\n      id\r\n      symbol\r\n    }\r\n    token1\r\n    {\r\n      id\r\n      symbol\r\n    }\r\n  }\r\n}";
+            GraphQLResponse<dynamic>? response = await _client.SendQueryAsync<dynamic>(query);
         }
     }
 }
