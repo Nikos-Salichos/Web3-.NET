@@ -111,7 +111,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
 
         public async Task<dynamic> GetPositionData(int positionId)
         {
-
+            GraphQLRequest? query = new GraphQLRequest();
         }
     }
 }
