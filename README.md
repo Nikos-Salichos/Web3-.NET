@@ -18,24 +18,31 @@ I have create different controllers for different smart contracts:
   - CallReadFunction (call read functions in contract)
   - CallWriteFunction (call write functions in contract)
   - TrackCryptoWhalesForAnyToken (track "Transfer" event in any token of your choice)
+
 - NetworkController
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
   - GetAllTransactionOfABlock
+
 - Wallet 
   - Check balance
   - Send ether/token to another wallet
+
 - UniswapV2
   - AllPairs
   - GetReserves
   - GetAmountsOut
   - Approve
   - SwapExactETHForTokens
+
 - UniswapV3
   - GetReserves (getPool, tokens and balanceOf)
   - SwapExactTokensForTokens using Router02
   - GetTokenData (using GraphQL)
   - GetMostLiquidPools (using GraphQL)
+  - GetPoolData (using GraphQL)
+  GetRecentSwapsWithinAPool using GraphQL)  
+
 - Lottery smart contract
   - Deploy
   - GetRandomNumber
@@ -43,8 +50,20 @@ I have create different controllers for different smart contracts:
   - GetBalance
   - EnterLottery
   - PickWinner
-- CryptoToken
 
+- CryptoToken
+  - Deploy ERC20 Token 
+  - GetBalance
+  - Mint
+  - Approve
+  - Allowance
+  - DestroySmartContract
+  - Transfer
+  - IncreaseApproval
+  - DecreaseApproval
+  - Burn
+  - TransferFrom
+  - BurnFrom
 
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
