@@ -180,6 +180,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
+                dynamic? data = await _uniswapGraphQL.GetPositionData(positionId);
 
             }
             catch (Exception exception)
