@@ -175,6 +175,17 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpPost("GetPositionData")]
+        public async Task<IActionResult> GetPositionData(int positionId)
+        {
+            try
+            {
 
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
     }
 }
