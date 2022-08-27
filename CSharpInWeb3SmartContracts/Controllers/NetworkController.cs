@@ -81,5 +81,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+
+        [HttpGet("GetAllContractCreationTransactions")]
+        public async Task<ActionResult> GetBlockTransactions(Chain chain, long blockNumber)
+        {
+        }
+
     }
+
 }
