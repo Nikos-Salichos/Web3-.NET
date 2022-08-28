@@ -109,6 +109,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 Transaction[] allTransactions = blockWithTransactions.Transactions;
 
+                if (allTransactions.Length == 0)
+                {
+
+                }
+
             }
             catch (Exception exception)
             {
