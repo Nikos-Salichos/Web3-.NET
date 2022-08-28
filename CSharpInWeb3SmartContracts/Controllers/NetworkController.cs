@@ -107,6 +107,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     return NotFound("Block not found");
                 }
 
+                Transaction[] allTransactions = blockWithTransactions.Transactions;
+
             }
             catch (Exception exception)
             {
