@@ -66,11 +66,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber)));
-
+                BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
+                if (blockWithTransactions == null)
+                {
+                    return NotFound("No transactions found on this block");
+                }
                 List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
-
-                //  List<string>? transactionsForContracts = allTransactions.Where(t => t.To == null).ToList().ConvertAll(transaction => transaction.TransactionHash);
 
                 return Ok(allTransactions);
             }
@@ -82,11 +83,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
 
-        [HttpGet("GetAllContractCreationTransactions")]
-        public async Task<ActionResult> GetBlockTransactions(Chain chain, long blockNumber)
-        {
-        }
+
+
+
+
 
     }
-
 }
