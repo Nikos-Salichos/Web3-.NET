@@ -101,6 +101,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber)));
+
+                if (blockWithTransactions == null)
+                {
+
+                }
+
             }
             catch (Exception exception)
             {
