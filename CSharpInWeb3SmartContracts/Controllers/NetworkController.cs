@@ -116,6 +116,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 IEnumerable<Transaction> transactionsForContractCreation = allTransactions.Where(t => t.To == null);
 
+                return Ok(transactionsForContractCreation);
             }
             catch (Exception exception)
             {
