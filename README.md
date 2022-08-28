@@ -23,6 +23,7 @@ I have create different controllers for different smart contracts:
   - GetLatestBlock
   - GetAllTransactionsOfCurrentBlock
   - GetAllTransactionOfABlock
+  - GetAllContractCreationTransactions
 
 - Wallet 
   - Check balance
