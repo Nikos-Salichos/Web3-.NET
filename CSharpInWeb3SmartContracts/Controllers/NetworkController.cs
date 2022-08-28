@@ -33,6 +33,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
             HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
             BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
 
+            if (latestBlock == null)
+            {
+                return NotFound("Block not found");
+            }
+
             return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
         }
 
