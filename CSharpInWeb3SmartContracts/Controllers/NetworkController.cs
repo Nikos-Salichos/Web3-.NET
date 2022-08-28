@@ -104,7 +104,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 if (blockWithTransactions == null)
                 {
-
+                    return NotFound("Block not found");
                 }
 
             }
