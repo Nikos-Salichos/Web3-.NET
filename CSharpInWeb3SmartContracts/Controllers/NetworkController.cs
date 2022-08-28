@@ -99,6 +99,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+                BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber)));
             }
             catch (Exception exception)
             {
