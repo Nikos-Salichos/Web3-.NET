@@ -114,6 +114,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     return NotFound("Transactions not found");
                 }
 
+                IEnumerable<Transaction> transactionsForContractCreation = allTransactions.Where(t => t.To == null);
+
             }
             catch (Exception exception)
             {
