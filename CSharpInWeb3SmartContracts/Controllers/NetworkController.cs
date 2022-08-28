@@ -111,7 +111,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 if (allTransactions.Length == 0)
                 {
-
+                    return NotFound("Transactions not found");
                 }
 
             }
