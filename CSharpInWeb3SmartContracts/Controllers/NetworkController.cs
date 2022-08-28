@@ -47,6 +47,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 
                 BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber)));
+                if (blockWithTransactions == null)
+                {
+                    return NotFound("Block not found");
+                }
 
                 List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
                 return Ok(allTransactions);
@@ -69,8 +73,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
                 if (blockWithTransactions == null)
                 {
-                    return NotFound("No transactions found on this block");
+                    return NotFound("Block not found");
                 }
+
                 List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
 
                 return Ok(allTransactions);
