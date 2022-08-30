@@ -320,11 +320,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 object[]? parameters = new object[2] { from, amount };
                 Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? transfer = smartContract.GetFunction("burnFrom");
+                Function? burnFrom = smartContract.GetFunction("burnFrom");
 
-                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+                HexBigInteger? estimatedGas = await burnFrom.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+                TransactionReceipt? transferResult = await burnFrom.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
                 return Ok($"Tokens burned from {from} successfully {transferResult.TransactionHash}");
             }
