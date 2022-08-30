@@ -179,7 +179,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-
+        [Consumes("application/json")]
+        [HttpPost("PostInMultipleChains")]
+        public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, User user, [FromBody] SmartContractDeploy smartContractModel)
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
 
     }
 }
