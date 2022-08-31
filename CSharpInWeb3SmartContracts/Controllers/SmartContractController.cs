@@ -188,6 +188,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 List<TransactionReceipt> transactionReceipts = new List<TransactionReceipt>();
                 foreach (var chain in chains)
                 {
+                    Account? account = new Account(_user.PrivateKey, chain);
                 }
                 return null;
             }
