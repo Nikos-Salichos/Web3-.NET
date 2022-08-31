@@ -198,7 +198,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                         parameters = smartContractModel.Parameters.ToArray();
                         if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                         {
-
+                            parameters = null;
                         }
                     }
                 }
