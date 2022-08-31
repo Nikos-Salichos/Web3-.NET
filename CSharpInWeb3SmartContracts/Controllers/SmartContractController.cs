@@ -180,13 +180,15 @@ namespace CSharpInWeb3SmartContracts.Controllers
         }
 
         [Consumes("application/json")]
-        [HttpPost("PostInMultipleChains")]
+        [HttpPost("DeployInMultipleChains")]
         public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
                 List<TransactionReceipt> transactionReceipts = new List<TransactionReceipt>();
-
+                foreach (var chain in chains)
+                {
+                }
                 return null;
             }
             catch (Exception exception)
