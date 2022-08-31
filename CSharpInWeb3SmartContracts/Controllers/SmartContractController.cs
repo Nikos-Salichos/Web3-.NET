@@ -192,6 +192,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                     object[]? parameters = null;
+
+                    if (smartContractModel?.Parameters?.Count > 0)
+                    {
+                    }
                 }
                 return null;
             }
