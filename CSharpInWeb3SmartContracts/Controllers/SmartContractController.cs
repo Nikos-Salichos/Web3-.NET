@@ -189,6 +189,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 foreach (var chain in chains)
                 {
                     Account? account = new Account(_user.PrivateKey, chain);
+                    Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
                 }
                 return null;
             }
