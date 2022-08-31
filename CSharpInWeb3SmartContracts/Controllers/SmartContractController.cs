@@ -25,7 +25,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
-        public async Task<ActionResult> DeployContract(Chain chain, string userDeploymentAddress, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
@@ -181,10 +181,12 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("PostInMultipleChains")]
-        public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, User user, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, [FromBody] SmartContractDeploy smartContractModel)
         {
             try
             {
+                List<TransactionReceipt> transactionReceipts = new List<TransactionReceipt>();
+
                 return null;
             }
             catch (Exception exception)
