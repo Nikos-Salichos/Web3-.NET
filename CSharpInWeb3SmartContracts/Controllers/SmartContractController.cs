@@ -213,7 +213,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                                                         estimatedGas,
                                                                                                                         null, null, null, parameters);
 
+                    if (deployContract != null)
+                    {
 
+                    }
                 }
             catch (Exception exception)
             {
