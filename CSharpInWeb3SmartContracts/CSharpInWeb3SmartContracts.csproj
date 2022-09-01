@@ -47,6 +47,7 @@
 
 	<ItemGroup>
 		<Folder Include="SmartContracts\FactoryPattern\" />
+		<Folder Include="SmartContracts\NFT\" />
 	</ItemGroup>
 
 	<ItemGroup>

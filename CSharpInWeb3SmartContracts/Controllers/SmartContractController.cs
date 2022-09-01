@@ -201,9 +201,14 @@ namespace CSharpInWeb3SmartContracts.Controllers
                             parameters = null;
                         }
                     }
+
+                    HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
+                                                                                              smartContractModel?.Bytecode,
+                                                                                              _user.WalletAddress,
+                                                                                              parameters);
+
+
                 }
-                return null;
-            }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
