@@ -215,7 +215,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                     if (deployContract != null)
                     {
-
+                        transactionReceipts.Add(deployContract);
                     }
                 }
             catch (Exception exception)
