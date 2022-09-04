@@ -217,8 +217,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     {
                         transactionReceipts.Add(deployContract);
                     }
-                    return Ok(string.Join(",", transactionReceipts));
                 }
+
+                return Ok(string.Join(",", transactionReceipts));
+            }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
