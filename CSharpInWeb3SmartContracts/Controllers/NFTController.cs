@@ -2,6 +2,7 @@
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -39,7 +40,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                             _user.WalletAddress,
                                                                                             null);
 
-
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
+                                                                                                     _byteCode,
+                                                                                                     _user.WalletAddress,
+                                                                                                     estimatedGas,
+                                                                                                     null);
             }
             catch (Exception exception)
             {
