@@ -1,6 +1,7 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Hex.HexTypes;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -32,6 +33,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 Account? account = new Account(_user.PrivateKey, chain);
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
+                                                                                            _byteCode,
+                                                                                            _user.WalletAddress,
+                                                                                            null);
+
+
             }
             catch (Exception exception)
             {
