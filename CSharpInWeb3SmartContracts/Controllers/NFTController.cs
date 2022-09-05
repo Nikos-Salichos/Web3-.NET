@@ -2,6 +2,8 @@
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Signer;
+using Nethereum.Web3;
+using Nethereum.Web3.Accounts;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -29,6 +31,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             try
             {
                 Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
             }
             catch (Exception exception)
             {
