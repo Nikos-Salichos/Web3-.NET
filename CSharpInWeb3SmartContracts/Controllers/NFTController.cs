@@ -45,6 +45,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                                      _user.WalletAddress,
                                                                                                      estimatedGas,
                                                                                                      null);
+
+                return Ok($"Contract deployed successfully, transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
             }
             catch (Exception exception)
             {
