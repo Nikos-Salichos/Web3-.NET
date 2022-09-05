@@ -1,6 +1,7 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.Signer;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -22,7 +23,18 @@ namespace CSharpInWeb3SmartContracts.Controllers
             _user = configuration.GetSection("User").Get<User>();
         }
 
+        [HttpGet("DeploySmartContract")]
+        public async Task<ActionResult> DeployContract(Chain chain)
+        {
+            try
+            {
 
+            }
+            catch (Exception exception)
+            {
+
+            }
+        }
 
     }
 }
