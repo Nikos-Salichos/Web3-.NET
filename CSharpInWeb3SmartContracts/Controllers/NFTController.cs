@@ -50,7 +50,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
             catch (Exception exception)
             {
-
+                return BadRequest(exception.Message);
             }
         }
 
