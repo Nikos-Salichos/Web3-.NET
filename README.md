@@ -67,6 +67,7 @@ I have create different controllers for different smart contracts:
   - BurnFrom
 
 - NFTController
+  - Deploy Mint smart contract 
 
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
