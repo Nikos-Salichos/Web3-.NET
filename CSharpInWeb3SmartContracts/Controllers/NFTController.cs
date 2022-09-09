@@ -68,6 +68,15 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                             _byteCode,
                                                                                             _user.WalletAddress,
                                                                                             parameters);
+
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
+                                                                                                                      _byteCode,
+                                                                                                                      _user.WalletAddress,
+                                                                                                                      estimatedGas,
+                                                                                                                      null,
+                                                                                                                      parameters);
+
+
             }
             catch (Exception exception)
             {
