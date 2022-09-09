@@ -63,6 +63,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 object[]? parameters = new object[3] { to, tokenId, ipfsAddress };
+
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
+                                                                                            _byteCode,
+                                                                                            _user.WalletAddress,
+                                                                                            parameters);
             }
             catch (Exception exception)
             {
