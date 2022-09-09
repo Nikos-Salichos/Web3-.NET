@@ -76,7 +76,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                                                                                                                       null,
                                                                                                                       parameters);
 
-
+                return Ok($"Transaction was successful, transaction Hash {deployContract.TransactionHash}");
             }
             catch (Exception exception)
             {
