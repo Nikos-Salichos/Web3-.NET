@@ -54,5 +54,18 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("Mint")]
+        public async Task<ActionResult> Mint(Chain chain, string to, int tokenId, string ipfsAddress)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
     }
 }
