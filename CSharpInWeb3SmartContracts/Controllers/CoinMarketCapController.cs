@@ -19,6 +19,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
+                var restClient = new RestClient("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
             }
             catch (Exception exception)
