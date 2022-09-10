@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSharpInWeb3SmartContracts.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -26,11 +27,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 restRequest.Method = Method.Get;
                 restRequest.AddHeader("X-CMC_PRO_API_KEY", _apiKey);
                 restRequest.AddHeader("Accept", "application/json");
-                restRequest.AddQueryParameter("limit", "5000");
+                restRequest.AddQueryParameter("limit", "100");
 
                 var response = await restClient.ExecuteAsync(restRequest);
 
-                var root = JsonConvert.DeserializeObject<Root>(response?.Content);
+                var root = JsonConvert.DeserializeObject<CoinMarketCapDTO>(response?.Content);
 
                 return Ok(root);
             }

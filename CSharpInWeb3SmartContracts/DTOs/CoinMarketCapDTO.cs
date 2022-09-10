@@ -29,7 +29,7 @@ namespace CSharpInWeb3SmartContracts.DTOs
         public DateTime LastUpdated { get; set; }
     }
 
-    public class Root
+    public class CoinMarketCapDTO
     {
         [JsonProperty("status")]
         public Status Status { get; set; }
