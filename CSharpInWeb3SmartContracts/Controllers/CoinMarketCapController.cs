@@ -31,6 +31,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 var response = await restClient.ExecuteAsync(restRequest);
 
                 var root = JsonConvert.DeserializeObject<Root>(response?.Content);
+
+                return Ok(root);
             }
             catch (Exception exception)
             {
