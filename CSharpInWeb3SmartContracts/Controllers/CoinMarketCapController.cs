@@ -27,7 +27,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 restRequest.AddHeader("Accept", "application/json");
                 restRequest.AddQueryParameter("limit", "5000");
 
-
+                var response = await restClient.ExecuteAsync(restRequest);
             }
             catch (Exception exception)
             {
