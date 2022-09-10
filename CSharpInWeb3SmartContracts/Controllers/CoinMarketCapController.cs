@@ -25,6 +25,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 restRequest.Method = Method.Get;
                 restRequest.AddHeader("X-CMC_PRO_API_KEY", _apiKey);
                 restRequest.AddHeader("Accept", "application/json");
+                restRequest.AddQueryParameter("limit", "5000");
+
+
             }
             catch (Exception exception)
             {
