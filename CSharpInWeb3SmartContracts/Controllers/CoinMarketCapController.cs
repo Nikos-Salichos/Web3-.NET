@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace CSharpInWeb3SmartContracts.Controllers
@@ -28,6 +29,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 restRequest.AddQueryParameter("limit", "5000");
 
                 var response = await restClient.ExecuteAsync(restRequest);
+
+                var root = JsonConvert.DeserializeObject<Root>(response?.Content);
             }
             catch (Exception exception)
             {
