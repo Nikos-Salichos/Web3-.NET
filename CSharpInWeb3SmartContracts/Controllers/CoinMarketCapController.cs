@@ -21,19 +21,29 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                var restClient = new RestClient("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+                RestClient restClient = new RestClient("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
-                var restRequest = new RestRequest();
+                RestRequest restRequest = new RestRequest();
                 restRequest.Method = Method.Get;
                 restRequest.AddHeader("X-CMC_PRO_API_KEY", _apiKey);
                 restRequest.AddHeader("Accept", "application/json");
                 restRequest.AddQueryParameter("limit", "100");
 
-                var response = await restClient.ExecuteAsync(restRequest);
+                RestResponse response = await restClient.ExecuteAsync(restRequest);
 
-                var root = JsonConvert.DeserializeObject<CoinMarketCapDTO>(response?.Content);
+                if (response is null)
+                {
+                    return NotFound("Response is null");
+                }
 
-                return Ok(root);
+                if (string.IsNullOrEmpty(response.Content))
+                {
+                    return NotFound("No response content found");
+                }
+
+                CoinMarketCapDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapDTO>(response.Content);
+
+                return Ok(coinMarketCapDTO);
             }
             catch (Exception exception)
             {
