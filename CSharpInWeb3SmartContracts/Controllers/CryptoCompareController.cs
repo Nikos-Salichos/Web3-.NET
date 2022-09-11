@@ -8,6 +8,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
     {
         private string _apiKey { get; }
 
-
+        public CryptoCompareController(IConfiguration configuration)
+        {
+            _apiKey = configuration.GetSection("CryptoCompare:APIKey").Get<string>();
+        }
     }
 }
