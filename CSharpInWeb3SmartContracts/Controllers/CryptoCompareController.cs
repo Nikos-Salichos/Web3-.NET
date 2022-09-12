@@ -22,6 +22,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 List<Coin> coins = new List<Coin>();
 
+                for (int i = 0; i < 2; i++)
+                {
+                }
+
                 return Ok();
             }
             catch (Exception exception)
