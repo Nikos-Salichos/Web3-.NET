@@ -1,5 +1,6 @@
 ﻿using CSharpInWeb3SmartContracts.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace CSharpInWeb3SmartContracts.Controllers
@@ -39,6 +40,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     if (string.IsNullOrEmpty(response.Content))
                     {
                     }
+
+                    CryptoCompare? cryptoCompare = JsonConvert.DeserializeObject<CryptoCompare>(response.Content);
+
+
                 }
 
                 return Ok();
