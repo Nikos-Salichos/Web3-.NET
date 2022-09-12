@@ -24,6 +24,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 for (int i = 0; i < 2; i++)
                 {
+                    RestClient restClient = new RestClient($"https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100&page={i}&tsym=USD&api_key={_apiKey}");
                 }
 
                 return Ok();
