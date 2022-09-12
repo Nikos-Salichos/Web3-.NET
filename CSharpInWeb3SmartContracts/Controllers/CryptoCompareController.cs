@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSharpInWeb3SmartContracts.Models;
+using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 
 namespace CSharpInWeb3SmartContracts.Controllers
@@ -19,7 +20,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-
+                List<Coin> coins = new List<Coin>();
 
                 return Ok();
             }
