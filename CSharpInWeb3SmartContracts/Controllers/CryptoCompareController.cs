@@ -29,6 +29,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     RestRequest restRequest = new RestRequest();
                     restRequest.Method = Method.Get;
 
+                    RestResponse response = await restClient.ExecuteAsync(restRequest);
                 }
 
                 return Ok();
