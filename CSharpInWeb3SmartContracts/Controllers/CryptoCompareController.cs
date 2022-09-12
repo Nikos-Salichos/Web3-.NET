@@ -35,6 +35,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     {
                         return NotFound("Response is null");
                     }
+
+                    if (string.IsNullOrEmpty(response.Content))
+                    {
+                    }
                 }
 
                 return Ok();
