@@ -39,9 +39,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                     if (string.IsNullOrEmpty(response.Content))
                     {
+                        return NotFound("No response content found");
                     }
 
                     CryptoCompare? cryptoCompare = JsonConvert.DeserializeObject<CryptoCompare>(response.Content);
+
 
 
                 }
