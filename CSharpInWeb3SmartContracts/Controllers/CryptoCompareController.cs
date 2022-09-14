@@ -58,6 +58,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     {
                         Coin coin = new Coin();
                         coin.Id = cryptoCoin?.CoinInfo.Id;
+                        coin.Name = cryptoCoin?.CoinInfo?.Name;
                     }
 
                 }
