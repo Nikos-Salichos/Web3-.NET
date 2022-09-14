@@ -51,7 +51,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                     if (cryptoCompare.Data is null)
                     {
-
+                        return NotFound("Response Data is empty");
                     }
 
                 }
