@@ -57,6 +57,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     foreach (var cryptoCoin in cryptoCompare.Data)
                     {
                         Coin coin = new Coin();
+                        coin.Id = cryptoCoin?.CoinInfo.Id;
                     }
 
                 }
