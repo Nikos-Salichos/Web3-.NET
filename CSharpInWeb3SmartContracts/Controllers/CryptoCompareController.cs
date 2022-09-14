@@ -60,6 +60,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                         coin.Id = cryptoCoin?.CoinInfo.Id;
                         coin.Name = cryptoCoin?.CoinInfo?.Name;
                         coin.FullName = cryptoCoin?.CoinInfo?.FullName;
+                        coin.MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP;
                     }
 
                 }
