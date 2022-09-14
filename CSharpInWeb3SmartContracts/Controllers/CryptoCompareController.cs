@@ -47,9 +47,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
 
                 }
-
-                return Ok();
-            }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
