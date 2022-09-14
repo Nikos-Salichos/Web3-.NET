@@ -70,6 +70,8 @@ I have create different controllers for different smart contracts:
   - Deploy smart contract 
   - Mint NFT
 
+- CryptoCompare
+
 In addition i use the following tools to convert ABI to string:
 https://elmah.io/tools/multiline-string-converter/
 and from multiline string to single line:
