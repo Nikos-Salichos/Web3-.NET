@@ -54,6 +54,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
                         return NotFound("Response Data is empty");
                     }
 
+                    foreach (var cryptoCoin in cryptoCompare.Data)
+                    {
+                    }
+
                 }
             catch (Exception exception)
             {
