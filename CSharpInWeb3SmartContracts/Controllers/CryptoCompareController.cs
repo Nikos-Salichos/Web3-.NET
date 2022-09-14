@@ -44,7 +44,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                     CryptoCompare? cryptoCompare = JsonConvert.DeserializeObject<CryptoCompare>(response.Content);
 
+                    if (cryptoCompare is null)
+                    {
 
+                    }
 
                 }
             catch (Exception exception)
