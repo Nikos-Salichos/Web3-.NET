@@ -67,7 +67,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 List<Coin> sortedCoins = coins.OrderByDescending(c => c.MarketCap).ToList();
 
-
+                return Ok(sortedCoins);
 
             }
             catch (Exception exception)
