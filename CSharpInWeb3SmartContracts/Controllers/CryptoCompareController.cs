@@ -63,8 +63,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
                         coin.MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP;
                         coins.Add(coin);
                     }
-
                 }
+
+                List<Coin> sortedCoins = coins.OrderByDescending(c => c.MarketCap).ToList();
+
+
+
+            }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
