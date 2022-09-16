@@ -59,6 +59,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 RestClient restClient = new RestClient("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories");
 
                 RestRequest restRequest = new RestRequest();
+                restRequest.Method = Method.Get;
             }
             catch (Exception exception)
             {
