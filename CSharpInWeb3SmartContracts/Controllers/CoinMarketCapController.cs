@@ -9,11 +9,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class CoinMarketCapController : ControllerBase
     {
-        private string _apiKey { get; }
+        private string ApiKey { get; }
 
         public CoinMarketCapController(IConfiguration configuration)
         {
-            _apiKey = configuration.GetSection("CoinMarketCap:APIKey").Get<string>();
+            ApiKey = configuration.GetSection("CoinMarketCap:APIKey").Get<string>();
         }
 
         [HttpGet("GetCoins")]
@@ -25,9 +25,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 RestRequest restRequest = new RestRequest();
                 restRequest.Method = Method.Get;
-                restRequest.AddHeader("X-CMC_PRO_API_KEY", _apiKey);
+                restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey);
                 restRequest.AddHeader("Accept", "application/json");
-                restRequest.AddQueryParameter("limit", "100");
+                restRequest.AddQueryParameter("limit", "5000");
 
                 RestResponse response = await restClient.ExecuteAsync(restRequest);
 
@@ -41,7 +41,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                     return NotFound("No response content found");
                 }
 
-                CoinMarketCapDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapDTO>(response.Content);
+                CoinMarketCapLatestCoinsDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapLatestCoinsDTO>(response.Content);
 
                 return Ok(coinMarketCapDTO);
             }
@@ -49,7 +49,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
             {
                 return BadRequest(exception.Message);
             }
-
         }
+
+
+
     }
 }
