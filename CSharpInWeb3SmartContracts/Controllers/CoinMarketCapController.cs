@@ -54,7 +54,14 @@ namespace CSharpInWeb3SmartContracts.Controllers
         [HttpGet("GetCategoriesId")]
         public async Task<ActionResult> GetCategoriesId()
         {
+            try
+            {
 
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
     }
