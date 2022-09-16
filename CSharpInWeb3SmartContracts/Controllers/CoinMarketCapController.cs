@@ -51,7 +51,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
+        [HttpGet("GetCategoriesId")]
+        public async Task<ActionResult> GetCategoriesId()
+        {
 
+        }
 
     }
 }
