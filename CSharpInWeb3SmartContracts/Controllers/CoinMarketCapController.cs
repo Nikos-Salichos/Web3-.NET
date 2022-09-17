@@ -66,6 +66,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 RestResponse response = await restClient.ExecuteAsync(restRequest);
 
+                if (response is null)
+                {
+
+                }
             }
             catch (Exception exception)
             {
