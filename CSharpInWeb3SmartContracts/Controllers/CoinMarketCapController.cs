@@ -77,6 +77,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 }
 
                 CoinMarketCapCategoriesDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapCategoriesDTO>(response.Content);
+                return Ok(coinMarketCapDTO);
             }
             catch (Exception exception)
             {
