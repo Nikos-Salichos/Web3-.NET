@@ -73,6 +73,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 if (string.IsNullOrEmpty(response.Content))
                 {
+                    return NotFound("No response content found");
                 }
             }
             catch (Exception exception)
