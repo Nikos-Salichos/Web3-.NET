@@ -75,6 +75,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 {
                     return NotFound("No response content found");
                 }
+
+                CoinMarketCapCategoriesDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapCategoriesDTO>(response.Content);
             }
             catch (Exception exception)
             {
