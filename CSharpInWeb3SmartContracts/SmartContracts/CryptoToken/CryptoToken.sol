@@ -515,5 +515,7 @@ contract Staking {
 
 contract CryptoCoinFactory{ 
 
-
+    CryptoCoin[] public CryptoCoins;
+    
+    
 }
