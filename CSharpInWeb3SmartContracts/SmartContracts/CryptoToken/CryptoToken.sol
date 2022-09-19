@@ -530,4 +530,5 @@ contract CryptoCoinFactory{
 
 contract CloneFactory {
   function createClone(address target) internal returns (address result) {
+  bytes20 targetBytes = bytes20(target);
 }
