@@ -525,5 +525,9 @@ contract CryptoCoinFactory{
     function getAllCryptoCoins() public pure returns (CryptoCoin[] memory allCryptoCoins){
       return allCryptoCoins;
     }
-    
+}
+
+
+
+contract CloneFactory {
 }
