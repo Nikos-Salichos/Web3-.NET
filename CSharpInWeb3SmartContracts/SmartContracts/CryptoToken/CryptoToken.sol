@@ -528,6 +528,6 @@ contract CryptoCoinFactory{
 }
 
 
-
 contract CloneFactory {
+  function createClone(address target) internal returns (address result) {
 }
