@@ -546,6 +546,7 @@ contract CloneFactory {
   assembly {
    let clone := mload(0x40)
    mstore(clone, 0x363d3d373d3d3d363d7300000000000000000000000000000000000000000000)
+   mstore(add(clone, 0xa), targetBytes)
     }
   }
  
