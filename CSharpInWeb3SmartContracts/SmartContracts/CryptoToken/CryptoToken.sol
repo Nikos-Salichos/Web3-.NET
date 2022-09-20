@@ -552,6 +552,7 @@ contract CloneFactory {
    let other := add(clone, 0x40)
    extcodecopy(query, other, 0, 0x2d)
    result := and(
+    eq(mload(clone), mload(other)),
     }
   }
  
