@@ -550,6 +550,7 @@ contract CloneFactory {
    mstore(add(clone, 0x1e), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)
    
    let other := add(clone, 0x40)
+   extcodecopy(query, other, 0, 0x2d)
     }
   }
  
