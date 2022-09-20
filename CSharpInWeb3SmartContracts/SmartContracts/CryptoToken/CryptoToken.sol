@@ -553,6 +553,8 @@ contract CloneFactory {
    extcodecopy(query, other, 0, 0x2d)
    result := and(
     eq(mload(clone), mload(other)),
+    eq(mload(add(clone, 0xd)), mload(add(other, 0xd)))
+      )
     }
   }
  
