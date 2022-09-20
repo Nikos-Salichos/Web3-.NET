@@ -548,6 +548,8 @@ contract CloneFactory {
    mstore(clone, 0x363d3d373d3d3d363d7300000000000000000000000000000000000000000000)
    mstore(add(clone, 0xa), targetBytes)
    mstore(add(clone, 0x1e), 0x5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000)
+   
+   let other := add(clone, 0x40)
     }
   }
  
