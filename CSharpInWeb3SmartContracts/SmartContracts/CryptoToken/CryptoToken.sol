@@ -541,5 +541,10 @@ contract CloneFactory {
   }
  }
  
+ function isClone(address target, address query) internal view returns (bool result) {
+
+    }
+  }
+ 
  
 }
