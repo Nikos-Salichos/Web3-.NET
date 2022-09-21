@@ -563,4 +563,7 @@ contract CloneFactory {
 contract CryptoCoinFactoryClone is Ownable, CloneFactory {
   address public libraryAddress;
   event CryptoCoinCreated(address newFoundation);
+  
+  function CryptoCoinFactoryWithLibrary(address _libraryAddress) public {
+  }
 }
