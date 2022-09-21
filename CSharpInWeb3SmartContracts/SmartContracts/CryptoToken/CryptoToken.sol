@@ -557,6 +557,9 @@ contract CloneFactory {
       )
     }
   }
- 
- 
+  
+}
+
+contract CryptoCoinFactoryClone is Ownable, CloneFactory {
+
 }
