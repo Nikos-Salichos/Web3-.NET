@@ -570,4 +570,5 @@ contract CryptoCoinFactoryClone is Ownable, CloneFactory {
 }
 
 contract CryptoCoinFactoryClone is Ownable, CloneFactory {
+  address public libraryAddress;
 }
