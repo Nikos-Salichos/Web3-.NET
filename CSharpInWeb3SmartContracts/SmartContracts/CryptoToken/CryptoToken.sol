@@ -568,3 +568,6 @@ contract CryptoCoinFactoryClone is Ownable, CloneFactory {
     event CryptoCoinCreated(address newFoundation);
   }
 }
+
+contract CryptoCoinFactoryClone is Ownable, CloneFactory {
+}
