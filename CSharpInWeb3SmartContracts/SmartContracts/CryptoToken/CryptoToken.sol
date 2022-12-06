@@ -325,9 +325,9 @@ contract CryptoTokenSale{
 }
 
 
-// Πρέπει στο αρχικό token με την διεύθυνση του owner να κάνω increase approval και να βάλω spender address την
-// διεύθυνση του contract του airdrop token και added το amount που θέλω να στείλω
-// Την function airdropToken πρέπει να την εκτελεί ο owner του contract
+// ΓΓ±ΓΓ°Γ¥Γ© Γ³Γ΄Γ― Γ΅Γ±Γ·Γ©ΓªΓΌ token Γ¬Γ¥ Γ΄Γ§Γ­ Γ¤Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ Γ΄Γ―Γµ owner Γ­Γ΅ ΓªΓΓ­ΓΉ increase approval ΓªΓ΅Γ© Γ­Γ΅ ΓΆΓΓ«ΓΉ spender address Γ΄Γ§Γ­
+// Γ¤Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ Γ΄Γ―Γµ contract Γ΄Γ―Γµ airdrop token ΓªΓ΅Γ© added Γ΄Γ― amount Γ°Γ―Γµ Γ¨ΓΓ«ΓΉ Γ­Γ΅ Γ³Γ΄Γ¥ΓΓ«ΓΉ
+// Γ”Γ§Γ­ function airdropToken Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ΄Γ§Γ­ Γ¥ΓªΓ΄Γ¥Γ«Γ¥Γ Γ― owner Γ΄Γ―Γµ contract
 
 
 contract Airdrop {
