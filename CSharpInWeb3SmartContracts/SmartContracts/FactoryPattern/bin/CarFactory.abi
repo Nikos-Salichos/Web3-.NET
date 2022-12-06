@@ -1,1 +1,0 @@
-[{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Cars","outputs":[{"internalType":"contract Car","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"createCar","outputs":[],"stateMutability":"nonpayable","type":"function"}]
