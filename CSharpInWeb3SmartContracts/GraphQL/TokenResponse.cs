@@ -4,6 +4,6 @@ namespace CSharpInWeb3SmartContracts.GraphQL
 {
     public class TokenResponse
     {
-        public Token Token { get; set; }
+        public Token? Token { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class CoinMarketCapController : ControllerBase
     {
-        private string ApiKey { get; }
+        private string? ApiKey { get; }
 
         public CoinMarketCapController(IConfiguration configuration)
         {

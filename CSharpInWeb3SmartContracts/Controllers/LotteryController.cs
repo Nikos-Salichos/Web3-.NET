@@ -29,7 +29,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
         public LotteryController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>();
+            _user = configuration?.GetSection("User").Get<User>();
         }
 
         [HttpGet("Deploy")]

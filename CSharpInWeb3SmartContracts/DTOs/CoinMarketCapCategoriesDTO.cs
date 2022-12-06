@@ -10,9 +10,4 @@ namespace CSharpInWeb3SmartContracts.DTOs
         [JsonProperty("data")]
         public List<Datum>? Data { get; set; }
     }
-
-
-
-
-
 }

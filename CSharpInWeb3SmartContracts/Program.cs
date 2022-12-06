@@ -46,8 +46,6 @@ if (assembly != null)
     builder.Services.AddMvc().AddApplicationPart(assembly).AddControllersAsServices();
 }*/
 
-
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -57,9 +55,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SchemaFilter<EnumSchemaFilter>();
 });
 
-
 WebApplication? app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

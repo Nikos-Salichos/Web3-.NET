@@ -9,11 +9,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class CryptoCompareController : ControllerBase
     {
-        private string _apiKey { get; }
+        private string? ApiKey { get; }
 
-        public CryptoCompareController(IConfiguration configuration)
+        public CryptoCompareController(IConfiguration? configuration)
         {
-            _apiKey = configuration.GetSection("CryptoCompare:APIKey").Get<string>();
+            ApiKey = configuration?.GetSection("CryptoCompare:APIKey").Get<string>();
         }
 
         [HttpGet("GetCoins")]
@@ -21,16 +21,16 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                List<Coin> coins = new List<Coin>();
+                List<Coin> coins = new();
 
                 for (int i = 0; i < 2; i++)
                 {
-                    RestClient restClient = new RestClient($"https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100&page={i}&tsym=USD&api_key={_apiKey}");
+                    RestClient restClient = new($"https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100&page={i}&tsym=USD&api_key={ApiKey}");
 
-                    RestRequest restRequest = new RestRequest();
+                    RestRequest restRequest = new();
                     restRequest.Method = Method.Get;
 
-                    RestResponse response = await restClient.ExecuteAsync(restRequest);
+                    RestResponse response = await restClient.ExecuteAsync(restRequest, default);
 
                     if (response is null)
                     {
@@ -56,11 +56,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                     foreach (var cryptoCoin in cryptoCompare.Data)
                     {
-                        Coin coin = new Coin();
-                        coin.Id = cryptoCoin?.CoinInfo.Id;
-                        coin.Name = cryptoCoin?.CoinInfo?.Name;
-                        coin.FullName = cryptoCoin?.CoinInfo?.FullName;
-                        coin.MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP;
+                        Coin coin = new()
+                        {
+                            Id = cryptoCoin?.CoinInfo?.Id,
+                            Name = cryptoCoin?.CoinInfo?.Name,
+                            FullName = cryptoCoin?.CoinInfo?.FullName,
+                            MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP
+                        };
                         coins.Add(coin);
                     }
                 }
@@ -68,7 +70,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 List<Coin> sortedCoins = coins.OrderByDescending(c => c.MarketCap).ToList();
 
                 return Ok(sortedCoins);
-
             }
             catch (Exception exception)
             {
