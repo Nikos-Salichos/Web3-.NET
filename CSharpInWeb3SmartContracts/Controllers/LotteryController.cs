@@ -22,7 +22,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         // private readonly string _smartContractAddress = "0xF321FcC68DB5755f81766cc6B631651bBB1E1cAD";
 
-        private readonly User _user = new User();
+        private readonly User _user = new();
 
         public EnumHelper EnumHelper { get; set; }
 
@@ -37,11 +37,10 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-
                 object[]? parametersForPair = new object[1] { _user.WalletAddress };
 
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
                                                                                             _byteCode,
@@ -68,8 +67,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
                 Function? getRandomNumber = smartContract.GetFunction("getRandomNumber");
@@ -88,8 +87,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 var smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
                 Function? getPlayers = smartContract.GetFunction("getPlayers");
@@ -103,14 +102,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-
         [HttpGet("GetBalance")]
         public async Task<ActionResult> GetBalance(Chain chain, string smartContractAddress)
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
                 Function? getBalance = smartContract.GetFunction("getBalance");
@@ -126,20 +124,19 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-
         [HttpGet("EnterLottery")]
         public async Task<ActionResult> EnterLottery(Chain chain, string smartContractAddress)
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
 
                 BigInteger wei = Web3.Convert.ToWei(0.02);
-                HexBigInteger value = new HexBigInteger(wei);
-                HexBigInteger gas = new HexBigInteger(wei);
+                HexBigInteger value = new(wei);
+                HexBigInteger gas = new(wei);
 
                 Function? enterLottery = smartContract.GetFunction("enter");
                 HexBigInteger? estimatedGas = await enterLottery.EstimateGasAsync(account.Address, gas, value, null);
@@ -153,14 +150,13 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-
         [HttpGet("PickWinner")]
         public async Task<ActionResult> PickWinner(Chain chain, string smartContractAddress)
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
 
@@ -175,7 +171,5 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
-
-
     }
 }

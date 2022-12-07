@@ -43,11 +43,11 @@ namespace CSharpInWeb3SmartContracts.Models
         public int Type { get; set; }
 
         [JsonProperty("MetaData")]
-        public MetaData MetaData { get; set; }
+        public MetaData? MetaData { get; set; }
 
 
         [JsonProperty("Data")]
-        public List<Datum> Data { get; set; }
+        public List<Datum>? Data { get; set; }
 
 
         [JsonProperty("HasWarning")]
