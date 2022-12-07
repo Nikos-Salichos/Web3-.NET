@@ -38,17 +38,14 @@ namespace CSharpInWeb3SmartContracts.Models
 
     public class CryptoCompare
     {
-
         [JsonProperty("Type")]
         public int Type { get; set; }
 
         [JsonProperty("MetaData")]
         public MetaData? MetaData { get; set; }
 
-
         [JsonProperty("Data")]
         public List<Datum>? Data { get; set; }
-
 
         [JsonProperty("HasWarning")]
         public bool HasWarning { get; set; }

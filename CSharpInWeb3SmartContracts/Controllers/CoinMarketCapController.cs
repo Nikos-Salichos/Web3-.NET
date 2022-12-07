@@ -25,7 +25,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 RestRequest restRequest = new RestRequest();
                 restRequest.Method = Method.Get;
-                restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey);
+                restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
                 restRequest.AddHeader("Accept", "application/json");
                 restRequest.AddQueryParameter("limit", "5000");
 
@@ -60,7 +60,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 RestRequest restRequest = new RestRequest();
                 restRequest.Method = Method.Get;
-                restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey);
+                restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
                 restRequest.AddHeader("Accept", "application/json");
                 restRequest.AddQueryParameter("limit", "5000");
 

@@ -8,7 +8,9 @@ using Nethereum.Signer;
 using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using RestSharp;
 using System.Numerics;
+using System.Reflection;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -24,12 +26,15 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         private readonly User _user = new();
 
+        private readonly ILogger<LotteryController> _logger;
+
         public EnumHelper EnumHelper { get; set; }
 
-        public LotteryController(IConfiguration configuration)
+        public LotteryController(IConfiguration configuration, ILogger<LotteryController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration?.GetSection("User").Get<User>();
+            _logger = logger;
         }
 
         [HttpGet("Deploy")]
@@ -58,6 +63,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
             catch (Exception exception)
             {
+                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + ' ' + exception);
                 return BadRequest(exception.Message);
             }
         }
