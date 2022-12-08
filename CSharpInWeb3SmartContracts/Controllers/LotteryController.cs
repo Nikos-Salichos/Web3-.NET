@@ -84,6 +84,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
             catch (Exception exception)
             {
+                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + ' ' + exception);
+
                 return BadRequest(exception.Message);
             }
         }
