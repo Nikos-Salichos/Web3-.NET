@@ -20,10 +20,11 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         private readonly ILogger<LotteryController> _logger;
 
-        public NetworkController(IConfiguration configuration)
+        public NetworkController(IConfiguration configuration, ILogger<LotteryController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>();
+            _logger = logger;
         }
 
         [HttpGet("GetLatestBlock")]
