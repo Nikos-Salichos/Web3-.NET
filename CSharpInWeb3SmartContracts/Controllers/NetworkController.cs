@@ -18,6 +18,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         public EnumHelper EnumHelper { get; set; }
 
+        private readonly ILogger<LotteryController> _logger;
+
         public NetworkController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
