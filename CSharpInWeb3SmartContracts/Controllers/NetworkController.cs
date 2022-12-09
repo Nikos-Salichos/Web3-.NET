@@ -117,6 +117,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 if (blockWithTransactions == null)
                 {
+                    _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Block not found");
                     return NotFound("Block not found");
                 }
 
