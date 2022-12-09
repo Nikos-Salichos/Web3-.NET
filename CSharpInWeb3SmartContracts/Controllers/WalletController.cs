@@ -67,7 +67,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
         }
 
-
         [HttpGet("TransferTokens")]
         public async Task<ActionResult> SendERC20Token(Chain chain, string toAddress, long amountOfTokens)
         {
@@ -91,7 +90,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
-
             }
         }
 
@@ -111,7 +109,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
-
             }
         }
 

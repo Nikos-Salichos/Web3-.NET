@@ -4,7 +4,7 @@ namespace CSharpInWeb3SmartContracts.Utilities
 {
     public static class JsonDeserializer<T>
     {
-        private static readonly HttpClient httpClient = new HttpClient();
+        private static readonly HttpClient httpClient = new();
 
         public static async Task<T?> GetAndDeserializeGenericType(JsonSerializerSettings jsonSerializerSettings, string url)
         {

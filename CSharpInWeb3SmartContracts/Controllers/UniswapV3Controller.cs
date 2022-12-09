@@ -11,14 +11,13 @@ using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using System.Numerics;
 
-
 namespace CSharpInWeb3SmartContracts.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UniswapV3Controller : ControllerBase
     {
-        private readonly User _user = new User();
+        private readonly User _user = new();
 
         private readonly string _uniswapV3FactoryAddress = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
         private readonly string _uniswapV3FactoryAbi = @" [{""inputs"":[],""stateMutability"":""nonpayable"",""type"":""constructor""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""indexed"":true,""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""}],""name"":""FeeAmountEnabled"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""oldOwner"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""newOwner"",""type"":""address""}],""name"":""OwnerChanged"",""type"":""event""},{""anonymous"":false,""inputs"":[{""indexed"":true,""internalType"":""address"",""name"":""token0"",""type"":""address""},{""indexed"":true,""internalType"":""address"",""name"":""token1"",""type"":""address""},{""indexed"":true,""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""indexed"":false,""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""},{""indexed"":false,""internalType"":""address"",""name"":""pool"",""type"":""address""}],""name"":""PoolCreated"",""type"":""event""},{""inputs"":[{""internalType"":""address"",""name"":""tokenA"",""type"":""address""},{""internalType"":""address"",""name"":""tokenB"",""type"":""address""},{""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""}],""name"":""createPool"",""outputs"":[{""internalType"":""address"",""name"":""pool"",""type"":""address""}],""stateMutability"":""nonpayable"",""type"":""function""},{""inputs"":[{""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""}],""name"":""enableFeeAmount"",""outputs"":[],""stateMutability"":""nonpayable"",""type"":""function""},{""inputs"":[{""internalType"":""uint24"",""name"":"""",""type"":""uint24""}],""name"":""feeAmountTickSpacing"",""outputs"":[{""internalType"":""int24"",""name"":"""",""type"":""int24""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""},{""internalType"":""address"",""name"":"""",""type"":""address""},{""internalType"":""uint24"",""name"":"""",""type"":""uint24""}],""name"":""getPool"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""owner"",""outputs"":[{""internalType"":""address"",""name"":"""",""type"":""address""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[],""name"":""parameters"",""outputs"":[{""internalType"":""address"",""name"":""factory"",""type"":""address""},{""internalType"":""address"",""name"":""token0"",""type"":""address""},{""internalType"":""address"",""name"":""token1"",""type"":""address""},{""internalType"":""uint24"",""name"":""fee"",""type"":""uint24""},{""internalType"":""int24"",""name"":""tickSpacing"",""type"":""int24""}],""stateMutability"":""view"",""type"":""function""},{""inputs"":[{""internalType"":""address"",""name"":""_owner"",""type"":""address""}],""name"":""setOwner"",""outputs"":[],""stateMutability"":""nonpayable"",""type"":""function""}] ";
@@ -46,8 +45,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
                 Function? getPool = smartContract.GetFunction("getPool");
@@ -97,8 +96,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
                 Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");
@@ -106,7 +105,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 object[] parametersForSwap = new object[4] { amountIn, amountOutMin, path, recipientAddress };
 
                 BigInteger wei = Web3.Convert.ToWei(amountToSwap);
-                HexBigInteger value = new HexBigInteger(wei);
+                HexBigInteger value = new(wei);
 
                 HexBigInteger? estimatedGas = await swapExactTokensForTokensFunction.EstimateGasAsync(account.Address, null, value, parametersForSwap);
                 TransactionReceipt? transactionReceiptForSwap = await swapExactTokensForTokensFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);

@@ -14,8 +14,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
     [ApiController]
     public class NetworkController : ControllerBase
     {
-
-        private readonly User _user = new User();
+        private readonly User _user = new();
 
         public EnumHelper EnumHelper { get; set; }
 
@@ -33,8 +32,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
                 BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
@@ -45,7 +44,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 }
 
                 return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
-
             }
             catch (Exception exception)
             {
@@ -59,8 +57,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 
@@ -85,8 +83,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
                 if (blockWithTransactions == null)
@@ -110,8 +108,8 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                Account? account = new(_user.PrivateKey, chain);
+                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber)));
 
@@ -139,6 +137,5 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
-
     }
 }

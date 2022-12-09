@@ -30,7 +30,7 @@ namespace CSharpInWeb3SmartContracts.GraphQL
             query.Variables = new { tokenId };
 
             GraphQLResponse<TokenResponse>? response = await _client.SendQueryAsync<TokenResponse>(query);
-            return response.Data.Token;
+            return response.Data.Token!;
         }
 
         public async Task<dynamic> GetMostLiquidPools(int numberOfPools)

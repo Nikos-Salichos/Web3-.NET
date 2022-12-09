@@ -17,7 +17,7 @@
                 }
 
                 //create new instance of the object
-                object newObject = Activator.CreateInstance(originalObject.GetType());
+                object newObject = Activator.CreateInstance(originalObject?.GetType());
 
                 //get list of all properties
                 //loop through each property

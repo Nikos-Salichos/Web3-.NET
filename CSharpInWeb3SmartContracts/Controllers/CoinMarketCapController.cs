@@ -21,9 +21,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                RestClient restClient = new RestClient("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+                RestClient restClient = new("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
-                RestRequest restRequest = new RestRequest();
+                RestRequest restRequest = new();
                 restRequest.Method = Method.Get;
                 restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
                 restRequest.AddHeader("Accept", "application/json");
@@ -56,9 +56,9 @@ namespace CSharpInWeb3SmartContracts.Controllers
         {
             try
             {
-                RestClient restClient = new RestClient("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories");
+                RestClient restClient = new("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories");
 
-                RestRequest restRequest = new RestRequest();
+                RestRequest restRequest = new();
                 restRequest.Method = Method.Get;
                 restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
                 restRequest.AddHeader("Accept", "application/json");
@@ -84,6 +84,5 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 return BadRequest(exception.Message);
             }
         }
-
     }
 }

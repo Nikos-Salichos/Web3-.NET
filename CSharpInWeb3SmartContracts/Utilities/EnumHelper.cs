@@ -16,11 +16,11 @@ namespace CSharpInWeb3SmartContracts.Utilities
             switch (chain)
             {
                 case Chain.MainNet:
-                    return _configuration["User:BlockchainProviderMainnet"];
+                    return _configuration["User:BlockchainProviderMainnet"]!;
                 case Chain.Kovan:
-                    return _configuration["User:BlockchainProviderKovan"];
+                    return _configuration["User:BlockchainProviderKovan"]!;
                 case Chain.Ropsten:
-                    return _configuration["User:BlockchainProviderRopsten"];
+                    return _configuration["User:BlockchainProviderRopsten"]!;
                 default:
                     return "NO NETWORK GIVEN";
             }

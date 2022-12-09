@@ -8,5 +8,4 @@
                 .AllowAnyMethod()
                 .AllowAnyHeader()));
     }
-
 }
