@@ -6,6 +6,7 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using System.Reflection;
 
 namespace CSharpInWeb3SmartContracts.Controllers
 {
@@ -30,18 +31,27 @@ namespace CSharpInWeb3SmartContracts.Controllers
         [HttpGet("GetLatestBlock")]
         public async Task<ActionResult> GetLatestBlock(Chain chain)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-            HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
-            BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
-
-            if (latestBlock == null)
+            try
             {
-                return NotFound("Block not found");
-            }
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-            return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
+                HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
+                BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
+
+                if (latestBlock == null)
+                {
+                    return NotFound("Block not found");
+                }
+
+                return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + ' ' + exception);
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpGet("GetAllTransactionsOfCurrentBlock")]
@@ -66,7 +76,6 @@ namespace CSharpInWeb3SmartContracts.Controllers
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
-
             }
         }
 
