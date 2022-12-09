@@ -125,7 +125,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 if (allTransactions.Length == 0)
                 {
-                    _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Block not found");
+                    _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Transactions not found");
                     return NotFound("Transactions not found");
                 }
 
@@ -135,6 +135,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
             }
             catch (Exception exception)
             {
+                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Transactions not found");
                 return BadRequest(exception.Message);
             }
         }
