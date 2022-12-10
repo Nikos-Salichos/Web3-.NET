@@ -1,0 +1,42 @@
+2022-12-10 09:16:29.149 +02:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-12-10 09:16:29.702 +02:00 [DBG] Hosting starting
+2022-12-10 09:16:29.821 +02:00 [DBG] Loaded hosting startup assembly WebApi
+2022-12-10 09:16:29.821 +02:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2022-12-10 09:16:29.821 +02:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2022-12-10 09:16:29.821 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-12-10 09:16:29.822 +02:00 [INF] Hosting environment: Development
+2022-12-10 09:16:29.822 +02:00 [INF] Content root path: C:\Users\Nikos\source\repos\CSharpInWeb3SmartContracts\CSharpInWeb3SmartContracts
+2022-12-10 09:16:29.822 +02:00 [DBG] Hosting started
+2022-12-10 09:16:29.941 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger - -
+2022-12-10 09:16:29.969 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-12-10 09:16:30.011 +02:00 [DBG] Connection ID "18374686494167138318" disconnecting.
+2022-12-10 09:16:30.011 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger/index.html - -
+2022-12-10 09:16:30.023 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger - - - 301 - - 83.6598ms
+2022-12-10 09:16:30.219 +02:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-12-10 09:16:30.226 +02:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-12-10 09:16:30.229 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger/index.html - - - 200 - text/html;charset=utf-8 216.1374ms
+2022-12-10 09:16:30.231 +02:00 [DBG] Connection ID "18230571323271151617" disconnecting.
+2022-12-10 09:16:30.241 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger/swagger-ui.css - -
+2022-12-10 09:16:30.241 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger/swagger-ui-bundle.js - -
+2022-12-10 09:16:30.247 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger/swagger-ui-standalone-preset.js - -
+2022-12-10 09:16:30.247 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/_framework/aspnetcore-browser-refresh.js - -
+2022-12-10 09:16:30.254 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/_framework/aspnetcore-browser-refresh.js - - - 200 11982 application/javascript;+charset=utf-8 2.9095ms
+2022-12-10 09:16:30.254 +02:00 [DBG] Connection ID "18230571323271151619" disconnecting.
+2022-12-10 09:16:30.273 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-12-10 09:16:30.273 +02:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-12-10 09:16:30.273 +02:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-12-10 09:16:30.277 +02:00 [DBG] Connection ID "18230571310386249731" disconnecting.
+2022-12-10 09:16:30.279 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger/swagger-ui.css - - - 200 143943 text/css 38.5679ms
+2022-12-10 09:16:30.286 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger/swagger-ui-standalone-preset.js - - - 200 339486 text/javascript 37.8998ms
+2022-12-10 09:16:30.311 +02:00 [DBG] Connection ID "18086456165260066845" disconnecting.
+2022-12-10 09:16:30.311 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger/swagger-ui-bundle.js - - - 200 1096145 text/javascript 70.0688ms
+2022-12-10 09:16:30.332 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/_vs/browserLink - -
+2022-12-10 09:16:30.402 +02:00 [DBG] Connection ID "18230571310386249733" disconnecting.
+2022-12-10 09:16:30.402 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 67.8424ms
+2022-12-10 09:16:30.482 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger/favicon-32x32.png - -
+2022-12-10 09:16:30.484 +02:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-12-10 09:16:30.484 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger/favicon-32x32.png - - - 200 628 image/png 1.5073ms
+2022-12-10 09:16:30.484 +02:00 [DBG] Connection ID "18086456165260066847" disconnecting.
+2022-12-10 09:16:30.520 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44330/swagger/v1/swagger.json - -
+2022-12-10 09:16:30.697 +02:00 [DBG] Connection ID "18374686507052040212" disconnecting.
+2022-12-10 09:16:30.697 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44330/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 177.2695ms
