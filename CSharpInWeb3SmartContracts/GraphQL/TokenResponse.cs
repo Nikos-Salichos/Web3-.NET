@@ -1,4 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using Domain.Models;
 
 namespace CSharpInWeb3SmartContracts.GraphQL
 {

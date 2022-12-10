@@ -1,6 +1,6 @@
 ﻿using CSharpInWeb3SmartContracts.DTOs;
-using CSharpInWeb3SmartContracts.Models;
 using CSharpInWeb3SmartContracts.Utilities;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;

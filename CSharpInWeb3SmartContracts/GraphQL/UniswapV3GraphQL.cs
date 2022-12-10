@@ -1,4 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Models;
+﻿using Domain.Models;
 using GraphQL;
 using GraphQL.Client.Abstractions;
 

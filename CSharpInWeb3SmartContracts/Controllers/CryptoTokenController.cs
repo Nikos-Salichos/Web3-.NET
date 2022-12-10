@@ -1,5 +1,5 @@
-﻿using CSharpInWeb3SmartContracts.Models;
-using CSharpInWeb3SmartContracts.Utilities;
+﻿using CSharpInWeb3SmartContracts.Utilities;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
