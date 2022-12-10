@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpInWeb3SmartContracts", "CSharpInWeb3SmartContracts\CSharpInWeb3SmartContracts.csproj", "{46E1DEA5-F82E-461C-8581-2DC737262084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "CSharpInWeb3SmartContracts\WebApi.csproj", "{46E1DEA5-F82E-461C-8581-2DC737262084}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{F426C60D-238D-40C6-B816-E6B5D8671AC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{38C38AB0-7F1A-49A8-A44A-3CED68D34466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{001BC823-ACDF-4CFC-BDAB-532BAC727ED4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{6ECB97DA-22ED-48DA-8B62-58E553E272D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +27,18 @@ Global
 		{F426C60D-238D-40C6-B816-E6B5D8671AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F426C60D-238D-40C6-B816-E6B5D8671AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F426C60D-238D-40C6-B816-E6B5D8671AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{001BC823-ACDF-4CFC-BDAB-532BAC727ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001BC823-ACDF-4CFC-BDAB-532BAC727ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001BC823-ACDF-4CFC-BDAB-532BAC727ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001BC823-ACDF-4CFC-BDAB-532BAC727ED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46E1DEA5-F82E-461C-8581-2DC737262084} = {6ECB97DA-22ED-48DA-8B62-58E553E272D2}
+		{F426C60D-238D-40C6-B816-E6B5D8671AC0} = {38C38AB0-7F1A-49A8-A44A-3CED68D34466}
+		{001BC823-ACDF-4CFC-BDAB-532BAC727ED4} = {38C38AB0-7F1A-49A8-A44A-3CED68D34466}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79F38C63-6551-429A-A071-8097B5D763CC}

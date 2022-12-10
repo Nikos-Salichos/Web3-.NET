@@ -25,7 +25,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
-        public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContract smartContractModel)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallContractVariable")]
-        public async Task<ActionResult> CallContractVariable(Chain chain, string variableName, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> CallContractVariable(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallReadFunction")]
-        public async Task<ActionResult> CallReadFunction(Chain chain, string variableName, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> CallReadFunction(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallWriteFunction")]
-        public async Task<ActionResult> CallWriteFunction(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> CallWriteFunction(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("TrackCryptoWhalesForAnyToken")]
-        public async Task<ActionResult> TrackCryptoWhalesForAnyToken(Chain chain, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> TrackCryptoWhalesForAnyToken(Chain chain, [FromBody] SmartContract smartContractModel)
         {
             try
             {
@@ -181,7 +181,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployInMultipleChains")]
-        public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, [FromBody] SmartContractDeploy smartContractModel)
+        public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, [FromBody] SmartContract smartContractModel)
         {
             try
             {

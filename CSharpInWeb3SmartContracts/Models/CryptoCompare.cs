@@ -12,7 +12,6 @@ namespace CSharpInWeb3SmartContracts.Models
 
         [JsonProperty("FullName")]
         public string? FullName { get; set; }
-
     }
 
     public class Datum
