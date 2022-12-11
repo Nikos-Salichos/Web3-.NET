@@ -235,25 +235,18 @@ namespace WebApi.Controllers
         [HttpGet("BurnFrom")]
         public async Task<ActionResult> BurnFrom(Chain chain, string from, long amount)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[2] { from, amount };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? burnFrom = smartContract.GetFunction("burnFrom");
+            object[]? parameters = new object[2] { from, amount };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? burnFrom = smartContract.GetFunction("burnFrom");
 
-                HexBigInteger? estimatedGas = await burnFrom.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await burnFrom.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? transferResult = await burnFrom.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            TransactionReceipt? transferResult = await burnFrom.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok($"Tokens burned from {from} successfully {transferResult.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"Tokens burned from {from} successfully {transferResult.TransactionHash}");
         }
 
 
