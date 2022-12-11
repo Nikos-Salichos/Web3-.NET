@@ -218,25 +218,18 @@ namespace WebApi.Controllers
         [HttpGet("TransferFrom")]
         public async Task<ActionResult> TransferFrom(Chain chain, string from, string to, long amount)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[3] { from, to, amount };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? transfer = smartContract.GetFunction("transferFrom");
+            object[]? parameters = new object[3] { from, to, amount };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? transfer = smartContract.GetFunction("transferFrom");
 
-                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok($"Tokens transfer from {from} to {to} by {account.Address} was successful {transferResult.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"Tokens transfer from {from} to {to} by {account.Address} was successful {transferResult.TransactionHash}");
         }
 
         [HttpGet("BurnFrom")]
