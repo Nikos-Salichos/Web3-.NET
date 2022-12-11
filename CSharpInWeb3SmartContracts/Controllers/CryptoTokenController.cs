@@ -201,25 +201,18 @@ namespace WebApi.Controllers
         [HttpGet("Burn")]
         public async Task<ActionResult> Burn(Chain chain, long amount)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[1] { amount };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? transfer = smartContract.GetFunction("burn");
+            object[]? parameters = new object[1] { amount };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? transfer = smartContract.GetFunction("burn");
 
-                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok($"{amount} tokens was burned {transferResult.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"{amount} tokens was burned {transferResult.TransactionHash}");
         }
 
         [HttpGet("TransferFrom")]
