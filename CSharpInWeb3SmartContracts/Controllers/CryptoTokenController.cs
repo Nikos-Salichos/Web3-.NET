@@ -93,25 +93,18 @@ namespace WebApi.Controllers
         [HttpGet("Approve")]
         public async Task<ActionResult> Approve(Chain chain, string spenderAddress, long amount)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[2] { spenderAddress, amount };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? approve = smartContract.GetFunction("approve");
+            object[]? parameters = new object[2] { spenderAddress, amount };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? approve = smartContract.GetFunction("approve");
 
-                HexBigInteger? estimatedGas = await approve.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await approve.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? approveResult = await approve.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            TransactionReceipt? approveResult = await approve.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok();
         }
 
         [HttpGet("Allowance")]
