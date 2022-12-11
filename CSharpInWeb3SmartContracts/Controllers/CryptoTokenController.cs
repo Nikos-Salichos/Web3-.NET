@@ -110,24 +110,17 @@ namespace WebApi.Controllers
         [HttpGet("Allowance")]
         public async Task<ActionResult> Allowance(Chain chain, string ownerAddress, string spenderAddress)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[2] { ownerAddress, spenderAddress };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? allowance = smartContract.GetFunction("allowance");
+            object[]? parameters = new object[2] { ownerAddress, spenderAddress };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? allowance = smartContract.GetFunction("allowance");
 
-                BigInteger allowanceAmount = await allowance.CallAsync<BigInteger>(parameters);
-                BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(allowanceAmount);
+            BigInteger allowanceAmount = await allowance.CallAsync<BigInteger>(parameters);
+            BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(allowanceAmount);
 
-                return Ok($"{spenderAddress} allow to spend {balanceInEth} ETH of {ownerAddress}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"{spenderAddress} allow to spend {balanceInEth} ETH of {ownerAddress}");
         }
 
         [HttpGet("DestroySmartContract")]
