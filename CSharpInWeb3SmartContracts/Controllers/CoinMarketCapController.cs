@@ -47,35 +47,28 @@ namespace WebApi.Controllers
         [HttpGet("GetCategoriesId")]
         public async Task<ActionResult> GetCategoriesId()
         {
-            try
+            RestClient restClient = new("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories");
+
+            RestRequest restRequest = new();
+            restRequest.Method = Method.Get;
+            restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
+            restRequest.AddHeader("Accept", "application/json");
+            restRequest.AddQueryParameter("limit", "5000");
+
+            RestResponse response = await restClient.ExecuteAsync(restRequest);
+
+            if (response is null)
             {
-                RestClient restClient = new("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories");
-
-                RestRequest restRequest = new();
-                restRequest.Method = Method.Get;
-                restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
-                restRequest.AddHeader("Accept", "application/json");
-                restRequest.AddQueryParameter("limit", "5000");
-
-                RestResponse response = await restClient.ExecuteAsync(restRequest);
-
-                if (response is null)
-                {
-                    return NotFound("Response is null");
-                }
-
-                if (string.IsNullOrEmpty(response.Content))
-                {
-                    return NotFound("No response content found");
-                }
-
-                CoinMarketCapCategoriesDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapCategoriesDTO>(response.Content);
-                return Ok(coinMarketCapDTO);
+                return NotFound("Response is null");
             }
-            catch (Exception exception)
+
+            if (string.IsNullOrEmpty(response.Content))
             {
-                return BadRequest(exception.Message);
+                return NotFound("No response content found");
             }
+
+            CoinMarketCapCategoriesDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapCategoriesDTO>(response.Content);
+            return Ok(coinMarketCapDTO);
         }
     }
 }
