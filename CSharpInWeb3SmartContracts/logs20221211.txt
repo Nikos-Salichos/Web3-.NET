@@ -1,0 +1,160 @@
+2022-12-11 08:41:45.830 +02:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-12-11 08:41:45.988 +02:00 [DBG] Hosting starting
+2022-12-11 08:41:46.087 +02:00 [DBG] Failed to locate the development https certificate at 'C:\Users\Nikos\AppData\Roaming\ASP.NET\https\WebApi.pfx'.
+2022-12-11 08:41:46.141 +02:00 [INF] Now listening on: https://localhost:7093
+2022-12-11 08:41:46.142 +02:00 [INF] Now listening on: http://localhost:5093
+2022-12-11 08:41:46.143 +02:00 [DBG] Loaded hosting startup assembly WebApi
+2022-12-11 08:41:46.144 +02:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2022-12-11 08:41:46.146 +02:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2022-12-11 08:41:46.147 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-12-11 08:41:46.148 +02:00 [INF] Hosting environment: Development
+2022-12-11 08:41:46.148 +02:00 [INF] Content root path: C:\Users\Nikos\source\repos\Web3-.NET\CSharpInWeb3SmartContracts
+2022-12-11 08:41:46.149 +02:00 [DBG] Hosting started
+2022-12-11 08:41:46.466 +02:00 [DBG] Connection id "0HMMR8B3209VB" received FIN.
+2022-12-11 08:41:46.471 +02:00 [DBG] Connection id "0HMMR8B3209VB" accepted.
+2022-12-11 08:41:46.472 +02:00 [DBG] Connection id "0HMMR8B3209VB" started.
+2022-12-11 08:41:46.486 +02:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-12-11 08:41:46.515 +02:00 [DBG] Connection id "0HMMR8B3209VB" stopped.
+2022-12-11 08:41:46.518 +02:00 [DBG] Connection id "0HMMR8B3209VB" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-12-11 08:41:46.797 +02:00 [DBG] Connection id "0HMMR8B3209VC" accepted.
+2022-12-11 08:41:46.800 +02:00 [DBG] Connection id "0HMMR8B3209VC" started.
+2022-12-11 08:41:46.837 +02:00 [DBG] Connection 0HMMR8B3209VC established using the following protocol: "Tls12"
+2022-12-11 08:41:46.888 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/swagger/index.html - -
+2022-12-11 08:41:46.910 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-12-11 08:41:47.081 +02:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-12-11 08:41:47.093 +02:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-12-11 08:41:47.096 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/swagger/index.html - - - 200 - text/html;charset=utf-8 209.1753ms
+2022-12-11 08:41:47.111 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/_framework/aspnetcore-browser-refresh.js - -
+2022-12-11 08:41:47.117 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/_framework/aspnetcore-browser-refresh.js - - - 200 11982 application/javascript;+charset=utf-8 5.4605ms
+2022-12-11 08:41:47.191 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/_vs/browserLink - -
+2022-12-11 08:41:47.239 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 48.3240ms
+2022-12-11 08:41:47.317 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/swagger/v1/swagger.json - -
+2022-12-11 08:41:47.474 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 157.8073ms
+2022-12-11 08:42:03.369 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/api/Network/GetLatestBlock?chain=MainNet - -
+2022-12-11 08:42:03.373 +02:00 [DBG] The request path  does not match the path filter
+2022-12-11 08:42:05.263 +02:00 [DBG] 1 candidate(s) found for the request path '/api/Network/GetLatestBlock'
+2022-12-11 08:42:05.266 +02:00 [DBG] Endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)' with route pattern 'api/Network/GetLatestBlock' is valid for the request path '/api/Network/GetLatestBlock'
+2022-12-11 08:42:05.268 +02:00 [DBG] Request matched endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)'
+2022-12-11 08:42:05.271 +02:00 [INF] Executing endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)'
+2022-12-11 08:42:05.290 +02:00 [INF] Route matched with {action = "GetLatestBlock", controller = "Network"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestBlock(Nethereum.Signer.Chain) on controller WebApi.Controllers.NetworkController (WebApi).
+2022-12-11 08:42:05.295 +02:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-12-11 08:42:05.296 +02:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-12-11 08:42:05.297 +02:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-12-11 08:42:05.299 +02:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-12-11 08:42:05.300 +02:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-12-11 08:42:05.302 +02:00 [DBG] Executing controller factory for controller WebApi.Controllers.NetworkController (WebApi)
+2022-12-11 08:42:05.305 +02:00 [DBG] Executed controller factory for controller WebApi.Controllers.NetworkController (WebApi)
+2022-12-11 08:42:05.318 +02:00 [DBG] Attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain' ...
+2022-12-11 08:42:05.321 +02:00 [DBG] Attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain' using the name 'chain' in request data ...
+2022-12-11 08:42:05.324 +02:00 [DBG] Done attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain'.
+2022-12-11 08:42:05.325 +02:00 [DBG] Done attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain'.
+2022-12-11 08:42:05.327 +02:00 [DBG] Attempting to validate the bound parameter 'chain' of type 'Nethereum.Signer.Chain' ...
+2022-12-11 08:42:05.330 +02:00 [DBG] Done attempting to validate the bound parameter 'chain' of type 'Nethereum.Signer.Chain'.
+2022-12-11 08:42:06.236 +02:00 [INF] Executed action WebApi.Controllers.NetworkController.GetLatestBlock (WebApi) in 932.9205ms
+2022-12-11 08:42:06.238 +02:00 [INF] Executed endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)'
+2022-12-11 08:42:06.859 +02:00 [ERR] System.Exception: Failed to retrieve data
+   at WebApi.Controllers.NetworkController.GetLatestBlock(Chain chain) in C:\Users\Nikos\source\repos\Web3-.NET\CSharpInWeb3SmartContracts\Controllers\NetworkController.cs:line 35
+   at lambda_method6(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.CustomExceptionMiddleware.ExceptionHandlingMiddleware.Invoke(HttpContext context) in C:\Users\Nikos\source\repos\Web3-.NET\CSharpInWeb3SmartContracts\CustomExceptionMiddleware\ExceptionHandlingMiddleware.cs:line 20
+2022-12-11 08:42:06.943 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/api/Network/GetLatestBlock?chain=MainNet - - - 500 - application/json 3573.3247ms
+2022-12-11 08:43:20.954 +02:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-12-11 08:43:21.165 +02:00 [DBG] Hosting starting
+2022-12-11 08:43:21.257 +02:00 [DBG] Failed to locate the development https certificate at 'C:\Users\Nikos\AppData\Roaming\ASP.NET\https\WebApi.pfx'.
+2022-12-11 08:43:21.309 +02:00 [INF] Now listening on: https://localhost:7093
+2022-12-11 08:43:21.310 +02:00 [INF] Now listening on: http://localhost:5093
+2022-12-11 08:43:21.310 +02:00 [DBG] Loaded hosting startup assembly WebApi
+2022-12-11 08:43:21.311 +02:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2022-12-11 08:43:21.312 +02:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2022-12-11 08:43:21.314 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-12-11 08:43:21.315 +02:00 [INF] Hosting environment: Development
+2022-12-11 08:43:21.316 +02:00 [INF] Content root path: C:\Users\Nikos\source\repos\Web3-.NET\CSharpInWeb3SmartContracts
+2022-12-11 08:43:21.317 +02:00 [DBG] Hosting started
+2022-12-11 08:43:21.528 +02:00 [DBG] Connection id "0HMMR8BVCIII3" accepted.
+2022-12-11 08:43:21.528 +02:00 [DBG] Connection id "0HMMR8BVCIII2" accepted.
+2022-12-11 08:43:21.530 +02:00 [DBG] Connection id "0HMMR8BVCIII3" started.
+2022-12-11 08:43:21.530 +02:00 [DBG] Connection id "0HMMR8BVCIII2" started.
+2022-12-11 08:43:21.546 +02:00 [DBG] Connection id "0HMMR8BVCIII3" received FIN.
+2022-12-11 08:43:21.546 +02:00 [DBG] Connection id "0HMMR8BVCIII2" received FIN.
+2022-12-11 08:43:21.562 +02:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-12-11 08:43:21.562 +02:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-12-11 08:43:21.609 +02:00 [DBG] Connection id "0HMMR8BVCIII2" stopped.
+2022-12-11 08:43:21.610 +02:00 [DBG] Connection id "0HMMR8BVCIII3" stopped.
+2022-12-11 08:43:21.615 +02:00 [DBG] Connection id "0HMMR8BVCIII2" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-12-11 08:43:21.615 +02:00 [DBG] Connection id "0HMMR8BVCIII3" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-12-11 08:43:21.870 +02:00 [DBG] Connection id "0HMMR8BVCIII4" accepted.
+2022-12-11 08:43:21.873 +02:00 [DBG] Connection id "0HMMR8BVCIII4" started.
+2022-12-11 08:43:21.912 +02:00 [DBG] Connection 0HMMR8BVCIII4 established using the following protocol: "Tls12"
+2022-12-11 08:43:21.961 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/swagger/index.html - -
+2022-12-11 08:43:21.981 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-12-11 08:43:22.130 +02:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-12-11 08:43:22.142 +02:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-12-11 08:43:22.145 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/swagger/index.html - - - 200 - text/html;charset=utf-8 184.3072ms
+2022-12-11 08:43:22.175 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/_framework/aspnetcore-browser-refresh.js - -
+2022-12-11 08:43:22.180 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/_framework/aspnetcore-browser-refresh.js - - - 200 11982 application/javascript;+charset=utf-8 5.1381ms
+2022-12-11 08:43:22.253 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/_vs/browserLink - -
+2022-12-11 08:43:22.303 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 50.3294ms
+2022-12-11 08:43:22.385 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/swagger/v1/swagger.json - -
+2022-12-11 08:43:22.521 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 135.5687ms
+2022-12-11 08:43:38.597 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7093/api/Network/GetLatestBlock?chain=MainNet - -
+2022-12-11 08:43:38.600 +02:00 [DBG] The request path  does not match the path filter
+2022-12-11 08:43:40.615 +02:00 [DBG] 1 candidate(s) found for the request path '/api/Network/GetLatestBlock'
+2022-12-11 08:43:40.618 +02:00 [DBG] Endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)' with route pattern 'api/Network/GetLatestBlock' is valid for the request path '/api/Network/GetLatestBlock'
+2022-12-11 08:43:40.620 +02:00 [DBG] Request matched endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)'
+2022-12-11 08:43:40.623 +02:00 [INF] Executing endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)'
+2022-12-11 08:43:40.644 +02:00 [INF] Route matched with {action = "GetLatestBlock", controller = "Network"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetLatestBlock(Nethereum.Signer.Chain) on controller WebApi.Controllers.NetworkController (WebApi).
+2022-12-11 08:43:40.646 +02:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-12-11 08:43:40.648 +02:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-12-11 08:43:40.649 +02:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-12-11 08:43:40.651 +02:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-12-11 08:43:40.653 +02:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-12-11 08:43:40.655 +02:00 [DBG] Executing controller factory for controller WebApi.Controllers.NetworkController (WebApi)
+2022-12-11 08:43:40.658 +02:00 [DBG] Executed controller factory for controller WebApi.Controllers.NetworkController (WebApi)
+2022-12-11 08:43:40.671 +02:00 [DBG] Attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain' ...
+2022-12-11 08:43:40.674 +02:00 [DBG] Attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain' using the name 'chain' in request data ...
+2022-12-11 08:43:40.676 +02:00 [DBG] Done attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain'.
+2022-12-11 08:43:40.677 +02:00 [DBG] Done attempting to bind parameter 'chain' of type 'Nethereum.Signer.Chain'.
+2022-12-11 08:43:40.679 +02:00 [DBG] Attempting to validate the bound parameter 'chain' of type 'Nethereum.Signer.Chain' ...
+2022-12-11 08:43:40.681 +02:00 [DBG] Done attempting to validate the bound parameter 'chain' of type 'Nethereum.Signer.Chain'.
+2022-12-11 08:43:42.015 +02:00 [INF] Executed action WebApi.Controllers.NetworkController.GetLatestBlock (WebApi) in 1358.632ms
+2022-12-11 08:43:42.022 +02:00 [INF] Executed endpoint 'WebApi.Controllers.NetworkController.GetLatestBlock (WebApi)'
+2022-12-11 08:43:43.674 +02:00 [ERR] System.Exception: Failed to retrieve data
+   at WebApi.Controllers.NetworkController.GetLatestBlock(Chain chain) in C:\Users\Nikos\source\repos\Web3-.NET\CSharpInWeb3SmartContracts\Controllers\NetworkController.cs:line 35
+   at lambda_method6(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at WebApi.CustomExceptionMiddleware.ExceptionHandlingMiddleware.Invoke(HttpContext context) in C:\Users\Nikos\source\repos\Web3-.NET\CSharpInWeb3SmartContracts\CustomExceptionMiddleware\ExceptionHandlingMiddleware.cs:line 20
+2022-12-11 08:43:49.724 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7093/api/Network/GetLatestBlock?chain=MainNet - - - 500 - application/json 11127.3058ms

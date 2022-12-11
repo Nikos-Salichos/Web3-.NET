@@ -30,26 +30,18 @@ namespace WebApi.Controllers
         [HttpGet("GetLatestBlock")]
         public async Task<ActionResult> GetLatestBlock(Chain chain)
         {
-            try
+            Account? account = new(_user.PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
+            BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
+
+            if (latestBlock == null)
             {
-                Account? account = new(_user.PrivateKey, chain);
-                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
-                BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
-
-                if (latestBlock == null)
-                {
-                    return NotFound("Block not found");
-                }
-
-                return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
+                return NotFound("Block not found");
             }
-            catch (Exception exception)
-            {
-                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + ' ' + exception);
-                return BadRequest(exception.Message);
-            }
+
+            return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
         }
 
         [HttpGet("GetAllTransactionsOfCurrentBlock")]

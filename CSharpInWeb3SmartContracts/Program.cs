@@ -64,7 +64,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureExceptionHandler(logger);
+app.UseGlobalExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
