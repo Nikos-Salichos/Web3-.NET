@@ -65,26 +65,18 @@ namespace WebApi.Controllers
         [HttpGet("GetAllTransactionsOfABlock")]
         public async Task<ActionResult> GetBlockTransactions(Chain chain, long blockNumber)
         {
-            try
+            Account? account = new(_user.PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
+            if (blockWithTransactions == null)
             {
-                Account? account = new(_user.PrivateKey, chain);
-                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
-                if (blockWithTransactions == null)
-                {
-                    return NotFound("Block not found");
-                }
-
-                List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
-
-                return Ok(allTransactions);
+                return NotFound("Block not found");
             }
-            catch (Exception exception)
-            {
-                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + ' ' + exception);
-                return BadRequest(exception.Message);
-            }
+
+            List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
+
+            return Ok(allTransactions);
         }
 
         [HttpGet("GetAllContractCreationTransactions")]
