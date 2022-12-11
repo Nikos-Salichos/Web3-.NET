@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using Domain.Models;
 using System.Net;
 
 namespace WebApi.CustomExceptionMiddleware
@@ -28,12 +28,11 @@ namespace WebApi.CustomExceptionMiddleware
         private Task HandleException(HttpContext context, Exception exception)
         {
             logger.LogError(exception.ToString());
-            var errorMessageObject = new { exception.Message, Code = "system_error" };
+            var errorDetail = new ErrorDetail(500, exception.Message);
 
-            var errorMessage = JsonConvert.SerializeObject(errorMessageObject);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return context.Response.WriteAsync(errorMessage);
+            return context.Response.WriteAsync(errorDetail.ToString());
         }
     }
 }
