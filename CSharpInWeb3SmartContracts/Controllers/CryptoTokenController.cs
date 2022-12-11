@@ -36,32 +36,24 @@ namespace WebApi.Controllers
         [HttpGet("Deploy")]
         public async Task<ActionResult> DeployContract(Chain chain, long initialSupply, string tokenName, string tokenSymbol, long tokenCap)
         {
-            try
-            {
-                object[]? parameters = new object[4] { initialSupply, tokenName, tokenSymbol, tokenCap };
+            object[]? parameters = new object[4] { initialSupply, tokenName, tokenSymbol, tokenCap };
 
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
-                                                                                            _byteCode,
-                                                                                            _user.WalletAddress,
-                                                                                            parameters);
+            HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
+                                                                                        _byteCode,
+                                                                                        _user.WalletAddress,
+                                                                                        parameters);
 
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
-                                                                                                                     _byteCode,
-                                                                                                                     _user.WalletAddress,
-                                                                                                                     estimatedGas,
-                                                                                                                     null,
-                                                                                                                     parameters);
+            TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
+                                                                                                                 _byteCode,
+                                                                                                                 _user.WalletAddress,
+                                                                                                                 estimatedGas,
+                                                                                                                 null,
+                                                                                                                 parameters);
 
-                return Ok($"Contract deployed successfully, transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
-
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"Contract deployed successfully, transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
         }
 
         [HttpGet("GetBalance")]
