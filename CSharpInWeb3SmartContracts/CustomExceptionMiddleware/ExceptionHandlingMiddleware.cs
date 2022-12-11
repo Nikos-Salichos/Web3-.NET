@@ -19,9 +19,9 @@ namespace WebApi.CustomExceptionMiddleware
             {
                 await requestDelegate(context);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                await HandleException(context, ex);
+                await HandleException(context, exception);
             }
         }
 
