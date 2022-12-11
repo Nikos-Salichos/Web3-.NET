@@ -76,25 +76,18 @@ namespace WebApi.Controllers
         [HttpGet("Mint")]
         public async Task<ActionResult> Mint(Chain chain, string receiverAddress, long amount)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[2] { receiverAddress, amount };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? mint = smartContract.GetFunction("mint");
+            object[]? parameters = new object[2] { receiverAddress, amount };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? mint = smartContract.GetFunction("mint");
 
-                HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await mint.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? mintResult = await mint.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            TransactionReceipt? mintResult = await mint.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok();
         }
 
         [HttpGet("Approve")]
