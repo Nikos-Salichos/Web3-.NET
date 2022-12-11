@@ -5,7 +5,6 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using System.Text.Json.Serialization;
-using WebApi;
 using WebApi.GraphQL;
 using WebApi.Utilities;
 
@@ -64,6 +63,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionHandler(logger);
 
 app.UseHttpsRedirection();
 

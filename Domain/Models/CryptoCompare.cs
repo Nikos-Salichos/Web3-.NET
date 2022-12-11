@@ -55,5 +55,4 @@ namespace Domain.Models
         [JsonProperty("MKTCAP")]
         public decimal MKTCAP { get; set; }
     }
-
 }
