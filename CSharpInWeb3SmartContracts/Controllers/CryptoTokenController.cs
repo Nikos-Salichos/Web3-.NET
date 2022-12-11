@@ -126,25 +126,18 @@ namespace WebApi.Controllers
         [HttpGet("DestroySmartContract")]
         public async Task<ActionResult> DestroySmartContract(Chain chain, string withdrawalAddress)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[1] { withdrawalAddress };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? destroySmartContract = smartContract.GetFunction("destroySmartContract");
+            object[]? parameters = new object[1] { withdrawalAddress };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? destroySmartContract = smartContract.GetFunction("destroySmartContract");
 
-                HexBigInteger? estimatedGas = await destroySmartContract.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await destroySmartContract.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? destroySmartContractResult = await destroySmartContract.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            TransactionReceipt? destroySmartContractResult = await destroySmartContract.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                return Ok($"Smart contract destroyed {destroySmartContractResult.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"Smart contract destroyed {destroySmartContractResult.TransactionHash}");
         }
 
         [HttpGet("Transfer")]
