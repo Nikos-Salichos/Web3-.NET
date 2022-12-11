@@ -82,36 +82,28 @@ namespace WebApi.Controllers
         [HttpGet("GetAllContractCreationTransactions")]
         public async Task<ActionResult> GetAllContractCreationTransactions(Chain chain, long blockNumber)
         {
-            try
+            Account? account = new(_user.PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
+
+            if (blockWithTransactions == null)
             {
-                Account? account = new(_user.PrivateKey, chain);
-                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
-
-                if (blockWithTransactions == null)
-                {
-                    _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Block not found");
-                    return NotFound("Block not found");
-                }
-
-                Transaction[] allTransactions = blockWithTransactions.Transactions;
-
-                if (allTransactions.Length == 0)
-                {
-                    _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Transactions not found");
-                    return NotFound("Transactions not found");
-                }
-
-                IEnumerable<Transaction> transactionsForContractCreation = allTransactions.Where(t => t.To == null);
-
-                return Ok(transactionsForContractCreation);
+                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Block not found");
+                return NotFound("Block not found");
             }
-            catch (Exception exception)
+
+            Transaction[] allTransactions = blockWithTransactions.Transactions;
+
+            if (allTransactions.Length == 0)
             {
                 _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Transactions not found");
-                return BadRequest(exception.Message);
+                return NotFound("Transactions not found");
             }
+
+            IEnumerable<Transaction> transactionsForContractCreation = allTransactions.Where(t => t.To == null);
+
+            return Ok(transactionsForContractCreation);
         }
     }
 }
