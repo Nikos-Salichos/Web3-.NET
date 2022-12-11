@@ -143,33 +143,26 @@ namespace WebApi.Controllers
         [HttpGet("Transfer")]
         public async Task<ActionResult> Transfer(Chain chain, string receiver, long amountOfTokens)
         {
-            try
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            object[]? parameters = new object[2] { receiver, amountOfTokens };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? transfer = smartContract.GetFunction("transfer");
+
+            TransferFunction? transferFunction = new TransferFunction()
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+                FromAddress = account.Address,
+                To = receiver,
+                Gas = 50000,
+                Value = amountOfTokens,
+            };
 
-                object[]? parameters = new object[2] { receiver, amountOfTokens };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? transfer = smartContract.GetFunction("transfer");
+            HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransferFunction? transferFunction = new TransferFunction()
-                {
-                    FromAddress = account.Address,
-                    To = receiver,
-                    Gas = 50000,
-                    Value = amountOfTokens,
-                };
+            TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
 
-                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
-
-                TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
-
-                return Ok($"Tokens transfer was successful {transferResult.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"Tokens transfer was successful {transferResult.TransactionHash}");
         }
 
         [HttpGet("IncreaseApproval")]
