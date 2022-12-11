@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CSharpInWeb3SmartContracts.Models
+namespace Domain.Models
 {
     public class CoinInfo
     {

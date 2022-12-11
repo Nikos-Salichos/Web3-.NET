@@ -1,6 +1,6 @@
 ﻿using Nethereum.Signer;
 
-namespace CSharpInWeb3SmartContracts.Utilities
+namespace WebApi.Utilities
 {
     public class EnumHelper
     {

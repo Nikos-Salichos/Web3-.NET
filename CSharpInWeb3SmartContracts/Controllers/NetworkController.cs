@@ -1,5 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Utilities;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
@@ -7,8 +6,9 @@ using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using System.Reflection;
+using WebApi.Utilities;
 
-namespace CSharpInWeb3SmartContracts.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -62,7 +62,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
 
                 HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
 
-                BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber)));
+                BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber));
                 if (blockWithTransactions == null)
                 {
                     return NotFound("Block not found");
@@ -111,7 +111,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 Account? account = new(_user.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                BlockWithTransactions? blockWithTransactions = (await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber)));
+                BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
 
                 if (blockWithTransactions == null)
                 {

@@ -5,17 +5,17 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "CSharpInWeb3SmartContracts\WebApi.csproj", "{46E1DEA5-F82E-461C-8581-2DC737262084}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{6ECB97DA-22ED-48DA-8B62-58E553E272D2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6ECB97DA-22ED-48DA-8B62-58E553E272D2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{AE0B8DB3-4A74-437D-A752-D3AC3718A086}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AE0B8DB3-4A74-437D-A752-D3AC3718A086}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{92C9363A-85CD-40BA-95BB-1C05BEF0A060}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8BD8F5C8-1860-425D-874B-DB6421B875E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{68D60B12-25FE-40C2-907C-70BB96E9C062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{68D60B12-25FE-40C2-907C-70BB96E9C062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{39CCE62E-1A09-42E2-ACA8-F5A5CAE3D311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{39CCE62E-1A09-42E2-ACA8-F5A5CAE3D311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.DTOs;
-using CSharpInWeb3SmartContracts.Utilities;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -9,8 +7,10 @@ using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using System.Numerics;
+using WebApi.DTOs;
+using WebApi.Utilities;
 
-namespace CSharpInWeb3SmartContracts.Controllers
+namespace WebApi.Controllers
 {
     public class SmartContractController : ControllerBase
     {

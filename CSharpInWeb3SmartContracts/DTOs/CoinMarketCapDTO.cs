@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CSharpInWeb3SmartContracts.DTOs
+namespace WebApi.DTOs
 {
     public class Datum
     {

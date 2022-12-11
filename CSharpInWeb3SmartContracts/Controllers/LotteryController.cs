@@ -1,5 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Utilities;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -11,8 +10,9 @@ using Nethereum.Web3.Accounts;
 using RestSharp;
 using System.Numerics;
 using System.Reflection;
+using WebApi.Utilities;
 
-namespace CSharpInWeb3SmartContracts.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

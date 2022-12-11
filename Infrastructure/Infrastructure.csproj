@@ -23,4 +23,8 @@
 		<ProjectReference Include="..\Application\Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="RabbitMQ\" />
+	</ItemGroup>
+
 </Project>

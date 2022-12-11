@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
-namespace CSharpInWeb3SmartContracts.GraphQL
+namespace WebApi.GraphQL
 {
     public class TokenResponse
     {

@@ -1,4 +1,4 @@
-﻿namespace CSharpInWeb3SmartContracts
+﻿namespace WebApi
 {
     public static class ServiceExtensions
     {

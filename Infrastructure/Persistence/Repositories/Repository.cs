@@ -1,8 +1,7 @@
-﻿using Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Domain
+namespace Infrastructure.Persistence.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

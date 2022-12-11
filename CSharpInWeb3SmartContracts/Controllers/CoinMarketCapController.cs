@@ -1,9 +1,9 @@
-﻿using CSharpInWeb3SmartContracts.DTOs;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
+using WebApi.DTOs;
 
-namespace CSharpInWeb3SmartContracts.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

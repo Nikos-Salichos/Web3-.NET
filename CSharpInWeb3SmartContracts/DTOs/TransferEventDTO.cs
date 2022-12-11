@@ -1,7 +1,7 @@
 ﻿using Nethereum.ABI.FunctionEncoding.Attributes;
 using System.Numerics;
 
-namespace CSharpInWeb3SmartContracts.DTOs
+namespace WebApi.DTOs
 {
     [Event("Transfer")]
     public class TransferEventDTO : IEventDTO

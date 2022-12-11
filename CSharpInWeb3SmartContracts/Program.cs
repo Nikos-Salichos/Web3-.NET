@@ -1,6 +1,3 @@
-using CSharpInWeb3SmartContracts;
-using CSharpInWeb3SmartContracts.GraphQL;
-using CSharpInWeb3SmartContracts.Utilities;
 using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
@@ -8,6 +5,9 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using System.Text.Json.Serialization;
+using WebApi;
+using WebApi.GraphQL;
+using WebApi.Utilities;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 

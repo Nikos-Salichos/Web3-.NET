@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CSharpInWeb3SmartContracts.Utilities
+namespace WebApi.Utilities
 {
     public static class JsonDeserializer<T>
     {

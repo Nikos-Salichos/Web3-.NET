@@ -2,7 +2,7 @@
 using GraphQL;
 using GraphQL.Client.Abstractions;
 
-namespace CSharpInWeb3SmartContracts.GraphQL
+namespace WebApi.GraphQL
 {
     public class UniswapV3GraphQL
     {

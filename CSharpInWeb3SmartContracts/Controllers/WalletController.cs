@@ -1,5 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.Utilities;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
@@ -9,8 +8,9 @@ using Nethereum.Signer;
 using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using WebApi.Utilities;
 
-namespace CSharpInWeb3SmartContracts.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

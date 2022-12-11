@@ -1,6 +1,4 @@
-﻿using CSharpInWeb3SmartContracts.GraphQL;
-using CSharpInWeb3SmartContracts.Utilities;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -10,8 +8,10 @@ using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using System.Numerics;
+using WebApi.GraphQL;
+using WebApi.Utilities;
 
-namespace CSharpInWeb3SmartContracts.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -78,7 +78,7 @@ namespace CSharpInWeb3SmartContracts.Controllers
                 BigDecimal balanceInEthToken1 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken1Result);
 
                 //balanceInEthToken1 has 6 decimals and not 18
-                BigDecimal adjusted_price = balanceInEthToken1 / (10 ^ (18 - 6));
+                BigDecimal adjusted_price = balanceInEthToken1 / (10 ^ 18 - 6);
                 BigDecimal inverted_price = 1 / adjusted_price;
 
                 BigDecimal price = balanceInEthToken0 / inverted_price;
