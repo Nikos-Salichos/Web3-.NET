@@ -59,25 +59,18 @@ namespace WebApi.Controllers
         [HttpGet("GetBalance")]
         public async Task<ActionResult> GetBalance(Chain chain, string address)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[1] { address };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? getBalance = smartContract.GetFunction("getBalance");
+            object[]? parameters = new object[1] { address };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? getBalance = smartContract.GetFunction("getBalance");
 
-                BigInteger getBalanceResult = await getBalance.CallAsync<BigInteger>(parameters);
+            BigInteger getBalanceResult = await getBalance.CallAsync<BigInteger>(parameters);
 
-                BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(getBalanceResult);
+            BigDecimal balanceInEth = Web3.Convert.FromWeiToBigDecimal(getBalanceResult);
 
-                return Ok($"{address} has {balanceInEth} tokens");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"{address} has {balanceInEth} tokens");
         }
 
         [HttpGet("Mint")]
