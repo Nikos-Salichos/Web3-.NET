@@ -168,24 +168,17 @@ namespace WebApi.Controllers
         [HttpGet("IncreaseApproval")]
         public async Task<ActionResult> IncreaseApproval(Chain chain, string spender, long addedAmount)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = new object[2] { spender, addedAmount };
-                Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
-                Function? transfer = smartContract.GetFunction("increaseApproval");
+            object[]? parameters = new object[2] { spender, addedAmount };
+            Contract? smartContract = web3.Eth.GetContract(_abi, _smartContractAddress);
+            Function? transfer = smartContract.GetFunction("increaseApproval");
 
-                HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
+            HexBigInteger? estimatedGas = await transfer.EstimateGasAsync(account.Address, null, null, parameters);
 
-                TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
-                return Ok($"Increase approval was successful {transferResult.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            TransactionReceipt? transferResult = await transfer.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, null, null, parameters);
+            return Ok($"Increase approval was successful {transferResult.TransactionHash}");
         }
 
         [HttpGet("DecreaseApproval")]
