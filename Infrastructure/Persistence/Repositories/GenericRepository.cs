@@ -4,14 +4,15 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.Persistence.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly DbContext _dbContext;
 
-        public Repository(DbContext dbContext)
+        public GenericRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public Task Add(T entity)
         {
             throw new NotImplementedException();

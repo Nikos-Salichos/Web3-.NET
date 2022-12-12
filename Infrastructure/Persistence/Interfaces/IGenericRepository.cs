@@ -1,6 +1,8 @@
-﻿namespace Infrastructure.Persistence.Interfaces
+﻿using System.Linq.Expressions;
+
+namespace Infrastructure.Persistence.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<T> Get(string id);
         Task<T> Find(Expression<Func<T, bool>> predicate);
