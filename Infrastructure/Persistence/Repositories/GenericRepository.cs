@@ -45,24 +45,28 @@ namespace Infrastructure.Persistence.Repositories
             return entities;
         }
 
+        public Task Update(T entity)
+        {
+            _dbContext.Set<T>().Update(entity);
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateRange(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().UpdateRange(entities);
+            return Task.CompletedTask;
+        }
+
         public Task Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<T>().Remove(entity);
+            return Task.CompletedTask;
         }
 
         public Task DeleteRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<T>> UpdateRange(IEnumerable<T> entities)
-        {
-            throw new NotImplementedException();
+            _dbContext.Set<T>().RemoveRange(entities);
+            return Task.CompletedTask;
         }
     }
 }
