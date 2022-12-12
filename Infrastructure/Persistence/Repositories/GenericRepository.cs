@@ -33,14 +33,16 @@ namespace Infrastructure.Persistence.Repositories
             return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public Task<T> Add(T entity)
+        public async Task<T> Add(T entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.Set<T>().AddAsync(entity);
+            return entity;
         }
 
-        public Task<IEnumerable<T>> AddRange(IEnumerable<T> entities)
+        public async Task<IEnumerable<T>> AddRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            await _dbContext.Set<T>().AddRangeAsync(entities);
+            return entities;
         }
 
         public Task Delete(T entity)
