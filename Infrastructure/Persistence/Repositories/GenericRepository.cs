@@ -17,50 +17,11 @@ namespace Infrastructure.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>().Where(predicate).ToList();
         }
 
-        public Task<T> Find(Expression<Func<T, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task Add(T entity)
-        {
-            await _dbContext.Set<T>().AddAsync(entity);
-        }
-
-        public Task AddRange(IEnumerable<T> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(T entity)
-        {
-            _dbContext.Set<T>().Remove(entity);
-        }
-
-        public Task DeleteRange(IEnumerable<T> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateRange(IEnumerable<T> entities)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
