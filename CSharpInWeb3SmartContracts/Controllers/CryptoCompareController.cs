@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         [HttpGet("GetCoins")]
         public async Task<ActionResult> GetCoins()
         {
-            List<Coin> coins = new();
+            List<Token> coins = new();
 
             for (int i = 0; i < 2; i++)
             {
@@ -54,18 +54,18 @@ namespace WebApi.Controllers
 
                 foreach (var cryptoCoin in cryptoCompare.Data)
                 {
-                    Coin coin = new()
+                    Token coin = new()
                     {
-                        Id = cryptoCoin?.CoinInfo?.Id,
-                        Name = cryptoCoin?.CoinInfo?.Name,
-                        FullName = cryptoCoin?.CoinInfo?.FullName,
-                        MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP
+                        Id = cryptoCoin?.CoinInfo?.Id!,
+                        Name = cryptoCoin?.CoinInfo?.Name!,
+                        FullName = cryptoCoin?.CoinInfo?.FullName!,
+                        MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP!,
                     };
                     coins.Add(coin);
                 }
             }
 
-            List<Coin> sortedCoins = coins.OrderByDescending(c => c.MarketCap).ToList();
+            List<Token> sortedCoins = coins.OrderByDescending(t => t.MarketCap).ToList();
 
             return Ok(sortedCoins);
         }

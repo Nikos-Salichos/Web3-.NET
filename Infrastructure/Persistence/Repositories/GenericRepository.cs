@@ -13,24 +13,14 @@ namespace Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public Task Add(T entity)
+        public async Task<T> GetById(string id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public Task AddRange(IEnumerable<T> entities)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteRange(IEnumerable<T> entities)
-        {
-            throw new NotImplementedException();
+            return await _dbContext.Set<T>().ToListAsync();
         }
 
         public Task<T> Find(Expression<Func<T, bool>> predicate)
@@ -38,12 +28,22 @@ namespace Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<T> Get(string id)
+        public async Task Add(T entity)
+        {
+            await _dbContext.Set<T>().AddAsync(entity);
+        }
+
+        public Task AddRange(IEnumerable<T> entities)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<T>> GetAll()
+        public void Delete(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+        }
+
+        public Task DeleteRange(IEnumerable<T> entities)
         {
             throw new NotImplementedException();
         }

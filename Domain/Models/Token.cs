@@ -2,11 +2,13 @@
 {
     public class Token
     {
+        public string? Id { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
-        public string Symbol { get; set; } = string.Empty;
-        public string? Name { get; set; }
-        public string? VolumeUSD { get; set; }
-        public string? PoolCount { get; set; }
-        public decimal Decimals { get; set; }
+        public string FullName { get; set; } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
+        public string? VolumeUSD { get; set; } = string.Empty;
+        public string? PoolCount { get; set; } = string.Empty;
+        public decimal? Decimals { get; set; } = 0;
+        public decimal? MarketCap { get; set; } = 0;
     }
 }
