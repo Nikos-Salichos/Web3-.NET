@@ -22,7 +22,7 @@ namespace Infrastructure.Persistence.Repositories
             _repositoryContext = repositoryContext;
         }
 
-        public async Task<bool> SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
             return await _repositoryContext.SaveChangesAsync() > 0;
         }

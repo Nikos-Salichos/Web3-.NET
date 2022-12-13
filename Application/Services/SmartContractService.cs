@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
 
 namespace Application.Services
@@ -12,6 +13,9 @@ namespace Application.Services
             _smartContractRepository = smartContractRepository;
         }
 
-
+        public IEnumerable<SmartContract> GetSmartContracts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
