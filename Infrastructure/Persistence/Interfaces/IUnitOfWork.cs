@@ -2,7 +2,7 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        ITokenRepository Tokens { get; }
-        int Save();
+        ILotteryRepository LotteryRepository { get; }
+        Task<bool> SaveChanges();
     }
 }

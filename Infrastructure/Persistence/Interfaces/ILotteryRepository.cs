@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Persistence.Interfaces
 {
-    public interface ITokenRepository : IGenericRepository<Token>
+    public interface ILotteryRepository : IGenericRepository<Token>
     {
     }
 }
