@@ -1,25 +1,30 @@
-﻿using Infrastructure.Persistence.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Infrastructure.Context;
+using Infrastructure.Persistence.Interfaces;
 
 namespace Infrastructure.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public readonly DbContext _dbContext;
-
+        public RepositoryContext _repositoryContext;
+        public ISmartContractRepository _smartContractRepository;
         private bool disposedValue;
 
-        private ILotteryRepository lotteryRepository;
-        public ILotteryRepository LotteryRepository => lotteryRepository ?? new LotteryRepository(_dbContext);
-
-        public UnitOfWork()
+        public ISmartContractRepository SmartContractRepository
         {
+            get
+            {
+                return _smartContractRepository ??= new SmartContractRepository(_repositoryContext);
+            }
+        }
 
+        public UnitOfWork(RepositoryContext repositoryContext)
+        {
+            _repositoryContext = repositoryContext;
         }
 
         public async Task<bool> SaveChanges()
         {
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await _repositoryContext.SaveChangesAsync() > 0;
         }
 
         protected virtual void Dispose(bool disposing)

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.Persistence.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly DbContext _dbContext;
 
@@ -18,19 +18,14 @@ namespace Infrastructure.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<T> Find(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(predicate);
+            return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _dbContext.Set<T>().ToListAsync();
-        }
-
-        public async Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate)
-        {
-            return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
         public async Task<T> Add(T entity)

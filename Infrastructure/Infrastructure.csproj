@@ -24,11 +24,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Application\Application.csproj" />
+	  <Folder Include="RabbitMQ\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="RabbitMQ\" />
+	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 
 </Project>

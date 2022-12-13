@@ -2,7 +2,7 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        ILotteryRepository LotteryRepository { get; }
+        ISmartContractRepository SmartContractRepository { get; }
         Task<bool> SaveChanges();
     }
 }
