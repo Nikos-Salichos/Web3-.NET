@@ -4,6 +4,6 @@ namespace Infrastructure.Persistence.Interfaces
 {
     public interface ISmartContractRepository : IGenericRepository<SmartContract>
     {
-        IEnumerable<SmartContract> GetSmartContracts();
+        Task<IEnumerable<SmartContract>> GetSmartContracts();
     }
 }
