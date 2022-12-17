@@ -115,15 +115,8 @@ namespace WebApi.Controllers
         [HttpPost("GetMostLiquidPools")]
         public async Task<IActionResult> GetMostLiquidPools(int numberOfPools)
         {
-            try
-            {
-                dynamic? data = await _uniswapGraphQL.GetMostLiquidPools(numberOfPools);
-                return Ok(data);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            dynamic? data = await _uniswapGraphQL.GetMostLiquidPools(numberOfPools);
+            return Ok(data);
         }
 
         [HttpPost("GetPoolData")]
