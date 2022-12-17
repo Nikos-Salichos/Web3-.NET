@@ -43,6 +43,7 @@ namespace Infrastructure.Persistence.Repositories
         public Task Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
+            return Task.CompletedTask;
         }
 
         public Task UpdateRange(IEnumerable<T> entities)
