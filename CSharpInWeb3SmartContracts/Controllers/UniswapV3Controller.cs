@@ -88,28 +88,21 @@ namespace WebApi.Controllers
         [HttpPost("UniswapV3SwapRouter02/SwapExactTokensForTokens")]
         public async Task<ActionResult> UniswapV3SwapRouter02SwapExactTokensForTokens(Chain chain, double amountToSwap, long amountIn, long amountOutMin, [FromBody] List<string> path, string recipientAddress)
         {
-            try
-            {
-                Account? account = new(_user.PrivateKey, chain);
-                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new(_user.PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
-                Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");
+            Contract? smartContract = web3.Eth.GetContract(_uniswapV3SwapRouter02Abi, _uniswapV3SwapRouter02Address);
+            Function? swapExactTokensForTokensFunction = smartContract.GetFunction("swapExactTokensForTokens");
 
-                object[] parametersForSwap = new object[4] { amountIn, amountOutMin, path, recipientAddress };
+            object[] parametersForSwap = new object[4] { amountIn, amountOutMin, path, recipientAddress };
 
-                BigInteger wei = Web3.Convert.ToWei(amountToSwap);
-                HexBigInteger value = new(wei);
+            BigInteger wei = Web3.Convert.ToWei(amountToSwap);
+            HexBigInteger value = new(wei);
 
-                HexBigInteger? estimatedGas = await swapExactTokensForTokensFunction.EstimateGasAsync(account.Address, null, value, parametersForSwap);
-                TransactionReceipt? transactionReceiptForSwap = await swapExactTokensForTokensFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);
+            HexBigInteger? estimatedGas = await swapExactTokensForTokensFunction.EstimateGasAsync(account.Address, null, value, parametersForSwap);
+            TransactionReceipt? transactionReceiptForSwap = await swapExactTokensForTokensFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parametersForSwap);
 
-                return Ok($"Transaction Hash for swap {transactionReceiptForSwap.TransactionHash}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok($"Transaction Hash for swap {transactionReceiptForSwap.TransactionHash}");
         }
 
         [HttpPost("GetTokenData")]
