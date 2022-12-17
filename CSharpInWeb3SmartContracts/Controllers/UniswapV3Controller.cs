@@ -108,15 +108,8 @@ namespace WebApi.Controllers
         [HttpPost("GetTokenData")]
         public async Task<IActionResult> GetTokenData(string tokenId)
         {
-            try
-            {
-                Token? token = await _uniswapGraphQL.GetTokenData(tokenId);
-                return Ok(token);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            Token? token = await _uniswapGraphQL.GetTokenData(tokenId);
+            return Ok(token);
         }
 
         [HttpPost("GetMostLiquidPools")]
