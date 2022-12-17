@@ -10,11 +10,6 @@ namespace Infrastructure
 
         public DbSet<SmartContract> SmartContract { get; set; }
 
-        public Task<int> SaveChangesAsync()
-        {
-            return base.SaveChangesAsync();
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
