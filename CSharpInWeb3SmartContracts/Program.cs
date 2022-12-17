@@ -25,7 +25,7 @@ IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("apps
 #region Serilog Logging
 string fullPath = Environment.CurrentDirectory + @"\logs.txt";
 LoggingLevelSwitch? levelSwitch = new();
-levelSwitch.MinimumLevel = LogEventLevel.Debug;
+levelSwitch.MinimumLevel = LogEventLevel.Error;
 builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
                                        .WriteTo.Console()
                                        .WriteTo.File(fullPath, rollingInterval: RollingInterval.Day));

@@ -13,9 +13,10 @@ namespace Application.Services
             _smartContractRepository = smartContractRepository;
         }
 
-        public IEnumerable<SmartContract> GetSmartContracts()
+        public Task<IEnumerable<SmartContract>> GetSmartContracts()
         {
-            throw new NotImplementedException();
+            var smartContracts = _smartContractRepository.GetSmartContracts();
+            return smartContracts;
         }
     }
 }

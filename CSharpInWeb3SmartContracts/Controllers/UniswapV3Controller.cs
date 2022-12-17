@@ -43,52 +43,46 @@ namespace WebApi.Controllers
         [HttpGet("UniswapV3GetReserves")]
         public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, string addressToken0, string addressToken1, long fee)
         {
-            try
+
+            Account? account = new(_user.PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
+            Function? getPool = smartContract.GetFunction("getPool");
+
+            object[] parameters = new object[3] { addressToken0, addressToken1, fee };
+            string poolAddress = await getPool.CallAsync<string>(parameters);
+
+            if (poolAddress == "0x0000000000000000000000000000000000000000")
             {
-                Account? account = new(_user.PrivateKey, chain);
-                Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                Contract? smartContract = web3.Eth.GetContract(_uniswapV3FactoryAbi, _uniswapV3FactoryAddress);
-                Function? getPool = smartContract.GetFunction("getPool");
-
-                object[] parameters = new object[3] { addressToken0, addressToken1, fee };
-                string poolAddress = await getPool.CallAsync<string>(parameters);
-
-                if (poolAddress == "0x0000000000000000000000000000000000000000")
-                {
-                    return NotFound();
-                }
-
-                Contract? smartContractPool = web3.Eth.GetContract(_uniswapV3PoolAbi, poolAddress);
-                Function? getToken0FromPool = smartContractPool.GetFunction("token0");
-                string token0 = await getToken0FromPool.CallAsync<string>();
-
-                Function? getToken1FromPool = smartContractPool.GetFunction("token1");
-                string token1 = await getToken1FromPool.CallAsync<string>();
-
-                Contract? smartContractToken0 = web3.Eth.GetContract(_tokenERC20Abi, token0);
-                Function? balanceOfToken0 = smartContractToken0.GetFunction("balanceOf");
-                BigInteger balanceOfToken0Result = await balanceOfToken0.CallAsync<BigInteger>(poolAddress);
-
-                Contract? smartContractToken1 = web3.Eth.GetContract(_tokenERC20Abi, token1);
-                Function? balanceOfToken1 = smartContractToken1.GetFunction("balanceOf");
-                BigInteger balanceOfToken1Result = await balanceOfToken1.CallAsync<BigInteger>(poolAddress);
-
-                BigDecimal balanceInEthToken0 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken0Result);
-                BigDecimal balanceInEthToken1 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken1Result);
-
-                //balanceInEthToken1 has 6 decimals and not 18
-                BigDecimal adjusted_price = balanceInEthToken1 / (10 ^ 18 - 6);
-                BigDecimal inverted_price = 1 / adjusted_price;
-
-                BigDecimal price = balanceInEthToken0 / inverted_price;
-
-                return Ok($"Token 1 balance {balanceInEthToken0} and balance of token 2 {inverted_price}");
+                return NotFound();
             }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+
+            Contract? smartContractPool = web3.Eth.GetContract(_uniswapV3PoolAbi, poolAddress);
+            Function? getToken0FromPool = smartContractPool.GetFunction("token0");
+            string token0 = await getToken0FromPool.CallAsync<string>();
+
+            Function? getToken1FromPool = smartContractPool.GetFunction("token1");
+            string token1 = await getToken1FromPool.CallAsync<string>();
+
+            Contract? smartContractToken0 = web3.Eth.GetContract(_tokenERC20Abi, token0);
+            Function? balanceOfToken0 = smartContractToken0.GetFunction("balanceOf");
+            BigInteger balanceOfToken0Result = await balanceOfToken0.CallAsync<BigInteger>(poolAddress);
+
+            Contract? smartContractToken1 = web3.Eth.GetContract(_tokenERC20Abi, token1);
+            Function? balanceOfToken1 = smartContractToken1.GetFunction("balanceOf");
+            BigInteger balanceOfToken1Result = await balanceOfToken1.CallAsync<BigInteger>(poolAddress);
+
+            BigDecimal balanceInEthToken0 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken0Result);
+            BigDecimal balanceInEthToken1 = Web3.Convert.FromWeiToBigDecimal(balanceOfToken1Result);
+
+            //balanceInEthToken1 has 6 decimals and not 18
+            BigDecimal adjusted_price = balanceInEthToken1 / (10 ^ 18 - 6);
+            BigDecimal inverted_price = 1 / adjusted_price;
+
+            BigDecimal price = balanceInEthToken0 / inverted_price;
+
+            return Ok($"Token 1 balance {balanceInEthToken0} and balance of token 2 {inverted_price}");
         }
 
         [HttpPost("UniswapV3SwapRouter02/SwapExactTokensForTokens")]
