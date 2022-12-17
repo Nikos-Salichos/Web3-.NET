@@ -43,7 +43,6 @@ namespace Infrastructure.Persistence.Repositories
         public Task Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
-            return Task.CompletedTask;
         }
 
         public Task UpdateRange(IEnumerable<T> entities)
@@ -52,10 +51,18 @@ namespace Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
-        public Task Delete(T entity)
+        public async Task<bool> Delete(string id)
         {
-            _dbContext.Set<T>().Remove(entity);
-            return Task.CompletedTask;
+            var entity = await _dbContext.Set<T>().FindAsync(id);
+            if (entity != null)
+            {
+                _dbContext.Set<T>().Remove(entity);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Task DeleteRange(IEnumerable<T> entities)

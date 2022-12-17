@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence.Interfaces
         Task Update(T entity);
         Task UpdateRange(IEnumerable<T> entities);
 
-        Task Delete(T entity);
+        Task<bool> Delete(string id);
         Task DeleteRange(IEnumerable<T> entities);
     }
 }
