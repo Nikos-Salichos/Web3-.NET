@@ -122,29 +122,15 @@ namespace WebApi.Controllers
         [HttpPost("GetPoolData")]
         public async Task<IActionResult> GetPoolData(string poolAddress)
         {
-            try
-            {
-                dynamic? data = await _uniswapGraphQL.GetPoolData(poolAddress);
-                return Ok(data);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            dynamic? data = await _uniswapGraphQL.GetPoolData(poolAddress);
+            return Ok(data);
         }
 
         [HttpPost("GetRecentSwapsWithinAPool")]
         public async Task<IActionResult> GetRecentSwapsWithinAPool(string poolAddress)
         {
-            try
-            {
-                dynamic? data = await _uniswapGraphQL.GetRecentSwapsWithinAPool(poolAddress);
-                return Ok(data);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            dynamic? data = await _uniswapGraphQL.GetRecentSwapsWithinAPool(poolAddress);
+            return Ok(data);
         }
 
         [HttpPost("GetPositionData")]
