@@ -136,15 +136,8 @@ namespace WebApi.Controllers
         [HttpPost("GetPositionData")]
         public async Task<IActionResult> GetPositionData(int positionId)
         {
-            try
-            {
-                dynamic? data = await _uniswapGraphQL.GetPositionData(positionId);
-                return Ok(data);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            dynamic? data = await _uniswapGraphQL.GetPositionData(positionId);
+            return Ok(data);
         }
     }
 }
