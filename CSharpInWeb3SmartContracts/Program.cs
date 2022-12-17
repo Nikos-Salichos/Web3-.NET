@@ -1,6 +1,7 @@
 using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using Infrastructure;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -39,8 +40,7 @@ builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
 #endregion Serilog Logging
 
 #region Database
-builder.Services.AddDbContext<StoreContext>(options =>
-       options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddPersistence(builder.Configuration);
 #endregion Database
 
 //Load Controllers dynamically from DLL

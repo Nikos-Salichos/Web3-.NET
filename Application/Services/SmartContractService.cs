@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Models;
+using Infrastructure.Persistence.Interfaces;
 
 namespace Application.Services
 {

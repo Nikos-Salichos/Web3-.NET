@@ -11,7 +11,7 @@ namespace Infrastructure
            IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("RijsatDatabase"),
+                options.UseSqlServer(configuration.GetConnectionString("MsSqlConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)), ServiceLifetime.Transient);
 
             services.AddScoped<IApplicationDBContext>(provider => provider.GetService<ApplicationDbContext>());
