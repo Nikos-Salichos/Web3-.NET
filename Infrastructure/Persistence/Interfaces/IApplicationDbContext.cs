@@ -5,7 +5,6 @@ namespace Application.Interfaces
 {
     public interface IApplicationDBContext
     {
-        DbSet<SmartContract> SmartContracts { get; set; }
-        Task<int> SaveChangesAsync();
+        DbSet<SmartContract> SmartContract { get; set; }
     }
 }
