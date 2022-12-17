@@ -38,6 +38,11 @@ builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
  }));*/
 #endregion Serilog Logging
 
+#region Database
+builder.Services.AddDbContext<StoreContext>(options =>
+       options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+#endregion Database
+
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
 if (assembly != null)

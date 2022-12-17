@@ -1,11 +1,10 @@
-﻿using Infrastructure.Context;
-using Infrastructure.Persistence.Interfaces;
+﻿using Infrastructure.Persistence.Interfaces;
 
 namespace Infrastructure.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public RepositoryContext _repositoryContext;
+        public ApplicationDbContext _repositoryContext;
         public ISmartContractRepository _smartContractRepository;
         private bool disposedValue;
 
@@ -17,7 +16,7 @@ namespace Infrastructure.Persistence.Repositories
             }
         }
 
-        public UnitOfWork(RepositoryContext repositoryContext)
+        public UnitOfWork(ApplicationDbContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }

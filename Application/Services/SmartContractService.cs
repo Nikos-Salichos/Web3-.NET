@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Domain.Models;
-using Infrastructure.Persistence.Interfaces;
 
 namespace Application.Services
 {
@@ -15,8 +14,7 @@ namespace Application.Services
 
         public Task<IEnumerable<SmartContract>> GetSmartContracts()
         {
-            var smartContracts = _smartContractRepository.GetSmartContracts();
-            return smartContracts;
+            return _smartContractRepository.GetSmartContracts();
         }
     }
 }

@@ -43,6 +43,10 @@ namespace WebApi.Controllers
         [HttpGet("UniswapV3GetReserves")]
         public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, string addressToken0, string addressToken1, long fee)
         {
+            if (fee != 100 && fee != 500 && fee != 3000 && fee != 10000)
+            {
+                throw new ArgumentOutOfRangeException(nameof(fee), "Fee must be 100 or 500 or 3000 or 10000");
+            }
 
             Account? account = new(_user.PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
