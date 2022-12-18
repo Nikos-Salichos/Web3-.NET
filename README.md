@@ -8,8 +8,9 @@ Installation
 3. Launch project.
 
 Entity Framework:
-  Add-Migration "DB Initialize"
-  Update-Database
+
+Add-Migration "DB Initialize"
+Update-Database
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
 After compilation I use ABI and bytecode from .json file. 
