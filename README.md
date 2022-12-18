@@ -7,6 +7,10 @@ Installation
 2. Configure appsettings.json with your own details.
 3. Launch project.
 
+Entity Framework:
+  Add-Migration "DB Initialize"
+  Update-Database
+
 In order to compile a smart contract I am using visual studio code with solidity extension. 
 After compilation I use ABI and bytecode from .json file. 
 
