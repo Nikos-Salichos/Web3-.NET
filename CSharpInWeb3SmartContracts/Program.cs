@@ -1,7 +1,11 @@
+using Application.Interfaces;
+using Application.Services;
 using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
+using Infrastructure.Persistence.Interfaces;
+using Infrastructure.Persistence.Repositories;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -42,6 +46,11 @@ builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
 #region Database
 builder.Services.AddPersistence(builder.Configuration);
 #endregion Database
+
+#region Dependency Injection
+builder.Services.AddScoped<ISmartContractRepository, SmartContractRepository>();
+builder.Services.AddScoped<ISmartContractService, SmartContractService>();
+#endregion Dependency Injection
 
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");

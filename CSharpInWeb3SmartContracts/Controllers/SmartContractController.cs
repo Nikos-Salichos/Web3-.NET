@@ -30,9 +30,9 @@ namespace WebApi.Controllers
         [HttpGet("GetAllSmartContracts")]
         public async Task<ActionResult> GetAllSmartContracts()
         {
-            var lala = await _smartContractService.GetSmartContracts();
+            var allSmartContracts = await _smartContractService.GetSmartContracts();
 
-            return Ok(lala);
+            return Ok(allSmartContracts);
         }
 
         [Consumes("application/json")]
@@ -43,9 +43,9 @@ namespace WebApi.Controllers
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = null;
-            if (smartContractModel?.Parameters?.Count > 0)
+            if (smartContractModel?.Parameters != null)
             {
-                parameters = smartContractModel.Parameters.ToArray();
+                parameters = (object[]?)smartContractModel.Parameters;
                 if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
                     parameters = null;
@@ -100,9 +100,9 @@ namespace WebApi.Controllers
             Function? readFunction = smartContract.GetFunction(variableName);
             object[]? parameters = null;
 
-            if (smartContractModel?.Parameters?.Count > 0)
+            if (smartContractModel?.Parameters != null)
             {
-                parameters = smartContractModel.Parameters.ToArray();
+                parameters = (object[]?)smartContractModel.Parameters;
             }
 
             dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
@@ -121,9 +121,9 @@ namespace WebApi.Controllers
             Function? writeFunction = smartContract.GetFunction(functionName);
             object[]? parameters = null;
 
-            if (smartContractModel?.Parameters?.Count > 0)
+            if (smartContractModel?.Parameters != null)
             {
-                parameters = smartContractModel.Parameters.ToArray();
+                parameters = (object[]?)smartContractModel.Parameters;
                 if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
                     parameters = null;
@@ -170,9 +170,9 @@ namespace WebApi.Controllers
 
                 object[]? parameters = null;
 
-                if (smartContractModel?.Parameters?.Count > 0)
+                if (smartContractModel?.Parameters != null)
                 {
-                    parameters = smartContractModel.Parameters.ToArray();
+                    parameters = (object[]?)smartContractModel.Parameters;
                     if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                     {
                         parameters = null;
