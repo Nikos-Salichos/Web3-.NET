@@ -80,29 +80,22 @@ namespace WebApi.Controllers
         [HttpPost("CallReadFunction")]
         public async Task<ActionResult> CallReadFunction(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
         {
-            try
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+
+            Function? readFunction = smartContract.GetFunction(variableName);
+            object[]? parameters = null;
+
+            if (smartContractModel?.Parameters?.Count > 0)
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
-
-                Function? readFunction = smartContract.GetFunction(variableName);
-                object[]? parameters = null;
-
-                if (smartContractModel?.Parameters?.Count > 0)
-                {
-                    parameters = smartContractModel.Parameters.ToArray();
-                }
-
-                dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
-
-                return Ok(variableName + ": " + variableValue.ToString());
+                parameters = smartContractModel.Parameters.ToArray();
             }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+
+            dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
+
+            return Ok(variableName + ": " + variableValue.ToString());
         }
 
         [Consumes("application/json")]
