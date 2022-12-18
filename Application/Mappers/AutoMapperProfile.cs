@@ -9,7 +9,7 @@ namespace Application.Mappers
         public AutoMapperProfile()
         {
             CreateMap<SmartContract, SmartContractDTO>();
-            CreateMap<SmartContractDTO, SmartContract>();
+            // CreateMap<SmartContractDTO, SmartContract>();
         }
     }
 }

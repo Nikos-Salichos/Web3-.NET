@@ -1,3 +1,4 @@
+using Application.Mappers;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using GraphQL.Client.Abstractions;
@@ -54,7 +55,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 #endregion Dependency Injection
 
 #region AutoMapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #endregion AutoMapper
 
 //Load Controllers dynamically from DLL

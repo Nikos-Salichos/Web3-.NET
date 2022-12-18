@@ -36,7 +36,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> GetAllSmartContracts()
         {
             var allSmartContracts = await _smartContractService.GetSmartContracts();
-            var allSmartContractsDTO = _mapper.Map<List<SmartContractDTO>>(allSmartContracts.ToList());
+            List<SmartContractDTO> allSmartContractsDTO = _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
             return Ok(allSmartContractsDTO);
         }
 
