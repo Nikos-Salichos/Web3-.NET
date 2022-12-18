@@ -58,27 +58,22 @@ namespace WebApi.Controllers
         [HttpPost("CallContractVariable")]
         public async Task<ActionResult> CallContractVariable(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
         {
-            try
+
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+            Function? variable = smartContract.GetFunction(variableName);
+
+            dynamic variableValue = await variable.CallAsync<dynamic>();
+
+            if (variableValue is null)
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
-                Function? variable = smartContract.GetFunction(variableName);
-
-                dynamic variableValue = await variable.CallAsync<dynamic>();
-
-                if (variableValue is null)
-                {
-                    return Ok(variableName + "is null");
-                }
-
-                return Ok(variableName + ": " + variableValue.ToString());
+                return Ok(variableName + "is null");
             }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+
+            return Ok(variableName + ": " + variableValue.ToString());
+
         }
 
         [Consumes("application/json")]
