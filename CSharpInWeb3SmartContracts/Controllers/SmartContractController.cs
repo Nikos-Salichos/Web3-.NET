@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Application.Interfaces;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -17,10 +18,21 @@ namespace WebApi.Controllers
         private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
 
-        public SmartContractController(IConfiguration configuration)
+        private readonly ISmartContractService _smartContractService;
+
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>();
+            _smartContractService = smartContractService;
+        }
+
+        [HttpGet("GetAllSmartContracts")]
+        public async Task<ActionResult> GetAllSmartContracts()
+        {
+            var lala = await _smartContractService.GetSmartContracts();
+
+            return Ok(lala);
         }
 
         [Consumes("application/json")]
