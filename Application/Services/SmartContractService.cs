@@ -10,7 +10,6 @@ namespace Application.Services
 {
     public class SmartContractService : ISmartContractService
     {
-        private readonly ISmartContractRepository _smartContractRepository; //refactor repo to use unit of work
         private readonly IUnitOfWork _unitOfWork;
 
         public SmartContractService(IUnitOfWork unitOfWork)
