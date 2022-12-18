@@ -42,12 +42,18 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
-        public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContract smartContract)
+        public async Task<ActionResult> DeployContract([FromBody] SmartContract smartContractModel)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, smartContractModel.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractModel.Chain));
 
-            smartContract.Chain = chain;
+            SmartContract smartContract = new SmartContract();
+            smartContract.Bytecode = smartContractModel.Bytecode;
+            smartContract.Abi = smartContractModel.Abi;
+            smartContract.Parameters = smartContractModel.Parameters;
+            smartContract.Chain = smartContractModel.Chain;
+
+            // Get ABI from VS CODE and copy it here https://jsontostring.com/ and use for abi the generated string
 
             var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(account, smartContract, web3);
 
@@ -58,7 +64,6 @@ namespace WebApi.Controllers
         [HttpPost("CallContractVariable")]
         public async Task<ActionResult> CallContractVariable(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
         {
-
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 

@@ -10,11 +10,12 @@ namespace Application.Services
 {
     public class SmartContractService : ISmartContractService
     {
-        private readonly ISmartContractRepository _smartContractRepository;
+        private readonly ISmartContractRepository _smartContractRepository; //refactor repo to use unit of work
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SmartContractService(ISmartContractRepository smartContractRepository)
+        public SmartContractService(IUnitOfWork unitOfWork)
         {
-            _smartContractRepository = smartContractRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<TransactionReceipt> DeploySmartContractAsync(Account account, SmartContract smartContract, Web3 web3)
@@ -36,10 +37,16 @@ namespace Application.Services
 
             TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContract?.Abi?.ToString(),
                                                                                                                 smartContract?.Bytecode,
-                                                                                                                account.PrivateKey,
+                                                                                                                account.Address,
                                                                                                                 estimatedGas,
                                                                                                                 null, null, null, parameters);
+            if (deployContract.Succeeded())
+            {
+                smartContract.Address = deployContract.ContractAddress;
 
+                var savedToDatababase = await _unitOfWork.SmartContractRepository.Add(smartContract);
+                await _unitOfWork.SaveChangesAsync();
+            }
             return deployContract;
         }
 

@@ -13,6 +13,7 @@ namespace WebApi
             // Singleton
             builder.RegisterType<SmartContractRepository>().As<ISmartContractRepository>().SingleInstance();
             builder.RegisterType<SmartContractService>().As<ISmartContractService>().SingleInstance();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().SingleInstance();
         }
     }
 }

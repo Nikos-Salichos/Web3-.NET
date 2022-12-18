@@ -8,7 +8,7 @@ namespace Domain.Models
     {
         public string? Address { get; set; }
         public string? Bytecode { get; set; }
-        public Chain Chain { get; set; }
+        public Chain Chain { get; set; } = new Chain();
 
         [NotMapped]
         public object? Abi { get; set; }
