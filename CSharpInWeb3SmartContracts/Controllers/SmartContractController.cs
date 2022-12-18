@@ -46,16 +46,7 @@ namespace WebApi.Controllers
         {
             Account? account = new Account(_user.PrivateKey, smartContractModel.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractModel.Chain));
-
-            SmartContract smartContract = new SmartContract();
-            smartContract.Bytecode = smartContractModel.Bytecode;
-            smartContract.Abi = smartContractModel.Abi;
-            smartContract.Parameters = smartContractModel.Parameters;
-            smartContract.Chain = smartContractModel.Chain;
-
-            // Get ABI from VS CODE and copy it here https://jsontostring.com/ and use for abi the generated string
-
-            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(account, smartContract, web3);
+            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(account, smartContractModel, web3);
 
             return Ok(deployedSmartContract);
         }
