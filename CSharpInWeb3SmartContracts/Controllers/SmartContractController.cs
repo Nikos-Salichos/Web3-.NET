@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces;
+using AutoMapper;
+using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -20,19 +22,22 @@ namespace WebApi.Controllers
 
         private readonly ISmartContractService _smartContractService;
 
-        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService)
+        private readonly IMapper _mapper;
+
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, IMapper mapper)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>();
             _smartContractService = smartContractService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetAllSmartContracts")]
         public async Task<ActionResult> GetAllSmartContracts()
         {
             var allSmartContracts = await _smartContractService.GetSmartContracts();
-
-            return Ok(allSmartContracts);
+            var allSmartContractsDTO = _mapper.Map<List<SmartContractDTO>>(allSmartContracts.ToList());
+            return Ok(allSmartContractsDTO);
         }
 
         [Consumes("application/json")]

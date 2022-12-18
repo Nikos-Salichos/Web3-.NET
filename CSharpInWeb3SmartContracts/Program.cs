@@ -52,6 +52,10 @@ builder.Services.AddScoped<ISmartContractRepository, SmartContractRepository>();
 builder.Services.AddScoped<ISmartContractService, SmartContractService>();
 #endregion Dependency Injection
 
+#region AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+#endregion AutoMapper
+
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
 if (assembly != null)
