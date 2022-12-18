@@ -1,6 +1,10 @@
 ﻿using Application.Interfaces;
+using Application.Utilities;
+using AutoMapper;
+using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
@@ -10,15 +14,33 @@ namespace Application.Services
 {
     public class SmartContractService : ISmartContractService
     {
+        private readonly User _user = new User();
+        public EnumHelper EnumHelper { get; set; }
+
         private readonly IUnitOfWork _unitOfWork;
 
-        public SmartContractService(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+
+        public SmartContractService(IConfiguration configuration, IUnitOfWork unitOfWork, IMapper mapper)
         {
+            EnumHelper = new EnumHelper(configuration);
+            _user = configuration.GetSection("User").Get<User>()!;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public async Task<TransactionReceipt> DeploySmartContractAsync(Account account, SmartContract smartContract, Web3 web3)
+        public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
         {
+            var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            List<SmartContractDTO> allSmartContractsDTO = _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
+            return allSmartContractsDTO;
+        }
+
+        public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContract smartContract)
+        {
+            Account? account = new Account(_user.PrivateKey, smartContract.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContract.Chain));
+
             object[]? parameters = null;
             if (smartContract?.Parameters?.Count > 0)
             {
@@ -50,9 +72,5 @@ namespace Application.Services
         }
 
 
-        public Task<IEnumerable<SmartContract>> GetSmartContractsAsync()
-        {
-            return _unitOfWork.SmartContractRepository.GetSmartContracts();
-        }
     }
 }

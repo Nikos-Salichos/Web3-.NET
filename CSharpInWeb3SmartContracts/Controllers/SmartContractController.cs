@@ -1,6 +1,4 @@
 ﻿using Application.Interfaces;
-using AutoMapper;
-using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -22,32 +20,25 @@ namespace WebApi.Controllers
 
         private readonly ISmartContractService _smartContractService;
 
-        private readonly IMapper _mapper;
-
-        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, IMapper mapper)
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>();
             _smartContractService = smartContractService;
-            _mapper = mapper;
         }
 
         [HttpGet("GetAllSmartContracts")]
         public async Task<ActionResult> GetAllSmartContracts()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
-            List<SmartContractDTO> allSmartContractsDTO = _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
-            return Ok(allSmartContractsDTO);
+            return Ok(allSmartContracts);
         }
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
         public async Task<ActionResult> DeployContract([FromBody] SmartContract smartContractModel)
         {
-            Account? account = new Account(_user.PrivateKey, smartContractModel.Chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractModel.Chain));
-            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(account, smartContractModel, web3);
-
+            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractModel);
             return Ok(deployedSmartContract);
         }
 
@@ -58,7 +49,7 @@ namespace WebApi.Controllers
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+            Contract? smartContract = web3.Eth.GetContract(smartContractModel?.Abi?.ToString(), smartContractModel?.Address);
             Function? variable = smartContract.GetFunction(variableName);
 
             dynamic variableValue = await variable.CallAsync<dynamic>();
