@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         {
             var allSmartContracts = await _smartContractService.GetSmartContracts();
             var allSmartContractsDTO = _mapper.Map<List<SmartContractDTO>>(allSmartContracts.ToList());
-            return Ok(allSmartContractsDTO);
+            return Ok(allSmartContracts);
         }
 
         [Consumes("application/json")]

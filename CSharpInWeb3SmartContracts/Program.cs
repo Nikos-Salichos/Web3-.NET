@@ -1,15 +1,14 @@
-using Application.Interfaces;
-using Application.Services;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
-using Infrastructure.Persistence.Interfaces;
-using Infrastructure.Persistence.Repositories;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using System.Text.Json.Serialization;
+using WebApi;
 using WebApi.GraphQL;
 using WebApi.Utilities;
 
@@ -24,8 +23,10 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 builder.Services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient("https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3", new NewtonsoftJsonSerializer()));
 builder.Services.AddScoped<UniswapV3GraphQL>();
 
+#region AppSettings.json
 // Read appsettings.json file
 IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
+#endregion AppSettings.json
 
 #region Serilog Logging
 string fullPath = Environment.CurrentDirectory + @"\logs.txt";
@@ -48,8 +49,8 @@ builder.Services.AddPersistence(builder.Configuration);
 #endregion Database
 
 #region Dependency Injection
-builder.Services.AddScoped<ISmartContractRepository, SmartContractRepository>();
-builder.Services.AddScoped<ISmartContractService, SmartContractService>();
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new MyAutofacModule()));
 #endregion Dependency Injection
 
 #region AutoMapper
