@@ -35,40 +35,23 @@ namespace WebApi.Controllers
         [HttpGet("GetAllSmartContracts")]
         public async Task<ActionResult> GetAllSmartContracts()
         {
-            var allSmartContracts = await _smartContractService.GetSmartContracts();
+            var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
             List<SmartContractDTO> allSmartContractsDTO = _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
             return Ok(allSmartContractsDTO);
         }
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
-        public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContract smartContract)
         {
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-            object[]? parameters = null;
-            if (smartContractModel?.Parameters != null)
-            {
-                parameters = (object[]?)smartContractModel.Parameters;
-                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                {
-                    parameters = null;
-                }
-            }
+            smartContract.Chain = chain;
 
-            HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
-                                                                                      smartContractModel?.Bytecode,
-                                                                                      _user.WalletAddress,
-                                                                                      parameters);
+            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(account, smartContract, web3);
 
-            TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
-                                                                                                                smartContractModel?.Bytecode,
-                                                                                                                _user.WalletAddress,
-                                                                                                                estimatedGas,
-                                                                                                                null, null, null, parameters);
-
-            return Ok(deployContract);
+            return Ok(deployedSmartContract);
         }
 
         [Consumes("application/json")]

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nethereum.Signer;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models
@@ -7,6 +8,7 @@ namespace Domain.Models
     {
         public string? Address { get; set; }
         public string? Bytecode { get; set; }
+        public Chain Chain { get; set; }
 
         [NotMapped]
         public object? Abi { get; set; }
