@@ -134,23 +134,16 @@ namespace WebApi.Controllers
         [HttpPost("TrackCryptoWhalesForAnyToken")]
         public async Task<ActionResult> TrackCryptoWhalesForAnyToken(Chain chain, [FromBody] SmartContract smartContractModel)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-                Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
 
-                Event transferEvent = smartContract.GetEvent("Transfer");
-                BlockParameter? _lastBlock = BlockParameter.CreateLatest();
-                NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
-                List<EventLog<TransferEventDTO>>? transfers = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
+            Event transferEvent = smartContract.GetEvent("Transfer");
+            BlockParameter? _lastBlock = BlockParameter.CreateLatest();
+            NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
+            List<EventLog<TransferEventDTO>>? transfers = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
 
-                return Ok(transfers);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            return Ok(transfers);
         }
 
         [Consumes("application/json")]
