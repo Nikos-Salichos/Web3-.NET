@@ -27,38 +27,31 @@ namespace WebApi.Controllers
         [HttpPost("DeployAnyContract")]
         public async Task<ActionResult> DeployContract(Chain chain, [FromBody] SmartContract smartContractModel)
         {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                object[]? parameters = null;
-                if (smartContractModel?.Parameters?.Count > 0)
+            object[]? parameters = null;
+            if (smartContractModel?.Parameters?.Count > 0)
+            {
+                parameters = smartContractModel.Parameters.ToArray();
+                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
-                    parameters = smartContractModel.Parameters.ToArray();
-                    if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                    {
-                        parameters = null;
-                    }
+                    parameters = null;
                 }
-
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
-                                                                                          smartContractModel?.Bytecode,
-                                                                                          _user.WalletAddress,
-                                                                                          parameters);
-
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
-                                                                                                                    smartContractModel?.Bytecode,
-                                                                                                                    _user.WalletAddress,
-                                                                                                                    estimatedGas,
-                                                                                                                    null, null, null, parameters);
-
-                return Ok(deployContract);
             }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+
+            HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
+                                                                                      smartContractModel?.Bytecode,
+                                                                                      _user.WalletAddress,
+                                                                                      parameters);
+
+            TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
+                                                                                                                smartContractModel?.Bytecode,
+                                                                                                                _user.WalletAddress,
+                                                                                                                estimatedGas,
+                                                                                                                null, null, null, parameters);
+
+            return Ok(deployContract);
         }
 
         [Consumes("application/json")]
