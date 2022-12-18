@@ -102,39 +102,32 @@ namespace WebApi.Controllers
         [HttpPost("CallWriteFunction")]
         public async Task<ActionResult> CallWriteFunction(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
-            try
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
+            Function? writeFunction = smartContract.GetFunction(functionName);
+            object[]? parameters = null;
+
+            if (smartContractModel?.Parameters?.Count > 0)
             {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
-                Function? writeFunction = smartContract.GetFunction(functionName);
-                object[]? parameters = null;
-
-                if (smartContractModel?.Parameters?.Count > 0)
+                parameters = smartContractModel.Parameters.ToArray();
+                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
-                    parameters = smartContractModel.Parameters.ToArray();
-                    if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                    {
-                        parameters = null;
-                    }
+                    parameters = null;
                 }
-
-                HexBigInteger? value = null;
-                BigInteger wei = Web3.Convert.ToWei(sendAsEth);
-                if (wei != 0)
-                {
-                    value = new HexBigInteger(wei);
-                }
-
-                HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
-                TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
-                return Ok(functionResult);
             }
-            catch (Exception exception)
+
+            HexBigInteger? value = null;
+            BigInteger wei = Web3.Convert.ToWei(sendAsEth);
+            if (wei != 0)
             {
-                return BadRequest(exception.Message);
+                value = new HexBigInteger(wei);
             }
+
+            HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
+            TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
+            return Ok(functionResult);
         }
 
         [Consumes("application/json")]
