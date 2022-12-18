@@ -53,7 +53,7 @@ namespace Application.Services
 
         public Task<IEnumerable<SmartContract>> GetSmartContractsAsync()
         {
-            return _smartContractRepository.GetSmartContracts();
+            return _unitOfWork.SmartContractRepository.GetSmartContracts();
         }
     }
 }
