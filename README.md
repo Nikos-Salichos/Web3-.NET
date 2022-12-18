@@ -10,6 +10,7 @@ Installation
 Entity Framework:
 
 Add-Migration "DB Initialize"
+
 Update-Database
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
