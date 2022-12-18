@@ -20,9 +20,9 @@ namespace Application.Services
         public async Task<TransactionReceipt> DeploySmartContractAsync(Account account, SmartContract smartContract, Web3 web3)
         {
             object[]? parameters = null;
-            if (smartContract?.Parameters != null)
+            if (smartContract?.Parameters?.Count > 0)
             {
-                parameters = (object[]?)smartContract.Parameters;
+                parameters = smartContract.Parameters.ToArray();
                 if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
                     parameters = null;

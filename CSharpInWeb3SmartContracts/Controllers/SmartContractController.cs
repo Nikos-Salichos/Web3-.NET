@@ -93,9 +93,13 @@ namespace WebApi.Controllers
             Function? readFunction = smartContract.GetFunction(variableName);
             object[]? parameters = null;
 
-            if (smartContractModel?.Parameters != null)
+            if (smartContractModel?.Parameters?.Count > 0)
             {
-                parameters = (object[]?)smartContractModel.Parameters;
+                parameters = smartContractModel.Parameters.ToArray();
+                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
+                {
+                    parameters = null;
+                }
             }
 
             dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
@@ -114,9 +118,9 @@ namespace WebApi.Controllers
             Function? writeFunction = smartContract.GetFunction(functionName);
             object[]? parameters = null;
 
-            if (smartContractModel?.Parameters != null)
+            if (smartContractModel?.Parameters?.Count > 0)
             {
-                parameters = (object[]?)smartContractModel.Parameters;
+                parameters = smartContractModel.Parameters.ToArray();
                 if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
                     parameters = null;
@@ -163,9 +167,9 @@ namespace WebApi.Controllers
 
                 object[]? parameters = null;
 
-                if (smartContractModel?.Parameters != null)
+                if (smartContractModel?.Parameters?.Count > 0)
                 {
-                    parameters = (object[]?)smartContractModel.Parameters;
+                    parameters = smartContractModel.Parameters.ToArray();
                     if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                     {
                         parameters = null;

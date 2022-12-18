@@ -29,7 +29,7 @@ namespace Domain.Models
         }
 
         [NotMapped]
-        public object? Parameters { get; set; }
+        public List<object>? Parameters { get; set; }
 
         [Column("Parameters")]
         public string ParametersSerialized
@@ -40,10 +40,18 @@ namespace Domain.Models
             }
             set
             {
-                Parameters = string.IsNullOrEmpty(value)
-                        ? new object()
-                        : JsonConvert.DeserializeObject<object>(value);
+                if (string.IsNullOrEmpty(value))
+                {
+                    Parameters = new List<object>();
+                }
+                else
+                {
+                    Parameters = JsonConvert.DeserializeObject<List<object>>(value);
+                }
             }
         }
+
+
+
     }
 }

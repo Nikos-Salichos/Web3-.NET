@@ -28,7 +28,8 @@ namespace WebApi.CustomExceptionMiddleware
         private Task HandleException(HttpContext context, Exception exception)
         {
             logger.LogError(exception.ToString());
-            var errorDetail = new ErrorDetail(500, exception.ToString());
+            var expectionMessageAndInner = exception.Message + Environment.NewLine + exception.InnerException;
+            var errorDetail = new ErrorDetail(500, expectionMessageAndInner);
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
