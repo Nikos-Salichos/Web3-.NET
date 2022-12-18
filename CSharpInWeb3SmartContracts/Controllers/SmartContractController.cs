@@ -150,48 +150,41 @@ namespace WebApi.Controllers
         [HttpPost("DeployInMultipleChains")]
         public async Task<ActionResult> DeployInMultipleChains(List<Chain> chains, [FromBody] SmartContract smartContractModel)
         {
-            try
+            List<TransactionReceipt> transactionReceipts = new List<TransactionReceipt>();
+            foreach (var chain in chains)
             {
-                List<TransactionReceipt> transactionReceipts = new List<TransactionReceipt>();
-                foreach (var chain in chains)
+                Account? account = new Account(_user.PrivateKey, chain);
+                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+
+                object[]? parameters = null;
+
+                if (smartContractModel?.Parameters?.Count > 0)
                 {
-                    Account? account = new Account(_user.PrivateKey, chain);
-                    Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                    object[]? parameters = null;
-
-                    if (smartContractModel?.Parameters?.Count > 0)
+                    parameters = smartContractModel.Parameters.ToArray();
+                    if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                     {
-                        parameters = smartContractModel.Parameters.ToArray();
-                        if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                        {
-                            parameters = null;
-                        }
-                    }
-
-                    HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
-                                                                                              smartContractModel?.Bytecode,
-                                                                                              _user.WalletAddress,
-                                                                                              parameters);
-
-                    TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
-                                                                                                                        smartContractModel?.Bytecode,
-                                                                                                                        _user.WalletAddress,
-                                                                                                                        estimatedGas,
-                                                                                                                        null, null, null, parameters);
-
-                    if (deployContract != null)
-                    {
-                        transactionReceipts.Add(deployContract);
+                        parameters = null;
                     }
                 }
 
-                return Ok(string.Join(",", transactionReceipts));
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
+                                                                                          smartContractModel?.Bytecode,
+                                                                                          _user.WalletAddress,
+                                                                                          parameters);
+
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
+                                                                                                                    smartContractModel?.Bytecode,
+                                                                                                                    _user.WalletAddress,
+                                                                                                                    estimatedGas,
+                                                                                                                    null, null, null, parameters);
+
+                if (deployContract != null)
+                {
+                    transactionReceipts.Add(deployContract);
+                }
             }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+
+            return Ok(string.Join(",", transactionReceipts));
         }
 
     }
