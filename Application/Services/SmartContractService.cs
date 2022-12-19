@@ -82,7 +82,8 @@ namespace Application.Services
 
         public Task<dynamic> CallContractVariable(string variableName, SmartContract smartContract)
         {
-            Account? account = new Account(_user.PrivateKey, smartContract.chain);
+            Account? account = new Account(_user.PrivateKey, smartContract.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
         }
 
