@@ -6,6 +6,7 @@ using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
@@ -80,10 +81,12 @@ namespace Application.Services
             return deployContract;
         }
 
-        public Task<dynamic> CallContractVariable(string variableName, SmartContract smartContract)
+        public Task<dynamic> CallContractVariable(string variableName, SmartContract smartContractJson)
         {
-            Account? account = new Account(_user.PrivateKey, smartContract.Chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
+            Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
+
+            Contract? smartContractObject = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
 
         }
 
