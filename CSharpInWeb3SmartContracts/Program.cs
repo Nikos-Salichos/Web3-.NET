@@ -1,3 +1,4 @@
+using Application;
 using Application.Mappers;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -57,6 +58,11 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 #region AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #endregion AutoMapper
+
+#region FluentValidation
+builder.Services.AddFluentValidation();
+#endregion FluentValidation
+
 
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");

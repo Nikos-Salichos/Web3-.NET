@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Utilities;
+using Application.Validators;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
@@ -38,6 +39,14 @@ namespace Application.Services
 
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContract smartContract)
         {
+            SmartContractValidator smartContractValidator = new SmartContractValidator();
+            var IsValid = await smartContractValidator.ValidateAsync(smartContract);
+
+            if (!IsValid.IsValid)
+            {
+                throw new ArgumentNullException(IsValid.ToString());
+            }
+
             Account? account = new Account(_user.PrivateKey, smartContract.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContract.Chain));
 
