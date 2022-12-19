@@ -87,7 +87,7 @@ namespace Application.Services
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
             Contract? smartContractObject = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
-
+            Function? variable = smartContractObject.GetFunction(variableName);
         }
 
     }
