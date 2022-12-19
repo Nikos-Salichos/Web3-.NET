@@ -369,3 +369,4 @@ FodyWeavers.xsd
 
 #Starting with
 starting*.logs*
+*.txt
