@@ -82,7 +82,7 @@ namespace Application.Services
 
         public Task<dynamic> CallContractVariable(string variableName, SmartContract smartContract)
         {
-
+            Account? account = new Account(_user.PrivateKey, smartContract.chain);
 
         }
 
