@@ -368,5 +368,4 @@ FodyWeavers.xsd
 /CSharpInWeb3SmartContracts/appsettings.json
 
 #Starting with
-starting*.logs*
-*.txt
+*.logs*
