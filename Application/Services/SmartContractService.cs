@@ -80,6 +80,11 @@ namespace Application.Services
             return deployContract;
         }
 
+        public Task<dynamic> CallContractVariable()
+        {
+            Account? account = new Account(_user.PrivateKey, chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
+        }
     }
 }

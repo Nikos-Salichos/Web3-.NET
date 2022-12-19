@@ -60,7 +60,6 @@ namespace WebApi.Controllers
             }
 
             return Ok(variableName + ": " + variableValue.ToString());
-
         }
 
         [Consumes("application/json")]
