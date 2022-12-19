@@ -90,6 +90,13 @@ namespace Application.Services
             Function? variable = smartContractObject.GetFunction(variableName);
 
             dynamic variableValue = await variable.CallAsync<dynamic>();
+
+            if (variableValue is null)
+            {
+                throw new ArgumentNullException(nameof(variableValue));
+            }
+
+            return Ok(variableName + ": " + variableValue.ToString());
         }
 
     }
