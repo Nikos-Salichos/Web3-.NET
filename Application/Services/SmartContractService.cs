@@ -93,10 +93,10 @@ namespace Application.Services
 
             if (variableValue is null)
             {
-                throw new ArgumentNullException(nameof(variableValue));
+                throw new ArgumentNullException(nameof(variableValue), "VariableName cannot be null");
             }
 
-            return Ok(variableName + ": " + variableValue.ToString());
+            return variableName;
         }
 
     }
