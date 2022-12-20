@@ -7,8 +7,9 @@ Installation
 2. Configure appsettings.json with your own details.
 3. Launch project.
 
-Technical knowledge:
+Technical specs:
 - Generic Repository.
+- Entity framework.
 
 
 Entity Framework:
