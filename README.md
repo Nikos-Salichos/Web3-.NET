@@ -8,6 +8,8 @@ Installation
 3. Launch project.
 
 Technical knowledge:
+- Generic Repository.
+
 
 Entity Framework:
 
