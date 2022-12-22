@@ -11,6 +11,7 @@ using Serilog.Core;
 using Serilog.Events;
 using System.Text.Json.Serialization;
 using WebApi;
+using WebApi.Extensions;
 using WebApi.GraphQL;
 using WebApi.Utilities;
 
