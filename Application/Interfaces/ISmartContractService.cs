@@ -8,7 +8,6 @@ namespace Application.Interfaces
     {
         Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync();
         Task<TransactionReceipt> DeploySmartContractAsync(SmartContract smartContract);
-
         Task<dynamic> CallContractVariableAsync(string variableName, SmartContract smartContractJson);
     }
 }

@@ -34,8 +34,7 @@ namespace Application.Services
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
         {
             var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
-            List<SmartContractDTO> allSmartContractsDTO = _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
-            return allSmartContractsDTO;
+            return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContract smartContract)
@@ -75,7 +74,7 @@ namespace Application.Services
             {
                 smartContract.Address = deployContract.ContractAddress;
 
-                var savedToDatababase = await _unitOfWork.SmartContractRepository.Add(smartContract);
+                await _unitOfWork.SmartContractRepository.Add(smartContract);
                 await _unitOfWork.SaveChangesAsync();
             }
             return deployContract;
