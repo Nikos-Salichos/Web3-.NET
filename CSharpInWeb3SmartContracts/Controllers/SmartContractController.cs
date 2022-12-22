@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -28,6 +29,8 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllSmartContracts")]
+        [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
+        [Domain.Models.LimitRequest(MaxRequests = 2, TimeWindow = 5)]
         public async Task<ActionResult> GetAllSmartContracts()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
