@@ -83,7 +83,9 @@ namespace WebApi.CustomMiddleware
             };
 
             if (apiDecorator.RateLimitType == RateLimitType.IpAddress)
+            {
                 keys.Add(GetClientIpAddress(context));
+            }
 
             // TODO: Implement other strategies.
 
