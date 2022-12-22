@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.Enterprise;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Collections.Concurrent;
 using System.Net;
@@ -82,7 +82,7 @@ namespace WebApi.CustomMiddleware
                 context.Request.Path
             };
 
-            if (apiDecorator.StrategyType == StrategyTypeEnum.IpAddress)
+            if (apiDecorator.RateLimitType == RateLimitType.IpAddress)
                 keys.Add(GetClientIpAddress(context));
 
             // TODO: Implement other strategies.

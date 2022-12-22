@@ -3,6 +3,6 @@
     [AttributeUsage(AttributeTargets.Method)]
     public class RateLimitDecorator : Attribute
     {
-        public StrategyTypeEnum StrategyType { get; set; }
+        public RateLimitType RateLimitType { get; set; }
     }
 }
