@@ -11,6 +11,7 @@ using Serilog.Core;
 using Serilog.Events;
 using System.Text.Json.Serialization;
 using WebApi;
+using WebApi.CustomMiddleware;
 using WebApi.Extensions;
 using WebApi.GraphQL;
 using WebApi.Utilities;
@@ -91,11 +92,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseGlobalExceptionMiddleware();
-
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseGlobalExceptionMiddleware();
+app.UseMiddleware<RateLimitingMiddlware>();
 
 app.UseCors();
 
