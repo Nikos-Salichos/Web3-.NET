@@ -1,7 +1,7 @@
 ﻿using Domain.Models;
 using System.Net;
 
-namespace WebApi.CustomExceptionMiddleware
+namespace WebApi.CustomMiddleware
 {
     public class ExceptionHandlingMiddleware
     {

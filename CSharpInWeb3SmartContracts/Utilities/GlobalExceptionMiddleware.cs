@@ -1,4 +1,4 @@
-﻿using WebApi.CustomExceptionMiddleware;
+﻿using WebApi.CustomMiddleware;
 
 namespace WebApi.Utilities
 {

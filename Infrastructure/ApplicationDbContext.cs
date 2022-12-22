@@ -1,5 +1,5 @@
-﻿using Application.Interfaces;
-using Domain.Models;
+﻿using Domain.Models;
+using Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
