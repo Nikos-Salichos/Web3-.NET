@@ -6,7 +6,9 @@ namespace WebApi.Extensions
     {
         public static void UseGlobalExceptionMiddleware(this IApplicationBuilder app)
         {
-            app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
+            //app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseMiddleware<RateLimitingMiddlware>();
         }
     }
 }
