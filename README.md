@@ -7,6 +7,11 @@ Installation
 2. Configure appsettings.json with your own details.
 3. Launch project.
 
+Technical specs:
+- Generic Repository.
+- Entity framework.
+
+
 Entity Framework:
 
 Add-Migration "DB Initialize"
