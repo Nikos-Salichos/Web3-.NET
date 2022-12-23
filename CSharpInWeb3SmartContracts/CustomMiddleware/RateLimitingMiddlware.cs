@@ -38,14 +38,12 @@ namespace WebApi.CustomMiddleware
             string key = GetCurrentClientKey(apiDecorator, context);
 
             var previousApiCall = GetPreviousApiCallByKey(key);
-            if (previousApiCall != null)
+            if (previousApiCall != null && DateTime.Now < previousApiCall.Value.AddSeconds(1))
             {
-
-                if (DateTime.Now < previousApiCall.Value.AddSeconds(5))
-                {
-                    context.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;
-                    return;
-                }
+                context.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsJsonAsync("Too many requests", default);
+                return;
             }
 
             UpdateApiCallFor(key);
