@@ -32,7 +32,7 @@ namespace WebApi.Controllers
         [HttpGet("GetAllSmartContracts")]
         [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
         [RateLimitDecorator(RateLimitType = RateLimitType.PerUser)]
-        public async Task<ActionResult> GetAllSmartContracts()
+        public async Task<ActionResult> GetAllSmartContractsAsync()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
             return Ok(allSmartContracts);
