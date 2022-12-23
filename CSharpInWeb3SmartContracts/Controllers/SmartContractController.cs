@@ -53,7 +53,6 @@ namespace WebApi.Controllers
             var deployedSmartContract = await _smartContractService.CallContractVariableAsync(variableName, smartContractModel);
             return Ok(deployedSmartContract);
 
-            Contract? smartContract = web3.Eth.GetContract(smartContractModel?.Abi?.ToString(), smartContractModel?.Address);
             Function? variable = smartContract.GetFunction(variableName);
 
             dynamic variableValue = await variable.CallAsync<dynamic>();
