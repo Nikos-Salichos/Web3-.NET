@@ -17,14 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Examples\CallVariableExample.txt" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Include="Examples\CallVariableExample.txt" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.5.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="GraphQL" Version="7.2.1" />
