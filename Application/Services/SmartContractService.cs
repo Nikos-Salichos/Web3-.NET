@@ -95,7 +95,7 @@ namespace Application.Services
                 throw new ArgumentNullException(nameof(variableValue), "VariableName cannot be null");
             }
 
-            return variableName;
+            return variableValue;
         }
 
     }
