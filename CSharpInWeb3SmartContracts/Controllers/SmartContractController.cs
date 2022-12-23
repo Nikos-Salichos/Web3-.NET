@@ -53,8 +53,6 @@ namespace WebApi.Controllers
             var deployedSmartContract = await _smartContractService.CallContractVariableAsync(variableName, smartContractModel);
             return Ok(deployedSmartContract);
 
-            dynamic variableValue = await variable.CallAsync<dynamic>();
-
             if (variableValue is null)
             {
                 return Ok(variableName + "is null");
