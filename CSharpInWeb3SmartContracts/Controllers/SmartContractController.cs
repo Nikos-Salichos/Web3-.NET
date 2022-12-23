@@ -53,9 +53,6 @@ namespace WebApi.Controllers
             var deployedSmartContract = await _smartContractService.CallContractVariableAsync(variableName, smartContractModel);
             return Ok(deployedSmartContract);
 
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
             Contract? smartContract = web3.Eth.GetContract(smartContractModel?.Abi?.ToString(), smartContractModel?.Address);
             Function? variable = smartContract.GetFunction(variableName);
 
