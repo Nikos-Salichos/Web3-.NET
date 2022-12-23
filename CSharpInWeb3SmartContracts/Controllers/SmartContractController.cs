@@ -50,12 +50,8 @@ namespace WebApi.Controllers
         [HttpPost("CallContractVariable")]
         public async Task<ActionResult> CallContractVariable(string variableName, [FromBody] SmartContract smartContractModel)
         {
-            var deployedSmartContract = await _smartContractService.CallContractVariableAsync(variableName, smartContractModel);
-            return Ok(deployedSmartContract);
-
-
-
-            return Ok(variableName + ": " + variableValue.ToString());
+            var variableResult = await _smartContractService.CallContractVariableAsync(variableName, smartContractModel);
+            return Ok(variableName + ": " + variableResult.ToString());
         }
 
         [Consumes("application/json")]
