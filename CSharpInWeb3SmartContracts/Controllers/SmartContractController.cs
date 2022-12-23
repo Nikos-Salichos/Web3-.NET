@@ -48,8 +48,11 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallContractVariable")]
-        public async Task<ActionResult> CallContractVariable(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> CallContractVariable(string variableName, [FromBody] SmartContract smartContractModel)
         {
+            var deployedSmartContract = await _smartContractService.CallContractVariableAsync(string variableName, smartContractModel);
+            return Ok(deployedSmartContract);
+
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
