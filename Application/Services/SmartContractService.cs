@@ -70,7 +70,7 @@ namespace Application.Services
                                                                                                                 account.Address,
                                                                                                                 estimatedGas,
                                                                                                                 null, null, null, parameters);
-            if (deployContract.Succeeded())
+            if (smartContract != null && deployContract.Succeeded())
             {
                 smartContract.Address = deployContract.ContractAddress;
 
