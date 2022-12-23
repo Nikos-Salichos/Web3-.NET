@@ -40,7 +40,7 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
-        public async Task<ActionResult> DeployContract([FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> DeployContractSuffix([FromBody] SmartContract smartContractModel)
         {
             var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractModel);
             return Ok(deployedSmartContract);
