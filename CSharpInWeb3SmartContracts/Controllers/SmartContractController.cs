@@ -65,7 +65,8 @@ namespace WebApi.Controllers
         [HttpPost("CallWriteFunction")]
         public async Task<ActionResult> CallWriteFunctionAsync(string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
-
+            dynamic functionResult = await _smartContractService.WriteContractFunctionVariableAsync(functionName, sendAsEth, smartContractModel);
+            return Ok(functionName + ": " + functionResult.ToString());
         }
 
         [Consumes("application/json")]

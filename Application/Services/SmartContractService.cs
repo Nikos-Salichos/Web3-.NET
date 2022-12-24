@@ -11,6 +11,7 @@ using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using Newtonsoft.Json;
 using System.Numerics;
 
 namespace Application.Services
@@ -126,7 +127,7 @@ namespace Application.Services
 
             HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
             TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
-            return functionResult;
+            return JsonConvert.SerializeObject(functionResult);
         }
     }
 }
