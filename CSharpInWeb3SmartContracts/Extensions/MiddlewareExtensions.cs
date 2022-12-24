@@ -1,4 +1,5 @@
-﻿using WebApi.CustomMiddleware;
+﻿using AspNetCoreRateLimit;
+using WebApi.CustomMiddleware;
 
 namespace WebApi.Extensions
 {
@@ -6,9 +7,17 @@ namespace WebApi.Extensions
     {
         public static void UseGlobalExceptionMiddleware(this IApplicationBuilder app)
         {
-            //app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseMiddleware<RateLimitingMiddlware>();
+        }
+
+        public static void RateLimit(this IApplicationBuilder app)
+        {
+            app.UseIpRateLimiting();
+        }
+
+        public static void AddRateLimiting(this IServiceCollection services)
+        {
+
         }
     }
 }

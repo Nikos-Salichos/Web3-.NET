@@ -68,6 +68,10 @@ builder.Services.AddFluentValidation();
 builder.Services.AddHttpClient();
 #endregion Api Gateway Pattern (Proxy Controller)
 
+#region Rate Limit
+builder.Services.AddRateLimiting();
+#endregion Rate Limit
+
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
 if (assembly != null)
@@ -99,6 +103,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseGlobalExceptionMiddleware();
+app.RateLimit();
 
 app.UseCors();
 

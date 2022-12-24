@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Domain.DTOs;
-using Domain.Enterprise;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
@@ -30,7 +29,6 @@ namespace WebApi.Controllers
 
         [HttpGet("GetAllSmartContracts")]
         [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
-        [RateLimitDecorator(RateLimitType = RateLimitType.PerUser)]
         public async Task<ActionResult> GetAllSmartContractsAsync()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
@@ -65,7 +63,7 @@ namespace WebApi.Controllers
         [HttpPost("CallWriteFunction")]
         public async Task<ActionResult> CallWriteFunctionAsync(string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
-            dynamic functionResult = await _smartContractService.WriteContractFunctionVariableAsync(functionName, sendAsEth, smartContractModel);
+            var functionResult = await _smartContractService.WriteContractFunctionVariableAsync(functionName, sendAsEth, smartContractModel);
             return Ok(functionName + ": " + functionResult.ToString());
         }
 
