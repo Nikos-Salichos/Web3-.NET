@@ -75,8 +75,9 @@ namespace Application.Services
             if (smartContractDto != null && deployContract.Succeeded())
             {
                 smartContractDto.Address = deployContract.ContractAddress;
+                var smartContract = _mapper.Map<SmartContractDTO, SmartContract>(smartContractDto);
 
-                await _unitOfWork.SmartContractRepository.Add(smartContractDto);
+                await _unitOfWork.SmartContractRepository.Add(smartContract);
                 await _unitOfWork.SaveChangesAsync();
             }
             return deployContract;
