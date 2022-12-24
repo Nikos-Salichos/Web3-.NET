@@ -69,7 +69,7 @@ builder.Services.AddHttpClient();
 #endregion Api Gateway Pattern (Proxy Controller)
 
 #region Rate Limit
-builder.Services.AddRateLimiting();
+builder.Services.AddRateLimiting(builder.Configuration.GetSection("IpRateLimiting"));
 #endregion Rate Limit
 
 //Load Controllers dynamically from DLL

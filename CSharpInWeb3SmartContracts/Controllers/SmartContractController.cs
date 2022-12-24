@@ -29,6 +29,7 @@ namespace WebApi.Controllers
 
         [HttpGet("GetAllSmartContracts")]
         [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> GetAllSmartContractsAsync()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
