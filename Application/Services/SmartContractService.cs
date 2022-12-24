@@ -11,6 +11,7 @@ using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using System.Numerics;
 
 namespace Application.Services
 {
@@ -98,9 +99,34 @@ namespace Application.Services
             return variableValue;
         }
 
-        public async Task<dynamic> WriteContractFunctionVariableAsync(string variableName, SmartContract smartContractJson)
+        public async Task<dynamic> WriteContractFunctionVariableAsync(string functionName, long sendAsEth, SmartContract smartContractJson)
         {
-            throw new NotImplementedException();
+            Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
+
+            Contract? smartContract = web3.Eth.GetContract(smartContractJson.Abi.ToString(), smartContractJson.Address);
+            Function? writeFunction = smartContract.GetFunction(functionName);
+            object[]? parameters = null;
+
+            if (smartContractJson?.Parameters?.Count > 0)
+            {
+                parameters = smartContractJson.Parameters.ToArray();
+                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
+                {
+                    parameters = null;
+                }
+            }
+
+            HexBigInteger? value = null;
+            BigInteger wei = Web3.Convert.ToWei(sendAsEth);
+            if (wei != 0)
+            {
+                value = new HexBigInteger(wei);
+            }
+
+            HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
+            TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
+            return functionResult;
         }
     }
 }

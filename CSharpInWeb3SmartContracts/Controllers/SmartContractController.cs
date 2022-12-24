@@ -9,7 +9,6 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
-using System.Numerics;
 using WebApi.DTOs;
 using WebApi.Utilities;
 
@@ -64,34 +63,9 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallWriteFunction")]
-        public async Task<ActionResult> CallWriteFunctionAsync(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> CallWriteFunctionAsync(string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
-            Function? writeFunction = smartContract.GetFunction(functionName);
-            object[]? parameters = null;
-
-            if (smartContractModel?.Parameters?.Count > 0)
-            {
-                parameters = smartContractModel.Parameters.ToArray();
-                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                {
-                    parameters = null;
-                }
-            }
-
-            HexBigInteger? value = null;
-            BigInteger wei = Web3.Convert.ToWei(sendAsEth);
-            if (wei != 0)
-            {
-                value = new HexBigInteger(wei);
-            }
-
-            HexBigInteger? estimatedGas = await writeFunction.EstimateGasAsync(account.Address, null, value, parameters);
-            TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
-            return Ok(functionResult);
         }
 
         [Consumes("application/json")]
