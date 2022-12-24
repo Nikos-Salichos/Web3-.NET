@@ -64,7 +64,7 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("CallWriteFunction")]
-        public async Task<ActionResult> CallWriteFunction(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> CallWriteFunctionAsync(Chain chain, string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
