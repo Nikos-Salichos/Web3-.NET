@@ -18,23 +18,7 @@ namespace WebApi.Extensions
         public static void AddRateLimiting(this IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.Configure<IpRateLimitOptions>(options =>
-            {
-                options.EnableEndpointRateLimiting = true;
-                options.StackBlockedRequests = false;
-                options.HttpStatusCode = 429;
-                options.RealIpHeader = "X-Real-IP";
-                options.ClientIdHeader = "X-ClientId";
-                options.GeneralRules = new List<RateLimitRule>
-                {
-                    new RateLimitRule
-                    {
-                        Endpoint = "GET:/GetAllSmartContracts",
-                        Period = "2s",
-                        Limit = 2,
-                    }
-                };
-            });
+            services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
