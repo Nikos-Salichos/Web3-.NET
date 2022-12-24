@@ -1,11 +1,10 @@
-﻿using Domain.Models;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Application.Validators
 {
-    public class SmartContractValidator : AbstractValidator<SmartContract>
+    public class SmartContractDtoValidator : AbstractValidator<SmartContractDTO>
     {
-        public SmartContractValidator()
+        public SmartContractDtoValidator()
         {
             RuleFor(x => x.Bytecode).NotNull();
             RuleFor(x => x.Bytecode).NotEmpty();

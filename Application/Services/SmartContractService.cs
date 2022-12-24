@@ -39,44 +39,44 @@ namespace Application.Services
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
-        public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContract smartContract)
+        public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContractDto)
         {
-            SmartContractValidator smartContractValidator = new SmartContractValidator();
-            var IsValid = await smartContractValidator.ValidateAsync(smartContract);
+            SmartContractDtoValidator smartContractValidator = new SmartContractDtoValidator();
+            var IsValid = await smartContractValidator.ValidateAsync(smartContractDto);
 
             if (!IsValid.IsValid)
             {
                 throw new ArgumentNullException(IsValid.ToString());
             }
 
-            Account? account = new Account(_user.PrivateKey, smartContract.Chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContract.Chain));
+            Account? account = new Account(_user.PrivateKey, smartContractDto.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractDto.Chain));
 
             object[]? parameters = null;
-            if (smartContract?.Parameters?.Count > 0)
+            if (smartContractDto?.Parameters?.Count > 0)
             {
-                parameters = smartContract.Parameters.ToArray();
+                parameters = smartContractDto.Parameters.ToArray();
                 if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
                 {
                     parameters = null;
                 }
             }
 
-            HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContract?.Abi?.ToString(),
-                                                                                      smartContract?.Bytecode,
+            HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractDto?.Abi?.ToString(),
+                                                                                      smartContractDto?.Bytecode,
                                                                                       account.Address,
                                                                                       parameters);
 
-            TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContract?.Abi?.ToString(),
-                                                                                                                smartContract?.Bytecode,
+            TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractDto?.Abi?.ToString(),
+                                                                                                                smartContractDto?.Bytecode,
                                                                                                                 account.Address,
                                                                                                                 estimatedGas,
                                                                                                                 null, null, null, parameters);
-            if (smartContract != null && deployContract.Succeeded())
+            if (smartContractDto != null && deployContract.Succeeded())
             {
-                smartContract.Address = deployContract.ContractAddress;
+                smartContractDto.Address = deployContract.ContractAddress;
 
-                await _unitOfWork.SmartContractRepository.Add(smartContract);
+                await _unitOfWork.SmartContractRepository.Add(smartContractDto);
                 await _unitOfWork.SaveChangesAsync();
             }
             return deployContract;

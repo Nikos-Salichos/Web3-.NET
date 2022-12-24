@@ -13,6 +13,7 @@ namespace Domain.Models
         [NotMapped]
         public object? Abi { get; set; }
 
+
         [Column("Abi")]
         public string AbiSerialized
         {

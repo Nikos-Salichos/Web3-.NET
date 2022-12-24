@@ -29,7 +29,6 @@ namespace WebApi.Controllers
 
         [HttpGet("GetAllSmartContracts")]
         [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> GetAllSmartContractsAsync()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
@@ -38,9 +37,9 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
-        public async Task<ActionResult> DeployContractSuffix([FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> DeployContractSuffix([FromBody] SmartContractDTO smartContractDto)
         {
-            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractModel);
+            var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractDto);
             return Ok(deployedSmartContract);
         }
 
