@@ -19,5 +19,11 @@ namespace WebApi.Controllers
             return Content(await _httpClient.GetStringAsync(url));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SmartContracts()
+        {
+            return await ProxyTo("https://localhost:7093/GetAllSmartContracts");
+        }
+
     }
 }
