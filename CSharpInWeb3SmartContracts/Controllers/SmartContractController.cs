@@ -106,12 +106,12 @@ namespace WebApi.Controllers
                     }
                 }
 
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi.ToString(),
+                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractModel?.Abi?.ToString(),
                                                                                           smartContractModel?.Bytecode,
                                                                                           _user.WalletAddress,
                                                                                           parameters);
 
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi.ToString(),
+                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(smartContractModel?.Abi?.ToString(),
                                                                                                                     smartContractModel?.Bytecode,
                                                                                                                     _user.WalletAddress,
                                                                                                                     estimatedGas,
