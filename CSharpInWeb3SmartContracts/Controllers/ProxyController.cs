@@ -8,5 +8,11 @@ namespace WebApi.Controllers
     public class ProxyController : ControllerBase
     {
         private readonly HttpClient _httpClient;
+
+        public ProxyController(IHttpClientFactory httpclient)
+        {
+            _httpClient = httpclient.CreateClient();
+        }
+
     }
 }
