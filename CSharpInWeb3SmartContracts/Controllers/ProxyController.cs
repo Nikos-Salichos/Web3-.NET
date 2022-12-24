@@ -14,5 +14,10 @@ namespace WebApi.Controllers
             _httpClient = httpclient.CreateClient();
         }
 
+        private async Task<ContentResult> ProxyTo(string url)
+        {
+            return Content(await _httpClient.GetStringAsync(url));
+        }
+
     }
 }
