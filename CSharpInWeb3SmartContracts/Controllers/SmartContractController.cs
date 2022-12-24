@@ -50,34 +50,16 @@ namespace WebApi.Controllers
         [HttpPost("CallContractVariable")]
         public async Task<ActionResult> CallContractVariableAsync(string variableName, [FromBody] SmartContract smartContractModel)
         {
-            var variableResult = await _smartContractService.CallContractVariableAsync(variableName, smartContractModel);
+            var variableResult = await _smartContractService.ReadContractFunctionVariableAsync(variableName, smartContractModel);
             return Ok(variableName + ": " + variableResult.ToString());
         }
 
         [Consumes("application/json")]
         [HttpPost("CallReadFunction")]
-        public async Task<ActionResult> CallReadFunction(Chain chain, string variableName, [FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> ReadContractFunctionAsync(string variableName, [FromBody] SmartContract smartContractModel)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-            Contract? smartContract = web3.Eth.GetContract(smartContractModel.Abi.ToString(), smartContractModel.Address);
-
-            Function? readFunction = smartContract.GetFunction(variableName);
-            object[]? parameters = null;
-
-            if (smartContractModel?.Parameters?.Count > 0)
-            {
-                parameters = smartContractModel.Parameters.ToArray();
-                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                {
-                    parameters = null;
-                }
-            }
-
-            dynamic variableValue = await readFunction.CallAsync<dynamic>(parameters);
-
-            return Ok(variableName + ": " + variableValue.ToString());
+            var variableResult = await _smartContractService.ReadContractFunctionVariableAsync(variableName, smartContractModel);
+            return Ok(variableName + ": " + variableResult.ToString());
         }
 
         [Consumes("application/json")]
