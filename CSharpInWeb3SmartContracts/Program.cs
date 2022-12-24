@@ -64,6 +64,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 builder.Services.AddFluentValidation();
 #endregion FluentValidation
 
+#region Api Gateway Pattern (Proxy Controller)
+builder.Services.AddHttpClient();
+#endregion Api Gateway Pattern (Proxy Controller)
 
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
