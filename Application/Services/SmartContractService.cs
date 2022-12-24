@@ -98,5 +98,9 @@ namespace Application.Services
             return variableValue;
         }
 
+        public async Task<dynamic> WriteContractFunctionVariableAsync(string variableName, SmartContract smartContractJson)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
