@@ -13,5 +13,13 @@ namespace Application.Handlers.SmartContracts
         {
             _unitOfWork = unitOfWork;
         }
+
+        public async Task<SmartContract> Handle(CreateSmartContractCommand request, CancellationToken cancellationToken)
+        {
+            await _unitOfWork.SmartContractRepository.Add(request.SmartContract);
+            await _unitOfWork.SaveChangesAsync();
+
+            return request.SmartContract;
+        }
     }
 }

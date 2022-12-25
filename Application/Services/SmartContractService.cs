@@ -1,4 +1,5 @@
-﻿using Application.CQRS.Queries;
+﻿using Application.CQRS.Commands;
+using Application.CQRS.Queries;
 using Application.Interfaces;
 using Application.Utilities;
 using Application.Validators;
@@ -81,9 +82,7 @@ namespace Application.Services
             {
                 smartContractDto.Address = deployContract.ContractAddress;
                 var smartContract = _mapper.Map<SmartContractDTO, SmartContract>(smartContractDto);
-
-                await _unitOfWork.SmartContractRepository.Add(smartContract);
-                await _unitOfWork.SaveChangesAsync();
+                var saveSmartContract = await _mediator.Send(new CreateSmartContractCommand(smartContract));
             }
             return deployContract;
         }
@@ -111,7 +110,7 @@ namespace Application.Services
             Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
-            Contract? smartContract = web3.Eth.GetContract(smartContractJson.Abi.ToString(), smartContractJson.Address);
+            Contract? smartContract = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
             Function? writeFunction = smartContract.GetFunction(functionName);
             object[]? parameters = null;
 
