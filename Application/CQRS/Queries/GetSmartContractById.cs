@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.CQRS.Queries
 {
-    public class GetSmartContractById : BaseEntity, IRequest<SmartContract>
+    public class GetSmartContractById : IEntity, IRequest<SmartContract>
     {
     }
 }

@@ -3,7 +3,7 @@ using Nethereum.Signer;
 
 namespace Domain.DTOs
 {
-    public class SmartContractDTO : BaseEntity
+    public class SmartContractDTO : IEntity
     {
         public string? Address { get; set; }
         public string? Bytecode { get; set; }
