@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <Folder Include="CQRS\Commands\" />
-    <Folder Include="CQRS\Queries\" />
   </ItemGroup>
 
 </Project>
