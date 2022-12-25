@@ -1,5 +1,6 @@
 using Application;
 using Application.Mappers;
+using Application.RegisterServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using GraphQL.Client.Abstractions;
@@ -59,6 +60,10 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 #region AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #endregion AutoMapper
+
+#region Mediatr
+builder.Services.RegisterMediatr();
+#endregion Mediatr
 
 #region FluentValidation
 builder.Services.AddFluentValidation();

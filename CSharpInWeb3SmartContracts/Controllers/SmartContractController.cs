@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.DTOs;
 using Domain.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -20,7 +21,9 @@ namespace WebApi.Controllers
 
         private readonly ISmartContractService _smartContractService;
 
-        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService)
+        private readonly IMediator _mediator;
+
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, IMediator mediator)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>();
