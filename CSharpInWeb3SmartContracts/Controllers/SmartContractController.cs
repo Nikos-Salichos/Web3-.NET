@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, IMediator mediator)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>();
+            _user = configuration.GetSection("User").Get<User>()!;
             _smartContractService = smartContractService;
             _mediator = mediator;
         }
