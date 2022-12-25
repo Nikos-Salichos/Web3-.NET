@@ -1,8 +1,6 @@
-﻿using Application.CQRS.Queries;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Domain.DTOs;
 using Domain.Models;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -22,22 +20,17 @@ namespace WebApi.Controllers
 
         private readonly ISmartContractService _smartContractService;
 
-        private readonly IMediator _mediator;
-
-        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, IMediator mediator)
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
             _smartContractService = smartContractService;
-
         }
 
         [HttpGet("GetAllSmartContracts")]
         [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
         public async Task<ActionResult> GetAllSmartContractsAsync()
         {
-            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery());
-
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
             return Ok(allSmartContracts);
         }

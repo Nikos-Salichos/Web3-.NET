@@ -1,10 +1,12 @@
-﻿using Application.Interfaces;
+﻿using Application.CQRS.Queries;
+using Application.Interfaces;
 using Application.Utilities;
 using Application.Validators;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -25,17 +27,21 @@ namespace Application.Services
 
         private readonly IMapper _mapper;
 
-        public SmartContractService(IConfiguration configuration, IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IMediator _mediator;
+
+        public SmartContractService(IConfiguration configuration, IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
         {
-            var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            // var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery());
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 

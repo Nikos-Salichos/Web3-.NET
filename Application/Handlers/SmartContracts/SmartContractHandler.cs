@@ -9,11 +9,9 @@ namespace Application.Handlers.SmartContracts
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        private readonly IMediator _mediator;
-        public SmartContractHandler(IUnitOfWork unitOfWork, IMediator mediator)
+        public SmartContractHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mediator = mediator;
         }
 
         public async Task<IEnumerable<SmartContract>> Handle(GetSmartContractsListQuery request, CancellationToken cancellationToken)
