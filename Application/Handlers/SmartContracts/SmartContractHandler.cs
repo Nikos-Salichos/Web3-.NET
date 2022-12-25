@@ -16,7 +16,8 @@ namespace Application.Handlers.SmartContracts
 
         public async Task<IEnumerable<SmartContract>> Handle(GetSmartContractsListQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            return allSmartContracts;
         }
     }
 }

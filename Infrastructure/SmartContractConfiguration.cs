@@ -9,6 +9,8 @@ namespace Infrastructure
         public void Configure(EntityTypeBuilder<SmartContract> builder)
         {
             builder.HasKey(smartContract => smartContract.Address);
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Property(p => p.Id).HasColumnOrder(0);
             builder.Property(smartContract => smartContract.Address).IsRequired();
         }
     }
