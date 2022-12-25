@@ -1,10 +1,11 @@
-﻿using Nethereum.Signer;
+﻿using Domain.Entities;
+using Nethereum.Signer;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models
 {
-    public class SmartContract
+    public class SmartContract : BaseEntity
     {
         public string? Address { get; set; }
         public string? Bytecode { get; set; }
