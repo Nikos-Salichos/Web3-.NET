@@ -1,9 +1,9 @@
-﻿using Domain.DTOs;
+﻿using Domain.Models;
 using MediatR;
 
 namespace Application.CQRS.Queries
 {
-    public class GetSmartContractsListQuery : IRequest<IEnumerable<SmartContractDTO>>
+    public class GetSmartContractsListQuery : IRequest<IEnumerable<SmartContract>>
     {
     }
 }

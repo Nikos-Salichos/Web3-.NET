@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
             _smartContractService = smartContractService;
-            _mediator = mediator;
+
         }
 
         [HttpGet("GetAllSmartContracts")]

@@ -1,5 +1,4 @@
-﻿using Application.CQRS.Queries;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.Utilities;
 using Application.Validators;
 using AutoMapper;
@@ -35,12 +34,6 @@ namespace Application.Services
         }
 
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
-        {
-            var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
-            return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
-        }
-
-        public async Task<IEnumerable<SmartContractDTO>> Handle(GetSmartContractsListQuery request, CancellationToken cancellationToken)
         {
             var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());

@@ -1,22 +1,25 @@
 ﻿using Application.CQRS.Queries;
-using Domain.DTOs;
+using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
 using MediatR;
 
 namespace Application.Handlers.SmartContracts
 {
-    public class SmartContractHandler : IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContractDTO>>
+    public class SmartContractHandler : IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContract>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public SmartContractHandler()
+        private readonly IMediator _mediator;
+        public SmartContractHandler(IUnitOfWork unitOfWork, IMediator mediator)
         {
-
+            _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
-        public Task<IEnumerable<SmartContractDTO>> Handle(GetSmartContractsListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<SmartContract>> Handle(GetSmartContractsListQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            return allSmartContracts;
         }
     }
 }
