@@ -5,11 +5,11 @@ using MediatR;
 
 namespace Application.Handlers.SmartContracts
 {
-    public class SmartContractHandler : IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContract>>
+    public class GetAllSmartContractHandler : IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContract>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public SmartContractHandler(IUnitOfWork unitOfWork)
+        public GetAllSmartContractHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

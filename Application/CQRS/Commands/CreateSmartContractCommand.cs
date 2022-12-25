@@ -1,9 +1,9 @@
-﻿using Domain.DTOs;
+﻿using Domain.Models;
 using MediatR;
 
 namespace Application.CQRS.Commands
 {
-    public class CreateSmartContractCommand : IRequest<SmartContractDTO>
+    public class CreateSmartContractCommand : IRequest<SmartContract>
     {
     }
 }
