@@ -6,7 +6,6 @@ using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -18,7 +17,7 @@ using System.Numerics;
 
 namespace Application.Services
 {
-    public class SmartContractService : ISmartContractService, IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContractDTO>>
+    public class SmartContractService : ISmartContractService
     {
         private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
