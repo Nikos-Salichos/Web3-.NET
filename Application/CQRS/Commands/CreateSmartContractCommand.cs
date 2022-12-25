@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.CQRS.Commands
 {
-    public class CreateSmartContractCommand : IRequest<SmartContract>
+    public class CreateSmartContractCommand : SmartContract, IRequest<SmartContract>
     {
     }
 }

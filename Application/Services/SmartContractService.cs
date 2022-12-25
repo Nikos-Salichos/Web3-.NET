@@ -40,7 +40,6 @@ namespace Application.Services
 
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
         {
-            // var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
             var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery());
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
