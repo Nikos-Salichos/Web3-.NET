@@ -1,8 +1,9 @@
-﻿using Nethereum.Signer;
+﻿using Domain.Entities;
+using Nethereum.Signer;
 
 namespace Domain.DTOs
 {
-    public class SmartContractDTO
+    public class SmartContractDTO : BaseEntity
     {
         public string? Address { get; set; }
         public string? Bytecode { get; set; }

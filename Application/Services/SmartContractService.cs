@@ -1,10 +1,12 @@
-﻿using Application.Interfaces;
+﻿using Application.CQRS.Queries;
+using Application.Interfaces;
 using Application.Utilities;
 using Application.Validators;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
@@ -16,7 +18,7 @@ using System.Numerics;
 
 namespace Application.Services
 {
-    public class SmartContractService : ISmartContractService
+    public class SmartContractService : ISmartContractService, IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContractDTO>>
     {
         private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
@@ -34,6 +36,12 @@ namespace Application.Services
         }
 
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
+        {
+            var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
+            return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
+        }
+
+        public async Task<IEnumerable<SmartContractDTO>> Handle(GetSmartContractsListQuery request, CancellationToken cancellationToken)
         {
             var allSmartContracts = await _unitOfWork.SmartContractRepository.GetSmartContracts();
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
@@ -130,5 +138,6 @@ namespace Application.Services
             TransactionReceipt? functionResult = await writeFunction.SendTransactionAndWaitForReceiptAsync(account.Address, estimatedGas, value, null, parameters);
             return JsonConvert.SerializeObject(functionResult);
         }
+
     }
 }

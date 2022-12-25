@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.CQRS.Queries;
+using Application.Interfaces;
 using Domain.DTOs;
 using Domain.Models;
 using MediatR;
@@ -35,6 +36,8 @@ namespace WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<SmartContractDTO>), StatusCodes.Status200OK)]
         public async Task<ActionResult> GetAllSmartContractsAsync()
         {
+            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery());
+
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
             return Ok(allSmartContracts);
         }
