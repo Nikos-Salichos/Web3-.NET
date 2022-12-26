@@ -135,6 +135,9 @@ namespace Application.Services
         {
             Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
+
+            Contract? smartContract = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
+
         }
     }
 }
