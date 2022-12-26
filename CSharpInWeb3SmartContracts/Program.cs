@@ -66,12 +66,12 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #endregion AutoMapper
 
-#region Cache
+#region Response Cache Profiles
 builder.Services.AddControllers(option =>
 {
     option.CacheProfiles.Add("DefaultCache", new CacheProfile() { Duration = 10 });
 });
-#endregion Cache
+#endregion Response Cache Profiles
 
 #region Mediatr
 builder.Services.RegisterMediatr();
@@ -89,9 +89,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddRateLimiting(builder.Configuration.GetSection("IpRateLimiting"));
 #endregion Rate Limit
 
-#region
+#region Read User appsettings.json
 builder.Services.Configure<User>(builder.Configuration.GetSection("User"));
-#endregion
+#endregion Read User appsettings.json
 
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");

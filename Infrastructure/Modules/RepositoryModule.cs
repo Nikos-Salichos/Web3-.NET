@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using Infrastructure.Persistence.Interfaces;
-using Infrastructure.Persistence.Repositories;
 
 namespace Infrastructure.Modules
 {
@@ -12,8 +10,6 @@ namespace Infrastructure.Modules
                    .Where(t => t.Name.EndsWith("Repository"))
                    .AsImplementedInterfaces()
                    .SingleInstance();
-
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWorkRepository>().SingleInstance();
         }
     }
 }
