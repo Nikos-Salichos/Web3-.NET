@@ -68,8 +68,8 @@ namespace WebApi.Controllers
         }
 
         [Consumes("application/json")]
-        [HttpPost("TrackCryptoWhalesForAnyToken")]
-        public async Task<ActionResult> TrackCryptoWhalesForAnyToken(Chain chain, [FromBody] SmartContract smartContractModel)
+        [HttpPost("TrackAnyEvent")]
+        public async Task<ActionResult> TrackAnyEventAsync(Chain chain, [FromBody] SmartContract smartContractModel)
         {
             Account? account = new Account(_user.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));

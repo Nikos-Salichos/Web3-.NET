@@ -78,7 +78,7 @@ namespace Application.Services
             {
                 smartContractDto.Address = deployContract.ContractAddress;
                 var smartContract = _mapper.Map<SmartContractDTO, SmartContract>(smartContractDto);
-                var saveSmartContract = await _mediator.Send(new CreateSmartContractCommand(smartContract));
+                var saveSmartContract = await _mediator.Send(new CreateSmartContractCommand(smartContract), default);
             }
             return deployContract;
         }

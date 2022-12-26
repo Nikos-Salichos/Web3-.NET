@@ -10,5 +10,6 @@ namespace Application.Interfaces
         Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContract);
         Task<dynamic> ReadContractFunctionVariableAsync(string variableName, SmartContract smartContractJson);
         Task<dynamic> WriteContractFunctionVariableAsync(string variableName, long sendAsEth, SmartContract smartContractJson);
+        Task<dynamic> TrackEventAsync(string eventName, SmartContract smartContractJson);
     }
 }
