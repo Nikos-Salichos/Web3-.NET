@@ -1,4 +1,8 @@
-﻿using Autofac;
+﻿using Application.Interfaces;
+using Application.Services;
+using Autofac;
+using Infrastructure.Persistence.Interfaces;
+using Infrastructure.Persistence.Repositories;
 
 namespace WebApi
 {
@@ -6,7 +10,6 @@ namespace WebApi
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SmartContractRepository>().As<ISmartContractRepository>().SingleInstance();
             builder.RegisterType<SmartContractService>().As<ISmartContractService>().SingleInstance();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().SingleInstance();
             builder.RegisterType<SingletonOptionsService>().As<ISingletonOptionsService>().SingleInstance();
