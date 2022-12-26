@@ -21,7 +21,6 @@ namespace Application.Services
 {
     public class SmartContractService : ISmartContractService
     {
-        private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
 
         private readonly IMapper _mapper;
@@ -31,7 +30,6 @@ namespace Application.Services
         public SmartContractService(IConfiguration configuration, IMapper mapper, IMediator mediator)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>()!;
             _mapper = mapper;
             _mediator = mediator;
         }

@@ -3,6 +3,7 @@ using Application.Mappers;
 using Application.RegisterServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Domain.Models;
 using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
@@ -84,6 +85,10 @@ builder.Services.AddHttpClient();
 #region Rate Limit
 builder.Services.AddRateLimiting(builder.Configuration.GetSection("IpRateLimiting"));
 #endregion Rate Limit
+
+#region
+builder.Services.Configure<User>(builder.Configuration.GetSection("User"));
+#endregion
 
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
