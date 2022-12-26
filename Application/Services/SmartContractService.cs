@@ -6,7 +6,6 @@ using Application.Validators;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
-using Infrastructure.Persistence.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Nethereum.Contracts;
@@ -24,13 +23,11 @@ namespace Application.Services
         private readonly User _user = new User();
         public EnumHelper EnumHelper { get; set; }
 
-        private readonly IUnitOfWork _unitOfWork;
-
         private readonly IMapper _mapper;
 
         private readonly IMediator _mediator;
 
-        public SmartContractService(IConfiguration configuration, IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+        public SmartContractService(IConfiguration configuration, IMapper mapper, IMediator mediator)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
