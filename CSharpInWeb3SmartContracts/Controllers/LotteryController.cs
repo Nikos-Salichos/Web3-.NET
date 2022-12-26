@@ -37,29 +37,6 @@ namespace WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet("Deploy")]
-        public async Task<ActionResult> DeployContract(Chain chain)
-        {
-            object[]? parametersForPair = new object[1] { _user.WalletAddress! };
-
-            Account? account = new(_user.PrivateKey, chain);
-            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-            HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
-                                                                                        _byteCode,
-                                                                                        _user.WalletAddress,
-                                                                                        parametersForPair);
-
-            TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
-                                                                                                                 _byteCode,
-                                                                                                                 _user.WalletAddress,
-                                                                                                                 estimatedGas,
-                                                                                                                 null,
-                                                                                                                 parametersForPair);
-
-            return Ok($"Deploy Contract Transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
-        }
-
         [HttpGet("GetRandomNumber")]
         public async Task<ActionResult> GetRandomNumber(Chain chain, string smartContractAddress)
         {
