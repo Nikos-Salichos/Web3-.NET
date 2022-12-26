@@ -142,8 +142,7 @@ namespace Application.Services
             BlockParameter? _lastBlock = BlockParameter.CreateLatest();
             NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
             List<EventLog<TransferEventDTO>>? actions = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
-            return Ok(transfers);
-
+            return JsonConvert.SerializeObject(actions);
         }
     }
 }

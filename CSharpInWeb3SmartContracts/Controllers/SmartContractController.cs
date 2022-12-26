@@ -2,13 +2,11 @@
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
-using WebApi.DTOs;
 using WebApi.Utilities;
 
 namespace WebApi.Controllers
@@ -69,18 +67,10 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("TrackAnyEvent")]
-        public async Task<ActionResult> TrackAnyEventAsync(Chain chain, [FromBody] SmartContract smartContractModel)
+        public async Task<ActionResult> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-            Contract? smartContract = web3.Eth.GetContract(smartContractModel?.Abi?.ToString(), smartContractModel?.Address);
-
-            Event transferEvent = smartContract.GetEvent("Transfer");
-            BlockParameter? _lastBlock = BlockParameter.CreateLatest();
-            NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
-            List<EventLog<TransferEventDTO>>? transfers = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
-
-            return Ok(transfers);
+            var eventResults = await _smartContractService.TrackEventAsync(eventName, smartContractJson);
+            return eventResults.ToJson();
         }
 
         [Consumes("application/json")]
