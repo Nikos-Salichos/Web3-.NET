@@ -31,14 +31,13 @@ namespace Application.Services
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _mediator = mediator;
         }
 
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
         {
-            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery());
+            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery(), default);
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
