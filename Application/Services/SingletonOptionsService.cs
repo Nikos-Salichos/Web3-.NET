@@ -4,11 +4,11 @@ using Microsoft.Extensions.Options;
 
 namespace Application.Services
 {
-    internal class SingletonOptionService : ISingletonOptionService
+    public class SingletonOptionsService : ISingletonOptionsService
     {
         private readonly IOptionsMonitor<User> _userOptions;
 
-        public SingletonOptionService(IOptionsMonitor<User> userOptions)
+        public SingletonOptionsService(IOptionsMonitor<User> userOptions)
         {
             _userOptions = userOptions;
         }

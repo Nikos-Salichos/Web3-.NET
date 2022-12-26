@@ -27,11 +27,14 @@ namespace Application.Services
 
         private readonly IMediator _mediator;
 
-        public SmartContractService(IConfiguration configuration, IMapper mapper, IMediator mediator)
+        private readonly ISingletonOptionsService _singletonOptionsService;
+
+        public SmartContractService(IConfiguration configuration, IMapper mapper, IMediator mediator, ISingletonOptionsService singletonOptionsService)
         {
             EnumHelper = new EnumHelper(configuration);
             _mapper = mapper;
             _mediator = mediator;
+            _singletonOptionsService = singletonOptionsService;
         }
 
         public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
@@ -50,7 +53,7 @@ namespace Application.Services
                 throw new ArgumentNullException(IsValid.ToString());
             }
 
-            Account? account = new Account(_user.PrivateKey, smartContractDto.Chain);
+            Account? account = new Account(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractDto.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractDto.Chain));
 
             object[]? parameters = null;
@@ -84,7 +87,7 @@ namespace Application.Services
 
         public async Task<dynamic> ReadContractFunctionVariableAsync(string variableName, SmartContract smartContractJson)
         {
-            Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+            Account? account = new Account(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractJson.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
             Contract? smartContractObject = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
@@ -102,7 +105,7 @@ namespace Application.Services
 
         public async Task<dynamic> WriteContractFunctionVariableAsync(string functionName, long sendAsEth, SmartContract smartContractJson)
         {
-            Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+            Account? account = new Account(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractJson.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
             Contract? smartContract = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
@@ -132,7 +135,7 @@ namespace Application.Services
 
         public async Task<dynamic> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
-            Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+            Account? account = new Account(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractJson.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
             Contract? smartContract = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);

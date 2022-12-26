@@ -2,7 +2,7 @@
 
 namespace Application.Interfaces
 {
-    public interface ISingletonOptionService
+    public interface ISingletonOptionsService
     {
         User GetUserSettings();
     }
