@@ -9,6 +9,7 @@ using Domain.Models;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Nethereum.Contracts;
+using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
@@ -131,13 +132,17 @@ namespace Application.Services
             return JsonConvert.SerializeObject(functionResult);
         }
 
-        public Task<dynamic> TrackEventAsync(string eventName, SmartContract smartContractJson)
+        public async Task<dynamic> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
             Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
             Contract? smartContract = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
             Event transferEvent = smartContract.GetEvent(eventName);
+            BlockParameter? _lastBlock = BlockParameter.CreateLatest();
+            NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
+            List<EventLog<TransferEventDTO>>? actions = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
+            return Ok(transfers);
 
         }
     }
