@@ -137,6 +137,7 @@ namespace Application.Services
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
 
             Contract? smartContract = web3.Eth.GetContract(smartContractJson?.Abi?.ToString(), smartContractJson?.Address);
+            Event transferEvent = smartContract.GetEvent(eventName);
 
         }
     }
