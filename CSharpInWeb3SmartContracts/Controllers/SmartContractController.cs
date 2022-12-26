@@ -21,6 +21,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllSmartContracts")]
+        [ResponseCache(Duration = 10)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> GetAllSmartContractsAsync()
@@ -71,6 +72,8 @@ namespace WebApi.Controllers
 
         [Consumes("application/json")]
         [HttpPost("TrackAnyEvent")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
             var eventLogs = await _smartContractService.TrackEventAsync(eventName, smartContractJson);

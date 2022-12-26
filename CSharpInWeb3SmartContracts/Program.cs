@@ -61,6 +61,10 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #endregion AutoMapper
 
+#region Cache
+builder.Services.AddResponseCaching();
+#endregion Cache
+
 #region Mediatr
 builder.Services.RegisterMediatr();
 #endregion Mediatr
