@@ -27,33 +27,6 @@ namespace WebApi.Controllers
             _user = configuration.GetSection("User").Get<User>();
         }
 
-        [HttpGet("DeploySmartContract")]
-        public async Task<ActionResult> DeployContract(Chain chain)
-        {
-            try
-            {
-                Account? account = new Account(_user.PrivateKey, chain);
-                Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-                HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(_abi,
-                                                                                            _byteCode,
-                                                                                            _user.WalletAddress,
-                                                                                            null);
-
-                TransactionReceipt? deployContract = await web3.Eth.DeployContract.SendRequestAndWaitForReceiptAsync(_abi,
-                                                                                                     _byteCode,
-                                                                                                     _user.WalletAddress,
-                                                                                                     estimatedGas,
-                                                                                                     null);
-
-                return Ok($"Contract deployed successfully, transaction Hash {deployContract.TransactionHash} , smart contract address {deployContract.ContractAddress}");
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
-        }
-
         [HttpGet("Mint")]
         public async Task<ActionResult> Mint(Chain chain, string to, int tokenId, string ipfsAddress)
         {

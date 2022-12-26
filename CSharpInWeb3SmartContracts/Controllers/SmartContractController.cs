@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> CallContractVariableAsync(string variableName, [FromBody] SmartContract smartContractModel)
         {
             var variableResult = await _smartContractService.ReadContractFunctionVariableAsync(variableName, smartContractModel);
-            return Ok(variableName + ": " + variableResult.ToString());
+            return Ok(variableResult.ToString());
         }
 
         [Consumes("application/json")]
@@ -54,7 +54,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> ReadContractFunctionAsync(string variableName, [FromBody] SmartContract smartContractModel)
         {
             var variableResult = await _smartContractService.ReadContractFunctionVariableAsync(variableName, smartContractModel);
-            return Ok(variableName + ": " + variableResult.ToString());
+            return Ok(variableResult.ToString());
         }
 
         [Consumes("application/json")]
@@ -62,15 +62,15 @@ namespace WebApi.Controllers
         public async Task<ActionResult> CallWriteFunctionAsync(string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
             var functionResult = await _smartContractService.WriteContractFunctionVariableAsync(functionName, sendAsEth, smartContractModel);
-            return Ok(functionName + ": " + functionResult.ToString());
+            return Ok(functionResult.ToString());
         }
 
         [Consumes("application/json")]
         [HttpPost("TrackAnyEvent")]
         public async Task<ActionResult> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
-            var eventResults = await _smartContractService.TrackEventAsync(eventName, smartContractJson);
-            return eventResults.ToJson();
+            var eventLogs = await _smartContractService.TrackEventAsync(eventName, smartContractJson);
+            return Ok(eventLogs.ToString());
         }
 
         [Consumes("application/json")]

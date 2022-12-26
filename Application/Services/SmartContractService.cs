@@ -141,8 +141,8 @@ namespace Application.Services
             Event transferEvent = smartContract.GetEvent(eventName);
             BlockParameter? _lastBlock = BlockParameter.CreateLatest();
             NewFilterInput? filterInput = transferEvent.CreateFilterInput(_lastBlock, _lastBlock);
-            List<EventLog<TransferEventDTO>>? actions = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
-            return JsonConvert.SerializeObject(actions);
+            List<EventLog<TransferEventDTO>>? eventLogs = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
+            return JsonConvert.SerializeObject(eventLogs);
         }
     }
 }
