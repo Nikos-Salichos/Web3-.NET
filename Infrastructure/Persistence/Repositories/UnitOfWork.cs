@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Persistence.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWorkRepository
     {
         public ApplicationDbContext _repositoryContext;
         public ISmartContractRepository _smartContractRepository;

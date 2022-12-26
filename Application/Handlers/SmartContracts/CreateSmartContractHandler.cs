@@ -7,9 +7,9 @@ namespace Application.Handlers.SmartContracts
 {
     public class CreateSmartContractHandler : SmartContract, IRequestHandler<CreateSmartContractCommand, SmartContract>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkRepository _unitOfWork;
 
-        public CreateSmartContractHandler(IUnitOfWork unitOfWork)
+        public CreateSmartContractHandler(IUnitOfWorkRepository unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

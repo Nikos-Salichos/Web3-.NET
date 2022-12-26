@@ -55,12 +55,12 @@ builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
 builder.Services.AddPersistence(builder.Configuration);
 #endregion Database
 
-#region Dependency Injection
+#region Autofac Dependency Injection
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new RepositoryModule()));
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new ServicesModule()));
-#endregion Dependency Injection
+    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new ServiceModule()));
+#endregion Autofac Dependency Injection
 
 #region AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);

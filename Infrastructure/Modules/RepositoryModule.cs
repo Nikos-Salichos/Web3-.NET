@@ -8,8 +8,12 @@ namespace Infrastructure.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().SingleInstance();
-            builder.RegisterType<SmartContractRepository>().As<ISmartContractRepository>().SingleInstance();
+            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+                   .Where(t => t.Name.EndsWith("Repository"))
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
+
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWorkRepository>().SingleInstance();
         }
     }
 }

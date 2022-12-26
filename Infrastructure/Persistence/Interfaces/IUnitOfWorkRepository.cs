@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Persistence.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWorkRepository : IDisposable
     {
         ISmartContractRepository SmartContractRepository { get; }
         Task<bool> SaveChangesAsync();

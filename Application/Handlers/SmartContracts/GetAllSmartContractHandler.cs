@@ -7,9 +7,9 @@ namespace Application.Handlers.SmartContracts
 {
     public class GetAllSmartContractHandler : IRequestHandler<GetSmartContractsListQuery, IEnumerable<SmartContract>>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkRepository _unitOfWork;
 
-        public GetAllSmartContractHandler(IUnitOfWork unitOfWork)
+        public GetAllSmartContractHandler(IUnitOfWorkRepository unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
