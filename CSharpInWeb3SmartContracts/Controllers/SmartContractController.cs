@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllSmartContracts")]
-        [ResponseCache(Duration = 10)]
+        [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> GetAllSmartContractsAsync()

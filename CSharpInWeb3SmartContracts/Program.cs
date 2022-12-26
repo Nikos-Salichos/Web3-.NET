@@ -7,6 +7,7 @@ using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -62,7 +63,10 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #endregion AutoMapper
 
 #region Cache
-builder.Services.AddResponseCaching();
+builder.Services.AddControllers(option =>
+{
+    option.CacheProfiles.Add("DefaultCache", new CacheProfile() { Duration = 10 });
+});
 #endregion Cache
 
 #region Mediatr
