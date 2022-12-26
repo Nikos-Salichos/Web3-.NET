@@ -1,19 +1,21 @@
 ﻿using Application.Interfaces;
+using Domain.Models;
 using Microsoft.Extensions.Options;
 
 namespace Application.Services
 {
     internal class SingletonOptionService : ISingletonOptionService
     {
-        private readonly IOptionsMonitor<UnitOptions> _unitOptions;
+        private readonly IOptionsMonitor<User> _userOptions;
 
-        public SingletonService(IOptionsMonitor<UnitOptions> unitOptions)
+        public SingletonOptionService(IOptionsMonitor<User> userOptions)
         {
-            _unitOptions = unitOptions;
+            _userOptions = userOptions;
         }
-        public UnitOptions GetUnits()
+
+        public User GetUserSettings()
         {
-            return _unitOptions.CurrentValue;
+            return _userOptions.CurrentValue;
         }
     }
 }
