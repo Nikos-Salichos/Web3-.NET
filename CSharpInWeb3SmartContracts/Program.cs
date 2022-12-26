@@ -1,5 +1,6 @@
 using Application;
 using Application.Mappers;
+using Application.Modules;
 using Application.RegisterServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -8,12 +9,12 @@ using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
+using Infrastructure.Modules;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using System.Text.Json.Serialization;
-using WebApi;
 using WebApi.Extensions;
 using WebApi.GraphQL;
 using WebApi.Utilities;
@@ -56,7 +57,9 @@ builder.Services.AddPersistence(builder.Configuration);
 
 #region Dependency Injection
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new MyAutofacModule()));
+    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new RepositoryModule()));
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new ServicesModule()));
 #endregion Dependency Injection
 
 #region AutoMapper
