@@ -1,6 +1,6 @@
-﻿using Application.Interfaces;
-using Application.Services;
-using Autofac;
+﻿using Autofac;
+using System.Reflection;
+using Module = Autofac.Module;
 
 namespace Application.Modules
 {
@@ -8,8 +8,11 @@ namespace Application.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SmartContractService>().As<ISmartContractService>().SingleInstance();
-            builder.RegisterType<SingletonOptionsService>().As<ISingletonOptionsService>().SingleInstance();
+
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                    .Where(t => t.Name.EndsWith("Service"))
+                    .AsImplementedInterfaces()
+                    .SingleInstance();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using System.Reflection;
+using Module = Autofac.Module;
 
 namespace Infrastructure.Modules
 {
@@ -6,7 +8,7 @@ namespace Infrastructure.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                    .Where(t => t.Name.EndsWith("Repository"))
                    .AsImplementedInterfaces()
                    .SingleInstance();
