@@ -56,10 +56,9 @@ builder.Services.AddPersistence(builder.Configuration);
 #endregion Database
 
 #region Autofac Dependency Injection
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new RepositoryModule()));
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new ServiceModule()));
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ServiceModule()));
+builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new RepositoryModule()));
 #endregion Autofac Dependency Injection
 
 #region AutoMapper

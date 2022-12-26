@@ -2,7 +2,7 @@
 
 namespace WebApi.Extensions
 {
-    public static class RateLimitExtensions
+    public static class RateLimitExtension
     {
         public static void RateLimit(this IApplicationBuilder app)
         {

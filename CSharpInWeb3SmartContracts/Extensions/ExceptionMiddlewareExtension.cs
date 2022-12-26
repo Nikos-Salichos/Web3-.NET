@@ -2,7 +2,7 @@
 
 namespace WebApi.Extensions
 {
-    public static class ExceptionMiddlewareExtensions
+    public static class ExceptionMiddlewareExtension
     {
         public static void UseGlobalExceptionMiddleware(this IApplicationBuilder app)
         {

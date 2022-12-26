@@ -8,7 +8,6 @@ namespace Application.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                     .Where(t => t.Name.EndsWith("Service"))
                     .AsImplementedInterfaces()
