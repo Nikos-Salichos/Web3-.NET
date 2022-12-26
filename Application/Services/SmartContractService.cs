@@ -134,6 +134,7 @@ namespace Application.Services
         public Task<dynamic> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
             Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractJson.Chain));
         }
     }
 }
