@@ -131,5 +131,9 @@ namespace Application.Services
             return JsonConvert.SerializeObject(functionResult);
         }
 
+        public Task<dynamic> TrackEventAsync(string eventName, SmartContract smartContractJson)
+        {
+            Account? account = new Account(_user.PrivateKey, smartContractJson.Chain);
+        }
     }
 }
