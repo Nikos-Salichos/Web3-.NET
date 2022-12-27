@@ -29,6 +29,11 @@ namespace WebApi.Controllers
             _retryPolicy = Policy<IActionResult>.Handle<Exception>().RetryAsync();
 
             _circuitBreakerPolicy ??= Policy.Handle<Exception>().CircuitBreakerAsync(2, TimeSpan.FromMinutes(1));
+
+            _policy = Policy<IActionResult>.Handle<Exception>()
+                               .FallbackAsync(Content("Sorry, we are currently experiencing issues. Please try again later"))
+                               .WrapAsync(_retryPolicy)
+                               .WrapAsync(_circuitBreakerPolicy);
         }
 
         private async Task<IActionResult> ProxyTo(string url)
