@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Polly.Fallback;
 
 namespace WebApi.Controllers
 {
@@ -8,7 +9,7 @@ namespace WebApi.Controllers
     public class ProxyController : ControllerBase
     {
         private readonly HttpClient _httpClient;
-
+        private readonly AsyncFallbackPolicy<IActionResult> _fallbackPolicy;
         public ProxyController(IHttpClientFactory httpclient)
         {
             _httpClient = httpclient.CreateClient();
