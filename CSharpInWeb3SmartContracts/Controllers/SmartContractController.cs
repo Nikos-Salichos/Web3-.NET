@@ -30,7 +30,7 @@ namespace WebApi.Controllers
             return Ok(allSmartContracts);
         }
 
-        [HttpGet("GetAllSmartContracts")]
+        [HttpGet("GetSmartContractById")]
         [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
