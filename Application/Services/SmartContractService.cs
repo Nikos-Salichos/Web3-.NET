@@ -43,6 +43,7 @@ namespace Application.Services
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
+
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContractDto)
         {
             SmartContractDtoValidator smartContractValidator = new SmartContractDtoValidator();

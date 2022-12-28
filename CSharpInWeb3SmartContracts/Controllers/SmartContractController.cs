@@ -34,7 +34,7 @@ namespace WebApi.Controllers
         [HttpPost("DeployAnyContract")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeployContractSuffix([FromBody] SmartContractDTO smartContractDto)
+        public async Task<ActionResult> DeployContractAsync([FromBody] SmartContractDTO smartContractDto)
         {
             var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractDto);
             return Ok(deployedSmartContract);
