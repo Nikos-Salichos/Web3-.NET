@@ -30,6 +30,16 @@ namespace WebApi.Controllers
             return Ok(allSmartContracts);
         }
 
+        [HttpGet("GetAllSmartContracts")]
+        [ResponseCache(CacheProfileName = "DefaultCache")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetSmartContractAsync(string id)
+        {
+            var allSmartContracts = await _smartContractService.GetSmartContractAsync(id);
+            return Ok(allSmartContracts);
+        }
+
         [Consumes("application/json")]
         [HttpPost("DeployAnyContract")]
         [ProducesResponseType(StatusCodes.Status200OK)]

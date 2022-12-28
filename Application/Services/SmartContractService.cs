@@ -43,10 +43,10 @@ namespace Application.Services
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
-
-        public Task<SmartContractDTO> GetSmartContractAsync()
+        public async Task<SmartContractDTO> GetSmartContractAsync(string id)
         {
-            throw new NotImplementedException();
+            var smartContract = await _mediator.Send(new GetSmartContractQuery(), default);
+            return _mapper.Map<SmartContract, SmartContractDTO>(smartContract);
         }
 
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContractDto)
