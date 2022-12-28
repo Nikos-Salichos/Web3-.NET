@@ -12,5 +12,9 @@ namespace Infrastructure.Persistence.Repositories
             var allSmartContracts = await GetAll();
             return allSmartContracts;
         }
+
+
+
+
     }
 }
