@@ -44,6 +44,11 @@ namespace Application.Services
         }
 
 
+        public Task<SmartContractDTO> GetSmartContractAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContractDto)
         {
             SmartContractDtoValidator smartContractValidator = new SmartContractDtoValidator();
