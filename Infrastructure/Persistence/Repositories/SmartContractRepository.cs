@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Persistence.Repositories
 {
@@ -19,6 +20,10 @@ namespace Infrastructure.Persistence.Repositories
             return smartContract;
         }
 
-
+        public async Task<IEnumerable<SmartContract>> FindSmartContractAsync(Expression<Func<SmartContract, bool>> predicate)
+        {
+            var smartContract = await Find(predicate);
+            return smartContract;
+        }
     }
 }

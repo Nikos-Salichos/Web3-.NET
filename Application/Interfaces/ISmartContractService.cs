@@ -9,7 +9,7 @@ namespace Application.Interfaces
     {
         Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync();
         Task<SmartContractDTO> GetSmartContractByIdAsync(long id);
-        Task<IEnumerable<SmartContractDTO>> FindSmartContract(Expression<Func<SmartContractDTO, bool>> predicate);
+        Task<IEnumerable<SmartContract>> FindSmartContract(Expression<Func<SmartContract, bool>> predicate);
         Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContract);
         Task<dynamic> ReadContractFunctionVariableAsync(string variableName, SmartContract smartContractJson);
         Task<dynamic> WriteContractFunctionVariableAsync(string variableName, long sendAsEth, SmartContract smartContractJson);

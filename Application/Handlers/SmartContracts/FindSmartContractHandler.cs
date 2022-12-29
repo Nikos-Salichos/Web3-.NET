@@ -1,10 +1,11 @@
 ﻿using Application.CQRS.Queries;
 using Domain.Models;
 using Infrastructure.Persistence.Interfaces;
+using MediatR;
 
 namespace Application.Handlers.SmartContracts
 {
-    public class FindSmartContractHandler
+    public class FindSmartContractHandler : IRequestHandler<FindSmartContractQuery, IEnumerable<SmartContract>>
     {
         private readonly IUnitOfWorkRepository _unitOfWork;
 
@@ -13,9 +14,9 @@ namespace Application.Handlers.SmartContracts
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<SmartContract> Handle(FindSmartContractQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<SmartContract>> Handle(FindSmartContractQuery request, CancellationToken cancellationToken)
         {
-            var smartContract = await _unitOfWork.SmartContractRepository.Find(request.Predicate.Name == );
+            var smartContract = await _unitOfWork.SmartContractRepository.Find(request.Predicate);
             return smartContract;
         }
     }

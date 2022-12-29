@@ -15,6 +15,7 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 using System.Numerics;
 
 namespace Application.Services
@@ -47,6 +48,12 @@ namespace Application.Services
         {
             var smartContract = await _mediator.Send(new GetSmartContractQuery(id), default);
             return _mapper.Map<SmartContract, SmartContractDTO>(smartContract);
+        }
+
+        public async Task<IEnumerable<SmartContract>> FindSmartContract(Expression<Func<SmartContract, bool>> predicate)
+        {
+            var allSmartContracts = await _mediator.Send(new FindSmartContractQuery(predicate), default);
+            return _mapper.Map<List<SmartContract>, List<SmartContract>>(allSmartContracts.ToList());
         }
 
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContractDto)
@@ -151,5 +158,7 @@ namespace Application.Services
             List<EventLog<TransferEventDTO>>? eventLogs = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
             return JsonConvert.SerializeObject(eventLogs);
         }
+
+
     }
 }

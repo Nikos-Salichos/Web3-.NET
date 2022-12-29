@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Application.CQRS.Queries
 {
-    public class FindSmartContractQuery : IRequest<SmartContract>
+    public class FindSmartContractQuery : IRequest<IEnumerable<SmartContract>>
     {
         public Expression<Func<SmartContract, bool>> Predicate { get; set; }
 
