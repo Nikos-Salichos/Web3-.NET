@@ -1,6 +1,7 @@
 ﻿using Domain.DTOs;
 using Domain.Models;
 using Nethereum.RPC.Eth.DTOs;
+using System.Linq.Expressions;
 
 namespace Application.Interfaces
 {
@@ -8,7 +9,7 @@ namespace Application.Interfaces
     {
         Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync();
         Task<SmartContractDTO> GetSmartContractByIdAsync(long id);
-        Task<SmartContractDTO> FindSmartContract()
+        Task<IEnumerable<SmartContractDTO>> FindSmartContract(Expression<Func<SmartContractDTO, bool>> predicate);
         Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContract);
         Task<dynamic> ReadContractFunctionVariableAsync(string variableName, SmartContract smartContractJson);
         Task<dynamic> WriteContractFunctionVariableAsync(string variableName, long sendAsEth, SmartContract smartContractJson);
