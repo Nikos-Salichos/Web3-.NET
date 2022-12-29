@@ -4,7 +4,7 @@ namespace Infrastructure.Persistence.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<T> GetById(string id);
+        Task<T> GetById(long id);
         Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
 
         Task<IEnumerable<T>> GetAll();

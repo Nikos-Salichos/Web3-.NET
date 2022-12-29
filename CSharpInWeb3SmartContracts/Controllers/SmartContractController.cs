@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> GetAllSmartContractsAsync()
+        public async Task<IActionResult> GetAllSmartContractsAsync()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
             return Ok(allSmartContracts);
@@ -34,7 +34,8 @@ namespace WebApi.Controllers
         [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> GetSmartContractAsync(string id)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetSmartContractAsync(string id)
         {
             var allSmartContracts = await _smartContractService.GetSmartContractAsync(id);
             return Ok(allSmartContracts);

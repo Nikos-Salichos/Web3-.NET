@@ -13,7 +13,7 @@ namespace Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<T> GetById(string id)
+        public async Task<T> GetById(long id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
