@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221225073122_DB Initialize")]
+    [Migration("20221228162251_DB Initialize")]
     partial class DBInitialize
     {
         /// <inheritdoc />
@@ -40,12 +40,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Chain")
                         .HasColumnType("int");
 
-                    b.Property<long>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("ParametersSerialized")
                         .IsRequired()

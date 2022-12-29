@@ -37,12 +37,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Chain")
                         .HasColumnType("int");
 
-                    b.Property<long>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("ParametersSerialized")
                         .IsRequired()

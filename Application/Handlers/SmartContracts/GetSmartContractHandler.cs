@@ -17,7 +17,6 @@ namespace Application.Handlers.SmartContracts
         public async Task<SmartContract> Handle(GetSmartContractQuery request, CancellationToken cancellationToken)
         {
             var smartContract = await _unitOfWork.SmartContractRepository.GetSmartContractAsync(request.Id);
-
             return smartContract;
         }
     }

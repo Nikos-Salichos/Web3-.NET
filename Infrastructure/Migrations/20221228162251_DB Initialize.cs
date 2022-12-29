@@ -14,8 +14,7 @@ namespace Infrastructure.Migrations
                 name: "SmartContract",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Bytecode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Chain = table.Column<int>(type: "int", nullable: false),
