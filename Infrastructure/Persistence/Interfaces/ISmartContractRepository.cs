@@ -7,5 +7,7 @@ namespace Infrastructure.Persistence.Interfaces
         Task<IEnumerable<SmartContract>> GetSmartContracts();
 
         Task<SmartContract> GetSmartContractAsync(long id);
+
+
     }
 }

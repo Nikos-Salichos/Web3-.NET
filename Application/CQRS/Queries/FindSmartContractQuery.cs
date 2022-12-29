@@ -14,5 +14,3 @@ namespace Application.CQRS.Queries
         }
     }
 }
-
-

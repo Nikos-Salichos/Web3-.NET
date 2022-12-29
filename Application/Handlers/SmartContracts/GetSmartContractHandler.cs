@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Handlers.SmartContracts
 {
-    internal class GetSmartContractHandler : IRequestHandler<GetSmartContractQuery, SmartContract>
+    public class GetSmartContractHandler : IRequestHandler<GetSmartContractQuery, SmartContract>
     {
         private readonly IUnitOfWorkRepository _unitOfWork;
 
