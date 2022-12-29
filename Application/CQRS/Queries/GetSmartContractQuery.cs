@@ -5,9 +5,9 @@ namespace Application.CQRS.Queries
 {
     public class GetSmartContractQuery : IRequest<SmartContract>
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
 
-        public GetSmartContractQuery(string id)
+        public GetSmartContractQuery(long id)
         {
             Id = id;
         }

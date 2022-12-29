@@ -13,7 +13,7 @@ namespace Infrastructure.Persistence.Repositories
             return allSmartContracts;
         }
 
-        public async Task<SmartContract> GetSmartContractAsync(string id)
+        public async Task<SmartContract> GetSmartContractAsync(long id)
         {
             var smartContract = await GetById(id);
             return smartContract;

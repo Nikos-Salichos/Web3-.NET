@@ -43,7 +43,7 @@ namespace Application.Services
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
-        public async Task<SmartContractDTO> GetSmartContractAsync(string id)
+        public async Task<SmartContractDTO> GetSmartContractAsync(long id)
         {
             var smartContract = await _mediator.Send(new GetSmartContractQuery(id), default);
             return _mapper.Map<SmartContract, SmartContractDTO>(smartContract);

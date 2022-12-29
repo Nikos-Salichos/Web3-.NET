@@ -7,7 +7,7 @@ namespace Application.Interfaces
     public interface ISmartContractService
     {
         Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync();
-        Task<SmartContractDTO> GetSmartContractAsync(string id);
+        Task<SmartContractDTO> GetSmartContractAsync(long id);
         Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContract);
         Task<dynamic> ReadContractFunctionVariableAsync(string variableName, SmartContract smartContractJson);
         Task<dynamic> WriteContractFunctionVariableAsync(string variableName, long sendAsEth, SmartContract smartContractJson);

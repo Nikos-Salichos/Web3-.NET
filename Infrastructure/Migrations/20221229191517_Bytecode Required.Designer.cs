@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221228162251_DB Initialize")]
-    partial class DBInitialize
+    [Migration("20221229191517_Bytecode Required")]
+    partial class BytecodeRequired
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,31 +26,35 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Models.SmartContract", b =>
                 {
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("AbiSerialized")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Abi");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Bytecode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Chain")
                         .HasColumnType("int");
-
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(0);
 
                     b.Property<string>("ParametersSerialized")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Parameters");
 
-                    b.HasKey("Address");
+                    b.HasKey("Id");
 
                     b.ToTable("SmartContract");
                 });

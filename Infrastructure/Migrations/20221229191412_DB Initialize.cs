@@ -14,8 +14,9 @@ namespace Infrastructure.Migrations
                 name: "SmartContract",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Bytecode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Chain = table.Column<int>(type: "int", nullable: false),
                     Abi = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -23,7 +24,7 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SmartContract", x => x.Address);
+                    table.PrimaryKey("PK_SmartContract", x => x.Id);
                 });
         }
 

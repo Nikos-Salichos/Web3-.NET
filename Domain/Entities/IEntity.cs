@@ -2,6 +2,6 @@
 {
     public class IEntity
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
     }
 }
