@@ -47,9 +47,11 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> FindSmartContractAsync(Expression<Func<SmartContract, bool>> predicate)
+        public async Task<IActionResult> FindSmartContractByAddressAsync([FromUri] string[] ids)
         {
-            var allSmartContracts = await _smartContractService.FindSmartContract(predicate);
+
+            Expression<Func<SmartContract, bool>> predicate;
+            var allSmartContracts = await _smartContractService.FindSmartContractByAddressAsync(predicate);
             return Ok(allSmartContracts);
         }
 

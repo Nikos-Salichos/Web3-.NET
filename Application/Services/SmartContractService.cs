@@ -50,7 +50,7 @@ namespace Application.Services
             return _mapper.Map<SmartContract, SmartContractDTO>(smartContract);
         }
 
-        public async Task<IEnumerable<SmartContract>> FindSmartContract(Expression<Func<SmartContract, bool>> predicate)
+        public async Task<IEnumerable<SmartContract>> FindSmartContractByAddressAsync(Expression<Func<SmartContract, bool>> predicate)
         {
             var allSmartContracts = await _mediator.Send(new FindSmartContractQuery(predicate), default);
             return _mapper.Map<List<SmartContract>, List<SmartContract>>(allSmartContracts.ToList());
