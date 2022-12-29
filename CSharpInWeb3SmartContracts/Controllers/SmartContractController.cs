@@ -2,6 +2,7 @@
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 using WebApi.Utilities;
 
 namespace WebApi.Controllers
@@ -38,6 +39,17 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetSmartContractAsync(long id)
         {
             var allSmartContracts = await _smartContractService.GetSmartContractByIdAsync(id);
+            return Ok(allSmartContracts);
+        }
+
+        [HttpGet("FindSmartContract")]
+        [ResponseCache(CacheProfileName = "DefaultCache")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> FindSmartContractAsync(Expression<Func<SmartContract, bool>> predicate)
+        {
+            var allSmartContracts = await _smartContractService.FindSmartContract(predicate);
             return Ok(allSmartContracts);
         }
 
