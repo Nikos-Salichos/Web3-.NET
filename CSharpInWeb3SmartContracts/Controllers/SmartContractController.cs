@@ -2,7 +2,6 @@
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
 using WebApi.Utilities;
 
 namespace WebApi.Controllers
@@ -47,11 +46,9 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> FindSmartContractByAddressAsync([FromUri] string[] ids)
+        public async Task<IActionResult> FindSmartContractByAddressAsync(string address)
         {
-
-            Expression<Func<SmartContract, bool>> predicate;
-            var allSmartContracts = await _smartContractService.FindSmartContractByAddressAsync(predicate);
+            var allSmartContracts = await _smartContractService.FindSmartContractByAddressAsync(s => s.Address == address);
             return Ok(allSmartContracts);
         }
 
