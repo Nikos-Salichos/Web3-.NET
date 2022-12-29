@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetSmartContractAsync(long id)
         {
-            var allSmartContracts = await _smartContractService.GetSmartContractAsync(id);
+            var allSmartContracts = await _smartContractService.GetSmartContractByIdAsync(id);
             return Ok(allSmartContracts);
         }
 
