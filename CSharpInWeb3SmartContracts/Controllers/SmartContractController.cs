@@ -45,7 +45,7 @@ namespace WebApi.Controllers
         [HttpPost("DeployAnyContract")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeployContractAsync([FromBody] SmartContractDTO smartContractDto)
+        public async Task<IActionResult> DeployContractAsync([FromBody] SmartContractDTO smartContractDto)
         {
             var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractDto);
             return Ok(deployedSmartContract);
@@ -55,7 +55,7 @@ namespace WebApi.Controllers
         [HttpPost("CallContractVariable")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> CallContractVariableAsync(string variableName, [FromBody] SmartContract smartContractModel)
+        public async Task<IActionResult> CallContractVariableAsync(string variableName, [FromBody] SmartContract smartContractModel)
         {
             var variableResult = await _smartContractService.ReadContractFunctionVariableAsync(variableName, smartContractModel);
             return Ok(variableResult.ToString());
@@ -65,7 +65,7 @@ namespace WebApi.Controllers
         [HttpPost("CallReadFunction")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> ReadContractFunctionAsync(string variableName, [FromBody] SmartContract smartContractModel)
+        public async Task<IActionResult> ReadContractFunctionAsync(string variableName, [FromBody] SmartContract smartContractModel)
         {
             var variableResult = await _smartContractService.ReadContractFunctionVariableAsync(variableName, smartContractModel);
             return Ok(variableResult.ToString());
@@ -75,7 +75,7 @@ namespace WebApi.Controllers
         [HttpPost("CallWriteFunction")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> CallWriteFunctionAsync(string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
+        public async Task<IActionResult> CallWriteFunctionAsync(string functionName, long sendAsEth, [FromBody] SmartContract smartContractModel)
         {
             var functionResult = await _smartContractService.WriteContractFunctionVariableAsync(functionName, sendAsEth, smartContractModel);
             return Ok(functionResult.ToString());
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
         [HttpPost("TrackAnyEvent")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> TrackEventAsync(string eventName, SmartContract smartContractJson)
+        public async Task<IActionResult> TrackEventAsync(string eventName, SmartContract smartContractJson)
         {
             var eventLogs = await _smartContractService.TrackEventAsync(eventName, smartContractJson);
             return Ok(eventLogs.ToString());
