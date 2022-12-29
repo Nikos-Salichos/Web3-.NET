@@ -41,7 +41,7 @@ namespace WebApi.Controllers
             return Ok(allSmartContracts);
         }
 
-        [HttpGet("FindSmartContract")]
+        [HttpGet("FindSmartContractByAddress")]
         [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
