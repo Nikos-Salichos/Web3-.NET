@@ -31,7 +31,6 @@ builder.Services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient("https://a
 builder.Services.AddScoped<UniswapV3GraphQL>();
 
 #region AppSettings.json
-// Read appsettings.json file
 IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
 #endregion AppSettings.json
 
@@ -69,7 +68,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 #region Response Cache Profiles
 builder.Services.AddControllers(option =>
 {
-    option.CacheProfiles.Add("DefaultCache", new CacheProfile() { Duration = 10 });
+    option.CacheProfiles.Add("DefaultCache", new CacheProfile() { Duration = 5 });
 });
 #endregion Response Cache Profiles
 

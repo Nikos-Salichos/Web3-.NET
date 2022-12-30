@@ -41,14 +41,14 @@ namespace WebApi.Controllers
             return Ok(allSmartContracts);
         }
 
-        [HttpGet("FindSmartContractByAddress")]
+        [HttpGet("FindSmartContractsByAddress")]
         [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> FindSmartContractByAddressAsync(string address)
+        public async Task<IActionResult> FindSmartContractsByAddressAsync(string address)
         {
-            var allSmartContracts = await _smartContractService.FindSmartContractByAddressAsync(s => s.Address == address);
+            var allSmartContracts = await _smartContractService.FindSmartContractsByAddressAsync(s => s.Address == address);
             return Ok(allSmartContracts);
         }
 

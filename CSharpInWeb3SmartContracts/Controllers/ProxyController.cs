@@ -15,7 +15,7 @@ namespace WebApi.Controllers
         private readonly HttpClient _httpClient;
         private readonly AsyncFallbackPolicy<IActionResult> _fallbackPolicy;
         private readonly AsyncRetryPolicy<IActionResult> _retryPolicy;
-        private readonly AsyncCircuitBreakerPolicy _circuitBreakerPolicy;
+        private static AsyncCircuitBreakerPolicy _circuitBreakerPolicy;
         private readonly AsyncPolicyWrap<IActionResult> _policy;
 
         public ProxyController(IHttpClientFactory httpclient)
@@ -26,9 +26,9 @@ namespace WebApi.Controllers
                 .Handle<Exception>()
                 .FallbackAsync(Content("Sorry, we are currently experiencing issues. Please try again later"));
 
-            _retryPolicy = Policy<IActionResult>.Handle<Exception>().RetryAsync();
+            _retryPolicy = Policy<IActionResult>.Handle<Exception>().RetryAsync(2);
 
-            _circuitBreakerPolicy ??= Policy.Handle<Exception>().CircuitBreakerAsync(2, TimeSpan.FromSeconds(10));
+            _circuitBreakerPolicy ??= Policy.Handle<Exception>().CircuitBreakerAsync(2, TimeSpan.FromMinutes(1));
 
             _policy = Policy<IActionResult>.Handle<Exception>()
                                .FallbackAsync(Content("Sorry, we are currently experiencing issues. Please try again later"))
@@ -36,15 +36,15 @@ namespace WebApi.Controllers
                                .WrapAsync(_circuitBreakerPolicy);
         }
 
-        private async Task<IActionResult> ProxyTo(string url)
+        private Task<IActionResult> ProxyTo(string url)
         {
-            return await _fallbackPolicy.ExecuteAsync(async () => Content(await _httpClient.GetStringAsync(url)));
+            return _retryPolicy.ExecuteAsync(async () => Content(await _httpClient.GetStringAsync(url)));
         }
 
         [HttpGet]
-        public async Task<IActionResult> SmartContracts()
+        public Task<IActionResult> SmartContracts()
         {
-            return await ProxyTo("https://localhost:7093/GetAllSmartContracts");
+            return ProxyTo("https://localhost:7093/GetAllSmartContracts");
         }
 
 

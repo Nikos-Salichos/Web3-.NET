@@ -51,6 +51,8 @@
 		<PackageReference Include="Solidity.Roslyn" Version="0.1.25" />
 		<PackageReference Include="Solidity.Roslyn.Core" Version="0.1.25" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.6" />
+		<PackageReference Include="Swashbuckle.Examples" Version="4.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
