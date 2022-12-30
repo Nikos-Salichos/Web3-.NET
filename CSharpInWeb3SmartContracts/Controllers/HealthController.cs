@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Net;
 
 namespace WebApi.Controllers
 {
@@ -15,6 +16,14 @@ namespace WebApi.Controllers
             _logger = logger;
         }
 
+        [HttpGet("CheckHealth")]
+        public async Task<IActionResult> Get()
+        {
+            var report = await _healthCheckService.CheckHealthAsync();
+
+            return report.Status == HealthStatus.Healthy ? Ok(report) :
+                StatusCode((int)HttpStatusCode.ServiceUnavailable, report);
+        }
 
     }
 }
