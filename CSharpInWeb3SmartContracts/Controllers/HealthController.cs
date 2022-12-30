@@ -7,5 +7,14 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<HealthController> _logger;
         private readonly HealthCheckService _healthCheckService;
+
+        public HealthController(ILogger<HealthController> logger,
+            HealthCheckService healthCheckService)
+        {
+            _healthCheckService = healthCheckService;
+            _logger = logger;
+        }
+
+
     }
 }
