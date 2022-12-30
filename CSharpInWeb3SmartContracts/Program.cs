@@ -94,8 +94,8 @@ builder.Services.Configure<User>(builder.Configuration.GetSection("User"));
 #endregion Read User appsettings.json
 
 #region Health Checks
-
 builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
 #endregion Health Checks
 
 //Load Controllers dynamically from DLL
