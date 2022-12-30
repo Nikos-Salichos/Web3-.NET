@@ -11,6 +11,7 @@ using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
 using Infrastructure.Modules;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -107,7 +108,9 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.UseInlineDefinitionsForEnums();
     options.SchemaFilter<EnumSchemaFilter>();
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 });
+
 
 WebApplication? app = builder.Build();
 
