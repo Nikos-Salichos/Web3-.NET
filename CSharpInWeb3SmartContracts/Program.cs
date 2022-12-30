@@ -93,6 +93,11 @@ builder.Services.AddRateLimiting(builder.Configuration.GetSection("IpRateLimitin
 builder.Services.Configure<User>(builder.Configuration.GetSection("User"));
 #endregion Read User appsettings.json
 
+#region Health Checks
+
+builder.Services.AddHealthChecks();
+#endregion Health Checks
+
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
 if (assembly != null)
@@ -113,6 +118,8 @@ builder.Services.AddSwaggerGen(options =>
 
 
 WebApplication? app = builder.Build();
+
+app.UseHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

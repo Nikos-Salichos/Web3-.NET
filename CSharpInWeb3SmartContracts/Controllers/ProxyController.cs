@@ -15,7 +15,7 @@ namespace WebApi.Controllers
         private readonly HttpClient _httpClient;
         private readonly AsyncFallbackPolicy<IActionResult> _fallbackPolicy;
         private readonly AsyncRetryPolicy<IActionResult> _retryPolicy;
-        private static AsyncCircuitBreakerPolicy _circuitBreakerPolicy;
+        private static AsyncCircuitBreakerPolicy? _circuitBreakerPolicy;
         private readonly AsyncPolicyWrap<IActionResult> _policy;
 
         public ProxyController(IHttpClientFactory httpclient)
