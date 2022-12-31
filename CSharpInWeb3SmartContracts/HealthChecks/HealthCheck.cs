@@ -26,7 +26,6 @@ namespace WebApi.HealthChecks
             if (!response.IsSuccessStatusCode)
             {
                 return HealthCheckResult.Unhealthy($"API is not running {getSmartContractById}");
-
             }
 
             return HealthCheckResult.Healthy("All APIs are running.");

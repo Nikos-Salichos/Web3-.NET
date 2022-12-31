@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
 using System.Net;
 
 namespace WebApi.Controllers
@@ -22,7 +21,7 @@ namespace WebApi.Controllers
         {
             var report = await _healthCheckService.CheckHealthAsync();
 
-            return report.Status == HealthStatus.Healthy ? Ok(JsonConvert.SerializeObject(report)) :
+            return report.Status == HealthStatus.Healthy ? Ok(report) :
                 StatusCode((int)HttpStatusCode.ServiceUnavailable, report);
         }
 
