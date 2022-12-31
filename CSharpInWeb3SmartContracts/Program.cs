@@ -99,6 +99,10 @@ builder.Services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
 builder.Services.AddHealthChecks().AddCheck<HealthCheck>("Custom Health Checks");
 #endregion Health Checks
 
+#region Database Exception Filter
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+#endregion Database Exception Filter
+
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
 if (assembly != null)
@@ -122,6 +126,11 @@ WebApplication? app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+else
 {
     app.UseSwagger();
     app.UseSwaggerUI();
