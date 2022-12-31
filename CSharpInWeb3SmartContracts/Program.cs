@@ -120,8 +120,6 @@ builder.Services.AddSwaggerGen(options =>
 
 WebApplication? app = builder.Build();
 
-app.UseHealthChecks("/healthcheck");
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
