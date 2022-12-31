@@ -18,6 +18,7 @@ using Serilog.Events;
 using System.Text.Json.Serialization;
 using WebApi.Extensions;
 using WebApi.GraphQL;
+using WebApi.HealthChecks;
 using WebApi.Utilities;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
@@ -94,8 +95,8 @@ builder.Services.Configure<User>(builder.Configuration.GetSection("User"));
 #endregion Read User appsettings.json
 
 #region Health Checks
-builder.Services.AddHealthChecks();
 builder.Services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
+builder.Services.AddHealthChecks().AddCheck<HealthCheck>("Custom Health Checks");
 #endregion Health Checks
 
 //Load Controllers dynamically from DLL
@@ -119,7 +120,7 @@ builder.Services.AddSwaggerGen(options =>
 
 WebApplication? app = builder.Build();
 
-app.UseHealthChecks("/health");
+app.UseHealthChecks("/healthcheck");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
