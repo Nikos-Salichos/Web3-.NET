@@ -7,60 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="SmartContracts\CryptoToken\bin\CryptoToken-solc-output.json" />
-		<None Remove="SmartContracts\CryptoToken\bin\CryptoToken.json" />
-		<None Remove="SmartContracts\CryptoToken\bin\IERC20.json" />
-		<None Remove="SmartContracts\CryptoToken\bin\Ownable.json" />
-		<None Remove="SmartContracts\CryptoToken\bin\Pausable.json" />
-		<None Remove="SmartContracts\Lottery\bin\Lottery-solc-output.json" />
-		<None Remove="SmartContracts\Lottery\bin\Lottery.json" />
-		<None Remove="SmartContracts\Lottery\bin\Oracle.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="SmartContracts\CryptoToken\bin\CryptoToken-solc-output.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\CryptoToken\bin\CryptoToken.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\CryptoToken\bin\IERC20.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\CryptoToken\bin\Ownable.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\CryptoToken\bin\Pausable.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\Lottery\bin\Lottery-solc-output.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\Lottery\bin\Lottery.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="SmartContracts\Lottery\bin\Oracle.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.5.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Nethereum.Signer" Version="4.12.0" />
