@@ -8,7 +8,14 @@ Installation
 3. Launch project.
 
 Docker run:
+Open cmd and in docker-compose.yml directory run:
+docker compose up -d --> Create and start docker container
+docker ps --> see all containers and check port
+open url: http://localhost:55757/swagger/index.html (port specified on command docker ps)
 
+To run it in your own port do the following:
+docker compose create
+docker run -dp 3000:3000 webapi
 
 Technical specs:
 - Generic Repository.
