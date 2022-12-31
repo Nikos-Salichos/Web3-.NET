@@ -11,11 +11,9 @@ Docker run
 ======
 Open cmd and in docker-compose.yml directory run:
 
-docker compose up -d --> Create and start docker container
-
-docker ps --> see all containers and check port
-
-open url: http://localhost:55757/swagger/index.html (port specified on command docker ps)
+- docker compose up -d --> Create and start docker container
+- docker ps --> see all containers and check port
+- open url: http://localhost:55757/swagger/index.html (port specified on command docker ps)
 
 Technical specs:
 - Generic Repository.
