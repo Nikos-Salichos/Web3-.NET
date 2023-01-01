@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  csharpinweb3smartcontracts:
-    image: ${DOCKER_REGISTRY-}csharpinweb3smartcontracts
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
     build:
       context: .
       dockerfile: CSharpInWeb3SmartContracts/Dockerfile

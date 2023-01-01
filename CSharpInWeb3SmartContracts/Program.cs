@@ -23,8 +23,9 @@ using WebApi.Utilities;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
-//Extension method for configuring CORS
+#region Cors
 IServiceCollection configureCors = builder.Services.ConfigureCors();
+#endregion Cors
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())).AddNewtonsoftJson();
@@ -120,7 +121,6 @@ builder.Services.AddSwaggerGen(options =>
     options.SchemaFilter<EnumSchemaFilter>();
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 });
-
 
 WebApplication? app = builder.Build();
 
