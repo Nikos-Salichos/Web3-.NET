@@ -19,7 +19,7 @@ namespace WebApi.Controllers
 
         public ProxyController(IHttpClientFactory httpclient)
         {
-            _httpClient = httpclient.CreateClient();
+            _httpClient = httpclient.CreateClient("apiGateway");
 
             _fallbackPolicy = Policy<IActionResult>
                 .Handle<Exception>()
