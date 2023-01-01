@@ -7,7 +7,6 @@ using Polly.Wrap;
 
 namespace WebApi.Controllers
 {
-    // [Route("api/[controller]")]
     [Route("[action]")]
     [ApiController]
     public class ProxyController : ControllerBase
