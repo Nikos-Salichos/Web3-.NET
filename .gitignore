@@ -369,4 +369,3 @@ FodyWeavers.xsd
 
 #Starting with
 *.logs*
-/appsettings.json
