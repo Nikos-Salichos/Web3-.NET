@@ -43,7 +43,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public Task<IActionResult> SmartContracts()
         {
-            return ProxyTo("https://localhost:7093/GetAllSmartContracts");
+            return ProxyTo("https://host.docker.internal:55082/GetAllSmartContracts");
         }
 
 
