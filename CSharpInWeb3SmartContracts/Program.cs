@@ -85,7 +85,10 @@ builder.Services.AddFluentValidation();
 
 #region Api Gateway Pattern (Proxy Controller)
 builder.Services.AddHttpClient();
-
+builder.Services.AddHttpClient("apiGateway").ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+});
 #endregion Api Gateway Pattern (Proxy Controller)
 
 #region Rate Limit
