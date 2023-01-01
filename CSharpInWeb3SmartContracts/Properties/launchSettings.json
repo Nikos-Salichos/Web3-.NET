@@ -4,7 +4,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:21051",
+      "applicationUrl": "http://localhost:21051;http://host.docker.internal:21051",
       "sslPort": 44330
     }
   },
@@ -16,7 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7093;http://localhost:5093",
+      "applicationUrl": "https://localhost:7093;http://localhost:5093;https://host.docker.internal:7093;https://host.docker.internal:5093",
       "dotnetRunMessages": true
     },
     "IIS Express": {
@@ -33,7 +33,7 @@
       "launchUrl": "https://localhost:7093/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7093;http://localhost:5093"
+        "ASPNETCORE_URLS": "https://localhost:7093;http://localhost:5093;https://host.docker.internal:7093;http://host.docker.internal:5093"
       },
       "distributionName": ""
     },
@@ -41,7 +41,8 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true,
+      "applicationUrl": "https://localhost:5001;http://host.docker.internal:5000",
+      "publishAllPorts": false,
       "useSSL": true
     }
   }

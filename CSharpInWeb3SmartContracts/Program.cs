@@ -85,6 +85,7 @@ builder.Services.AddFluentValidation();
 
 #region Api Gateway Pattern (Proxy Controller)
 builder.Services.AddHttpClient();
+
 #endregion Api Gateway Pattern (Proxy Controller)
 
 #region Rate Limit
