@@ -18,6 +18,7 @@ Open cmd and in docker-compose.yml directory run:
 Technical specs:
 - Clean architecture.
 - Generic Repository.
+- Unit of Work.
 - Entity framework.
 
 
