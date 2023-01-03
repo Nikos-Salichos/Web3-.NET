@@ -17,6 +17,14 @@ namespace WebApi.Extensions
         public static byte[] Decompress(byte[] bytes)
         {
             using var memoryStream = new MemoryStream(bytes);
+            using (var outputStream = new MemoryStream())
+            {
+                using (var decompressStream = new BrotliStream(memoryStream, CompressionMode.Decompress))
+                {
+                    decompressStream.CopyTo(outputStream);
+                }
+                return outputStream.ToArray();
+            }
         }
 
     }
