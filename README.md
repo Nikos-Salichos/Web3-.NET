@@ -16,7 +16,9 @@ Open cmd and in docker-compose.yml directory run:
 - open url: http://localhost:55757/swagger/index.html (port specified on command docker ps)
 
 Technical specs:
+- Clean architecture.
 - Generic Repository.
+- Unit of Work.
 - Entity framework.
 
 
