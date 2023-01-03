@@ -4,14 +4,16 @@ namespace WebApi.Extensions
 {
     public static class CompressDecrompressExtension
     {
-        public static byte[] Compress(byte[] bytes)
+        public static async Task<byte[]> CompressAsync(byte[] bytes)
         {
-            using var memoryStream = new MemoryStream();
-            using (var brotliStream = new BrotliStream(memoryStream, CompressionLevel.Optimal))
+            using (var memoryStream = new MemoryStream())
             {
-                brotliStream.Write(bytes, 0, bytes.Length);
+                using (var brotliStream = new BrotliStream(memoryStream, CompressionLevel.Optimal))
+                {
+                    await brotliStream.WriteAsync(bytes, 0, bytes.Length);
+                }
+                return memoryStream.ToArray();
             }
-            return memoryStream.ToArray();
         }
 
         public static byte[] Decompress(byte[] bytes)
