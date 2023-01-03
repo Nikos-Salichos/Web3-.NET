@@ -6,26 +6,26 @@ namespace WebApi.Extensions
     {
         public static async Task<byte[]> CompressAsync(byte[] bytes)
         {
-            using (var memoryStream = new MemoryStream())
+            using var memoryStream = new MemoryStream();
+            using (var brotliStream = new BrotliStream(memoryStream, CompressionLevel.Optimal))
             {
-                using (var brotliStream = new BrotliStream(memoryStream, CompressionLevel.Optimal))
-                {
-                    await brotliStream.WriteAsync(bytes, 0, bytes.Length);
-                }
-                return memoryStream.ToArray();
+                await brotliStream.WriteAsync(bytes, default);
             }
+            return memoryStream.ToArray();
         }
 
-        public static byte[] Decompress(byte[] bytes)
+        public static async Task<byte[]> DecompressAsync(byte[] bytes)
         {
-            using var memoryStream = new MemoryStream(bytes);
-            using (var outputStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream(bytes))
             {
-                using (var decompressStream = new BrotliStream(memoryStream, CompressionMode.Decompress))
+                using (var outputStream = new MemoryStream())
                 {
-                    decompressStream.CopyTo(outputStream);
+                    using (var brotliStream = new BrotliStream(memoryStream, CompressionMode.Decompress))
+                    {
+                        await brotliStream.CopyToAsync(outputStream);
+                    }
+                    return outputStream.ToArray();
                 }
-                return outputStream.ToArray();
             }
         }
 
