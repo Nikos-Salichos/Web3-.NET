@@ -13,5 +13,11 @@ namespace WebApi.Extensions
             }
             return memoryStream.ToArray();
         }
+
+        public static byte[] Decompress(byte[] bytes)
+        {
+            using var memoryStream = new MemoryStream(bytes);
+        }
+
     }
 }
