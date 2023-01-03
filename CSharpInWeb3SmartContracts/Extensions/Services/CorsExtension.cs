@@ -1,4 +1,4 @@
-﻿namespace WebApi.Extensions
+﻿namespace WebApi.Extensions.Services
 {
     public static class ServiceExtensions
     {

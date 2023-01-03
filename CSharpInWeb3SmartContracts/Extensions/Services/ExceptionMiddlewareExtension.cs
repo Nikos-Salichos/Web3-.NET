@@ -1,6 +1,6 @@
 ﻿using WebApi.CustomMiddleware;
 
-namespace WebApi.Extensions
+namespace WebApi.Extensions.Services
 {
     public static class ExceptionMiddlewareExtension
     {

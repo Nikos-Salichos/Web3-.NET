@@ -1,6 +1,6 @@
 ﻿using AspNetCoreRateLimit;
 
-namespace WebApi.Extensions
+namespace WebApi.Extensions.Services
 {
     public static class RateLimitExtension
     {
