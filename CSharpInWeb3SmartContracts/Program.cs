@@ -11,6 +11,7 @@ using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
 using Infrastructure.Modules;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Core;
@@ -108,6 +109,14 @@ builder.Services.AddHealthChecks().AddCheck<HealthCheck>("Custom Health Checks")
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 #endregion Database Exception Filter
 
+#region Response Compression
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<BrotliCompressionProvider>();
+});
+#endregion Response Compression
+
 //Load Controllers dynamically from DLL
 /*Assembly? assembly = Assembly.LoadFile(@"C:\Users\Nikos\source\repos\LoadDynamicControllers\LoadDynamicControllers\bin\Debug\net6.0\Test.dll");
 if (assembly != null)
@@ -145,11 +154,14 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseGlobalExceptionMiddleware();
+
 app.RateLimit();
 
 app.UseCors();
 
 app.UseAuthorization();
+
+app.UseResponseCompression();
 
 app.MapControllers();
 
