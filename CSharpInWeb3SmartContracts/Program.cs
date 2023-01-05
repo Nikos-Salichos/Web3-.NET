@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using System.IO.Compression;
 using System.Text.Json.Serialization;
 using WebApi.Extensions.Services;
 using WebApi.GraphQL;
@@ -115,6 +116,12 @@ builder.Services.AddResponseCompression(options =>
     options.EnableForHttps = true;
     options.Providers.Add<BrotliCompressionProvider>();
 });
+
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
+});
+
 #endregion Response Compression
 
 //Load Controllers dynamically from DLL
