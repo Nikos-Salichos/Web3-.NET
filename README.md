@@ -20,6 +20,7 @@ Technical specs:
 - Generic Repository.
 - Unit of Work.
 - Entity framework.
+- Api Gateway Pattern
 
 
 Entity Framework:
