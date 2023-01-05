@@ -119,7 +119,7 @@ builder.Services.AddResponseCompression(options =>
 
 builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
 {
-    options.Level = CompressionLevel.Fastest;
+    options.Level = CompressionLevel.Optimal;
 });
 
 #endregion Response Compression
