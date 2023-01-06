@@ -23,7 +23,7 @@ namespace WebApi.Controllers
         public NetworkController(IConfiguration configuration, ILogger<LotteryController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>();
+            _user = configuration.GetSection("User").Get<User>()!;
             _logger = logger;
         }
 

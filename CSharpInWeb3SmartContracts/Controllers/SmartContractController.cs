@@ -12,12 +12,14 @@ namespace WebApi.Controllers
         public EnumHelper EnumHelper { get; set; }
 
         private readonly ISmartContractService _smartContractService;
+        private readonly ILogger<LotteryController> _logger;
 
-        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService)
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<LotteryController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
             _smartContractService = smartContractService;
+            _logger = logger;
         }
 
         [HttpGet("GetAllSmartContracts")]
