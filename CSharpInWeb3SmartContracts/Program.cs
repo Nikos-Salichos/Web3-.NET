@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting.Json;
 using System.IO.Compression;
 using System.Text.Json.Serialization;
 using WebApi.Extensions.Services;
@@ -42,10 +43,10 @@ IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("apps
 #region Serilog Logging
 string fullPath = Environment.CurrentDirectory + @"\logs.txt";
 LoggingLevelSwitch? levelSwitch = new();
-levelSwitch.MinimumLevel = LogEventLevel.Error;
+levelSwitch.MinimumLevel = LogEventLevel.Information;
 builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
-                                       .WriteTo.Console()
-                                       .WriteTo.File(fullPath, rollingInterval: RollingInterval.Day));
+                                       .WriteTo.File(new JsonFormatter(), fullPath, rollingInterval: RollingInterval.Day));
+
 /*.WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("MsSqlConnection"),
  new MSSqlServerSinkOptions
  {
