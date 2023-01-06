@@ -19,6 +19,5 @@ namespace WebApi.Extensions.Services
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
             services.AddInMemoryRateLimiting();
         }
-
     }
 }

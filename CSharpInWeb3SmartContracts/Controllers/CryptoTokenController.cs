@@ -225,8 +225,5 @@ namespace WebApi.Controllers
 
             return Ok($"Tokens burned from {from} successfully {transferResult.TransactionHash}");
         }
-
-
-
     }
 }
