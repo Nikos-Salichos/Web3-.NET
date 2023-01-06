@@ -53,6 +53,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> FindSmartContractsByAddressAsync(string address)
         {
             var allSmartContracts = await _smartContractService.FindSmartContractsByAddressAsync(s => s.Address == address);
+            _logger.LogInformation(allSmartContracts.ToString());
             return Ok(allSmartContracts);
         }
 
