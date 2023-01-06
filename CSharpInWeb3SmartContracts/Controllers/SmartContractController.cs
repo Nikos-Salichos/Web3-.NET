@@ -64,6 +64,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> DeployContractAsync([FromBody] SmartContractDTO smartContractDto)
         {
             var deployedSmartContract = await _smartContractService.DeploySmartContractAsync(smartContractDto);
+            _logger.LogInformation(allSmartContracts.ToString());
             return Ok(deployedSmartContract);
         }
 
