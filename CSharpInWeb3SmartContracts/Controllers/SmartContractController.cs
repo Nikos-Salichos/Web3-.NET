@@ -29,6 +29,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetAllSmartContractsAsync()
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync();
+            _logger.LogInformation(allSmartContracts.ToString());
             return Ok(allSmartContracts);
         }
 
