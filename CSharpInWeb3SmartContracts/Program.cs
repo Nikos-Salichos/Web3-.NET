@@ -107,7 +107,7 @@ builder.Services.AddRateLimiting(builder.Configuration.GetSection("IpRateLimitin
 #endregion Rate Limit
 
 #region Read User appsettings.json
-builder.Services.Configure<User>(builder.Configuration.GetSection("User"));
+builder.Services.AddOptions<User>().BindConfiguration("User").ValidateDataAnnotations().ValidateOnStart();
 #endregion Read User appsettings.json
 
 #region Health Checks
