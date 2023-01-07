@@ -41,11 +41,19 @@ IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("apps
 #endregion AppSettings.json
 
 #region Serilog Logging
+
+var serilogConfiguration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+        .Build();
+
 string fullPath = Environment.CurrentDirectory + @"\logs.txt";
 LoggingLevelSwitch? levelSwitch = new();
 levelSwitch.MinimumLevel = LogEventLevel.Error;
-builder.Host.UseSerilog((ctx, lc) => lc.MinimumLevel.ControlledBy(levelSwitch)
-                                       .WriteTo.File(new JsonFormatter(), fullPath, rollingInterval: RollingInterval.Day));
+builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(serilogConfiguration)
+                                         //.MinimumLevel.ControlledBy(levelSwitch)
+                                         .WriteTo.File(new JsonFormatter(), fullPath, rollingInterval: RollingInterval.Day));
 
 /*.WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("MsSqlConnection"),
  new MSSqlServerSinkOptions
