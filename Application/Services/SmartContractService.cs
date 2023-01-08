@@ -66,8 +66,8 @@ namespace Application.Services
                 throw new ArgumentNullException(IsValid.ToString());
             }
 
-            Account? account = new Account(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractDto.Chain);
-            Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(smartContractDto.Chain));
+            Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractDto.Chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(smartContractDto.Chain));
 
             object[]? parameters = null;
             if (smartContractDto?.Parameters?.Count > 0)
@@ -158,7 +158,5 @@ namespace Application.Services
             List<EventLog<TransferEventDTO>>? eventLogs = await transferEvent.GetAllChangesAsync<TransferEventDTO>(filterInput);
             return JsonConvert.SerializeObject(eventLogs);
         }
-
-
     }
 }
