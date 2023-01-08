@@ -44,26 +44,8 @@ namespace WebApi.Controllers
             return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
         }
 
-        [HttpGet("GetAllTransactionsOfCurrentBlock")]
-        public async Task<ActionResult> GetTransactionsOfABlockAsync(Chain chain)
-        {
-            Account? account = new(_user.PrivateKey, chain);
-            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-            HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
-
-            BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(latestBlockNumber));
-            if (blockWithTransactions == null)
-            {
-                return NotFound("Block not found");
-            }
-
-            Transaction[] allTransactions = blockWithTransactions.Transactions;
-            return Ok(allTransactions);
-        }
-
         [HttpGet("GetAllTransactionsOfABlock")]
-        public async Task<ActionResult> GetTransactionsOfABlock(Chain chain, long blockNumber)
+        public async Task<ActionResult> GetTransactionsOfABlockAsync(Chain chain, long blockNumber)
         {
             Account? account = new(_user.PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
@@ -80,7 +62,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllContractCreationTransactions")]
-        public async Task<ActionResult> GetAllContractCreationTransactions(Chain chain, long blockNumber)
+        public async Task<ActionResult> GetAllContractCreationTransactionsAsync(Chain chain, long blockNumber)
         {
             Account? account = new(_user.PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
