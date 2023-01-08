@@ -58,12 +58,12 @@ namespace WebApi.Controllers
                 return NotFound("Block not found");
             }
 
-            IEnumerable<Transaction>? allTransactions = blockWithTransactions.Transactions;
+            Transaction[] allTransactions = blockWithTransactions.Transactions;
             return Ok(allTransactions);
         }
 
         [HttpGet("GetAllTransactionsOfABlock")]
-        public async Task<ActionResult> GetBlockTransactions(Chain chain, long blockNumber)
+        public async Task<ActionResult> GetTransactionsOfABlock(Chain chain, long blockNumber)
         {
             Account? account = new(_user.PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
@@ -74,7 +74,7 @@ namespace WebApi.Controllers
                 return NotFound("Block not found");
             }
 
-            List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
+            Transaction[] allTransactions = blockWithTransactions.Transactions;
 
             return Ok(allTransactions);
         }
