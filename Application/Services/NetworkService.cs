@@ -8,6 +8,8 @@ namespace Application.Services
     {
         public EnumHelper EnumHelper { get; set; }
 
+        private readonly ISingletonOptionsService _singletonOptionsService;
+
         public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
         {
             throw new NotImplementedException();
