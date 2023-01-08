@@ -10,6 +10,12 @@ namespace Application.Services
 
         private readonly ISingletonOptionsService _singletonOptionsService;
 
+        public NetworkService(EnumHelper enumHelper, ISingletonOptionsService singletonOptionsService)
+        {
+            EnumHelper = enumHelper;
+            _singletonOptionsService = singletonOptionsService;
+        }
+
         public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
         {
             throw new NotImplementedException();
