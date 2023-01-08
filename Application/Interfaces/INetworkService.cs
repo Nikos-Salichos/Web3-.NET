@@ -5,5 +5,6 @@ namespace Application.Interfaces
     public interface INetworkService
     {
         Task<BlockWithTransactionHashes> GetLatestBlockAsync();
+        Task<BlockWithTransactionHashes[]> GetTransactionsOfABlock();
     }
 }

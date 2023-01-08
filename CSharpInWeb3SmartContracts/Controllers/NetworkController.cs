@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetLatestBlock")]
-        public async Task<ActionResult> GetLatestBlock(Chain chain)
+        public async Task<ActionResult> GetLatestBlockAsync(Chain chain)
         {
             Account? account = new(_user.PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
@@ -45,7 +45,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllTransactionsOfCurrentBlock")]
-        public async Task<ActionResult> GetTransactionsOfABlock(Chain chain)
+        public async Task<ActionResult> GetTransactionsOfABlockAsync(Chain chain)
         {
             Account? account = new(_user.PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
                 return NotFound("Block not found");
             }
 
-            List<Transaction>? allTransactions = blockWithTransactions.Transactions.ToList();
+            IEnumerable<Transaction>? allTransactions = blockWithTransactions.Transactions;
             return Ok(allTransactions);
         }
 
