@@ -1,6 +1,8 @@
-﻿namespace Application.Services
+﻿using Application.Interfaces;
+
+namespace Application.Services
 {
-    public class NetworkServices
+    public class NetworkService : INetworkService
     {
     }
 }
