@@ -1,10 +1,13 @@
 ﻿using Application.Interfaces;
+using Application.Utilities;
 using Nethereum.RPC.Eth.DTOs;
 
 namespace Application.Services
 {
     public class NetworkService : INetworkService
     {
+        public EnumHelper EnumHelper { get; set; }
+
         public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
         {
             throw new NotImplementedException();
