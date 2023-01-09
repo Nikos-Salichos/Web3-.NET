@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Application.Interfaces;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
@@ -19,6 +20,8 @@ namespace WebApi.Controllers
         public EnumHelper EnumHelper { get; set; }
 
         private readonly ILogger<LotteryController> _logger;
+
+        private readonly INetworkService _networkService;
 
         public NetworkController(IConfiguration configuration, ILogger<LotteryController> logger)
         {
