@@ -23,28 +23,18 @@ namespace WebApi.Controllers
 
         private readonly INetworkService _networkService;
 
-        public NetworkController(IConfiguration configuration, ILogger<LotteryController> logger)
+        public NetworkController(IConfiguration configuration, ILogger<LotteryController> logger, INetworkService networkService)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
             _logger = logger;
+            _networkService = networkService;
         }
 
         [HttpGet("GetLatestBlock")]
-        public async Task<ActionResult> GetLatestBlockAsync(Chain chain)
+        public async Task<ActionResult> GetBlockAsync(Chain chain)
         {
-            Account? account = new(_user.PrivateKey, chain);
-            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-            HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
-            BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
-
-            if (latestBlock == null)
-            {
-                return NotFound("Block not found");
-            }
-
-            return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
         }
 
         [HttpGet("GetAllTransactionsOfABlock")]

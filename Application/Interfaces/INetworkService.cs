@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface INetworkService
     {
-        Task<BlockWithTransactionHashes> GetLatestBlockAsync();
+        Task<BlockWithTransactionHashes> GetBlockAsync();
         Task<Transaction[]> GetTransactionsOfABlock();
         Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync();
     }
