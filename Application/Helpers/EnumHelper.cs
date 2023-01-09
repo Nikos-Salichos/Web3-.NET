@@ -1,15 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Interfaces;
 using Nethereum.Signer;
 
 namespace Application.Utilities
 {
     public class EnumHelper
     {
-        private readonly IConfiguration _configuration;
+        private readonly ISingletonOptionsService _singletonOptionsService;
 
-        public EnumHelper(IConfiguration configuration)
+        public EnumHelper(ISingletonOptionsService singletonOptionsService)
         {
-            _configuration = configuration;
+            _singletonOptionsService = singletonOptionsService;
         }
 
         public string GetStringBasedOnEnum(Chain chain)
@@ -17,7 +17,7 @@ namespace Application.Utilities
             switch (chain)
             {
                 case Chain.MainNet:
-                    return _configuration["User:BlockchainProviderMainnet"]!;
+                    return _singletonOptionsService.GetUserSettings();
                 case Chain.Goerli:
                     return _configuration["User:BlockchainProviderGoerli"]!;
                 case Chain.Ropsten:

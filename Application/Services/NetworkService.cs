@@ -2,7 +2,10 @@
 using Application.Utilities;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
 using Nethereum.Web3;
+using Nethereum.Web3.Accounts;
+using System.Numerics;
 
 namespace Application.Services
 {
@@ -23,20 +26,14 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<BlockWithTransactionHashes> GetBlockAsync()
+        public async Task<BlockWithTransactionHashes> GetBlockAsync(BigInteger blockNumber, Chain chain)
         {
-            Account? account = new(_user.PrivateKey, chain);
+            Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-            HexBigInteger? latestBlockNumber = await web3.Eth.Blocks.GetBlockNumber.SendRequestAsync();
-            BlockWithTransactionHashes? latestBlock = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
+            BlockWithTransactionHashes? blockWithTransactionHashes = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
 
-            if (latestBlock == null)
-            {
-                return NotFound("Block not found");
-            }
-
-            return Ok($"Last block number {latestBlockNumber}, latest block gas limit {latestBlock.GasLimit}, latest block gas used {latestBlock.GasUsed}");
+            return blockWithTransactionHashes ?? new BlockWithTransactionHashes();
         }
 
         public Task<Transaction[]> GetTransactionsOfABlock()

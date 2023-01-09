@@ -32,9 +32,10 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetLatestBlock")]
-        public async Task<ActionResult> GetBlockAsync(Chain chain)
+        public async Task<ActionResult> GetBlockAsync(long blockNumber, Chain chain)
         {
-
+            var blockWithTransactionHashes = await _networkService.GetBlockAsync(blockNumber, chain);
+            return Ok($"Block number {blockWithTransactionHashes}, block gas limit {blockWithTransactionHashes.GasLimit}, block gas used {blockWithTransactionHashes.GasUsed}");
         }
 
         [HttpGet("GetAllTransactionsOfABlock")]

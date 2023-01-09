@@ -1,10 +1,12 @@
 ﻿using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
+using System.Numerics;
 
 namespace Application.Interfaces
 {
     public interface INetworkService
     {
-        Task<BlockWithTransactionHashes> GetBlockAsync();
+        Task<BlockWithTransactionHashes> GetBlockAsync(BigInteger blockNumber, Chain chain);
         Task<Transaction[]> GetTransactionsOfABlock();
         Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync();
     }

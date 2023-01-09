@@ -5,5 +5,7 @@ namespace Application.Interfaces
     public interface ISingletonOptionsService
     {
         User GetUserSettings();
+
+        NetworkConfig GetNetworkConfig();
     }
 }

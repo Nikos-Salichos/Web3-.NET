@@ -9,5 +9,6 @@ namespace Domain.Models
 
         [Required]
         public string? PrivateKey { get; set; }
+
     }
 }

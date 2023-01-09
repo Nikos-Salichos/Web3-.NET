@@ -17,7 +17,7 @@ namespace Application.Services
 
         public NetworkConfig GetNetworkConfig()
         {
-            throw new NotImplementedException();
+            return _networkConfig.CurrentValue;
         }
 
         public User GetUserSettings()
