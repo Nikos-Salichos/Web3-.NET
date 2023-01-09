@@ -17,11 +17,11 @@ namespace Application.Utilities
             switch (chain)
             {
                 case Chain.MainNet:
-                    return _singletonOptionsService.GetUserSettings();
+                    return _singletonOptionsService.GetNetworkConfig().Network;
                 case Chain.Goerli:
-                    return _configuration["User:BlockchainProviderGoerli"]!;
+                    return _singletonOptionsService.GetNetworkConfig().Network;
                 case Chain.Ropsten:
-                    return _configuration["User:BlockchainProviderRopsten"]!;
+                    return _singletonOptionsService.GetNetworkConfig().Network;
                 default:
                     return "NO NETWORK GIVEN";
             }
