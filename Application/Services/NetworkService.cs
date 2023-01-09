@@ -15,15 +15,10 @@ namespace Application.Services
 
         private readonly ISingletonOptionsService _singletonOptionsService;
 
-        public NetworkService(EnumHelper enumHelper, ISingletonOptionsService singletonOptionsService)
+        public NetworkService(ISingletonOptionsService singletonOptionsService)
         {
-            EnumHelper = enumHelper;
+            EnumHelper = new EnumHelper(singletonOptionsService!);
             _singletonOptionsService = singletonOptionsService;
-        }
-
-        public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BlockWithTransactionHashes> GetBlockAsync(BigInteger blockNumber, Chain chain)
@@ -34,6 +29,11 @@ namespace Application.Services
             BlockWithTransactionHashes? blockWithTransactionHashes = await web3.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
 
             return blockWithTransactionHashes ?? new BlockWithTransactionHashes();
+        }
+
+        public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public Task<Transaction[]> GetTransactionsOfABlock()

@@ -7,15 +7,15 @@ namespace Application.Services
     public class SingletonOptionsService : ISingletonOptionsService
     {
         private readonly IOptionsMonitor<User> _userOptions;
-        private readonly IOptionsMonitor<NetworkConfig> _networkConfig;
+        private readonly IOptionsMonitor<NetworkProvider> _networkConfig;
 
-        public SingletonOptionsService(IOptionsMonitor<User> userOptions, IOptionsMonitor<NetworkConfig> networkConfig)
+        public SingletonOptionsService(IOptionsMonitor<User> userOptions, IOptionsMonitor<NetworkProvider> networkConfig)
         {
             _userOptions = userOptions;
             _networkConfig = networkConfig;
         }
 
-        public NetworkConfig GetNetworkConfig()
+        public NetworkProvider GetNetworkConfig()
         {
             return _networkConfig.CurrentValue;
         }

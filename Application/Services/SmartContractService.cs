@@ -7,7 +7,6 @@ using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Nethereum.Contracts;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
@@ -30,9 +29,9 @@ namespace Application.Services
 
         private readonly ISingletonOptionsService _singletonOptionsService;
 
-        public SmartContractService(IConfiguration configuration, IMapper mapper, IMediator mediator, ISingletonOptionsService singletonOptionsService)
+        public SmartContractService(IMapper mapper, IMediator mediator, ISingletonOptionsService singletonOptionsService)
         {
-            EnumHelper = new EnumHelper(configuration);
+            EnumHelper = new EnumHelper(_singletonOptionsService!);
             _mapper = mapper;
             _mediator = mediator;
             _singletonOptionsService = singletonOptionsService;

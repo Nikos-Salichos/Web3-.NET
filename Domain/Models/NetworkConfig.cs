@@ -1,7 +1,9 @@
 ﻿namespace Domain.Models
 {
-    public class NetworkConfig
+    public class NetworkProvider
     {
-        public string Network { get; set; }
+        public string BlockchainProviderMainnet { get; set; }
+        public string BlockchainProviderGoerli { get; set; }
+        public string BlockchainProviderSepolia { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace Application.Interfaces
     {
         User GetUserSettings();
 
-        NetworkConfig GetNetworkConfig();
+        NetworkProvider GetNetworkConfig();
     }
 }
