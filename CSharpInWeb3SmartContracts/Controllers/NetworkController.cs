@@ -38,7 +38,12 @@ namespace WebApi.Controllers
             return Ok(block);
         }
 
-
+        [HttpGet("GetAllTransactionsOfABlock")]
+        public async Task<IActionResult> GetTransactionsOfABlockAsync(long blockNumber, Chain chain)
+        {
+            var transactions = await _networkService.GetTransactionsOfABlock(blockNumber, chain);
+            return Ok(transactions);
+        }
 
         [HttpGet("GetAllContractCreationTransactions")]
         public async Task<ActionResult> GetAllContractCreationTransactionsAsync(Chain chain, long blockNumber)
