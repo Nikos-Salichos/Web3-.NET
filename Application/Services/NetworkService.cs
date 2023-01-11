@@ -40,6 +40,7 @@ namespace Application.Services
         {
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
+            BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
         }
     }
 }
