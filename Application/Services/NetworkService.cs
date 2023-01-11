@@ -36,9 +36,8 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<Transaction[]> GetTransactionsOfABlock()
+        public async Task<Transaction[]> GetTransactionsOfABlock(long blockNumber, Chain chain)
         {
-            throw new NotImplementedException();
         }
     }
 }
