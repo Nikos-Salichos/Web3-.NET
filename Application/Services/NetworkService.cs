@@ -47,6 +47,7 @@ namespace Application.Services
                 return Array.Empty<Transaction>();
             }
 
+            return blockWithTransactions.Transactions ?? Array.Empty<Transaction>();
         }
     }
 }
