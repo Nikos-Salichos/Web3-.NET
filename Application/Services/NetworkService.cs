@@ -39,6 +39,7 @@ namespace Application.Services
         public async Task<Transaction[]> GetTransactionsOfABlock(long blockNumber, Chain chain)
         {
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
         }
     }
 }
