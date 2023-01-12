@@ -33,6 +33,8 @@ namespace Application.Services
 
         public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
         {
+            Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
+
             throw new NotImplementedException();
         }
 
