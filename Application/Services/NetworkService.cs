@@ -36,10 +36,12 @@ namespace Application.Services
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
+
+
             throw new NotImplementedException();
         }
 
-        public async Task<Transaction[]> GetTransactionsOfABlock(long blockNumber, Chain chain)
+        public async Task<Transaction[]> GetTransactionsOfABlock(BigInteger blockNumber, Chain chain)
         {
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
