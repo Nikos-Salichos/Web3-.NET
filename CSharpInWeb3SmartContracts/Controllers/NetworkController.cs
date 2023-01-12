@@ -6,6 +6,7 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using System.Numerics;
 using System.Reflection;
 using WebApi.Utilities;
 
@@ -32,7 +33,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetLatestBlock")]
-        public async Task<IActionResult> GetBlockAsync(long blockNumber, Chain chain)
+        public async Task<IActionResult> GetBlockAsync(BigInteger blockNumber, Chain chain)
         {
             var block = await _networkService.GetBlockAsync(blockNumber, chain);
             return Ok(block);
