@@ -34,6 +34,7 @@ namespace Application.Services
         public Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync()
         {
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
+            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             throw new NotImplementedException();
         }
