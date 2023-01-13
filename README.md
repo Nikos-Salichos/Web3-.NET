@@ -24,6 +24,7 @@ Technical specs:
 
 
 Entity Framework:
+
 Add-Migration "DB Initialize"
 
 Update-Database
