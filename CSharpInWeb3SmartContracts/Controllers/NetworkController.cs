@@ -42,12 +42,12 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetAllContractCreationTransactions")]
-        public async Task<ActionResult> GetAllContractCreationTransactionsAsync(Chain chain, long blockNumber)
+        public async Task<ActionResult> GetAllContractCreationTransactionsAsync(BigInteger blockNumber, Chain chain)
         {
 
 
 
-            return Ok(transactionsForContractCreation);
+
         }
     }
 }
