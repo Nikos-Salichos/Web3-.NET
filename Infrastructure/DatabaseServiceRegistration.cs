@@ -17,7 +17,7 @@ namespace Infrastructure
 
             services.AddScoped<IMsqlSqlDbContext>(provider => provider.GetService<MsqlDbContext>()!);
 
-            services.AddDbContext<PostgreSqlDbContext>(options =>
+            services.AddEntityFrameworkNpgsql().AddDbContext<PostgreSqlDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("PostgreSqlConnection"),
                 b => b.MigrationsAssembly(typeof(PostgreSqlDbContext).Assembly.FullName)), ServiceLifetime.Transient);
 
