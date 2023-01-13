@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
-    public static class DependencyInjection
+    public static class DatabaseServiceRegistration
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services,
            IConfiguration configuration)
@@ -17,6 +17,11 @@ namespace Infrastructure
 
             services.AddScoped<IMsqlSqlDbContext>(provider => provider.GetService<MsqlDbContext>()!);
 
+            services.AddDbContext<PostgreSqlDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("PostgreSqlConnection"),
+                b => b.MigrationsAssembly(typeof(PostgreSqlDbContext).Assembly.FullName)), ServiceLifetime.Transient);
+
+            services.AddScoped<IPostgreSqlDbContext>(provider => provider.GetService<PostgreSqlDbContext>()!);
 
             return services;
         }
