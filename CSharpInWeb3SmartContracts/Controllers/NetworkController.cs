@@ -1,11 +1,8 @@
 ﻿using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
-using Nethereum.Web3;
-using Nethereum.Web3.Accounts;
 using System.Numerics;
 using System.Reflection;
 using WebApi.Utilities;
@@ -49,17 +46,6 @@ namespace WebApi.Controllers
         [HttpGet("GetAllContractCreationTransactions")]
         public async Task<ActionResult> GetAllContractCreationTransactionsAsync(Chain chain, long blockNumber)
         {
-            Account? account = new(_user.PrivateKey, chain);
-            Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
-
-            BlockWithTransactions? blockWithTransactions = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(new HexBigInteger(blockNumber));
-
-            if (blockWithTransactions == null)
-            {
-                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Block not found");
-                return NotFound("Block not found");
-            }
-
             Transaction[] allTransactions = blockWithTransactions.Transactions;
 
             if (allTransactions.Length == 0)
