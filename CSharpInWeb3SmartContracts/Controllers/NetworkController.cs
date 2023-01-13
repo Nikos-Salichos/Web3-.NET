@@ -10,15 +10,15 @@ namespace WebApi.Controllers
     [ApiController]
     public class NetworkController : ControllerBase
     {
-        private readonly User _user = new();
+        private readonly User _user;
 
         public EnumHelper EnumHelper { get; set; }
 
-        private readonly ILogger<LotteryController> _logger;
+        private readonly ILogger<NetworkController> _logger;
 
         private readonly INetworkService _networkService;
 
-        public NetworkController(IConfiguration configuration, ILogger<LotteryController> logger, INetworkService networkService)
+        public NetworkController(IConfiguration configuration, ILogger<NetworkController> logger, INetworkService networkService)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
@@ -26,7 +26,7 @@ namespace WebApi.Controllers
             _networkService = networkService;
         }
 
-        [HttpGet("GetLatestBlock")]
+        [HttpGet("GetBlockDetails")]
         public async Task<IActionResult> GetBlockAsync(long blockNumber, Chain chain)
         {
             var block = await _networkService.GetBlockAsync(blockNumber, chain);
