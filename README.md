@@ -25,9 +25,11 @@ Technical specs:
 
 Entity Framework:
 
-Add-Migration "DB Initialize"
+Always target Infrastructure project from Default Project selection in Package Manager Console
 
-Update-Database
+Add-Migration "DB Initialize" -context PostgreSqlDbContext (context of your choice)
+
+Update-Database -context PostgreSqlDbContext (context of your choice)
 
 Target specific folder
 
