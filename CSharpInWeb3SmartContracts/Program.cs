@@ -66,7 +66,7 @@ builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(serilogConfigurat
 #endregion Serilog Logging
 
 #region Database
-builder.Services.AddPersistence(builder.Configuration);
+builder.Services.RegisterDatabases(builder.Configuration);
 #endregion Database
 
 #region Autofac Dependency Injection

@@ -8,7 +8,7 @@ namespace Infrastructure
 {
     public static class DatabaseServiceRegistration
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services,
+        public static IServiceCollection RegisterDatabases(this IServiceCollection services,
            IConfiguration configuration)
         {
             services.AddDbContext<MsqlDbContext>(options =>
