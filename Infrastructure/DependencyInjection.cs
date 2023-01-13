@@ -14,7 +14,7 @@ namespace Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("MsSqlConnection"),
                 b => b.MigrationsAssembly(typeof(MsqlDbContext).Assembly.FullName)), ServiceLifetime.Transient);
 
-            services.AddScoped<IApplicationDBContext>(provider => provider.GetService<MsqlDbContext>());
+            services.AddScoped<IMsqlSqlDbContext>(provider => provider.GetService<MsqlDbContext>());
             return services;
         }
     }

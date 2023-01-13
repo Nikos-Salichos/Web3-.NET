@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-    public class MsqlDbContext : DbContext, IApplicationDBContext
+    public class MsqlDbContext : DbContext, IMsqlSqlDbContext
     {
         public MsqlDbContext(DbContextOptions<MsqlDbContext> options) : base(options) { }
 
