@@ -8,6 +8,6 @@ namespace Application.Interfaces
     {
         Task<BlockWithTransactionHashes> GetBlockAsync(BigInteger blockNumber, Chain chain);
         Task<Transaction[]> GetTransactionsOfABlock(BigInteger blockNumber, Chain chain);
-        Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync(BigInteger blockNumber, Chain chai);
+        Task<IEnumerable<Transaction?>> GetAllContractCreationTransactionsAsync(BigInteger blockNumber, Chain chai);
     }
 }

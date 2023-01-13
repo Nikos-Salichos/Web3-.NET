@@ -31,7 +31,7 @@ namespace Application.Services
             return blockWithTransactionHashes ?? new BlockWithTransactionHashes();
         }
 
-        public async Task<IEnumerable<Transaction>> GetAllContractCreationTransactionsAsync(BigInteger blockNumber, Chain chain)
+        public async Task<IEnumerable<Transaction?>> GetAllContractCreationTransactionsAsync(BigInteger blockNumber, Chain chain)
         {
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, chain);
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
@@ -43,9 +43,7 @@ namespace Application.Services
                 return Array.Empty<Transaction>();
             }
 
-            IEnumerable<Transaction> transactionsForContractCreation = blockWithTransactions.Transactions.Where(t => t.To == null);
-
-            return transactionsForContractCreation;
+            return blockWithTransactions.Transactions.Where(t => t.To == null);
         }
 
         public async Task<Transaction[]> GetTransactionsOfABlock(BigInteger blockNumber, Chain chain)
