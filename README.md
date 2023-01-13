@@ -31,14 +31,6 @@ Add-Migration "DB Initialize" -context PostgreSqlDbContext (context of your choi
 
 Update-Database -context PostgreSqlDbContext (context of your choice)
 
-Target specific folder
-
-cd C:\Users\Nikos\source\repos\Web3-.NET\Infrastructure (your path)
-
-dotnet ef migrations add "initial_migrations_postgresql" -c PostgreSqlDbContext --verbose
-
-Update-Database -Context PostgreSqlDbContext
-
 In order to compile a smart contract I am using visual studio code with solidity extension. 
 After compilation I use ABI and bytecode from .json file. 
 
