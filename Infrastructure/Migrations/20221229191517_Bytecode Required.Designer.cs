@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(MsqlDbContext))]
     [Migration("20221229191517_Bytecode Required")]
     partial class BytecodeRequired
     {

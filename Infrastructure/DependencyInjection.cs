@@ -10,11 +10,11 @@ namespace Infrastructure
         public static IServiceCollection AddPersistence(this IServiceCollection services,
            IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<MsqlDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("MsSqlConnection"),
-                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)), ServiceLifetime.Transient);
+                b => b.MigrationsAssembly(typeof(MsqlDbContext).Assembly.FullName)), ServiceLifetime.Transient);
 
-            services.AddScoped<IApplicationDBContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<IApplicationDBContext>(provider => provider.GetService<MsqlDbContext>());
             return services;
         }
     }

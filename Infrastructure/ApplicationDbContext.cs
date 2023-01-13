@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-    public class ApplicationDbContext : DbContext, IApplicationDBContext
+    public class MsqlDbContext : DbContext, IApplicationDBContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public MsqlDbContext(DbContextOptions<MsqlDbContext> options) : base(options) { }
 
         public DbSet<SmartContract> SmartContract { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MsqlDbContext).Assembly);
             modelBuilder.ApplyConfiguration(new SmartContractConfiguration());
         }
     }

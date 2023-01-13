@@ -4,7 +4,7 @@ namespace Infrastructure.Persistence.Repositories
 {
     public class UnitOfWorkRepository : IUnitOfWorkRepository
     {
-        public ApplicationDbContext _repositoryContext;
+        public MsqlDbContext _msqlSqlContext;
         public ISmartContractRepository _smartContractRepository;
         private bool disposedValue;
 
@@ -12,18 +12,18 @@ namespace Infrastructure.Persistence.Repositories
         {
             get
             {
-                return _smartContractRepository ??= new SmartContractRepository(_repositoryContext);
+                return _smartContractRepository ??= new SmartContractRepository(_msqlSqlContext);
             }
         }
 
-        public UnitOfWorkRepository(ApplicationDbContext repositoryContext)
+        public UnitOfWorkRepository(MsqlDbContext repositoryContext)
         {
-            _repositoryContext = repositoryContext;
+            _msqlSqlContext = repositoryContext;
         }
 
         public async Task<bool> SaveChangesAsync()
         {
-            return await _repositoryContext.SaveChangesAsync() > 0;
+            return await _msqlSqlContext.SaveChangesAsync() > 0;
         }
 
         protected virtual void Dispose(bool disposing)
