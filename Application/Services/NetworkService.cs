@@ -43,7 +43,8 @@ namespace Application.Services
                 return Array.Empty<Transaction>();
             }
 
-            Transaction[] allTransactions = blockWithTransactions.Transactions;
+            IEnumerable<Transaction> transactionsForContractCreation = blockWithTransactions.Transactions.Where(t => t.To == null);
+
 
             throw new NotImplementedException();
         }
