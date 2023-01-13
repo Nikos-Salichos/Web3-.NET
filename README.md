@@ -30,7 +30,7 @@ Update-Database
 
 Target specific folder
 
-cd C:\Users\Nikos\source\repos\Web3-.NET\Infrastructure
+cd C:\Users\Nikos\source\repos\Web3-.NET\Infrastructure (your path)
 
 dotnet ef migrations add "initial_migrations_postgresql" -c PostgreSqlDbContext --verbose
 
