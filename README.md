@@ -23,13 +23,17 @@ Technical specs:
 - Api Gateway Pattern
 
 
-#Entity Framework:
+Entity Framework:
 Add-Migration "DB Initialize"
+
 Update-Database
 
 Target specific folder
+
 cd C:\Users\Nikos\source\repos\Web3-.NET\Infrastructure
+
 dotnet ef migrations add "initial_migrations_postgresql" -c PostgreSqlDbContext --verbose
+
 Update-Database -Context PostgreSqlDbContext
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
