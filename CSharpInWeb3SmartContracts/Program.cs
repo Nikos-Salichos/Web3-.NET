@@ -10,6 +10,7 @@ using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Infrastructure;
 using Infrastructure.Modules;
+using Infrastructure.Persistence.DbContexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;

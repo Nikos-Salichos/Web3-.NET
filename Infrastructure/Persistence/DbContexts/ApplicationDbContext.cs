@@ -2,7 +2,7 @@
 using Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure
+namespace Infrastructure.Persistence.DbContexts
 {
     public class MsqlDbContext : DbContext, IMsqlSqlDbContext
     {
