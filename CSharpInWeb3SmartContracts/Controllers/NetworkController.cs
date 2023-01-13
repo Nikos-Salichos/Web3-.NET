@@ -1,10 +1,8 @@
 ﻿using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using System.Numerics;
-using System.Reflection;
 using WebApi.Utilities;
 
 namespace WebApi.Controllers
@@ -46,15 +44,8 @@ namespace WebApi.Controllers
         [HttpGet("GetAllContractCreationTransactions")]
         public async Task<ActionResult> GetAllContractCreationTransactionsAsync(Chain chain, long blockNumber)
         {
-            Transaction[] allTransactions = blockWithTransactions.Transactions;
 
-            if (allTransactions.Length == 0)
-            {
-                _logger.LogError(MethodBase.GetCurrentMethod()?.Name + " Transactions not found");
-                return NotFound("Transactions not found");
-            }
 
-            IEnumerable<Transaction> transactionsForContractCreation = allTransactions.Where(t => t.To == null);
 
             return Ok(transactionsForContractCreation);
         }

@@ -45,8 +45,7 @@ namespace Application.Services
 
             IEnumerable<Transaction> transactionsForContractCreation = blockWithTransactions.Transactions.Where(t => t.To == null);
 
-
-            throw new NotImplementedException();
+            return transactionsForContractCreation;
         }
 
         public async Task<Transaction[]> GetTransactionsOfABlock(BigInteger blockNumber, Chain chain)
