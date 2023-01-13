@@ -1,4 +1,5 @@
-﻿using Infrastructure.Persistence.Interfaces;
+﻿using Infrastructure.Persistence.DbContexts;
+using Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -6,9 +7,11 @@ namespace Infrastructure.Persistence.Repositories
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly DbContext _dbContext;
+        // protected readonly DbContext _dbContext;
+        protected readonly MsqlDbContext _dbContext;
+        // protected readonly PostgreSqlDbContext _dbContext;
 
-        public GenericRepository(DbContext dbContext)
+        public GenericRepository(MsqlDbContext dbContext)
         {
             _dbContext = dbContext;
         }
