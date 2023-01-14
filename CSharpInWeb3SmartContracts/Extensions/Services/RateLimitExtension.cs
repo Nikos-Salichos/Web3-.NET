@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Microsoft.AspNetCore.RateLimiting;
 using Newtonsoft.Json;
 using System.Threading.RateLimiting;
 
@@ -17,6 +18,7 @@ namespace WebApi.Extensions.Services
         {
             configuration.GetSection("RateLimitOptions").Bind(RateLimitOptions);
 
+            //Global rate limit
             services.AddRateLimiter(options =>
             {
                 options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
@@ -50,6 +52,15 @@ namespace WebApi.Extensions.Services
                         }), cancellationToken: token);
                     }
                 };
+
+                //Custom rate limiter for endpoint
+                options.AddFixedWindowLimiter("ApiSmartContract", options =>
+                {
+                    options.AutoReplenishment = true;
+                    options.PermitLimit = 1;
+                    options.Window = TimeSpan.FromSeconds(1);
+                });
+
             });
 
         }
