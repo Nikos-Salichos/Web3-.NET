@@ -25,9 +25,11 @@ Technical specs:
 
 Entity Framework:
 
-Add-Migration "DB Initialize"
+Always target Infrastructure project from Default Project selection in Package Manager Console
 
-Update-Database
+Add-Migration "DB Initialize" -context PostgreSqlDbContext (context of your choice)
+
+Update-Database -context PostgreSqlDbContext (context of your choice)
 
 In order to compile a smart contract I am using visual studio code with solidity extension. 
 After compilation I use ABI and bytecode from .json file. 
