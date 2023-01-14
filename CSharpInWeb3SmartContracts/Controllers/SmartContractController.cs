@@ -35,7 +35,6 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetSmartContractById")]
-        [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,7 +46,6 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("FindSmartContractsByAddress")]
-        [ResponseCache(CacheProfileName = "DefaultCache")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
