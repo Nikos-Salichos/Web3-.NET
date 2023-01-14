@@ -171,9 +171,9 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseGlobalExceptionMiddleware();
-
 app.RateLimit();
+
+app.UseGlobalExceptionMiddleware();
 
 app.UseCors();
 
