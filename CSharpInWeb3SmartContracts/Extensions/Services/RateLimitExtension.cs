@@ -1,4 +1,5 @@
-﻿using AspNetCoreRateLimit;
+﻿using Newtonsoft.Json;
+using System.Threading.RateLimiting;
 
 namespace WebApi.Extensions.Services
 {
@@ -6,18 +7,46 @@ namespace WebApi.Extensions.Services
     {
         public static void RateLimit(this IApplicationBuilder app)
         {
-            app.UseIpRateLimiting();
+            app.UseRateLimiter();
         }
 
         public static void AddRateLimiting(this IServiceCollection services, IConfigurationSection configurationSection)
         {
-            services.AddMemoryCache();
-            services.Configure<IpRateLimitOptions>(configurationSection);
-            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
-            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
-            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
-            services.AddInMemoryRateLimiting();
+
+            services.AddRateLimiter(options =>
+            {
+                options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+                        factory: partition => new FixedWindowRateLimiterOptions
+                        {
+                            AutoReplenishment = true,
+                            PermitLimit = 5,
+                            QueueLimit = 0,
+                            Window = TimeSpan.FromSeconds(10)
+                        }));
+
+                options.OnRejected = async (context, token) =>
+                {
+                    context.HttpContext.Response.StatusCode = 429;
+                    context.HttpContext.Response.ContentType = "application/json";
+                    if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+                    {
+                        await context.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(new
+                        {
+                            Error = $"Too many requests. Please try again after {retryAfter.TotalSeconds} second(s)."
+                        }), cancellationToken: token);
+                    }
+                    else
+                    {
+                        await context.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(new
+                        {
+                            data = "Too many requests. Please try again later."
+                        }), cancellationToken: token);
+                    }
+                };
+            });
+
         }
     }
 }
