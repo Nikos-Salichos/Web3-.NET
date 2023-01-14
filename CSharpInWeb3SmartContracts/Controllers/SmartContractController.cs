@@ -2,6 +2,7 @@
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using WebApi.Utilities;
 
 namespace WebApi.Controllers
@@ -25,6 +26,7 @@ namespace WebApi.Controllers
 
         [HttpGet("GetAllSmartContracts")]
         [ResponseCache(CacheProfileName = "DefaultCache")]
+        [EnableRateLimiting("ApiSmartContract")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllSmartContractsAsync()
