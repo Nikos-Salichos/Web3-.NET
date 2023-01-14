@@ -1,31 +1,36 @@
-﻿using Newtonsoft.Json;
+﻿using Domain.Models;
+using Newtonsoft.Json;
 using System.Threading.RateLimiting;
 
 namespace WebApi.Extensions.Services
 {
     public static class RateLimitExtension
     {
+        public static RateLimitOptions RateLimitOptions { get; } = new RateLimitOptions();
+
         public static void RateLimit(this IApplicationBuilder app)
         {
             app.UseRateLimiter();
         }
 
-        public static void AddRateLimiting(this IServiceCollection services, IConfigurationSection configurationSection)
+        public static void AddRateLimiting(this IServiceCollection services, IConfiguration configuration)
         {
+            configuration.GetSection("RateLimitOptions").Bind(RateLimitOptions);
 
             services.AddRateLimiter(options =>
             {
                 options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
                     RateLimitPartition.GetFixedWindowLimiter(
                         partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
-                        factory: partition => new FixedWindowRateLimiterOptions
+                        factory: _ => new FixedWindowRateLimiterOptions
                         {
-                            AutoReplenishment = true,
-                            PermitLimit = 5,
-                            QueueLimit = 0,
-                            Window = TimeSpan.FromSeconds(10)
+                            AutoReplenishment = RateLimitOptions.AutoReplenishment,
+                            PermitLimit = RateLimitOptions.PermitLimit,
+                            QueueLimit = RateLimitOptions.QueueLimit,
+                            Window = TimeSpan.FromSeconds(RateLimitOptions.Window)
                         }));
 
+                options.RejectionStatusCode = 429;
                 options.OnRejected = async (context, token) =>
                 {
                     context.HttpContext.Response.StatusCode = 429;
