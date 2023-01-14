@@ -104,7 +104,7 @@ builder.Services.AddHttpClient("apiGateway").ConfigurePrimaryHttpMessageHandler(
 #endregion Api Gateway Pattern (Proxy Controller)
 
 #region Rate Limit
-builder.Services.AddRateLimiting(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddRateLimiting(builder.Configuration);
 #endregion Rate Limit
 
 #region Read User appsettings.json
