@@ -14,7 +14,7 @@ namespace WebApi.Controllers
 
         private readonly ISmartContractService _smartContractService;
 
-        private readonly ILogger<LotteryController> _logger;
+        private readonly ILogger<SmartContractController> _logger;
 
         public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<LotteryController> logger)
         {
