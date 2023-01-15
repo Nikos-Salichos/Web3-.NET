@@ -23,9 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Web3-.NET\Application\Application.csproj" />
-    <ProjectReference Include="..\Web3-.NET\CSharpInWeb3SmartContracts\WebApi.csproj" />
-    <ProjectReference Include="..\Web3-.NET\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\CSharpInWeb3SmartContracts\WebApi.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\Controllers\" />
   </ItemGroup>
 
 </Project>
