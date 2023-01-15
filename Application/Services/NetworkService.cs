@@ -1,5 +1,5 @@
-﻿using Application.Interfaces;
-using Application.Utilities;
+﻿using Application.Helpers;
+using Application.Interfaces;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
