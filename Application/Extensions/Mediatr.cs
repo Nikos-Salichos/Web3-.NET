@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Application.RegisterServices
+namespace Application.Extensions
 {
     public static class Mediatr
     {
