@@ -1,7 +1,7 @@
 using Application;
+using Application.Extensions;
 using Application.Mappers;
 using Application.Modules;
-using Application.RegisterServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Domain.Models;
