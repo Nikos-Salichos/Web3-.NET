@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Domain.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -36,7 +37,15 @@ namespace Tests.UnitTests
             // Act
             var result = await controller.GetAllSmartContractsAsync();
 
-
+            // Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
+            Assert.Equal(smartContracts, returnedSmartContracts);
+            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
+                                         It.IsAny<EventId>(),
+                                         It.IsAny<It.IsAnyType>(),
+                                         It.IsAny<Exception>(),
+                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
         }
     }
 }
