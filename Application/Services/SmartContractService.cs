@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Commands;
 using Application.CQRS.Queries;
+using Application.Helpers;
 using Application.Interfaces;
-using Application.Utilities;
 using Application.Validators;
 using AutoMapper;
 using Domain.DTOs;
@@ -58,11 +58,11 @@ namespace Application.Services
         public async Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContractDto)
         {
             SmartContractDtoValidator smartContractValidator = new SmartContractDtoValidator();
-            var IsValid = await smartContractValidator.ValidateAsync(smartContractDto);
+            var validationResult = await smartContractValidator.ValidateAsync(smartContractDto);
 
-            if (!IsValid.IsValid)
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentNullException(IsValid.ToString());
+                throw new ArgumentException(validationResult.ToString());
             }
 
             Account? account = new(_singletonOptionsService.GetUserSettings().PrivateKey, smartContractDto.Chain);
