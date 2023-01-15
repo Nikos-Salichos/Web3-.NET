@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces;
 using Nethereum.Signer;
 
-namespace Application.Utilities
+namespace Application.Helpers
 {
     public class EnumHelper
     {
