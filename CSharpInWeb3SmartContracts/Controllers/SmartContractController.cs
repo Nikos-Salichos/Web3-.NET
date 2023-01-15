@@ -16,7 +16,7 @@ namespace WebApi.Controllers
 
         private readonly ILogger<SmartContractController> _logger;
 
-        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<LotteryController> logger)
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<SmartContractController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
             _user = configuration.GetSection("User").Get<User>()!;
