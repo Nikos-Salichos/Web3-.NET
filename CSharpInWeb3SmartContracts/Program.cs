@@ -14,15 +14,12 @@ using Infrastructure.Persistence.DbContexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
-using Serilog;
-using Serilog.Core;
-using Serilog.Events;
-using Serilog.Formatting.Json;
 using System.IO.Compression;
 using System.Text.Json.Serialization;
 using WebApi.Extensions.Services;
 using WebApi.GraphQL;
 using WebApi.HealthChecks;
+using WebApi.Logging;
 using WebApi.Utilities;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
@@ -42,27 +39,7 @@ IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("apps
 #endregion AppSettings.json
 
 #region Serilog Logging
-
-var serilogConfiguration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json")
-        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
-        .Build();
-
-string fullPath = Environment.CurrentDirectory + @"\logs.txt";
-LoggingLevelSwitch? levelSwitch = new();
-levelSwitch.MinimumLevel = LogEventLevel.Error;
-builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(serilogConfiguration)
-                                         //.MinimumLevel.ControlledBy(levelSwitch)
-                                         .WriteTo.File(new JsonFormatter(), fullPath, rollingInterval: RollingInterval.Day));
-
-/*.WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("MsSqlConnection"),
- new MSSqlServerSinkOptions
- {
-     TableName = "Logs",
-     SchemaName = "dbo",
-     AutoCreateSqlTable = true
- }));*/
+SerilogRegistration.SerilogConfiguration(builder);
 #endregion Serilog Logging
 
 #region Database
