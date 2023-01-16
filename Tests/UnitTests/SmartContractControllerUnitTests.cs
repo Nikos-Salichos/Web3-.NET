@@ -47,5 +47,41 @@ namespace Tests.UnitTests
                                          It.IsAny<Exception>(),
                                          (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
         }
+
+        [Fact]
+        public async Task GetAllSmartContractsAsync_ReturnsEmptyResult()
+        {
+            // Arrange
+            var smartContracts = new List<SmartContractDTO> { };
+
+            var mockSmartContractService = new Mock<ISmartContractService>();
+
+            mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
+
+            Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
+            mockSection.Setup(x => x.Value).Returns("User");
+
+            Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
+            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
+
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
+
+            var controller = new SmartContractController(mockConfig.Object,
+                                    mockSmartContractService.Object, mockLogger.Object);
+
+            // Act
+            var result = await controller.GetAllSmartContractsAsync();
+
+            // Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
+            Assert.Equal(smartContracts, returnedSmartContracts);
+            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
+                                         It.IsAny<EventId>(),
+                                         It.IsAny<It.IsAnyType>(),
+                                         It.IsAny<Exception>(),
+                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
+        }
+
     }
 }
