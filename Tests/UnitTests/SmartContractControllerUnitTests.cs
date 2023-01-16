@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System.Net;
 using WebApi.Controllers;
 using Xunit;
 
@@ -39,6 +40,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
             Assert.Equal(smartContracts, returnedSmartContracts);
             mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
@@ -52,7 +54,7 @@ namespace Tests.UnitTests
         public async Task GetAllSmartContractsAsync_ReturnsEmptyResult()
         {
             // Arrange
-            var smartContracts = new List<SmartContractDTO> { };
+            var smartContracts = new List<SmartContractDTO>();
 
             var mockSmartContractService = new Mock<ISmartContractService>();
 
@@ -74,6 +76,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
             Assert.Equal(smartContracts, returnedSmartContracts);
             mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
