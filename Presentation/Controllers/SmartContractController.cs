@@ -40,7 +40,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetSmartContractAsync(long id)
+        public async Task<IActionResult> GetSmartContractByIdAsync(long id)
         {
             var smartContract = await _smartContractService.GetSmartContractByIdAsync(id);
             _logger.LogInformation("Smart Contract {@smartContract}", smartContract);
