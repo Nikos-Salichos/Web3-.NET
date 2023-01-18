@@ -112,6 +112,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
 
 
         }
