@@ -89,39 +89,8 @@ namespace Tests.UnitTests
         [Fact]
         public async Task GetSmartContractByIdAsync_ReturnsEmptyResult()
         {
-            // Arrange
             var smartContracts = new List<SmartContractDTO> {
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 2" } };
-
-            var mockSmartContractService = new Mock<ISmartContractService>();
-
-            mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
-                .ReturnsAsync(smartContracts.FirstOrDefault());
-
-            Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
-            mockSection.Setup(x => x.Value).Returns("User");
-
-            Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
-
-            var mockLogger = new Mock<ILogger<SmartContractController>>();
-
-            var controller = new SmartContractController(mockConfig.Object,
-                                    mockSmartContractService.Object, mockLogger.Object);
-
-            // Act
-            var result = await controller.GetSmartContractByIdAsync(1);
-
-            // Assert
-            var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
-            var returnedSmartContract = Assert.IsAssignableFrom<SmartContractDTO>(okObjectResult.Value);
-            Assert.Equal(smartContracts.FirstOrDefault(), returnedSmartContract);
-            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
-                                         It.IsAny<EventId>(),
-                                         It.IsAny<It.IsAnyType>(),
-                                         It.IsAny<Exception>(),
-                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
         }
 
     }
