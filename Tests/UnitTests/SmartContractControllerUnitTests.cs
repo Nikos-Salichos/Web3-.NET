@@ -91,6 +91,8 @@ namespace Tests.UnitTests
         {
             var smartContracts = new List<SmartContractDTO> {
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 2" } };
+
+            var mockSmartContractService = new Mock<ISmartContractService>();
         }
 
     }
