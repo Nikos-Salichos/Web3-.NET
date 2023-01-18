@@ -115,7 +115,11 @@ namespace Tests.UnitTests
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContract = Assert.IsAssignableFrom<SmartContractDTO>(okObjectResult.Value);
             Assert.Equal(smartContracts.FirstOrDefault(), returnedSmartContract);
-
+            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
+                                        It.IsAny<EventId>(),
+                                        It.IsAny<It.IsAnyType>(),
+                                        It.IsAny<Exception>(),
+                                        (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
 
         }
 
