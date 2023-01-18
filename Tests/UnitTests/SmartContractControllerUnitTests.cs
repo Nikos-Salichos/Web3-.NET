@@ -110,6 +110,10 @@ namespace Tests.UnitTests
             // Act
             var result = await controller.GetSmartContractByIdAsync(1);
 
+            // Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+
+
         }
 
     }
