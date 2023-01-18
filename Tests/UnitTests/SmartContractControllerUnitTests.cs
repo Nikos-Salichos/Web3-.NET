@@ -97,6 +97,9 @@ namespace Tests.UnitTests
             mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
                 .ReturnsAsync(smartContracts.FirstOrDefault());
 
+            Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
+            mockSection.Setup(x => x.Value).Returns("User");
+
         }
 
     }
