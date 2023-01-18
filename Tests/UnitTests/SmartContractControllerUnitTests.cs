@@ -114,6 +114,7 @@ namespace Tests.UnitTests
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContract = Assert.IsAssignableFrom<SmartContractDTO>(okObjectResult.Value);
+            Assert.Equal(smartContracts.FirstOrDefault(), returnedSmartContract);
 
 
         }
