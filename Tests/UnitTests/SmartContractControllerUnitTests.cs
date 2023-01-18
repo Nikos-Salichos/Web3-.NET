@@ -93,6 +93,10 @@ namespace Tests.UnitTests
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 2" } };
 
             var mockSmartContractService = new Mock<ISmartContractService>();
+
+            mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
+                .ReturnsAsync(smartContracts.FirstOrDefault());
+
         }
 
     }
