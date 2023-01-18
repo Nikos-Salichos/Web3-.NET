@@ -102,6 +102,9 @@ namespace Tests.UnitTests
 
             Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
             mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
+
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
+
         }
 
     }
