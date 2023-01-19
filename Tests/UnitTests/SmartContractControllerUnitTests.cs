@@ -146,6 +146,16 @@ namespace Tests.UnitTests
             // Act
             var result = await controller.GetSmartContractByIdAsync(1);
 
+            // Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
+            Assert.Null(okObjectResult.Value);
+            Assert.Empty(smartContracts);
+            mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
+                                        IsAny<EventId>(),
+                                        IsAny<IsAnyType>(),
+                                        IsAny<Exception>(),
+                                        IsAny<Func<IsAnyType, Exception?, string>>()));
         }
     }
 }
