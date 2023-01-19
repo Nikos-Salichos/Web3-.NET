@@ -128,6 +128,9 @@ namespace Tests.UnitTests
         {
             var smartContracts = new List<SmartContractDTO>();
             var mockSmartContractService = new Mock<ISmartContractService>();
+
+            mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
+                .ReturnsAsync(smartContracts.FirstOrDefault());
         }
     }
 }
