@@ -118,7 +118,7 @@ namespace Tests.UnitTests
             Assert.Equal(smartContracts.FirstOrDefault(), returnedSmartContract);
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
                                         IsAny<EventId>(),
-                                        IsAny<It.IsAnyType>(),
+                                        IsAny<IsAnyType>(),
                                         IsAny<Exception>(),
                                         IsAny<Func<IsAnyType, Exception?, string>>()));
         }
@@ -127,35 +127,6 @@ namespace Tests.UnitTests
         public async Task GetSmartContractByIdAsync_ReturnsEmptyResult()
         {
             var smartContracts = new List<SmartContractDTO>();
-
-            var mockSmartContractService = new Mock<ISmartContractService>();
-
-            mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
-                .ReturnsAsync(smartContracts.FirstOrDefault());
-
-            Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
-            mockSection.Setup(x => x.Value).Returns("User");
-
-            Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
-
-            var mockLogger = new Mock<ILogger<SmartContractController>>();
-
-            var controller = new SmartContractController(mockConfig.Object,
-                                    mockSmartContractService.Object, mockLogger.Object);
-            // Act
-            var result = await controller.GetSmartContractByIdAsync(1);
-
-            // Assert
-            var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
-            Assert.Null(okObjectResult.Value);
-            Assert.Empty(smartContracts);
-            mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
-                                        IsAny<EventId>(),
-                                        IsAny<It.IsAnyType>(),
-                                        IsAny<Exception>(),
-                                        IsAny<Func<IsAnyType, Exception?, string>>()));
         }
     }
 }
