@@ -134,6 +134,9 @@ namespace Tests.UnitTests
 
             Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
             mockSection.Setup(x => x.Value).Returns("User");
+
+            Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
+            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
         }
     }
 }
