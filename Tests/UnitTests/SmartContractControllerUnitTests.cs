@@ -143,6 +143,9 @@ namespace Tests.UnitTests
             var controller = new SmartContractController(mockConfig.Object,
                         mockSmartContractService.Object, mockLogger.Object);
 
+            // Act
+            var result = await controller.GetSmartContractByIdAsync(1);
+
         }
     }
 }
