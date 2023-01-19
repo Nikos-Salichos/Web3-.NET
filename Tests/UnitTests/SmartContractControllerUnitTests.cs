@@ -127,6 +127,7 @@ namespace Tests.UnitTests
         public async Task GetSmartContractByIdAsync_ReturnsEmptyResult()
         {
             var smartContracts = new List<SmartContractDTO>();
+            var mockSmartContractService = new Mock<ISmartContractService>();
         }
     }
 }
