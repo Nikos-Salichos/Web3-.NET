@@ -140,6 +140,9 @@ namespace Tests.UnitTests
 
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
+            var controller = new SmartContractController(mockConfig.Object,
+                        mockSmartContractService.Object, mockLogger.Object);
+
         }
     }
 }
