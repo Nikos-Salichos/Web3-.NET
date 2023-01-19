@@ -7,6 +7,7 @@ using Moq;
 using System.Net;
 using WebApi.Controllers;
 using Xunit;
+using static Moq.It;
 
 namespace Tests.UnitTests
 {
@@ -43,11 +44,11 @@ namespace Tests.UnitTests
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
             Assert.Equal(smartContracts, returnedSmartContracts);
-            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
-                                         It.IsAny<EventId>(),
-                                         It.IsAny<It.IsAnyType>(),
-                                         It.IsAny<Exception>(),
-                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
+            mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
+                                         IsAny<EventId>(),
+                                         IsAny<It.IsAnyType>(),
+                                         IsAny<Exception>(),
+                                         IsAny<Func<IsAnyType, Exception?, string>>()));
         }
 
         [Fact]
@@ -79,15 +80,15 @@ namespace Tests.UnitTests
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
             Assert.Equal(smartContracts, returnedSmartContracts);
-            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
-                                         It.IsAny<EventId>(),
-                                         It.IsAny<It.IsAnyType>(),
-                                         It.IsAny<Exception>(),
-                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
+            mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
+                                         IsAny<EventId>(),
+                                         IsAny<IsAnyType>(),
+                                         IsAny<Exception>(),
+                                         IsAny<Func<IsAnyType, Exception?, string>>()));
         }
 
         [Fact]
-        public async Task GetSmartContractByIdAsync_ReturnsEmptyResult()
+        public async Task GetSmartContractByIdAsync_ReturnsOkResult()
         {
             var smartContracts = new List<SmartContractDTO> {
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 2" } };
@@ -115,13 +116,13 @@ namespace Tests.UnitTests
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
             var returnedSmartContract = Assert.IsAssignableFrom<SmartContractDTO>(okObjectResult.Value);
             Assert.Equal(smartContracts.FirstOrDefault(), returnedSmartContract);
-            mockLogger.Verify(x => x.Log(It.IsAny<LogLevel>(),
-                                        It.IsAny<EventId>(),
-                                        It.IsAny<It.IsAnyType>(),
-                                        It.IsAny<Exception>(),
-                                        (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
-
+            mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
+                                        IsAny<EventId>(),
+                                        IsAny<It.IsAnyType>(),
+                                        IsAny<Exception>(),
+                                        IsAny<Func<IsAnyType, Exception?, string>>()));
         }
+
 
     }
 }
