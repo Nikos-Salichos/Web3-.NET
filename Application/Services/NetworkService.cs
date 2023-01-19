@@ -17,7 +17,7 @@ namespace Application.Services
 
         public NetworkService(ISingletonOptionsService singletonOptionsService)
         {
-            EnumHelper = new EnumHelper(singletonOptionsService!);
+            EnumHelper = new EnumHelper(singletonOptionsService);
             _singletonOptionsService = singletonOptionsService;
         }
 
