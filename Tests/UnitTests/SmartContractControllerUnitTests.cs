@@ -41,7 +41,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
             Assert.Equal(smartContracts, returnedSmartContracts);
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
@@ -77,7 +77,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             var returnedSmartContracts = Assert.IsAssignableFrom<IEnumerable<SmartContractDTO>>(okObjectResult.Value);
             Assert.Equal(smartContracts, returnedSmartContracts);
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
@@ -113,7 +113,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             var returnedSmartContract = Assert.IsAssignableFrom<SmartContractDTO>(okObjectResult.Value);
             Assert.Equal(smartContracts.FirstOrDefault(), returnedSmartContract);
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
@@ -148,7 +148,7 @@ namespace Tests.UnitTests
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode!);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             Assert.Null(okObjectResult.Value);
             Assert.Empty(smartContracts);
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
