@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface ISingletonOptionsService
     {
-        User GetUserSettings();
+        WalletOwner GetUserSettings();
 
         NetworkProvider GetNetworkConfig();
     }
