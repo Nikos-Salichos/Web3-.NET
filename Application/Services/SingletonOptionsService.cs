@@ -17,12 +17,12 @@ namespace Application.Services
 
         public NetworkProvider GetNetworkConfig()
         {
-            return _networkConfig.CurrentValue;
+            return _networkConfig.CurrentValue ?? new NetworkProvider();
         }
 
         public User GetUserSettings()
         {
-            return _userOptions.CurrentValue;
+            return _userOptions.CurrentValue ?? new User();
         }
     }
 }
