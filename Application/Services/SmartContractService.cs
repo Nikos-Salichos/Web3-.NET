@@ -31,7 +31,8 @@ namespace Application.Services
 
         public SmartContractService(IMapper mapper, IMediator mediator, ISingletonOptionsService singletonOptionsService)
         {
-            EnumHelper = new EnumHelper(_singletonOptionsService!);
+            _singletonOptionsService = singletonOptionsService;
+            EnumHelper = new EnumHelper(_singletonOptionsService);
             _mapper = mapper;
             _mediator = mediator;
             _singletonOptionsService = singletonOptionsService;
@@ -69,13 +70,10 @@ namespace Application.Services
             Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(smartContractDto.Chain));
 
             object[]? parameters = null;
-            if (smartContractDto?.Parameters?.Count > 0)
+            if (smartContractDto.Parameters?.Count > 0
+                && !string.IsNullOrWhiteSpace(smartContractDto.Parameters?.FirstOrDefault()?.ToString()))
             {
                 parameters = smartContractDto.Parameters.ToArray();
-                if (string.IsNullOrWhiteSpace(parameters?.FirstOrDefault()?.ToString()))
-                {
-                    parameters = null;
-                }
             }
 
             HexBigInteger estimatedGas = await web3.Eth.DeployContract.EstimateGasAsync(smartContractDto?.Abi?.ToString(),
@@ -92,7 +90,7 @@ namespace Application.Services
             {
                 smartContractDto.Address = deployContract.ContractAddress;
                 var smartContract = _mapper.Map<SmartContractDTO, SmartContract>(smartContractDto);
-                var saveSmartContract = await _mediator.Send(new CreateSmartContractCommand(smartContract), default);
+                await _mediator.Send(new CreateSmartContractCommand(smartContract), default);
             }
             return deployContract;
         }
