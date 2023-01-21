@@ -14,17 +14,13 @@ namespace Application.Helpers
 
         public string GetStringBasedOnEnum(Chain chain)
         {
-            switch (chain)
+            return chain switch
             {
-                case Chain.MainNet:
-                    return _singletonOptionsService.GetNetworkConfig().BlockchainProviderMainnet;
-                case Chain.Goerli:
-                    return _singletonOptionsService.GetNetworkConfig().BlockchainProviderGoerli;
-                case Chain.Ropsten:
-                    return _singletonOptionsService.GetNetworkConfig().BlockchainProviderSepolia;
-                default:
-                    return "NO NETWORK GIVEN";
-            }
+                Chain.MainNet => _singletonOptionsService.GetNetworkConfig().BlockchainProviderMainnet,
+                Chain.Goerli => _singletonOptionsService.GetNetworkConfig().BlockchainProviderGoerli,
+                Chain.Ropsten => _singletonOptionsService.GetNetworkConfig().BlockchainProviderSepolia,
+                _ => "NO NETWORK GIVEN",
+            };
         }
     }
 }
