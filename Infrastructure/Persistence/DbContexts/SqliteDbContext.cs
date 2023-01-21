@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.DbContexts
 {
-    public class MsqlDbContext : DbContext, IMsSqlDbContext
+    public class SqliteDbContext : DbContext, ISqliteDbContext
     {
-        public MsqlDbContext(DbContextOptions<MsqlDbContext> options) : base(options) { }
+        public SqliteDbContext(DbContextOptions<SqliteDbContext> options) : base(options) { }
 
         public DbSet<SmartContract> SmartContract { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MsqlDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqliteDbContext).Assembly);
             modelBuilder.ApplyConfiguration(new SmartContractConfiguration());
         }
     }
