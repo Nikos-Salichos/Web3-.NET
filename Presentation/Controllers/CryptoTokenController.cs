@@ -21,14 +21,14 @@ namespace WebApi.Controllers
 
         private readonly string _smartContractAddress = "0x0d26f523c24feda020c293185ac7a032814aedcf";
 
-        private readonly User _user = new();
+        private readonly WalletOwner _user = new();
 
         public EnumHelper EnumHelper { get; set; }
 
         public CryptoTokenController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>()!;
+            _user = configuration.GetSection("User").Get<WalletOwner>();
         }
 
         [HttpGet("GetBalance")]

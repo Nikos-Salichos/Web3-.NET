@@ -18,13 +18,13 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<WalletController> _logger;
 
-        private readonly User _user = new();
+        private readonly WalletOwner _user = new();
         public EnumHelper EnumHelper { get; set; }
 
         public WalletController(IConfiguration configuration, ILogger<WalletController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>();
+            _user = configuration.GetSection("User").Get<WalletOwner>();
             _logger = logger;
         }
 

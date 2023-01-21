@@ -16,11 +16,11 @@ namespace WebApi.Utilities
             switch (chain)
             {
                 case Chain.MainNet:
-                    return _configuration["User:BlockchainProviderMainnet"]!;
+                    return _configuration["User:BlockchainProviderMainnet"];
                 case Chain.Goerli:
-                    return _configuration["User:BlockchainProviderGoerli"]!;
+                    return _configuration["User:BlockchainProviderGoerli"];
                 case Chain.Ropsten:
-                    return _configuration["User:BlockchainProviderRopsten"]!;
+                    return _configuration["User:BlockchainProviderRopsten"];
                 default:
                     return "NO NETWORK GIVEN";
             }

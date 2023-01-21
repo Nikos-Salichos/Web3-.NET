@@ -24,7 +24,7 @@ namespace WebApi.Controllers
 
         // private readonly string _smartContractAddress = "0xF321FcC68DB5755f81766cc6B631651bBB1E1cAD";
 
-        private readonly User _user = new();
+        private readonly WalletOwner _user = new();
 
         private readonly ILogger<LotteryController> _logger;
 
@@ -33,7 +33,7 @@ namespace WebApi.Controllers
         public LotteryController(IConfiguration configuration, ILogger<LotteryController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration?.GetSection("User").Get<User>();
+            _user = configuration?.GetSection("User").Get<WalletOwner>();
             _logger = logger;
         }
 

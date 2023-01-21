@@ -9,7 +9,8 @@ namespace WebApi.Controllers
 {
     public class SmartContractController : ControllerBase
     {
-        private readonly User _user = new User();
+        private readonly WalletOwner _walletOwner;
+
         public EnumHelper EnumHelper { get; set; }
 
         private readonly ISmartContractService _smartContractService;
@@ -19,7 +20,7 @@ namespace WebApi.Controllers
         public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<SmartContractController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>()!;
+            _walletOwner = configuration.GetSection("User").Get<WalletOwner>() ?? new WalletOwner();
             _smartContractService = smartContractService;
             _logger = logger;
         }

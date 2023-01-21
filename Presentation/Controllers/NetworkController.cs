@@ -10,7 +10,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class NetworkController : ControllerBase
     {
-        private readonly User _user;
+        private readonly WalletOwner _user;
 
         public EnumHelper EnumHelper { get; set; }
 
@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         public NetworkController(IConfiguration configuration, ILogger<NetworkController> logger, INetworkService networkService)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<User>()!;
+            _user = configuration.GetSection("User").Get<WalletOwner>();
             _logger = logger;
             _networkService = networkService;
         }

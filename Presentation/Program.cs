@@ -39,6 +39,7 @@ IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("apps
 #endregion AppSettings.json
 
 #region Serilog Logging
+ILoggerFactory loggerFactory = new LoggerFactory();
 SerilogRegistration.SerilogConfiguration(builder);
 #endregion Serilog Logging
 
@@ -85,7 +86,7 @@ builder.Services.AddRateLimiting(builder.Configuration);
 #endregion Rate Limit
 
 #region Read User appsettings.json
-builder.Services.AddOptions<User>().BindConfiguration("User").ValidateDataAnnotations().ValidateOnStart();
+builder.Services.AddOptions<WalletOwner>().BindConfiguration("User").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<NetworkProvider>().BindConfiguration("NetworkProvider").ValidateDataAnnotations().ValidateOnStart();
 #endregion Read User appsettings.json
 

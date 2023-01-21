@@ -1,7 +1,6 @@
 ﻿using Serilog;
-using Serilog.Core;
-using Serilog.Events;
 using Serilog.Formatting.Json;
+using System.Data.SQLite;
 
 namespace WebApi.Logging
 {
@@ -18,26 +17,31 @@ namespace WebApi.Logging
             var path = serilogConfiguration.GetSection("Serilog").GetSection("WriteTo").GetSection("1").GetSection("Args").GetSection("path").Value;
             var finalPath = Path.Combine(Environment.CurrentDirectory + path);
 
-            var minimumLevel = serilogConfiguration.GetSection("Serilog").GetSection("MinimumLevel").Value;
             var rollingInterval = (RollingInterval)Enum.Parse(typeof(RollingInterval), serilogConfiguration!.GetSection("Serilog").GetSection("RollingInterval").Value!);
-            var levelSwitch = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), minimumLevel!);
-
-            LoggingLevelSwitch loggingLevelSwitch = new();
-            loggingLevelSwitch.MinimumLevel = levelSwitch;
 
             builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(serilogConfiguration)
-                                                     .MinimumLevel.ControlledBy(loggingLevelSwitch)
-                                                     .WriteTo.File(new JsonFormatter(), finalPath,
-                                                     rollingInterval: rollingInterval));
+                                          .WriteTo.File(new JsonFormatter(), finalPath,
+                                          rollingInterval: rollingInterval));
 
-            /*.WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("MsSqlConnection"),
-                new MSSqlServerSinkOptions
+            var serilogSqliteDbName = serilogConfiguration.GetSection("Serilog").GetSection("WriteTo").GetSection("2").GetSection("Args").GetSection("connectionString").Value;
+            if (serilogSqliteDbName != null)
+            {
+                string value = serilogSqliteDbName.Substring(serilogSqliteDbName.IndexOf('=') + 1);
+                var serilogSqlitePath = Environment.CurrentDirectory + "\\Logs\\" + value;
+                if (!File.Exists(serilogSqlitePath))
                 {
-                    TableName = "Logs",
-                    SchemaName = "dbo",
-                    AutoCreateSqlTable = true
-                }));*/
+                    SQLiteConnection.CreateFile(serilogSqlitePath);
+                }
+                var sqliteSerilogTable = serilogConfiguration.GetSection("Serilog").GetSection("WriteTo").GetSection("2").GetSection("Args").GetSection("tableName").Value;
+                builder.Host.UseSerilog((ctx, lc) => lc
+                            .WriteTo.SQLite(serilogSqlitePath, sqliteSerilogTable));
+            }
 
+            /*            var sqliteLogger = new LoggerConfiguration()
+                                                 .WriteTo.SQLite(serilogConnectionString, tableName: "Logs")
+                                                 .CreateLogger();
+
+                        loggerFactory.AddSerilog(sqliteLogger);*/
         }
     }
 }

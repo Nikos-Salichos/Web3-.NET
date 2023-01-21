@@ -56,10 +56,10 @@ namespace WebApi.Controllers
                 {
                     Token coin = new()
                     {
-                        Id = cryptoCoin?.CoinInfo?.Id!,
-                        Name = cryptoCoin?.CoinInfo?.Name!,
-                        FullName = cryptoCoin?.CoinInfo?.FullName!,
-                        MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP!,
+                        Id = cryptoCoin?.CoinInfo?.Id,
+                        Name = cryptoCoin?.CoinInfo?.Name,
+                        FullName = cryptoCoin?.CoinInfo?.FullName,
+                        MarketCap = cryptoCoin?.RAW?.USD?.MKTCAP,
                     };
                     coins.Add(coin);
                 }
