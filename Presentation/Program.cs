@@ -39,7 +39,6 @@ IConfigurationRoot? configuration = new ConfigurationBuilder().AddJsonFile("apps
 #endregion AppSettings.json
 
 #region Serilog Logging
-ILoggerFactory loggerFactory = new LoggerFactory();
 SerilogRegistration.SerilogConfiguration(builder);
 #endregion Serilog Logging
 

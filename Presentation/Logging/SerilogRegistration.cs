@@ -19,10 +19,6 @@ namespace WebApi.Logging
 
             var rollingInterval = (RollingInterval)Enum.Parse(typeof(RollingInterval), serilogConfiguration!.GetSection("Serilog").GetSection("RollingInterval").Value!);
 
-            builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(serilogConfiguration)
-                                          .WriteTo.File(new JsonFormatter(), finalPath,
-                                          rollingInterval: rollingInterval));
-
             var serilogSqliteDbName = serilogConfiguration.GetSection("Serilog").GetSection("WriteTo").GetSection("2").GetSection("Args").GetSection("connectionString").Value;
             if (serilogSqliteDbName != null)
             {
@@ -34,14 +30,11 @@ namespace WebApi.Logging
                 }
                 var sqliteSerilogTable = serilogConfiguration.GetSection("Serilog").GetSection("WriteTo").GetSection("2").GetSection("Args").GetSection("tableName").Value;
                 builder.Host.UseSerilog((ctx, lc) => lc
+                            .ReadFrom.Configuration(serilogConfiguration)
+                            .WriteTo.File(new JsonFormatter(), finalPath,
+                                          rollingInterval: rollingInterval)
                             .WriteTo.SQLite(serilogSqlitePath, sqliteSerilogTable));
             }
-
-            /*            var sqliteLogger = new LoggerConfiguration()
-                                                 .WriteTo.SQLite(serilogConnectionString, tableName: "Logs")
-                                                 .CreateLogger();
-
-                        loggerFactory.AddSerilog(sqliteLogger);*/
         }
     }
 }
