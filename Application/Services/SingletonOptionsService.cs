@@ -22,7 +22,7 @@ namespace Application.Services
 
         public WalletOwner GetUserSettings()
         {
-            return _userOptions.CurrentValue ?? WalletOwner.Construct(string.Empty, string.Empty);
+            return _userOptions.CurrentValue ?? new WalletOwner();
         }
     }
 }
