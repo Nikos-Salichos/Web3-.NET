@@ -44,8 +44,7 @@ I have create different controllers for different smart contracts:
   - TrackCryptoWhalesForAnyToken (track "Transfer" event in any token of your choice)
 
 - NetworkController
-  - GetLatestBlock
-  - GetAllTransactionsOfCurrentBlock
+  - GetBlock
   - GetAllTransactionOfABlock
   - GetAllContractCreationTransactions
 
