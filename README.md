@@ -20,7 +20,8 @@ Technical specs:
 - Generic Repository.
 - Unit of Work.
 - Entity framework.
-- Api Gateway Pattern
+- Api Gateway Pattern.
+- Mediatr CQRS pattern.
 
 
 Entity Framework:
@@ -44,8 +45,7 @@ I have create different controllers for different smart contracts:
   - TrackCryptoWhalesForAnyToken (track "Transfer" event in any token of your choice)
 
 - NetworkController
-  - GetLatestBlock
-  - GetAllTransactionsOfCurrentBlock
+  - GetBlock
   - GetAllTransactionOfABlock
   - GetAllContractCreationTransactions
 
