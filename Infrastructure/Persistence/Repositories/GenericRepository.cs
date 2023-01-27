@@ -1,19 +1,21 @@
 ﻿using Infrastructure.Persistence.DbContexts;
 using Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Persistence.Repositories
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        // protected readonly DbContext _dbContext;
         protected readonly MsqlDbContext _dbContext;
         // protected readonly PostgreSqlDbContext _dbContext;
+        private readonly IDistributedCache _distributedCache;
 
-        public GenericRepository(MsqlDbContext dbContext)
+        public GenericRepository(MsqlDbContext dbContext, IDistributedCache distributedCache)
         {
             _dbContext = dbContext;
+            _distributedCache = distributedCache;
         }
 
         public async Task<T> GetById(long id)
