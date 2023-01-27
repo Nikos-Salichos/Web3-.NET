@@ -20,5 +20,18 @@ namespace Infrastructure.Persistence.Cache
             await cache.SetStringAsync(recordId, jsonData, options, default);
         }
 
+        public static async Task<T?> GetRecordAsync<T>(this IDistributedCache cache,
+                                               string recordId)
+        {
+            var jsonData = await cache.GetStringAsync(recordId);
+
+            if (jsonData is null)
+            {
+                return default;
+            }
+
+            return JsonSerializer.Deserialize<T>(jsonData);
+        }
+
     }
 }
