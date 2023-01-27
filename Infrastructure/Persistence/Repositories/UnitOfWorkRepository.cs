@@ -1,25 +1,28 @@
 ﻿using Infrastructure.Persistence.DbContexts;
 using Infrastructure.Persistence.Interfaces;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Infrastructure.Persistence.Repositories
 {
     public class UnitOfWorkRepository : IUnitOfWorkRepository
     {
-        public MsqlDbContext _msqlSqlContext;
-        public ISmartContractRepository _smartContractRepository;
+        private MsqlDbContext _msqlSqlContext;
+        private IDistributedCache _distributedCache;
+        private ISmartContractRepository _smartContractRepository;
         private bool disposedValue;
 
         public ISmartContractRepository SmartContractRepository
         {
             get
             {
-                return _smartContractRepository ??= new SmartContractRepository(_msqlSqlContext);
+                return _smartContractRepository ??= new SmartContractRepository(_msqlSqlContext, _distributedCache);
             }
         }
 
-        public UnitOfWorkRepository(MsqlDbContext repositoryContext)
+        public UnitOfWorkRepository(MsqlDbContext repositoryContext, IDistributedCache distributedCache)
         {
             _msqlSqlContext = repositoryContext;
+            _distributedCache = distributedCache;
         }
 
         public async Task<bool> SaveChangesAsync()
