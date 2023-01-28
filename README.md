@@ -23,7 +23,7 @@ To check if redis work you can test the following:
 
 1) docker exec -it my-redis sh
 
-2) # redis-cli
+2) #redis-cli
 
 3) ping
 
