@@ -25,7 +25,7 @@ namespace Infrastructure.Persistence.Repositories
                 return cacheSmartContracts;
             }
             var allSmartContracts = await GetAll();
-
+            await _distributedCache.SetRecordAsync("allsmartcontracts", allSmartContracts);
             return allSmartContracts;
         }
 
