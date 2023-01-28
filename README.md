@@ -28,7 +28,8 @@ To check if redis work you can test the following:
 3) ping
 
 
-Technical specs:
+Technical specs
+=======
 - Clean architecture.
 - Generic Repository.
 - Unit of Work.
