@@ -19,7 +19,13 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<SmartContract>> GetSmartContracts()
         {
+            var cacheSmartContracts = await _distributedCache.GetRecordAsync<IEnumerable<SmartContract>>("allsmartcontracts");
+            if (cacheSmartContracts != null)
+            {
+                return cacheSmartContracts;
+            }
             var allSmartContracts = await GetAll();
+
             return allSmartContracts;
         }
 
