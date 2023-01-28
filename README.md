@@ -11,11 +11,25 @@ Docker run
 ======
 Open cmd and in docker-compose.yml directory run:
 
-- docker compose up -d --> Create and start docker container
-- docker ps --> see all containers and check port
-- open url: http://localhost:55757/swagger/index.html (port specified on command docker ps)
+1) docker compose up -d --> Create and start docker container
+2) docker ps --> see all containers and check port
+3) open url: http://localhost:55757/swagger/index.html (port specified on command docker ps)
 
-Technical specs:
+Redis
+=======
+docker run --name my-redis -p 6379:6379 -d redis
+
+To check if redis work you can test the following:
+
+1) docker exec -it my-redis sh
+
+2) #redis-cli
+
+3) ping
+
+
+Technical specs
+=======
 - Clean architecture.
 - Generic Repository.
 - Unit of Work.
