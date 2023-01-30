@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace Infrastructure
 {
@@ -40,7 +41,10 @@ namespace Infrastructure
               {
                   options.Configuration = configuration["ConnectionStrings:Redis"];
                   options.InstanceName = "SmartContracts";
+                  options.ConfigurationOptions = new ConfigurationOptions { AbortOnConnectFail = false };
               });
+
+            //  services.AddSingleton(sp => ConnectionMultiplexer.Connect(configuration["ConnectionStrings:Redis"]));
 
             services.Add(ServiceDescriptor.Singleton<IDistributedCache, RedisCache>());
 
