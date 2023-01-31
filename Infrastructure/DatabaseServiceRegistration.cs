@@ -39,9 +39,14 @@ namespace Infrastructure
             //Redis cache
             services.AddStackExchangeRedisCache(options =>
               {
-                  options.Configuration = configuration["ConnectionStrings:Redis"];
                   options.InstanceName = "SmartContracts";
-                  options.ConfigurationOptions = new ConfigurationOptions { AbortOnConnectFail = false };
+                  options.ConfigurationOptions = new ConfigurationOptions
+                  {
+                      EndPoints = { configuration["ConnectionStrings:Redis"] },
+                      AbortOnConnectFail = false,
+                      ConnectTimeout = 5000,
+                      ConnectRetry = 5,
+                  };
               });
 
             //  services.AddSingleton(sp => ConnectionMultiplexer.Connect(configuration["ConnectionStrings:Redis"]));
