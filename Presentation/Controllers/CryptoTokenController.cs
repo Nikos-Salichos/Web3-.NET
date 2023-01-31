@@ -21,20 +21,20 @@ namespace WebApi.Controllers
 
         private readonly string _smartContractAddress = "0x0d26f523c24feda020c293185ac7a032814aedcf";
 
-        private readonly WalletOwner _user = new();
+        private readonly WalletOwner _walletOwner = new();
 
         public EnumHelper EnumHelper { get; set; }
 
         public CryptoTokenController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<WalletOwner>();
+            _walletOwner = configuration.GetSection("User").Get<WalletOwner>() ?? new WalletOwner();
         }
 
         [HttpGet("GetBalance")]
         public async Task<ActionResult> GetBalance(Chain chain, string address)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[1] { address };
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
         [HttpGet("Mint")]
         public async Task<ActionResult> Mint(Chain chain, string receiverAddress, long amount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { receiverAddress, amount };
@@ -68,7 +68,7 @@ namespace WebApi.Controllers
         [HttpGet("Approve")]
         public async Task<ActionResult> Approve(Chain chain, string spenderAddress, long amount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { spenderAddress, amount };
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
         [HttpGet("Allowance")]
         public async Task<ActionResult> Allowance(Chain chain, string ownerAddress, string spenderAddress)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { ownerAddress, spenderAddress };
@@ -101,7 +101,7 @@ namespace WebApi.Controllers
         [HttpGet("DestroySmartContract")]
         public async Task<ActionResult> DestroySmartContract(Chain chain, string withdrawalAddress)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[1] { withdrawalAddress };
@@ -118,7 +118,7 @@ namespace WebApi.Controllers
         [HttpGet("Transfer")]
         public async Task<ActionResult> Transfer(Chain chain, string receiver, long amountOfTokens)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { receiver, amountOfTokens };
@@ -143,7 +143,7 @@ namespace WebApi.Controllers
         [HttpGet("IncreaseApproval")]
         public async Task<ActionResult> IncreaseApproval(Chain chain, string spender, long addedAmount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { spender, addedAmount };
@@ -159,7 +159,7 @@ namespace WebApi.Controllers
         [HttpGet("DecreaseApproval")]
         public async Task<ActionResult> DecreaseApproval(Chain chain, string spender, long subtractedAmount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { spender, subtractedAmount };
@@ -176,7 +176,7 @@ namespace WebApi.Controllers
         [HttpGet("Burn")]
         public async Task<ActionResult> Burn(Chain chain, long amount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[1] { amount };
@@ -193,7 +193,7 @@ namespace WebApi.Controllers
         [HttpGet("TransferFrom")]
         public async Task<ActionResult> TransferFrom(Chain chain, string from, string to, long amount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[3] { from, to, amount };
@@ -210,7 +210,7 @@ namespace WebApi.Controllers
         [HttpGet("BurnFrom")]
         public async Task<ActionResult> BurnFrom(Chain chain, string from, long amount)
         {
-            Account? account = new Account(_user.PrivateKey, chain);
+            Account? account = new Account(_walletOwner.PrivateKey, chain);
             Web3? web3 = new Web3(account, EnumHelper.GetStringBasedOnEnum(chain));
 
             object[]? parameters = new object[2] { from, amount };
