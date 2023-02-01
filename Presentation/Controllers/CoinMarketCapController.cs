@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RestSharp;
+using System.Net.Http.Headers;
 using WebApi.DTOs;
 
 namespace WebApi.Controllers
@@ -10,6 +10,7 @@ namespace WebApi.Controllers
     public class CoinMarketCapController : ControllerBase
     {
         private string? ApiKey { get; }
+        private static readonly HttpClient client = new HttpClient();
 
         public CoinMarketCapController(IConfiguration configuration)
         {
@@ -19,55 +20,50 @@ namespace WebApi.Controllers
         [HttpGet("GetCoins")]
         public async Task<ActionResult> GetCoins()
         {
-            RestClient restClient = new("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
+            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiKey);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            RestRequest restRequest = new();
-            restRequest.Method = Method.Get;
-            restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
-            restRequest.AddHeader("Accept", "application/json");
-            restRequest.AddQueryParameter("limit", "5000");
+            var response = await client.GetAsync("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=5000");
 
-            RestResponse response = await restClient.ExecuteAsync(restRequest);
-
-            if (response is null)
+            if (!response.IsSuccessStatusCode)
             {
-                return NotFound("Response is null");
+                return NotFound("Response failed with status code: " + response.StatusCode);
             }
 
-            if (string.IsNullOrEmpty(response.Content))
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (string.IsNullOrEmpty(content))
             {
                 return NotFound("No response content found");
             }
 
-            CoinMarketCapLatestCoinsDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapLatestCoinsDTO>(response.Content);
+            var coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapLatestCoinsDTO>(content);
 
             return Ok(coinMarketCapDTO);
         }
 
-        [HttpGet("GetCategoriesId")]
-        public async Task<ActionResult> GetCategoriesId()
+        [HttpGet("GetCategories")]
+        public async Task<ActionResult> GetCategories()
         {
-            RestClient restClient = new("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories");
+            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiKey);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            RestRequest restRequest = new();
-            restRequest.Method = Method.Get;
-            restRequest.AddHeader("X-CMC_PRO_API_KEY", ApiKey!);
-            restRequest.AddHeader("Accept", "application/json");
-            restRequest.AddQueryParameter("limit", "5000");
+            var response = await client.GetAsync("https://pro-api.coinmarketcap.com/v1/cryptocurrency/categories?limit=5000");
 
-            RestResponse response = await restClient.ExecuteAsync(restRequest);
-
-            if (response is null)
+            if (!response.IsSuccessStatusCode)
             {
-                return NotFound("Response is null");
+                return NotFound("Response failed with status code: " + response.StatusCode);
             }
 
-            if (string.IsNullOrEmpty(response.Content))
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (string.IsNullOrEmpty(content))
             {
                 return NotFound("No response content found");
             }
 
-            CoinMarketCapCategoriesDTO? coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapCategoriesDTO>(response.Content);
+            var coinMarketCapDTO = JsonConvert.DeserializeObject<CoinMarketCapCategoriesDTO>(content);
+
             return Ok(coinMarketCapDTO);
         }
     }
