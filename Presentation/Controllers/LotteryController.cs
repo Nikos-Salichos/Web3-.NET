@@ -7,7 +7,6 @@ using Nethereum.Signer;
 using Nethereum.Util;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
-using RestSharp;
 using System.Numerics;
 using System.Reflection;
 using WebApi.Utilities;
@@ -24,7 +23,7 @@ namespace WebApi.Controllers
 
         // private readonly string _smartContractAddress = "0xF321FcC68DB5755f81766cc6B631651bBB1E1cAD";
 
-        private readonly WalletOwner _user = new();
+        private readonly WalletOwner _walletOwner;
 
         private readonly ILogger<LotteryController> _logger;
 
@@ -33,7 +32,7 @@ namespace WebApi.Controllers
         public LotteryController(IConfiguration configuration, ILogger<LotteryController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration?.GetSection("User").Get<WalletOwner>();
+            _walletOwner = configuration.GetSection("User").Get<WalletOwner>() ?? new WalletOwner();
             _logger = logger;
         }
 
@@ -42,7 +41,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
@@ -63,7 +62,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 var smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
@@ -84,7 +83,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
@@ -107,7 +106,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
@@ -134,7 +133,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 Contract? smartContract = web3.Eth.GetContract(_abi, smartContractAddress);
