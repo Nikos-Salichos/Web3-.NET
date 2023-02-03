@@ -1,7 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RestSharp;
 
 namespace WebApi.Controllers
 {
@@ -10,6 +9,7 @@ namespace WebApi.Controllers
     public class CryptoCompareController : ControllerBase
     {
         private string? ApiKey { get; }
+        private static readonly HttpClient client = new HttpClient();
 
         public CryptoCompareController(IConfiguration? configuration)
         {
