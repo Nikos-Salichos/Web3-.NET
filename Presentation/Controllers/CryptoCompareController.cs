@@ -23,24 +23,21 @@ namespace WebApi.Controllers
 
             for (int i = 0; i < 2; i++)
             {
-                RestClient restClient = new($"https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100&page={i}&tsym=USD&api_key={ApiKey}");
+                var response = await client.GetAsync($"https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100&page={i}&tsym=USD&api_key={ApiKey}");
 
-                RestRequest restRequest = new();
-                restRequest.Method = Method.Get;
-
-                RestResponse response = await restClient.ExecuteAsync(restRequest, default);
-
-                if (response is null)
+                if (!response.IsSuccessStatusCode)
                 {
-                    return NotFound("Response is null");
+                    return NotFound("Request failed");
                 }
 
-                if (string.IsNullOrEmpty(response.Content))
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrEmpty(responseContent))
                 {
                     return NotFound("No response content found");
                 }
 
-                CryptoCompare? cryptoCompare = JsonConvert.DeserializeObject<CryptoCompare>(response.Content);
+                var cryptoCompare = JsonConvert.DeserializeObject<CryptoCompare>(responseContent);
 
                 if (cryptoCompare is null)
                 {
@@ -54,7 +51,7 @@ namespace WebApi.Controllers
 
                 foreach (var cryptoCoin in cryptoCompare.Data)
                 {
-                    Token coin = new()
+                    var coin = new Token
                     {
                         Id = cryptoCoin?.CoinInfo?.Id,
                         Name = cryptoCoin?.CoinInfo?.Name,
@@ -65,7 +62,7 @@ namespace WebApi.Controllers
                 }
             }
 
-            List<Token> sortedCoins = coins.OrderByDescending(t => t.MarketCap).ToList();
+            var sortedCoins = coins.OrderByDescending(t => t.MarketCap).ToList();
 
             return Ok(sortedCoins);
         }
