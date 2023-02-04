@@ -6,3 +6,17 @@ services:
     build:
       context: .
       dockerfile: Presentation/Dockerfile
+
+  webapiredis:
+    image: redis
+    ports:
+     - "6379:6379"
+
+  webapimssql:
+    image: mcr.microsoft.com/mssql/server:latest
+    restart: always
+    ports:
+     - "1435:1433"
+    environment:
+            SA_PASSWORD: "yourStrong(!)Password"
+            ACCEPT_EULA: "Y"
