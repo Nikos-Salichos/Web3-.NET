@@ -27,7 +27,9 @@ namespace Tests.UnitTests
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 1" },
             new SmartContractDTO { Id = 2, Address = "Smart Contract Address 2" } };
 
-            _mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
+            var mockSmartContractService = new Mock<ISmartContractService>();
+
+            mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
 
             Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
             mockSection.Setup(x => x.Value).Returns("User");
@@ -38,7 +40,7 @@ namespace Tests.UnitTests
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
             var controller = new SmartContractController(mockConfig.Object,
-                                    _mockSmartContractService.Object, mockLogger.Object);
+                                    mockSmartContractService.Object, mockLogger.Object);
 
             // Act
             var result = await controller.GetAllSmartContractsAsync();
