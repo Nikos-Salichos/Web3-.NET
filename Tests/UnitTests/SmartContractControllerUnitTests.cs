@@ -182,6 +182,10 @@ namespace Tests.UnitTests
             mockSmartContractService.Object, mockLogger.Object);
 
             var result = await controller.GetSmartContractByIdAsync(1);
+
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
         }
     }
 }
