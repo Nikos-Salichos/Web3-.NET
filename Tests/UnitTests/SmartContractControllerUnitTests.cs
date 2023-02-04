@@ -11,6 +11,7 @@ using static Moq.It;
 
 namespace Tests.UnitTests
 {
+    [Trait("SmartContracts", "UnitTests")]
     public class SmartContractControllerUnitTests
     {
         [Fact]
@@ -156,6 +157,13 @@ namespace Tests.UnitTests
                                         IsAny<IsAnyType>(),
                                         IsAny<Exception>(),
                                         IsAny<Func<IsAnyType, Exception?, string>>()));
+        }
+
+        [Fact]
+        public async Task FindSmartContractByAddressAsync_ReturnsOkResult()
+        {
+            var smartContracts = new List<SmartContractDTO>();
+            var mockSmartContractService = new Mock<ISmartContractService>();
         }
     }
 }
