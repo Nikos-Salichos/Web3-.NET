@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY-}webapi
     build:
       context: .
-      dockerfile: CSharpInWeb3SmartContracts/Dockerfile
+      dockerfile: Presentation/Dockerfile

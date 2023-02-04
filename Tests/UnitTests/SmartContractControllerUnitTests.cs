@@ -16,6 +16,11 @@ namespace Tests.UnitTests
     [Trait("SmartContracts", "UnitTests")]
     public class SmartContractControllerUnitTests
     {
+        private readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
+        private readonly IConfigurationSection _mockSection;
+        private readonly IConfiguration _mockConfig;
+        private readonly ILogger<SmartContractController> _mockLogger;
+
         [Fact]
         public async Task GetAllSmartContractsAsync_ReturnsOkResult()
         {
@@ -24,9 +29,7 @@ namespace Tests.UnitTests
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 1" },
             new SmartContractDTO { Id = 2, Address = "Smart Contract Address 2" } };
 
-            var mockSmartContractService = new Mock<ISmartContractService>();
-
-            mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
+            _mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
 
             Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
             mockSection.Setup(x => x.Value).Returns("User");
@@ -37,7 +40,7 @@ namespace Tests.UnitTests
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
             var controller = new SmartContractController(mockConfig.Object,
-                                    mockSmartContractService.Object, mockLogger.Object);
+                                    _mockSmartContractService.Object, mockLogger.Object);
 
             // Act
             var result = await controller.GetAllSmartContractsAsync();
