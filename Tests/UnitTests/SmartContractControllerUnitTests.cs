@@ -93,6 +93,7 @@ namespace Tests.UnitTests
         [Fact]
         public async Task GetSmartContractByIdAsync_ReturnsOkResult()
         {
+            //Arrange
             var smartContracts = new List<SmartContractDTO> {
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 2" } };
 
@@ -129,6 +130,7 @@ namespace Tests.UnitTests
         [Fact]
         public async Task GetSmartContractByIdAsync_ReturnsEmptyResult()
         {
+            //Arrange
             var smartContracts = new List<SmartContractDTO>();
             var mockSmartContractService = new Mock<ISmartContractService>();
 
@@ -164,6 +166,7 @@ namespace Tests.UnitTests
         [Fact]
         public async Task FindSmartContractByAddressAsync_ReturnsOkResult()
         {
+            //Arrange
             var smartContracts = new List<SmartContractDTO>();
             var mockSmartContractService = new Mock<ISmartContractService>();
 
@@ -181,8 +184,10 @@ namespace Tests.UnitTests
             var controller = new SmartContractController(mockConfig.Object,
             mockSmartContractService.Object, mockLogger.Object);
 
+            // Act
             var result = await controller.GetSmartContractByIdAsync(1);
 
+            // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
 
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
@@ -195,5 +200,6 @@ namespace Tests.UnitTests
                                         IsAny<Exception>(),
                                         IsAny<Func<IsAnyType, Exception?, string>>()));
         }
+
     }
 }
