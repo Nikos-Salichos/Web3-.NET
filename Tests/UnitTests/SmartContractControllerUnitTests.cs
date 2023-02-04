@@ -177,6 +177,9 @@ namespace Tests.UnitTests
             mockConfig.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(mockSection.Object);
 
             var mockLogger = new Mock<ILogger<SmartContractController>>();
+
+            var controller = new SmartContractController(mockConfig.Object,
+            mockSmartContractService.Object, mockLogger.Object);
         }
     }
 }
