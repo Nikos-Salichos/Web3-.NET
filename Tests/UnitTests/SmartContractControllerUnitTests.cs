@@ -186,6 +186,7 @@ namespace Tests.UnitTests
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
 
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
+            Assert.Null(okObjectResult.Value);
         }
     }
 }
