@@ -188,6 +188,12 @@ namespace Tests.UnitTests
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             Assert.Null(okObjectResult.Value);
             Assert.Empty(smartContracts);
+
+            mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
+                                        IsAny<EventId>(),
+                                        IsAny<IsAnyType>(),
+                                        IsAny<Exception>(),
+                                        IsAny<Func<IsAnyType, Exception?, string>>()));
         }
     }
 }
