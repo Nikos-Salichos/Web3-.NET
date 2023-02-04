@@ -187,6 +187,7 @@ namespace Tests.UnitTests
 
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             Assert.Null(okObjectResult.Value);
+            Assert.Empty(smartContracts);
         }
     }
 }
