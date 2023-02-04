@@ -1,9 +1,11 @@
 using Application.Interfaces;
 using Domain.DTOs;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System.Linq.Expressions;
 using System.Net;
 using WebApi.Controllers;
 using Xunit;
@@ -164,6 +166,9 @@ namespace Tests.UnitTests
         {
             var smartContracts = new List<SmartContractDTO>();
             var mockSmartContractService = new Mock<ISmartContractService>();
+
+            mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
+               .ReturnsAsync(smartContracts);
         }
     }
 }
