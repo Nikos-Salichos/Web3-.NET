@@ -20,10 +20,6 @@ namespace Tests.UnitTests
         private static readonly Mock<IConfigurationSection> _mockConfigurationSection = new Mock<IConfigurationSection>();
         private static readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
         private static readonly Mock<ILogger<SmartContractController>> _mockLogger = new Mock<ILogger<SmartContractController>>();
-        private readonly SmartContractController _smartContractController = new SmartContractController(
-                                                 _mockConfiguration.Object,
-                                                 _mockSmartContractService.Object,
-                                                 _mockLogger.Object);
 
         [Fact]
         public async Task GetAllSmartContractsAsync_ReturnsOkResult()
@@ -58,7 +54,7 @@ namespace Tests.UnitTests
             Assert.Equal(smartContracts, returnedSmartContracts);
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
                                          IsAny<EventId>(),
-                                         IsAny<It.IsAnyType>(),
+                                         IsAny<IsAnyType>(),
                                          IsAny<Exception>(),
                                          IsAny<Func<IsAnyType, Exception?, string>>()));
         }
@@ -186,7 +182,9 @@ namespace Tests.UnitTests
 
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
 
-            _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
+            _mockConfiguration.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
+
+            var _smartContractController = new SmartContractController(_mockConfiguration.Object, _mockSmartContractService.Object, _mockLogger.Object);
 
             // Act
             var result = await _smartContractController.FindSmartContractsByAddressAsync("123");
