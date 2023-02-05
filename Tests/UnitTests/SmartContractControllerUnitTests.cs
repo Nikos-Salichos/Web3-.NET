@@ -177,6 +177,8 @@ namespace Tests.UnitTests
 
             _mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
                .ReturnsAsync(smartContracts);
+
+            _mockConfigurationSection.Setup(x => x.Value).Returns("User");
         }
 
         [Fact]
