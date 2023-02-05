@@ -170,6 +170,16 @@ namespace Tests.UnitTests
         public async Task FindSmartContractByAddressAsync_ReturnsOkResult()
         {
             //Arrange
+            var smartContracts = new List<SmartContractDTO>
+            {
+                new SmartContractDTO { Id = 1 , Address = "123"}
+            };
+        }
+
+        [Fact]
+        public async Task FindSmartContractByAddressAsync_ReturnsEmptyResult()
+        {
+            //Arrange
             var smartContracts = new List<SmartContractDTO>();
             var mockSmartContractService = new Mock<ISmartContractService>();
 
@@ -188,14 +198,13 @@ namespace Tests.UnitTests
             mockSmartContractService.Object, mockLogger.Object);
 
             // Act
-            var result = await controller.GetSmartContractByIdAsync(1);
+            var result = await controller.FindSmartContractsByAddressAsync("123");
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
 
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
-            Assert.Null(okObjectResult.Value);
-            Assert.Empty(smartContracts);
+            Assert.Empty((IEnumerable<SmartContractDTO>)okObjectResult.Value);
 
             mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
                                         IsAny<EventId>(),
