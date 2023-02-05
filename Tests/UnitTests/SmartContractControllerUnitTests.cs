@@ -20,7 +20,7 @@ namespace Tests.UnitTests
         private static readonly Mock<IConfigurationSection> _mockConfigurationSection = new Mock<IConfigurationSection>();
         private static readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
         private static readonly Mock<ILogger<SmartContractController>> _mockLogger = new Mock<ILogger<SmartContractController>>();
-        private readonly SmartContractController smartContractController = new SmartContractController(
+        private readonly SmartContractController _smartContractController = new SmartContractController(
                                                  _mockConfiguration.Object,
                                                  _mockSmartContractService.Object,
                                                  _mockLogger.Object);
@@ -187,6 +187,9 @@ namespace Tests.UnitTests
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
+
+            // Act
+            var result = await _smartContractController.FindSmartContractsByAddressAsync("123");
 
         }
 
