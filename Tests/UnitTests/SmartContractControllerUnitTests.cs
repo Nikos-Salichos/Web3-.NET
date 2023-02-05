@@ -16,9 +16,11 @@ namespace Tests.UnitTests
     [Trait("SmartContracts", "UnitTests")]
     public class SmartContractControllerUnitTests
     {
-        private readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
-        private readonly Mock<IConfigurationSection> _mockConfigurationSection = new Mock<IConfigurationSection>();
-        private readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
+        private static readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
+        private static readonly Mock<IConfigurationSection> _mockConfigurationSection = new Mock<IConfigurationSection>();
+        private static readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
+        private static readonly Mock<ILogger<SmartContractController>> _mockLogger = new Mock<ILogger<SmartContractController>>();
+
 
         [Fact]
         public async Task GetAllSmartContractsAsync_ReturnsOkResult()
@@ -183,7 +185,6 @@ namespace Tests.UnitTests
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var mockLogger = new Mock<ILogger<SmartContractController>>();
         }
 
         [Fact]
