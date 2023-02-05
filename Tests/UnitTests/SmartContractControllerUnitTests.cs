@@ -196,6 +196,12 @@ namespace Tests.UnitTests
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             Assert.NotNull(okObjectResult.Value);
             Assert.NotEmpty((IEnumerable<SmartContractDTO>)okObjectResult.Value);
+
+            _mockLogger.Verify(x => x.Log(IsAny<LogLevel>(),
+                                        IsAny<EventId>(),
+                                        IsAny<IsAnyType>(),
+                                        IsAny<Exception>(),
+                                        IsAny<Func<IsAnyType, Exception?, string>>()));
         }
 
         [Fact]
