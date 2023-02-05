@@ -18,6 +18,7 @@ namespace Tests.UnitTests
     {
         private readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
         private readonly Mock<IConfigurationSection> _mockConfigurationSection = new Mock<IConfigurationSection>();
+        private readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
 
         [Fact]
         public async Task GetAllSmartContractsAsync_ReturnsOkResult()
