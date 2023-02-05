@@ -195,6 +195,7 @@ namespace Tests.UnitTests
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)okObjectResult.StatusCode);
             Assert.NotNull(okObjectResult.Value);
+            Assert.NotEmpty((IEnumerable<SmartContractDTO>)okObjectResult.Value);
         }
 
         [Fact]
