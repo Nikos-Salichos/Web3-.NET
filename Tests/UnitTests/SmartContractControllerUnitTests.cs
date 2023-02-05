@@ -191,6 +191,8 @@ namespace Tests.UnitTests
             // Act
             var result = await _smartContractController.FindSmartContractsByAddressAsync("123");
 
+            // Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
