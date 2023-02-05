@@ -174,6 +174,9 @@ namespace Tests.UnitTests
             {
                 new SmartContractDTO { Id = 1 , Address = "123"}
             };
+
+            _mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
+               .ReturnsAsync(smartContracts);
         }
 
         [Fact]
