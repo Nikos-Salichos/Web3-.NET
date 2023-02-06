@@ -37,7 +37,7 @@ namespace Tests.UnitTests
             mockSection.Setup(x => x.Value).Returns("User");
 
             Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
+            mockConfig.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(mockSection.Object);
 
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
@@ -73,7 +73,7 @@ namespace Tests.UnitTests
             mockSection.Setup(x => x.Value).Returns("User");
 
             Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
+            mockConfig.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(mockSection.Object);
 
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
@@ -111,7 +111,7 @@ namespace Tests.UnitTests
             mockSection.Setup(x => x.Value).Returns("User");
 
             Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(mockSection.Object);
+            mockConfig.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(mockSection.Object);
 
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
@@ -182,7 +182,7 @@ namespace Tests.UnitTests
 
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
 
-            _mockConfiguration.Setup(x => x.GetSection(It.Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
+            _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
             var _smartContractController = new SmartContractController(_mockConfiguration.Object, _mockSmartContractService.Object, _mockLogger.Object);
 
