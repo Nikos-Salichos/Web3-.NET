@@ -45,7 +45,7 @@ namespace Tests.UnitTests
                                     mockSmartContractService.Object, mockLogger.Object);
 
             // Act
-            var result = await controller.GetAllSmartContractsAsync();
+            var result = await controller.GetAllSmartContractsAsync(IsAny<int>(), IsAny<int>());
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
