@@ -31,7 +31,7 @@ namespace Tests.UnitTests
 
             var mockSmartContractService = new Mock<ISmartContractService>();
 
-            mockSmartContractService.Setup(x => x.GetSmartContractsAsync(IsAny<int>(), IsAny<int>())).ReturnsAsync(smartContracts);
+            mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
 
             Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
             mockSection.Setup(x => x.Value).Returns("User");
@@ -45,7 +45,7 @@ namespace Tests.UnitTests
                                     mockSmartContractService.Object, mockLogger.Object);
 
             // Act
-            var result = await controller.GetAllSmartContractsAsync(IsAny<int>(), IsAny<int>());
+            var result = await controller.GetAllSmartContractsAsync();
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
