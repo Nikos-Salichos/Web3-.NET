@@ -31,7 +31,7 @@ namespace Tests.UnitTests
 
             var mockSmartContractService = new Mock<ISmartContractService>();
 
-            mockSmartContractService.Setup(x => x.GetSmartContractsAsync()).ReturnsAsync(smartContracts);
+            mockSmartContractService.Setup(x => x.GetSmartContractsAsync(IsAny<int>(), IsAny<int>())).ReturnsAsync(smartContracts);
 
             Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
             mockSection.Setup(x => x.Value).Returns("User");
