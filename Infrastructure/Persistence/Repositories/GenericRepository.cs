@@ -28,9 +28,12 @@ namespace Infrastructure.Persistence.Repositories
             return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll(int pageSize = 1, int pageNumber = 1)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>()
+                   .Skip((pageNumber - 1) * pageSize)
+                   .Take(pageSize)
+                   .ToListAsync();
         }
 
         public async Task<T> Add(T entity)

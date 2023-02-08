@@ -17,14 +17,14 @@ namespace Infrastructure.Persistence.Repositories
             _distributedCache = distributedCache;
         }
 
-        public async Task<IEnumerable<SmartContract>> GetSmartContracts()
+        public async Task<IEnumerable<SmartContract>> GetSmartContracts(int pageSize, int pageNumber)
         {
             var cacheSmartContracts = await _distributedCache.GetRecordAsync<IEnumerable<SmartContract>>("allsmartcontracts");
             if (cacheSmartContracts != null)
             {
                 return cacheSmartContracts;
             }
-            var allSmartContracts = await GetAll();
+            var allSmartContracts = await GetAll(pageSize, pageNumber);
             await _distributedCache.SetRecordAsync("allsmartcontracts", allSmartContracts);
             return allSmartContracts;
         }
