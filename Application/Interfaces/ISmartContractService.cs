@@ -7,7 +7,7 @@ namespace Application.Interfaces
 {
     public interface ISmartContractService
     {
-        Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync(int pageSize, int pageNumber);
+        Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync();
         Task<SmartContractDTO?> GetSmartContractByIdAsync(long id);
         Task<IEnumerable<SmartContractDTO>> FindSmartContractsByAddressAsync(Expression<Func<SmartContract, bool>> predicate);
         Task<TransactionReceipt> DeploySmartContractAsync(SmartContractDTO smartContract);

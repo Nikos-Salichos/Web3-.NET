@@ -38,9 +38,9 @@ namespace Application.Services
             _singletonOptionsService = singletonOptionsService;
         }
 
-        public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync(int pageSize, int pageNumber)
+        public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync()
         {
-            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery(pageSize, pageNumber), default);
+            var allSmartContracts = await _mediator.Send(new GetSmartContractsListQuery(), default);
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 

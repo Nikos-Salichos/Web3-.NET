@@ -7,7 +7,7 @@ namespace Infrastructure.Persistence.Interfaces
         Task<T> GetById(long id);
         Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
 
-        Task<IEnumerable<T>> GetAll(int pageSize = 3, int pageNumber = 1);
+        Task<IEnumerable<T>> GetAll();
 
         Task<T> Add(T entity);
         Task<IEnumerable<T>> AddRange(IEnumerable<T> entities);
