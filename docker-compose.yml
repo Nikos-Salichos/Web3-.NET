@@ -9,8 +9,11 @@ services:
 
   webapiredis:
     image: redis
+    restart: always
     ports:
      - "6379:6379"
+    environment:
+     - ALLOW_EMPTY_PASSWORD=yes
 
   webapimssql:
     image: mcr.microsoft.com/mssql/server:latest
