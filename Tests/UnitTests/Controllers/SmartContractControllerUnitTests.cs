@@ -129,11 +129,10 @@ namespace Tests.UnitTests.Controllers
             _mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
                 .ReturnsAsync(smartContracts.FirstOrDefault());
 
-            Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
-            mockSection.Setup(x => x.Value).Returns("User");
+            _mockConfigurationSection.Setup(x => x.Value).Returns("User");
 
             Mock<IConfiguration> mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(mockSection.Object);
+            mockConfig.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
