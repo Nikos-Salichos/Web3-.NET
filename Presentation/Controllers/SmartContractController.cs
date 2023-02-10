@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         [EnableRateLimiting("ApiSmartContract")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllSmartContractsAsync(int pageSize, int pageNumber)
+        public async Task<IActionResult> GetAllSmartContractsAsync(int pageSize = 5, int pageNumber = 1)
         {
             var allSmartContracts = await _smartContractService.GetSmartContractsAsync(pageSize, pageNumber);
             _logger.LogInformation("Smart Contracts {@allSmartContracts}", allSmartContracts);
