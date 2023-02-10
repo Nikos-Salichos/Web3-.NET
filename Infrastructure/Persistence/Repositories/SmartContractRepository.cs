@@ -41,14 +41,18 @@ namespace Infrastructure.Persistence.Repositories
                 return cacheSmartContract;
             }
             var smartContract = await GetById(id);
-            await _distributedCache.SetRecordAsync(id.ToString(), smartContract);
-            return smartContract;
+            if (smartContract != null)
+            {
+                await _distributedCache.SetRecordAsync(smartContract.Id.ToString(), smartContract);
+                return smartContract;
+            }
+            return new SmartContract();
         }
 
         public async Task<IEnumerable<SmartContract>> FindSmartContractAsync(Expression<Func<SmartContract, bool>> predicate)
         {
-            var smartContract = await Find(predicate);
-            return smartContract;
+            var smartContracts = await Find(predicate);
+            return smartContracts;
         }
 
         public async Task<SmartContract> AddSmartContractAsync(SmartContract smartContract)
