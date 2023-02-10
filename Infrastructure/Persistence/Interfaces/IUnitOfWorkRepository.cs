@@ -3,6 +3,6 @@
     public interface IUnitOfWorkRepository : IDisposable
     {
         ISmartContractRepository SmartContractRepository { get; }
-        Task<int> SaveChangesAsync();
+        Task SaveChangesAsync();
     }
 }
