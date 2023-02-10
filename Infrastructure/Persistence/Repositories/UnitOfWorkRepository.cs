@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Persistence.DbContexts;
 using Infrastructure.Persistence.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Infrastructure.Persistence.Repositories
@@ -26,11 +25,9 @@ namespace Infrastructure.Persistence.Repositories
             _distributedCache = distributedCache;
         }
 
-        public async Task<int> SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            bool hasChanges = _msSqlContext.ChangeTracker.HasChanges(); // should be true
-            int result = await _msSqlContext.SaveChangesAsync();
-            return _msSqlContext.Database.ExecuteSqlRaw("SELECT SCOPE_IDENTITY()");
+            await _msSqlContext.SaveChangesAsync();
         }
 
         protected virtual void Dispose(bool disposing)
