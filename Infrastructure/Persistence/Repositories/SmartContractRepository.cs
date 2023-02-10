@@ -9,6 +9,7 @@ namespace Infrastructure.Persistence.Repositories
 {
     public class SmartContractRepository : GenericRepository<SmartContract>, ISmartContractRepository
     {
+        private const string redisAllSmartContractsKey = "allsmartcontracts";
         private readonly IDistributedCache _distributedCache;
         private readonly IUnitOfWorkRepository _unitOfWorkRepository;
 
@@ -24,13 +25,12 @@ namespace Infrastructure.Persistence.Repositories
         public async Task<IEnumerable<SmartContract>> GetSmartContracts(int pageSize, int pageNumber)
         {
             var cacheSmartContracts = await _distributedCache.GetRecordAsync<IEnumerable<SmartContract>>("allsmartcontracts");
-            if (cacheSmartContracts != null)
+            if (cacheSmartContracts == null)
             {
-                return cacheSmartContracts;
+                cacheSmartContracts = await GetAll();
+                await _distributedCache.SetRecordAsync(redisAllSmartContractsKey, cacheSmartContracts);
             }
-            var allSmartContracts = await GetAll(pageSize, pageNumber);
-            await _distributedCache.SetRecordAsync("allsmartcontracts", allSmartContracts);
-            return allSmartContracts;
+            return cacheSmartContracts.Skip((pageNumber - 1) * pageSize).Take(pageSize);
         }
 
         public async Task<SmartContract> GetSmartContractAsync(long id)
@@ -56,14 +56,9 @@ namespace Infrastructure.Persistence.Repositories
             await _unitOfWorkRepository.SmartContractRepository.Add(smartContract);
             await _unitOfWorkRepository.SaveChangesAsync();
 
-            /*            using (var unitOfWork = new UnitOfWorkRepository(_msSqlContext, _distributedCache))
-                        {
-                            await unitOfWork.SmartContractRepository.Add(smartContract);
-                            await unitOfWork.SaveChangesAsync();
-                        }
-            */
+            var allSmartContracts = await GetAll();
+            await _distributedCache.SetRecordAsync(redisAllSmartContractsKey, allSmartContracts);
 
-            await _distributedCache.SetRecordAsync(smartContract.Id.ToString(), smartContract);
             return smartContract;
         }
     }
