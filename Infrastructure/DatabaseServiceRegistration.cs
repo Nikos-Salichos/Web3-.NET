@@ -15,11 +15,11 @@ namespace Infrastructure
            IConfiguration configuration)
         {
             //MsSQL
-            services.AddDbContext<MsqlDbContext>(options =>
+            services.AddDbContext<MsSqlDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("MsSqlConnection"),
-                b => b.MigrationsAssembly(typeof(MsqlDbContext).Assembly.FullName)), ServiceLifetime.Transient);
+                b => b.MigrationsAssembly(typeof(MsSqlDbContext).Assembly.FullName)), ServiceLifetime.Transient);
 
-            services.AddScoped<IMsSqlDbContext>(provider => provider.GetService<MsqlDbContext>() ?? throw new ArgumentNullException(nameof(services)));
+            services.AddScoped<IMsSqlDbContext>(provider => provider.GetService<MsSqlDbContext>() ?? throw new ArgumentNullException(nameof(services)));
 
             //PostgreSql
             services.AddEntityFrameworkNpgsql().AddDbContext<PostgreSqlDbContext>(options =>
