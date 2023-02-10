@@ -192,9 +192,8 @@ namespace Tests.UnitTests.Controllers
         {
             //Arrange
             var smartContracts = new List<SmartContractDTO>();
-            var mockSmartContractService = new Mock<ISmartContractService>();
 
-            mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
+            _mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
                .ReturnsAsync(smartContracts);
 
             Mock<IConfigurationSection> mockSection = new Mock<IConfigurationSection>();
@@ -206,7 +205,7 @@ namespace Tests.UnitTests.Controllers
             var mockLogger = new Mock<ILogger<SmartContractController>>();
 
             var controller = new SmartContractController(mockConfig.Object,
-            mockSmartContractService.Object, mockLogger.Object);
+            _mockSmartContractService.Object, mockLogger.Object);
 
             // Act
             var result = await controller.FindSmartContractsByAddressAsync("123");
