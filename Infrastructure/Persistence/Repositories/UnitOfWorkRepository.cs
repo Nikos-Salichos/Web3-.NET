@@ -23,7 +23,7 @@ namespace Infrastructure.Persistence.Repositories
         public UnitOfWorkRepository(MsSqlDbContext msSqlContext, IDistributedCache distributedCache)
         {
             _msSqlContext = msSqlContext;
-            _distributedCache = distributedCache; ;
+            _distributedCache = distributedCache;
         }
 
         public async Task<int> SaveChangesAsync()
