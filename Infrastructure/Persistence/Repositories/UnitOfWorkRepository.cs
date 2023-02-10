@@ -1,12 +1,13 @@
 ﻿using Infrastructure.Persistence.DbContexts;
 using Infrastructure.Persistence.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Infrastructure.Persistence.Repositories
 {
     public class UnitOfWorkRepository : IUnitOfWorkRepository
     {
-        private MsqlDbContext _msqlSqlContext;
+        private MsSqlDbContext _msSqlContext;
         private IDistributedCache _distributedCache;
         private ISmartContractRepository _smartContractRepository;
         private bool disposedValue;
@@ -15,19 +16,21 @@ namespace Infrastructure.Persistence.Repositories
         {
             get
             {
-                return _smartContractRepository ??= new SmartContractRepository(_msqlSqlContext, _distributedCache);
+                return _smartContractRepository ??= new SmartContractRepository(_msSqlContext, _distributedCache, this);
             }
         }
 
-        public UnitOfWorkRepository(MsqlDbContext repositoryContext, IDistributedCache distributedCache)
+        public UnitOfWorkRepository(MsSqlDbContext msSqlContext, IDistributedCache distributedCache)
         {
-            _msqlSqlContext = repositoryContext;
-            _distributedCache = distributedCache;
+            _msSqlContext = msSqlContext;
+            _distributedCache = distributedCache; ;
         }
 
-        public async Task<bool> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            return await _msqlSqlContext.SaveChangesAsync() > 0;
+            bool hasChanges = _msSqlContext.ChangeTracker.HasChanges(); // should be true
+            int result = await _msSqlContext.SaveChangesAsync();
+            return _msSqlContext.Database.ExecuteSqlRaw("SELECT SCOPE_IDENTITY()");
         }
 
         protected virtual void Dispose(bool disposing)
