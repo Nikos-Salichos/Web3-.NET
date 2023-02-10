@@ -90,7 +90,7 @@ builder.Services.AddOptions<NetworkProvider>().BindConfiguration("NetworkProvide
 #endregion Read User appsettings.json
 
 #region Health Checks
-builder.Services.AddHealthChecks().AddDbContextCheck<MsqlDbContext>();
+builder.Services.AddHealthChecks().AddDbContextCheck<MsSqlDbContext>();
 builder.Services.AddHealthChecks().AddCheck<HealthCheck>("Custom Health Checks");
 #endregion Health Checks
 
