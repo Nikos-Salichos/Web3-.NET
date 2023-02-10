@@ -16,9 +16,7 @@ namespace Application.Handlers.SmartContracts
 
         public async Task<SmartContract> Handle(CreateSmartContractCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.SmartContractRepository.Add(request.SmartContract);
-            await _unitOfWork.SaveChangesAsync();
-
+            await _unitOfWork.SmartContractRepository.AddSmartContractAsync(request.SmartContract);
             return request.SmartContract;
         }
     }
