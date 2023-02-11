@@ -29,8 +29,4 @@
 		<ProjectReference Include="..\Presentation\WebApi.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="UnitTests\Repositories\" />
-	</ItemGroup>
-
 </Project>
