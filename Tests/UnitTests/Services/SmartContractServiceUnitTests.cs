@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Moq;
 using Xunit;
+using static Moq.It;
 
 namespace Tests.UnitTests.Repositories
 {
@@ -31,6 +32,7 @@ namespace Tests.UnitTests.Repositories
                                          new SmartContractDTO { Id = smartContracts.Last().Id, Address = smartContracts.Last().Address }};
 
             var query = new GetSmartContractsListQuery(IsAny<int>(), IsAny<int>());
+            _mockMediator.Setup(m => m.Send(query, default)).ReturnsAsync(smartContracts);
         }
 
     }
