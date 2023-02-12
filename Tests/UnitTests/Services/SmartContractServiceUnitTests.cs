@@ -41,6 +41,9 @@ namespace Tests.UnitTests.Repositories
 
             // Act
             var result = await service.FindSmartContractsByAddressAsync(sc => sc.Address == "SmartContract1");
+
+            // Assert
+            Assert.NotNull(result);
         }
 
     }
