@@ -38,6 +38,9 @@ namespace Tests.UnitTests.Repositories
             _mockSmartContractService.Setup(m => m.GetSmartContractsAsync(IsAny<int>(), IsAny<int>())).ReturnsAsync(smartContractsDtos);
 
             var service = new SmartContractService(_mockMapper.Object, _mockMediator.Object, _mockOptionsService.Object);
+
+            // Act
+            var result = await service.FindSmartContractsByAddressAsync(sc => sc.Address == "SmartContract1");
         }
 
     }
