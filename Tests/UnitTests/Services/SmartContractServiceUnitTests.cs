@@ -44,6 +44,7 @@ namespace Tests.UnitTests.Repositories
 
             // Assert
             Assert.NotNull(result);
+            Assert.True(smartContracts.Select(x => new { x.Id, x.Address }).SequenceEqual(result.Select(x => new { x.Id, x.Address })));
         }
 
     }
