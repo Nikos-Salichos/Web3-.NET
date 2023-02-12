@@ -9,6 +9,6 @@ namespace Tests.UnitTests.Repositories
     public class SmartContractServiceUnitTests
     {
         private static readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
-
+        private static readonly Mock<ISingletonOptionsService> _mockOptionsService = new Mock<ISingletonOptionsService>();
     }
 }
