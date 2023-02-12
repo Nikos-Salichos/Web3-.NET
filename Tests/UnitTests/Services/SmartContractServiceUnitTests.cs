@@ -15,5 +15,11 @@ namespace Tests.UnitTests.Repositories
         private static readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private static readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
 
+        [Fact]
+        public async Task GetSmartContractsAsync_ShouldReturnSmartContracts()
+        {
+
+        }
+
     }
 }
