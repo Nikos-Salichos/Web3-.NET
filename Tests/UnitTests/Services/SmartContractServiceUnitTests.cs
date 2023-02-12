@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using AutoMapper;
+using Domain.Models;
 using MediatR;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Moq;
@@ -18,7 +19,10 @@ namespace Tests.UnitTests.Repositories
         [Fact]
         public async Task GetSmartContractsAsync_ShouldReturnSmartContracts()
         {
-
+            // Arrange
+            var smartContracts = new List<SmartContract> {
+                                         new SmartContract { Id = 1, Address = "SmartContract1" },
+                                         new SmartContract { Id = 2, Address = "SmartContract2" }};
         }
 
     }
