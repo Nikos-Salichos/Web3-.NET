@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using AutoMapper;
+using Domain.DTOs;
 using Domain.Models;
 using MediatR;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
@@ -23,6 +24,11 @@ namespace Tests.UnitTests.Repositories
             var smartContracts = new List<SmartContract> {
                                          new SmartContract { Id = 1, Address = "SmartContract1" },
                                          new SmartContract { Id = 2, Address = "SmartContract2" }};
+
+            var smartContractsDtos = new List<SmartContractDTO> {
+                                         new SmartContractDTO { Id = smartContracts.First().Id, Address = smartContracts.First().Address },
+                                         new SmartContractDTO { Id = smartContracts.Last().Id, Address = smartContracts.Last().Address }};
+
         }
 
     }
