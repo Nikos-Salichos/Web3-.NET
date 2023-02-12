@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.CQRS.Queries;
+using Application.Interfaces;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Models;
@@ -29,6 +30,7 @@ namespace Tests.UnitTests.Repositories
                                          new SmartContractDTO { Id = smartContracts.First().Id, Address = smartContracts.First().Address },
                                          new SmartContractDTO { Id = smartContracts.Last().Id, Address = smartContracts.Last().Address }};
 
+            var query = new GetSmartContractsListQuery(IsAny<int>(), IsAny<int>());
         }
 
     }
