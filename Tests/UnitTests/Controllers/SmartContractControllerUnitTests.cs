@@ -13,7 +13,7 @@ using static Moq.It;
 
 namespace Tests.UnitTests.Controllers
 {
-    [Trait("SmartContracts", "UnitTests")]
+    [Trait("SmartContractsController", "UnitTests")]
     public class SmartContractControllerUnitTests
     {
         private static readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
