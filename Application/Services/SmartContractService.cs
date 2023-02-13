@@ -44,13 +44,13 @@ namespace Application.Services
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
         }
 
-        public async Task<SmartContractDTO?> GetSmartContractByIdAsync(long id)
+        public async Task<SmartContractDTO> GetSmartContractAsync(long id)
         {
             var smartContract = await _mediator.Send(new GetSmartContractQuery(id), default);
             return _mapper.Map<SmartContract, SmartContractDTO>(smartContract);
         }
 
-        public async Task<IEnumerable<SmartContractDTO>> FindSmartContractsByAddressAsync(Expression<Func<SmartContract, bool>> predicate)
+        public async Task<IEnumerable<SmartContractDTO>> GetSmartContractsAsync(Expression<Func<SmartContract, bool>> predicate)
         {
             var allSmartContracts = await _mediator.Send(new FindSmartContractQuery(predicate), default);
             return _mapper.Map<List<SmartContract>, List<SmartContractDTO>>(allSmartContracts.ToList());
