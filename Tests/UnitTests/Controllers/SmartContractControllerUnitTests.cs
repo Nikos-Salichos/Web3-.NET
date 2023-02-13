@@ -94,7 +94,7 @@ namespace Tests.UnitTests.Controllers
             var smartContracts = new List<SmartContractDTO> {
             new SmartContractDTO { Id = 1, Address = "Smart Contract Address 2" } };
 
-            _mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
+            _mockSmartContractService.Setup(x => x.GetSmartContractAsync(1))
                 .ReturnsAsync(smartContracts.FirstOrDefault());
 
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
@@ -126,7 +126,7 @@ namespace Tests.UnitTests.Controllers
             //Arrange
             var smartContracts = new List<SmartContractDTO>();
 
-            _mockSmartContractService.Setup(x => x.GetSmartContractByIdAsync(1))
+            _mockSmartContractService.Setup(x => x.GetSmartContractAsync(1))
                 .ReturnsAsync(smartContracts.FirstOrDefault());
 
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
@@ -162,7 +162,7 @@ namespace Tests.UnitTests.Controllers
                 new SmartContractDTO { Id = 1 , Address = "123"}
             };
 
-            _mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
+            _mockSmartContractService.Setup(x => x.GetSmartContractsAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
                .ReturnsAsync(smartContracts);
 
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
@@ -193,7 +193,7 @@ namespace Tests.UnitTests.Controllers
             //Arrange
             var smartContracts = new List<SmartContractDTO>();
 
-            _mockSmartContractService.Setup(x => x.FindSmartContractsByAddressAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
+            _mockSmartContractService.Setup(x => x.GetSmartContractsAsync(IsAny<Expression<Func<SmartContract, bool>>>()))
                .ReturnsAsync(smartContracts);
 
             _mockConfigurationSection.Setup(x => x.Value).Returns("User");
