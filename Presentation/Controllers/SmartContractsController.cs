@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetSmartContractByIdAsync(long id)
         {
-            var smartContract = await _smartContractService.GetSmartContractByIdAsync(id);
+            var smartContract = await _smartContractService.GetSmartContractAsync(id);
             _logger.LogInformation("Smart Contract {@smartContract}", smartContract);
             return Ok(smartContract);
         }
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> FindSmartContractsByAddressAsync(string address)
         {
-            var allSmartContracts = await _smartContractService.FindSmartContractsByAddressAsync(s => s.Address == address);
+            var allSmartContracts = await _smartContractService.GetSmartContractsAsync(s => s.Address == address);
             _logger.LogInformation("Smart Contracts {@allSmartContracts}", allSmartContracts);
             return Ok(allSmartContracts);
         }
