@@ -25,6 +25,7 @@ namespace Tests.UnitTests.Repositories
         {
             // Arrange
             var smartContracts = new List<SmartContract>();
+            var smartContractsDtos = new List<SmartContractDTO>();
         }
 
         [Fact]
