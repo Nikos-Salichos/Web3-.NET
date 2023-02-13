@@ -36,7 +36,10 @@ namespace Tests.UnitTests.Repositories
             var service = new SmartContractService(_mockMapper.Object, _mockMediator.Object, _mockOptionsService.Object);
 
             // Act
-            var result = await service.GetSmartContractsAsync(sc => sc.Address == "SmartContract1");
+            var result = await service.GetSmartContractsAsync(sc => sc.Address == "0x1");
+
+            // Assert
+            Assert.NotNull(result);
         }
 
         [Fact]
