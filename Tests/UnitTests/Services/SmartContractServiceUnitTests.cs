@@ -31,6 +31,7 @@ namespace Tests.UnitTests.Repositories
 
             _mockMediator.Setup(m => m.Send(query, default)).ReturnsAsync(smartContracts);
             _mockMapper.Setup(m => m.Map<List<SmartContract>, List<SmartContractDTO>>(IsAny<List<SmartContract>>())).Returns(smartContractsDtos);
+            _mockSmartContractService.Setup(m => m.GetSmartContractsAsync(IsAny<int>(), IsAny<int>())).ReturnsAsync(smartContractsDtos);
         }
 
         [Fact]
