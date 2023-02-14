@@ -30,7 +30,7 @@ To check if redis work you can test the following:
 
 Technical specs
 =======
-- Clean architecture.
+- Clean architecture (Presentation layer has my controllers because I use Swagger as my UI)
 - Generic Repository.
 - Unit of Work.
 - Entity framework.
