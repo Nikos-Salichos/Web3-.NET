@@ -30,7 +30,7 @@ To check if redis work you can test the following:
 
 Technical specs
 =======
-- Clean architecture.
+- Clean architecture (Presentation layer has my controllers because I use Swagger as my UI)
 - Generic Repository.
 - Unit of Work.
 - Entity framework.
@@ -119,3 +119,4 @@ In order to test UniswapV3 get prices you can use the following addresses:
 WETH : 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
 DAI: 0x6B175474E89094C44Da98b954EedeAC495271d0F
 
+Unit tests
