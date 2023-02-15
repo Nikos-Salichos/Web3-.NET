@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetTransactionsOfABlockAsync(long blockNumber, Chain chain)
         {
             var transactions = await _networkService.GetTransactionsOfABlock(blockNumber, chain);
-
+            _logger.LogInformation("Transactions {@transactions}", transactions);
             return Ok(transactions);
         }
 
