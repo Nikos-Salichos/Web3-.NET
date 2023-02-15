@@ -7,8 +7,8 @@ using WebApi.Utilities;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    public class SmartContractsController : ControllerBase
+    [Route("api/v1/[controller]")]
+    public class SmartContractController : ControllerBase
     {
         private readonly WalletOwner _walletOwner;
 
@@ -16,9 +16,9 @@ namespace WebApi.Controllers
 
         private readonly ISmartContractService _smartContractService;
 
-        private readonly ILogger<SmartContractsController> _logger;
+        private readonly ILogger<SmartContractController> _logger;
 
-        public SmartContractsController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<SmartContractsController> logger)
+        public SmartContractController(IConfiguration configuration, ISmartContractService smartContractService, ILogger<SmartContractController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
             _walletOwner = configuration.GetSection("User").Get<WalletOwner>() ?? new WalletOwner();
@@ -39,7 +39,8 @@ namespace WebApi.Controllers
             return Ok(allSmartContracts);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
