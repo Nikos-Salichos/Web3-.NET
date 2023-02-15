@@ -19,7 +19,7 @@ namespace Tests.UnitTests.Controllers
         private static readonly Mock<ISmartContractService> _mockSmartContractService = new Mock<ISmartContractService>();
         private static readonly Mock<IConfigurationSection> _mockConfigurationSection = new Mock<IConfigurationSection>();
         private static readonly Mock<IConfiguration> _mockConfiguration = new Mock<IConfiguration>();
-        private static readonly Mock<ILogger<SmartContractsController>> _mockLogger = new Mock<ILogger<SmartContractsController>>();
+        private static readonly Mock<ILogger<SmartContractController>> _mockLogger = new Mock<ILogger<SmartContractController>>();
 
         [Fact]
         public async Task GetAllSmartContractsAsync_ReturnsOkResult()
@@ -35,9 +35,9 @@ namespace Tests.UnitTests.Controllers
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var mockLogger = new Mock<ILogger<SmartContractsController>>();
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
 
-            var controller = new SmartContractsController(_mockConfiguration.Object,
+            var controller = new SmartContractController(_mockConfiguration.Object,
                                     _mockSmartContractService.Object, mockLogger.Object);
 
             // Act
@@ -67,9 +67,9 @@ namespace Tests.UnitTests.Controllers
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var mockLogger = new Mock<ILogger<SmartContractsController>>();
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
 
-            var controller = new SmartContractsController(_mockConfiguration.Object,
+            var controller = new SmartContractController(_mockConfiguration.Object,
                                     _mockSmartContractService.Object, mockLogger.Object);
 
             // Act
@@ -101,9 +101,9 @@ namespace Tests.UnitTests.Controllers
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var mockLogger = new Mock<ILogger<SmartContractsController>>();
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
 
-            var controller = new SmartContractsController(_mockConfiguration.Object,
+            var controller = new SmartContractController(_mockConfiguration.Object,
                                     _mockSmartContractService.Object, mockLogger.Object);
             // Act
             var result = await controller.GetSmartContractByIdAsync(1);
@@ -133,9 +133,9 @@ namespace Tests.UnitTests.Controllers
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var mockLogger = new Mock<ILogger<SmartContractsController>>();
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
 
-            var controller = new SmartContractsController(_mockConfiguration.Object,
+            var controller = new SmartContractController(_mockConfiguration.Object,
                         _mockSmartContractService.Object, mockLogger.Object);
 
             // Act
@@ -169,7 +169,7 @@ namespace Tests.UnitTests.Controllers
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var _smartContractController = new SmartContractsController(_mockConfiguration.Object, _mockSmartContractService.Object, _mockLogger.Object);
+            var _smartContractController = new SmartContractController(_mockConfiguration.Object, _mockSmartContractService.Object, _mockLogger.Object);
 
             // Act
             var result = await _smartContractController.FindSmartContractsByAddressAsync("123");
@@ -200,9 +200,9 @@ namespace Tests.UnitTests.Controllers
 
             _mockConfiguration.Setup(x => x.GetSection(Is<string>(k => k == "User"))).Returns(_mockConfigurationSection.Object);
 
-            var mockLogger = new Mock<ILogger<SmartContractsController>>();
+            var mockLogger = new Mock<ILogger<SmartContractController>>();
 
-            var controller = new SmartContractsController(_mockConfiguration.Object,
+            var controller = new SmartContractController(_mockConfiguration.Object,
             _mockSmartContractService.Object, mockLogger.Object);
 
             // Act
