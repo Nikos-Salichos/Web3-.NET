@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> GetAllContractCreationTransactionsAsync(long blockNumber, Chain chain)
         {
             var creationContractTransactions = await _networkService.GetAllContractCreationTransactionsAsync(blockNumber, chain);
-
+            _logger.LogInformation("Contract transactions that created a contract {@creationContractTransactions}", creationContractTransactions);
             return Ok(creationContractTransactions);
         }
     }
