@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         public NFTController(IConfiguration configuration)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<WalletOwner>();
+            __walletOwner = configuration.GetSection("User").Get<WalletOwner>() ?? new WalletOwner();
         }
 
         [HttpGet("Mint")]
