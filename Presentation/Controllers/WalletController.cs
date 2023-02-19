@@ -18,25 +18,25 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<WalletController> _logger;
 
-        private readonly WalletOwner _user = new();
+        private readonly WalletOwner _walletOwner = new();
         public EnumHelper EnumHelper { get; set; }
 
         public WalletController(IConfiguration configuration, ILogger<WalletController> logger)
         {
             EnumHelper = new EnumHelper(configuration);
-            _user = configuration.GetSection("User").Get<WalletOwner>();
+            _walletOwner = configuration.GetSection("User").Get<WalletOwner>() ?? new WalletOwner();
             _logger = logger;
         }
 
-        [HttpPost("GetBalance")]
+        [HttpPost("Balance")]
         public async Task<ActionResult> GetBalance(Chain chain)
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
-                HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_user.WalletAddress);
+                HexBigInteger? balance = await web3.Eth.GetBalance.SendRequestAsync(_walletOwner.WalletAddress);
 
                 BigDecimal etherAmount = Web3.Convert.FromWeiToBigDecimal(balance.Value);
 
@@ -54,7 +54,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 TransactionReceipt? transaction = await web3.Eth.GetEtherTransferService().TransferEtherAndWaitForReceiptAsync(toAddress, etherAmount);
@@ -72,7 +72,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 TransferFunction? transferFunction = new()
@@ -98,7 +98,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Account? account = new(_user.PrivateKey, chain);
+                Account? account = new(_walletOwner.PrivateKey, chain);
                 Web3? web3 = new(account, EnumHelper.GetStringBasedOnEnum(chain));
 
                 HexBigInteger? pendingFilter = await web3.Eth.Filters.NewPendingTransactionFilter.SendRequestAsync();
