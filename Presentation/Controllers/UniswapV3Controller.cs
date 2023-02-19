@@ -40,7 +40,7 @@ namespace WebApi.Controllers
             _uniswapGraphQL = uniswapGraphQL;
         }
 
-        [HttpGet("UniswapV3GetReserves")]
+        [HttpGet("Reserves")]
         public async Task<ActionResult> GetUniswapV3GetReserves(Chain chain, string addressToken0, string addressToken1, long fee)
         {
             if (fee != 100 && fee != 500 && fee != 3000 && fee != 10000)
@@ -109,21 +109,21 @@ namespace WebApi.Controllers
             return Ok($"Transaction Hash for swap {transactionReceiptForSwap.TransactionHash}");
         }
 
-        [HttpPost("GetTokenData")]
+        [HttpPost("TokenData")]
         public async Task<IActionResult> GetTokenData(string tokenId)
         {
             Token? token = await _uniswapGraphQL.GetTokenData(tokenId);
             return Ok(token);
         }
 
-        [HttpPost("GetMostLiquidPools")]
+        [HttpPost("MostLiquidPools")]
         public async Task<IActionResult> GetMostLiquidPools(int numberOfPools)
         {
             dynamic? data = await _uniswapGraphQL.GetMostLiquidPools(numberOfPools);
             return Ok(data);
         }
 
-        [HttpPost("GetPoolData")]
+        [HttpPost("PoolData")]
         public async Task<IActionResult> GetPoolData(string poolAddress)
         {
             dynamic? data = await _uniswapGraphQL.GetPoolData(poolAddress);
@@ -137,7 +137,7 @@ namespace WebApi.Controllers
             return Ok(data);
         }
 
-        [HttpPost("GetPositionData")]
+        [HttpPost("PositionData")]
         public async Task<IActionResult> GetPositionData(int positionId)
         {
             dynamic? data = await _uniswapGraphQL.GetPositionData(positionId);
