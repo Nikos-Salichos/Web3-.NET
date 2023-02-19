@@ -48,7 +48,7 @@ builder.Services.RegisterDatabases(builder.Configuration);
 
 #region Autofac Dependency Injection
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new ServiceModule()));
+    .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new ApplicationModule()));
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(b => b.RegisterModule(new RepositoryModule()));
 #endregion Autofac Dependency Injection
