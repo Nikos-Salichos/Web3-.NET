@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         }
 
         [Produces("application/json")]
-        [HttpGet("UniswapV2FactoryAllPairs")]
+        [HttpGet("AllPairs")]
         public async Task<ActionResult<List<Pair>>> GetUniswapV2allPairsLength(Chain chain)
         {
             try
@@ -80,7 +80,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("UniswapV2FactoryGetReserves")]
+        [HttpGet("Reserves")]
         public async Task<ActionResult> GetUniswapV2FactoryGetReserves(Chain chain, string addressToken0, string addressToken1)
         {
             try
@@ -120,7 +120,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("UniswapV2PairApprove")]
+        [HttpGet("PairApprove")]
         public async Task<ActionResult> GetUniswapV2PairApprove(Chain chain, string addressToken0, string addressToken1, string spenderAddress, long value)
         {
             try
@@ -156,7 +156,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("UniswapV2RouterGetAmountsOut")]
+        [HttpPost("AmountsOut")]
         public async Task<ActionResult> UniswapV2RouterGetAmountsOut(Chain chain, long amountIn, List<string> path)
         {
             try
@@ -178,7 +178,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("UniswapV2RouterSwapExactETHForTokens")]
+        [HttpPost("SwapExactETHForTokens")]
         public async Task<ActionResult> SwapExactETHForTokens(Chain chain, double amountToSwap, long amountOutMin, [FromBody] List<string> path, double seconds)
         {
             try
